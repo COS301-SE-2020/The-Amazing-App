@@ -34,7 +34,7 @@ link here
     </details>
     
  > <b>Tapiwanashe Ndhlovu : </b> <br>
- * <a href="tapehNdhlovu.github.io"> GitHub  Profile  </a><br>
+ * <a href="https://tapehndhlovu.github.io/"> GitHub  Profile  </a><br>
  * <a href="https://github.com/tapehNdhlovu"> GitHub  Account </a><br>
  * <details>
     <summary><b>About myself </b></summary>
