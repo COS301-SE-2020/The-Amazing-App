@@ -14,7 +14,7 @@ link here
 
 ## Our Team
  > <b>Premodial Zhou : </b> <br>
- * <a href="#"> GitHub  Profile  </a><br>
+ * <a href="Premodial.github.io"> GitHub  Profile  </a><br>
  * <a href="#"> GitHub  Account </a><br>
  * <details>
    <summary><b>About myself</b></summary>
