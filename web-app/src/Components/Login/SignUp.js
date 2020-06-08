@@ -22,7 +22,7 @@ class SignUp extends React.Component
                 Email address: <input id="email" type="email" name="email"></input>
                 Password: <input id="password" type="password" name="password"></input>
                 <div id="input">
-                    <button id="loginbtn">Login</button>
+                    <button id="loginbtn">Register</button>
                     <a href="#">Forgot Password </a>
                 </div>
                 </div>
