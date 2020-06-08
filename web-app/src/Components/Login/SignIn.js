@@ -1,7 +1,7 @@
 import React from 'react';
 import loginImg from '../../location.PNG';
 import logo from '../../logo.png';
-import './../Login/login.css'
+import './login.css'
 
 class SignIn extends React.Component
 {
