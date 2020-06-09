@@ -20,7 +20,6 @@ class SideNavComponent extends React.Component {
 
     return (
       <Container>
-        <h1 className="ui header" style={{textAlign: "center", fontSize: 30}}>Navbar</h1>
         <Row>
           <Col xs={3}>
             <Col style={colStyle}>
