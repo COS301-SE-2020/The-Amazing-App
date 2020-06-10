@@ -17,7 +17,7 @@ class NavBar extends React.Component
         return(
                 <Navbar sticky="top" style={{backgroundColor: "#2A9D8F"}}>
                     <Navbar.Brand style={{marginLeft: 75, color: "white", fontSize: 16}} >
-                        <img src={logo} className="ui small image" alt="userImage" style={{height: 50, width: 55}}/>
+                        <img src={logo} className="ui small circular image" alt="userImage" style={{height: 55, width: 55}}/>
                     </Navbar.Brand>
                     <Nav className="mr-auto">
                        { /*<Nav.Link href="home">Home</ Nav.Link>
