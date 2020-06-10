@@ -5,9 +5,9 @@ class MyGamesModal extends React.Component {
   render() {
     return (
       <Modal
-        style={{top: "auto",bottom: "auto",left: "auto",right: "auto",position: "relative",height: 300}} 
+        style={{marginTop: 100, top: "auto",bottom: "auto",left: "auto",right: "auto",position: "relative",height: 300}} 
         trigger={
-          <Button style={{marginTop: 12,fontSize: 15,backgroundColor: "#2A9D8F",color: "white", width: 155}}>
+          <Button size='medium' style={{marginLeft: 10, marginTop: 12,fontSize: 13,backgroundColor: "#2A9D8F",color: "white", width: 135}}>
             <i className="trophy icon"></i>
             My Games
           </Button>

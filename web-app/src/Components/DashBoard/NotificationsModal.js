@@ -5,9 +5,9 @@ class NotificationsModal extends React.Component {
   render() {
     return (
       <Modal
-        style={{top: "auto",bottom: "auto",left: "auto",right: "auto",position: "relative",height: 300}} 
+        style={{marginTop: 100, top: "auto",bottom: "auto",left: "auto",right: "auto",position: "relative",height: 300}} 
         trigger={
-          <Button style={{marginTop: 12,fontSize: 15,backgroundColor: "#2A9D8F",color: "white",}}>
+          <Button size='medium' style={{marginTop: 12, marginLeft: 10, fontSize: 13,backgroundColor: "#2A9D8F",color: "white",}}>
             <i className="bell icon"></i>
             Notifications
           </Button>

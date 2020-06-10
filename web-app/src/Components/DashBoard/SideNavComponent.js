@@ -19,9 +19,8 @@ class SideNavComponent extends React.Component {
     };
 
     return (
-      <Container>
         <Row>
-          <Col xs={3}>
+          <Col xs={2.8} className="border-right border-bottom" style={{marginLeft: 40}}>
             <Col style={colStyle}>
               <UserImageComponent />
               <NotificationsModal />
@@ -32,11 +31,10 @@ class SideNavComponent extends React.Component {
               <RecentlyPlayedComponent />
             </Col>
           </Col>
-          <Col>
+          <Col style={{marginRight: 20}}>
             <AvailableGamesMapComponent />
           </Col>
         </Row>
-      </Container>
     );
   }
 }

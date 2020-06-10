@@ -1,23 +1,36 @@
 import React from 'react';
 import { Nav, Navbar } from "react-bootstrap";
+import logo from "../../logo.png"
 import {Link} from 'react-router-dom';
+import UserOptions from './UserOptions'
 
 
 class NavBar extends React.Component
 {
     render()
     {
+        const myStyle = {
+            fontSize: 16,
+            color: "white"
+        };
        
         return(
-                <Navbar bg="light" variant="light">
-                    <Navbar.Brand >The Amazing App</Navbar.Brand>
+                <Navbar sticky="top" style={{backgroundColor: "#2A9D8F"}}>
+                    <Navbar.Brand style={{marginLeft: 75, color: "white", fontSize: 16}} >
+                        <img src={logo} className="ui small image" alt="userImage" style={{height: 50, width: 55}}/>
+                    </Navbar.Brand>
                     <Nav className="mr-auto">
-                        <Nav.Link href="home">Home</ Nav.Link>
-                        <Nav.Link href="DashBoard">DashBoard</Nav.Link>
+                       { /*<Nav.Link href="home">Home</ Nav.Link>
+                        <Nav.Link href="DashBoard">DashBoard</Nav.Link> */}
                     </Nav>
-                    <Nav pull Right>
-                            <Nav.Link  href="/signup">Signup</Nav.Link >
-                            <Nav.Link  href="/login">Login</Nav.Link >
+                    <Nav style={{marginRight: 50}} pull Right>
+                            <Nav.Link href="home" style={myStyle} >Home</ Nav.Link>
+                            <Nav.Link href="DashBoard" style={myStyle}>DashBoard</Nav.Link>
+                            <Nav.Link  href="/signup" style={myStyle}>Signup</Nav.Link >
+                            <Nav.Link  href="/login" style={myStyle}>Login</Nav.Link >
+                            <Nav.Link href="#">
+                            <UserOptions />
+                            </Nav.Link>
                         </Nav>
                 </Navbar>
                 

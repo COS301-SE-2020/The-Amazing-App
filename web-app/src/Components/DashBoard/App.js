@@ -1,10 +1,16 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SideNavComponent from './SideNavComponent'
+import Footer from '../NavBar/Footer'
 
 class App extends React.Component{
     render(){
-        return <SideNavComponent/>
+        return(
+            <div>
+                <SideNavComponent/>
+                <Footer />
+            </div>
+        );
     }
 }
 
