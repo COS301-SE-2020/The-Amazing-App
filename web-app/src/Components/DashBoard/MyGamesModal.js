@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Header, Modal } from "semantic-ui-react";
+import MyGames from "./MyGames"
 
 class MyGamesModal extends React.Component {
   render() {
@@ -15,9 +16,7 @@ class MyGamesModal extends React.Component {
         <Modal.Header>My Games</Modal.Header>
         <Modal.Content>
           <Modal.Description>
-            <Header></Header>
-            <p></p>
-            <p></p>
+            <MyGames />
           </Modal.Description>
         </Modal.Content>
       </Modal>
