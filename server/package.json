@@ -1,13 +1,13 @@
 {
-  "name": "amazing-app-server",
+  "name": "server",
   "version": "1.0.0",
-  "description": "Sever App for the WebApp",
-  "main": "serverApp.js",
+  "description": "Amazing App server coded by mo",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server.js"
   },
-  "author": "Tshegofatso",
-  "license": "ISC",
+  "author": "Premodial",
+  "license": "MIT",
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
