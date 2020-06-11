@@ -1,7 +1,8 @@
 import React from 'react'
 import { Icon, Image, Item } from 'semantic-ui-react'
-
-//const paragraph = <Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
+import image3 from "./detective.jpg";
+import image4 from "./quest.png";
+import image5 from "./octopus.png"
 
 class MyGames extends React.Component {
     render() {
@@ -9,30 +10,41 @@ class MyGames extends React.Component {
     <div>
       <Item.Group>
         <Item>
-          <Item.Image size='small' src='https://react.semantic-ui.com/images/wireframe/image.png' />
+          <Item.Image size='small' src={image3} className="ui small image" alt="userImage" />
 
           <Item.Content>
             <Item.Header as='a'>Detective</Item.Header>
-            <Item.Description><p>hello</p></Item.Description>
+            <Item.Description><p>Duration: 00:10:00</p></Item.Description>
             <Item.Extra>
-              <Icon color='green' name='check' /> 121 Votes
+            <i className="trophy icon" /> completed 121 
             </Item.Extra>
+           
           </Item.Content>
-        </Item>
 
+        </Item>
+           <hr />
         <Item>
-          <Item.Image size='small' src='https://react.semantic-ui.com/images/wireframe/image.png' />
+          <Item.Image size='small' src={image4} className="ui small image" alt="userImage"/>
 
           <Item.Content>
             <Item.Header as='a'>cornQuest</Item.Header>
-            <Item.Description><p>hello</p></Item.Description>
-            <Item.Extra content='121 Votes' />
+            <Item.Description><p>Duration: 00:20:00</p></Item.Description>
+            <Item.Extra>
+            <i className="trophy icon" />completed 100 
+            </Item.Extra>
           </Item.Content>
         </Item>
-
+        <hr />
         <Item>
-          <Item.Image size='small' src='https://react.semantic-ui.com/images/wireframe/image.png' />
-          <Item.Content header='Cute Dog' extra='121 Votes' />
+          <Item.Image size='small' src={image5}  alt="userImage" />
+
+          <Item.Content>
+            <Item.Header as='a'>Octopus</Item.Header>
+            <Item.Description><p>Duration: 00:15:00</p></Item.Description>
+            <Item.Extra>
+              <i className="trophy icon" /> completed 50
+            </Item.Extra>
+          </Item.Content>
         </Item>
       </Item.Group>
   </div>

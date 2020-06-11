@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Header, Modal } from "semantic-ui-react";
+import { List } from 'semantic-ui-react'
 
 class NotificationsModal extends React.Component {
   render() {
@@ -13,11 +14,29 @@ class NotificationsModal extends React.Component {
           </Button>
         } centered={false} closeIcon>
         <Modal.Header>Notifications</Modal.Header>
-        <Modal.Content>
+        <Modal.Content >
           <Modal.Description>
-            <Header></Header>
-            <p></p>
-            <p></p>
+          
+
+
+  <List style={{fontSize: 20,color: "black"}}>
+    <List.Item icon='users' content='group "lengends" has finished game Detetives' />
+    <br />
+    <List.Item icon='marker' content='group "NewTect" has arrive at location X' />
+    <br />
+    <List.Item
+      icon='mail'
+      content={<a href='mailto:NewTech@gmail.com'>new message from mail</a>}
+    />
+    <br />
+    <List.Item
+      icon='trophy'
+      content='group "Gamma" sets record time'
+    />
+  </List>
+
+
+
           </Modal.Description>
         </Modal.Content>
       </Modal>
