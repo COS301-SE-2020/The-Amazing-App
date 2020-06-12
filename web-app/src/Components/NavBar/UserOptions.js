@@ -1,6 +1,7 @@
 import React from 'react'
-import { Dropdown, Icon} from 'semantic-ui-react'
+import { Dropdown, Icon, Modal} from 'semantic-ui-react'
 import image2 from "./no_picture.jpg"
+import UpdatePreferences from "./UpdatePreferences";
 
 const trigger = (
     <div>
@@ -12,14 +13,15 @@ const trigger = (
 )
 
 const options = [
-    { key: 'user', text: 'Account', icon: 'user' },
-    { key: 'settings', text: 'Settings', icon: 'settings' },
+   <UpdatePreferences />,
     { key: 'sign-out', text: 'Sign Out', icon: 'sign out' },
   ]
 
 const UserOptions = () => (
         <Dropdown
     trigger={trigger} options={options} pointing='top left' icon={null}/>
+    
+    
 )
 
 export default UserOptions;
