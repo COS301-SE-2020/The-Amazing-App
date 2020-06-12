@@ -1,6 +1,40 @@
 
-###
-GET http://localhost:8000/login
+### POST FOR USER LOGIN
+POST http://localhost:8000/user/login
+Content-Type: application/json
 
+{
+    "username": "Mo_AKA_the_beast",
+    "password": "meow"
+}
 
+### POST FOR ADMIN LOGIN
+POST http://localhost:8000/admin/login
+Content-Type: application/json
 
+{
+    "username": "Mo_AKA_the_beast",
+    "password": "meow"
+}
+
+### POST FOR USER REGISTRATION
+POST http://localhost:8000/user/register
+Content-Type: application/json
+
+{
+    "username": "Mo_AKA_the_beast",
+    "password": "meow",
+    "email": "thebeast@thebeast.com",
+    "image": "base64"
+}
+
+### POST FOR ADMIN REGISTRATION
+POST http://localhost:8000/admin/register
+Content-Type: application/json
+
+{
+    "username": "Mo_AKA_the_beast",
+    "password": "meow",
+    "email": "thebeast@thebeast.com",
+    "image": "base64"
+}

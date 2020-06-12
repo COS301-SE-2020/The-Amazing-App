@@ -2,9 +2,10 @@ const express = require('express')
 const bp = require('body-parser')
 const router = express.Router()
 
+
 //End points for the admin sites
 router.post('/admin/login',(req,res)=>{
-  
+    const post = new P
 })
 router.post('/admin/register',(req,res)=>{
     
