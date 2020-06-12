@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Modal } from "semantic-ui-react";
 import {Form} from "semantic-ui-react";
-import GameMap from "./GameMap";
+import MapModal from "./MapModal";
 
 class CreateGameModal extends React.Component {
   render() {
@@ -27,23 +27,23 @@ class CreateGameModal extends React.Component {
               </Form>
             </div>
             <div style={{marginTop: 15}}>
-              <div class="ui form" style={{width: 500}}>
-                <div class="field">
+              <div className="ui form" style={{width: 700}}>
+                <div className="field">
                     <label>Game Question</label>
                     <input type="text" placeholder="Type Question..."/>
                   </div>
               </div>
-              <div class="ui form" style={{marginTop: 15}}>
-                <div class="three fields">
-                  <div class="field">
-                    <label>Answer 1</label>
-                    <input type="text" placeholder="Type Answer..."/>
+              <div className="ui form" style={{marginTop: 15}}>
+                <div className="three fields">
+                  <div className="field">
+                    <label>Answer 1(Correct Option)</label>
+                    <input type="text" placeholder="Type Correct Answer..."/>
                   </div>
-                  <div class="field">
+                  <div className="field">
                     <label>Answer 2</label>
                     <input type="text" placeholder="Type Answer..."/>
                   </div>
-                  <div class="field">
+                  <div className="field">
                     <label>Answer 3</label>
                     <input type="text" placeholder="Type Answer..."/>
                   </div>
@@ -51,25 +51,25 @@ class CreateGameModal extends React.Component {
               </div>
             </div>
             <div className="ui form" style={{marginTop: 15}}>
-              <h6>Location</h6>
-              <div class="ui form" style={{marginTop: 15}}>
-                <div class="three fields">
-                  <div class="field">
+              <MapModal />
+              <div className="ui form" style={{marginTop: 15}}>
+                <div className="three fields">
+                  <div className="field">
                     <label>Location Name</label>
                     <input type="text" placeholder="City or Area..."/>
                   </div>
-                  <div class="field">
+                  <div className="field">
                     <label>Latitude</label>
-                    <input type="text" placeholder="lat..."/>
+                    <input type="text" placeholder="latitude..."/>
                   </div>
-                  <div class="field">
+                  <div className="field">
                     <label>Longitude</label>
-                    <input type="text" placeholder="long..."/>
+                    <input type="text" placeholder="longitude..."/>
                   </div>
                 </div>
               </div>
             </div>
-            <button class="ui button" style={{backgroundColor: "#2A9D8F", color: "white"}}>Submit</button>
+            <button className="ui button" style={{backgroundColor: "#2A9D8F", color: "white"}}>Submit</button>
           </Modal.Description>
         </Modal.Content>
       </Modal>
