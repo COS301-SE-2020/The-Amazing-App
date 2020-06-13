@@ -7,7 +7,7 @@ const trigger = (
     <div>
         <img src={image2} className="ui avatar image" alt="userImage" style={{height: 20, width: 20}}/>
           <span style={{fontSize: 14, color: "white"}} >
-            Hello, Tapiwa
+            Tapiwa
           </span>
     </div>
 )

@@ -23,9 +23,9 @@ class NavBar extends React.Component
                        { /*<Nav.Link href="home">Home</ Nav.Link>
                         <Nav.Link href="DashBoard">DashBoard</Nav.Link> */}
                     </Nav>
-                    <Nav style={{marginRight: 50}} pull Right>
+                    <Nav style={{marginRight: 50, color: "white", fontWeight: "normal"}} className="lead" pull Right>
                             <Nav.Link href="/" style={myStyle} >Home</ Nav.Link>
-                            <Nav.Link href="DashBoard" style={myStyle}>DashBoard</Nav.Link>
+                            <Nav.Link href="DashBoard" style={myStyle}>Dashboards</Nav.Link>
                             <Nav.Link  href="/signup" style={myStyle}>Signup</Nav.Link >
                             <Nav.Link  href="/login" style={myStyle}>Login</Nav.Link >
                             <Nav.Link href="#">

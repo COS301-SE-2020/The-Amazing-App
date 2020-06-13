@@ -8,14 +8,20 @@ class MapModal extends React.Component{
             <Modal style={{marginTop: 75, marginLeft: 25, height: 600, width: 700, display: "flex", justifyContent: "center", alignItems: "center"}} 
             trigger={<Button style={{backgroundColor: "#2A9D8F", color: "white"}}>Get Location</Button>} 
             basic size='fullscreen'
+            closeIcon
             >
-            <Modal.Content style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-              <GameMap />
+            {/*<Modal.Content style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+             <div>
+                
+            </div>   
             </Modal.Content>
             <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
                 <Button color='green' inverted style={{color: "white"}}>
                     <Icon name='checkmark' /> Select Location
                 </Button>
+        </div>*/}
+            <div>
+                <GameMap style={{height: 200}} />
             </div>
           </Modal>
         );
