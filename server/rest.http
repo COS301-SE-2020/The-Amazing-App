@@ -1,0 +1,63 @@
+### POST FOR ADMIN REGISTRATION
+POST http://localhost:8000/admin/register
+Content-Type: application/json
+
+{
+    "username": "TestUser1",
+    "password": "password@12",
+    "email": "Test@gmail.com",
+    "image": "base64"
+}
+
+### POST FOR ADMIN REGISTRATION
+POST http://localhost:8000/admin/register
+Content-Type: application/json
+
+{
+    "username": "TestUser2",
+    "password": "meow",
+    "email": "thebeast@mail.com",
+    "image": "base64"
+}
+
+### POST FOR ADMIN REGISTRATION
+POST http://localhost:8000/admin/register
+Content-Type: application/json
+
+{
+    "username": "TestUser3",
+    "password": "pasword@1",
+    "email": "loader@gmail.com",
+    "image": "base64"
+}
+
+### POST FOR ADMIN REGISTRATION
+POST http://localhost:8000/admin/register
+Content-Type: application/json
+
+{
+    "username": "beast",
+    "password": "meow2",
+    "email": "thebeast@gmail.com",
+    "image": "base64"
+}
+
+### POST FOR USER LOGIN
+POST http://localhost:8000/user/loginent-Type: application/json
+
+Cont
+{
+    "username": "thebeast@gmail.com",
+    "password": "meow2"
+}
+
+### POST FOR ADMIN LOGIN
+POST http://localhost:8000/admin/login
+Content-Type: application/json
+
+{
+    "username": "loader@gmail.com",
+    "password": "meow"
+}
+
+
