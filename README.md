@@ -14,8 +14,8 @@ link here
 
 ## Our Team
  > <b>Premodial Zhou : </b> <br>
- * <a href="premodial.github.io"> GitHub  Profile  </a><br>
- * <a href="#"> GitHub  Account </a><br>
+ * <a href="https://premodial.github.io/"> GitHub  Profile  </a><br>
+ * <a href="https://github.com/premodial"> GitHub  Account </a><br>
  * <details>
    <summary><b>About myself</b></summary>
    <br>
@@ -25,7 +25,7 @@ link here
     
  > <b>Tshegofatso Maseko : </b> <br>
  * <a href="https://tshegofatso12-ai.github.io/porfolio/"> GitHub  Profile  </a><br>
- * <a href="#"> GitHub  Account </a><br>
+ * <a href="https://github.com/tshegofatso12"> GitHub  Account </a><br>
  * <details>
    <summary><b>About myself</b></summary>
    <br>
