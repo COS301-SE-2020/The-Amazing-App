@@ -19,7 +19,7 @@ link here
  * <details>
    <summary><b>About myself</b></summary>
    <br>
-   write here
+   I  am  a  self-motivated  and  hardworking  computer  science  student  with  a  long time passion for technology.  I managed to   finish my first and second year well from theUniversity of Pretoria and have a comprehensive knowledge of computer hardware and  software  systems.
    <br>
     </details>
     
@@ -29,7 +29,7 @@ link here
  * <details>
    <summary><b>About myself</b></summary>
    <br>
-   write here
+   I am passionate abut technology and I am a hard-worker.  I am always eager to learnand to use my problem-solving skills.
    <br>
     </details>
     
@@ -39,7 +39,7 @@ link here
  * <details>
     <summary><b>About myself </b></summary>
     <br>
-    write here
+    I am a self-motivated and hard-working young man with love and passion for tech-nology and technology related stuff.  I passed well  my first and second year and I’mlooking forward to do well in my final year.
     </details>
     
  > <b>Thamsanqa Dineka : </b> <br>
@@ -48,6 +48,6 @@ link here
  * <details>
    <summary><b>About myself</b></summary>
    <br>
-   write here
+   I am a smart worker that is passionate about solving computer problems most efficiently. Completed modules such as netcentric computer systems,software modelling, programdesign and database related course. 
    <br>
     </details>
