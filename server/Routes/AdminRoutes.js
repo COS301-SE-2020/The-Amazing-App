@@ -9,7 +9,6 @@ router.post('/login',(req,res)=>{
 })
 //so heres the end point 
 router.post('/register',(req,res)=>{
-    
     const admin = new ad(req.body)
     const feedback = admin.save()
     res.status(200).send({success:{status: 200, message: "Admin Registered!"}})

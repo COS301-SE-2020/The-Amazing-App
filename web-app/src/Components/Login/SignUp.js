@@ -6,52 +6,28 @@ import axios from 'axios';
 
 export default class SignUp extends React.Component {
 
-    constructor(props) {
-        super(props)
+    state = {username:"",email:"", password:""}
 
-        this.onChangeUserName = this.onChangeUserName.bind(this);
-        this.onChangeUserEmail = this.onChangeUserEmail.bind(this);
-        this.onChangeUserPassword = this.onChangeUserPassword.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-
-        this.state = {
-            name: '',
-            email: '',
-            password: ''
-        }
+    onFormSubmit=event=>{
+        event.preventDefault();
+        const data =
+            {
+                "username": this.state.username,
+                "password": this.state.password,
+                "email": this.state.email,
+                "image": "base64"   
+            } 
+            axios.post('http://localhost:8000/user/register',data)  
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+                if(res.status == 200){
+                /*
+                    Load the home page 
+                */
+                }
+              })
     }
-
-    onChangeUserName(e) {
-        this.setState({ name: e.target.value })
-    }
-
-    onChangeUserEmail(e) {
-        this.setState({ email: e.target.value })
-    }
-
-    onChangeUserPassword(e) {
-        this.setState({ password: e.target.value })
-    }
-
-    onSubmit(e) {
-        e.preventDefault()
-
-        const userObject = {
-            name: this.state.name,
-            email: this.state.email,
-            password: this.state.password
-        };
-
-        axios.post('http://localhost:4000/users/create', userObject)
-            .then((res) => {
-                console.log(res.data)
-            }).catch((error) => {
-                console.log(error)
-            });
-
-        this.setState({ name: '', email: '', password: ''})
-    }
-
     render()
     {
         return(<div>
@@ -65,12 +41,12 @@ export default class SignUp extends React.Component {
                     </ul>
                 </div>
                 <div>
-                <form onSubmit={this.onSubmit}>
-                Username: <input id="username" type="text" value={this.state.name} onChange={this.onChangeUserName} name="username"/>
-                Email address: <input id="email" type="email" value={this.state.email} onChange={this.onChangeUserEmail} name="email"/>
-                Password: <input id="password" type="password" value={this.state.password} onChange={this.onChangeUserPassword} name="password"/>
+                <form onSubmit={this.onFormSubmit}>
+                Username: <input id="username" type="text" name="username" onChange={(e)=>this.setState({username:e.target.value})} />
+                Email address: <input id="email" type="email" name="email"onChange={(e)=>this.setState({email:e.target.value})}/>
+                Password: <input id="password" type="password" name="password" onChange={(e)=>this.setState({password:e.target.value})}/>
                 <div id="input">
-                    <input type="submit" id="loginbtn" value="Register"/>
+                    <input type="submit" id="loginbtn" value="Register" />
                     <a href="#">Forgot Password </a>
                 </div>
                 </form>
