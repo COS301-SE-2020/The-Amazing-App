@@ -24,12 +24,12 @@ link here
     </details>
     
  > <b>Tshegofatso Maseko : </b> <br>
- * <a href="#"> GitHub  Profile  </a><br>
+ * <a href="tshegofatso12-ai.github.io/porfolio/"> GitHub  Profile  </a><br>
  * <a href="#"> GitHub  Account </a><br>
  * <details>
    <summary><b>About myself</b></summary>
    <br>
-   I am passionate abut technology and I am a hard-worker.  I am always eager to learnand to use my problem-solving skills.
+   I am passionate about technology and I am a hard-worker.  I am always eager to learnand to use my problem-solving skills. Completed various modules such as software modelling, netcentric computer systems,program design and database related course which equipped me with useful skills toenable me to be an active team member.
    <br>
     </details>
     
