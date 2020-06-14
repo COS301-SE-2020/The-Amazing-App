@@ -7,10 +7,10 @@ The Amazing App is a location-based mobile application game. A web application i
 link here
 
 ## Project Management Tool
-link here
+https://trello.com/b/Jzv91cpj/cos301-capstone
 
 ## SRC Document
-link here
+https://www.overleaf.com/read/ddzzdsfnjcpb
 
 ## Our Team
  > <b>Premodial Zhou : </b> <br>
