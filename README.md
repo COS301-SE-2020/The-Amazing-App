@@ -4,7 +4,7 @@
 The Amazing App is a location-based mobile application game. A web application is used to create the game. Markers will be created on a map in which players have to physically visit in order to solve riddles and retrieve information.
 
 ## NewTech - Demo 1
-link here
+https://drive.google.com/drive/u/2/folders/12PRr0Z1063KxBKN-Vm2yE5Ciq_3cBEtB
 
 ## Project Management Tool
 https://trello.com/b/Jzv91cpj/cos301-capstone
