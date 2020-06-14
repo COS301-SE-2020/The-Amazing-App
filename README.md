@@ -24,7 +24,7 @@ link here
     </details>
     
  > <b>Tshegofatso Maseko : </b> <br>
- * <a href="tshegofatso12-ai.github.io/porfolio/"> GitHub  Profile  </a><br>
+ * <a href="https://tshegofatso12-ai.github.io/porfolio/"> GitHub  Profile  </a><br>
  * <a href="#"> GitHub  Account </a><br>
  * <details>
    <summary><b>About myself</b></summary>
