@@ -28,6 +28,7 @@ export default class UpdatePreferences extends React.Component {
   }
   onChangeUserName(e) {
     this.setState({ newusername: e.target.value })
+
 }
 
 onChangeUserEmail(e) {
