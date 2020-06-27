@@ -1,5 +1,5 @@
 import React from 'react';
-import loginImg from '../../location.PNG';
+import map from "../Assets/map.jpg";
 import logo from '../../logo.png';
 import axios from 'axios';
 import './login.css'
@@ -50,7 +50,7 @@ class SignIn extends React.Component
                 </form>
                 </span> 
             </div>
-            <img src={loginImg} alt="girl" id="image"></img>
+            <img src={map} alt="map1" style={{width: 400, marginTop: -130, marginLeft:170}} />
             </div>);
     }
 }
