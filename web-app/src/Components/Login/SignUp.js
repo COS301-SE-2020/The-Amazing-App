@@ -1,32 +1,55 @@
 import React from 'react';
-import loginImg from '../../location.PNG';
+import map from "../Assets/map.jpg";
 import logo from '../../logo.png';
 import './login.css'
+import { Base64 } from 'js-base64';
 import axios from 'axios';
 
 export default class SignUp extends React.Component {
 
-    state = {username:"",email:"", password:""}
+    state = {username:"",email:"", password:"",err:""}
 
     onFormSubmit=event=>{
         event.preventDefault();
-        const data =
-            {
-                "username": this.state.username,
-                "password": this.state.password,
-                "email": this.state.email,
-                "image": "base64"   
-            } 
-            axios.post('http://localhost:8000/user/register',data)  
-            .then(res => {
-                console.log(res);
-                console.log(res.data);
-                if(res.status == 200){
-                /*
-                    Load the home page 
-                */
+        //check if all fields are filled in
+        if (this.state.username == "" || this.state.email == "" || this.state.password == "")
+        {
+            this.setState({err:"Please fill in all the fields!"});
+        }
+        else {
+            //valid email REGEX
+            const regEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            //valid password REGEX
+            const regPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+
+            //check if email address if valid
+            if (regEmail.test(this.state.email) == false){
+                this.setState({err:"Please enter a valid email address!"});
+            }
+            //check if password is valid
+            else if (regPassword.test(this.state.password) == false){
+                this.setState({err:"Password must contain 1 uppercase letter, 1 lowercase letter,1 number, 1 special character and must be 8 characters long!"});
+            }
+            else {
+                const data =
+                    {
+                        "username": this.state.username,
+                        "password": Base64.encode(this.state.password),//encodo password before saving to database
+                        "email": this.state.email,
+                        "image": "base64"   
+                    } 
+                    axios.post('http://localhost:8000/user/register',data)  
+                    .then(res => {
+                        console.log(res);
+                        console.log(res.data);
+                        if(res.status == 200){
+                        
+                            //Load the home page 
+                        
+                        }
+                    })
                 }
-              })
+            }
     }
     render()
     {
@@ -48,12 +71,13 @@ export default class SignUp extends React.Component {
                 <div id="input">
                     <input type="submit" id="loginbtn" value="Register" />
                     <a href="#">Forgot Password </a>
+                    <p id="error">{this.state.err}</p>
                 </div>
                 </form>
                 </div>
             </span> 
         </div>
-        <img src={loginImg} alt="girl" id="image"></img>
+        <img src={map} alt="map1" style={{width: 400, marginTop: -130, marginLeft:170}} />
         </div>
         );
     }
