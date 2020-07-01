@@ -49,7 +49,7 @@ class CreateGameModal extends React.Component {
                 <MapModal />
                 <div className="ui form" style={{marginTop: 15, width: 400}}>
                     <div className="field disabled" style={{color: "grey"}}>
-                      <input id="location" type="text" placeholder="Selected Location Will Appear Here..."/>
+                      <input id="location1" type="text" value="Univesity of Pretoria" placeholder="Selected Location Will Appear Here..."/>
                     </div>
                 </div>
               </div>
@@ -82,7 +82,7 @@ class CreateGameModal extends React.Component {
                 <MapModal />
                 <div className="ui form" style={{marginTop: 15, width: 400}}>
                     <div className="field disabled" style={{color: "grey"}}>
-                      <input id="location" type="text" placeholder="Selected Location Will Appear Here..."/>
+                      <input id="location2" type="text" placeholder="Selected Location Will Appear Here..."/>
                     </div>
                 </div>
               </div>
@@ -115,7 +115,7 @@ class CreateGameModal extends React.Component {
                 <MapModal />
                 <div className="ui form" style={{marginTop: 15, width: 400}}>
                     <div className="field disabled" style={{color: "grey"}}>
-                      <input id="location" type="text" placeholder="Selected Location Will Appear Here..."/>
+                      <input id="location3" type="text" placeholder="Selected Location Will Appear Here..."/>
                     </div>
                 </div>
               </div>
