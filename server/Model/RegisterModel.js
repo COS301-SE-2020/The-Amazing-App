@@ -9,7 +9,7 @@ let UserSchema = new Schema({
   email: {
     type: String,
     required: [true, 'Please add an email'],
-    unique: true,
+    unique: [true, 'User already exists'],
     match: [
       /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/,
       'Please enter a valid email',

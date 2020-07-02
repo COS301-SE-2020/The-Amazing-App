@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import UserOptions from './UserOptions'
 
 
+
 class NavBar extends React.Component
 {
     render()
@@ -25,7 +26,7 @@ class NavBar extends React.Component
                     </Nav>
                     <Nav style={{marginRight: 50, color: "white", fontWeight: "normal"}} className="lead" pull Right>
                             <Nav.Link href="/" style={myStyle} >Home</ Nav.Link>
-                            <Nav.Link href="DashBoard" style={myStyle}>Dashboards</Nav.Link>
+                            <Nav.Link href="DashBoard" style={myStyle}>Dashboard</Nav.Link>
                             <Nav.Link  href="/signup" style={myStyle}>Signup</Nav.Link >
                             <Nav.Link  href="/login" style={myStyle}>Login</Nav.Link >
                             <Nav.Link href="#">
