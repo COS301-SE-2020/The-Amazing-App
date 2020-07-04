@@ -2,7 +2,8 @@ import React from 'react';
 import map from "../Assets/map.jpg";
 import logo from '../../logo.png';
 import axios from 'axios';
-import './login.css'
+import './login.css';
+import {Link} from 'react-router-dom'
 import { withRouter } from "react-router-dom";
 import Cookies from 'js-cookie';
 
@@ -45,17 +46,23 @@ class SignIn extends React.Component
             <div class = "loginPage" >
                 <span class="loginContainer">
                     <div class = "logReg">
-                        <ul>
-                            <li><a class="active" href="login.html">Login</a></li>
-                            <li><a  href="register.html">Register</a></li>
-                        </ul>
+                    <ul style={{width:"50%",display:"flex",justifyContent:"space-around",alignItems:"center"}}>
+                        <Link to="/login">
+                        <li>Login</li>
+                        </Link>
+                        <Link to="SignUp">
+                        <li>Register</li>
+                        </Link>
+                    </ul>
                     </div>
                     <form onSubmit={this.onFormSubmit}>
                     Email: <input id="email" type="email" name="email"  onChange={(e)=>this.setState({email:e.target.value})}></input>
                     Password: <input id="password" type="password" name="password"  onChange={(e)=>this.setState({password:e.target.value})}></input>
                     <div id="input">
                         <button id="loginbtn">Login</button>
-                        <a href="#">Forgot Password </a>
+                        <Link to="/Reset">
+                   <p> Forgot Password </p>
+                   </Link>
                         <p id="error">{this.state.err}</p>
                     </div>
                 </form>
