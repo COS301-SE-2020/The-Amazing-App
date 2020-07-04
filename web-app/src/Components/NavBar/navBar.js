@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import UserOptions from './UserOptions'
 
 
+
 class NavBar extends React.Component
 {
     render()
@@ -17,7 +18,7 @@ class NavBar extends React.Component
         return(
                 <Navbar sticky="top" style={{backgroundColor: "#2A9D8F"}}>
                     <Navbar.Brand style={{marginLeft: 75, color: "white", fontSize: 16}} >
-                        <img src={logo} className="ui small circular image" alt="userImage" style={{height: 55, width: 55}}/>
+                        <img src={logo} className="ui small circular image" alt="userImage" style={{height: 50, width: 50}}/>
                     </Navbar.Brand>
                     <Nav className="mr-auto">
                        { /*<Nav.Link href="home">Home</ Nav.Link>
@@ -25,7 +26,7 @@ class NavBar extends React.Component
                     </Nav>
                     <Nav style={{marginRight: 50, color: "white", fontWeight: "normal"}} className="lead" pull Right>
                             <Nav.Link href="/" style={myStyle} >Home</ Nav.Link>
-                            <Nav.Link href="DashBoard" style={myStyle}>Dashboards</Nav.Link>
+                            <Nav.Link href="DashBoard" style={myStyle}>Dashboard</Nav.Link>
                             <Nav.Link  href="/signup" style={myStyle}>Signup</Nav.Link >
                             <Nav.Link  href="/login" style={myStyle}>Login</Nav.Link >
                             <Nav.Link href="#">

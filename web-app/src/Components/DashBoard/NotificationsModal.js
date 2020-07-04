@@ -16,27 +16,21 @@ class NotificationsModal extends React.Component {
         <Modal.Header>Notifications</Modal.Header>
         <Modal.Content >
           <Modal.Description>
-          
-
-
-  <List style={{fontSize: 20,color: "black"}}>
-    <List.Item icon='users' content='group "lengends" has finished game Detetives' />
-    <br />
-    <List.Item icon='marker' content='group "NewTect" has arrive at location X' />
-    <br />
-    <List.Item
-      icon='mail'
-      content={<a href='mailto:NewTech@gmail.com'>new message from mail</a>}
-    />
-    <br />
-    <List.Item
-      icon='trophy'
-      content='group "Gamma" sets record time'
-    />
-  </List>
-
-
-
+          <List style={{fontSize: 20,color: "black"}}>
+            <List.Item icon='users' content='group "lengends" has finished game Detetives' />
+            <br />
+            <List.Item icon='marker' content='group "NewTect" has arrive at location X' />
+            <br />
+            <List.Item
+              icon='mail'
+              content={<a href='mailto:NewTech@gmail.com'>new message from mail</a>}
+            />
+            <br />
+            <List.Item
+              icon='trophy'
+              content='group "Gamma" sets record time'
+            />
+          </List>
           </Modal.Description>
         </Modal.Content>
       </Modal>

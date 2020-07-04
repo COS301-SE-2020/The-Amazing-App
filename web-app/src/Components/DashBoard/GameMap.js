@@ -1,48 +1,67 @@
-// src/DisplayMapClass.js
-import * as React from 'react';
+import React from 'react';
+import mapboxgl from 'mapbox-gl';
+import Geocoder from '@mapbox/mapbox-gl-geocoder';
+import { Button} from "semantic-ui-react";
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+import './styles.css'
+
+mapboxgl.accessToken = 'pk.eyJ1IjoidGFwZWhuZGhsb3Z1IiwiYSI6ImNrYmV2eTRhdDBwbXUydHA4eTl6cW5neDMifQ.BVjVIq7FUmlnMZJC_BvRDQ';
 
 class GameMap extends React.Component {
-  mapRef = React.createRef();
-  state = {
-    map: null
-  };
+  constructor(props){
+  super(props);
+    this.state = {
+      lng: 28.229271,
+      lat: -25.747868,
+      add: "",
+      zoom: 10
+    };
+  }
 
-  componentDidMount() {
-    const H = window.H;
-    const platform = new H.service.Platform({
-        apikey: "FoVXDu18ThLrAWjURYy5cTt_p7hCkV9eJeYM1Ohy310"
+  componentDidMount(){
+    const map = new mapboxgl.Map({
+      container: this.mapContainer,
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: [this.state.lng, this.state.lat],
+      zoom: this.state.zoom
     });
 
-    const defaultLayers = platform.createDefaultLayers();
+    const geocoder =  new Geocoder({
+      accessToken: mapboxgl.accessToken,
+      mapboxgl: mapboxgl
+      })
+      console.log(geocoder);
 
-    const map = new H.Map(
-      this.mapRef.current,
-      defaultLayers.vector.normal.map,
-      {
-        center: { lat: -25.747868, lng: 28.229271 },
-        zoom: 10,
-        pixelRatio: window.devicePixelRatio || 1
-      }
-    );
+      map.addControl(geocoder);
 
-    // MapEvents enables the event system
-    // Behavior implements default interactions for pan/zoom (also on mobile touch environments)
-    // This variable is unused and is present for explanatory purposes
-    const behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+      geocoder.on('result', (e) => {
+        console.log(e.result.place_name);
+        this.setState({ add: e.result.place_name})
+      });
 
-    // Create the default UI components to allow the user to interact with them
-    // This variable is unused
-    const ui = H.ui.UI.createDefault(map, defaultLayers);
-
-    this.setState({ map });
+    map.on('click', () => {
+      this.setState({
+        lng: map.getCenter().lng.toFixed(4),
+        lat: map.getCenter().lat.toFixed(4),
+        zoom: map.getZoom().toFixed(2)
+      });
+    });
   }
 
-  componentWillUnmount() {
-    this.state.map.dispose();
-  }
-
-  render() {
-    return <div ref={this.mapRef} style={{ height: "560px" }} />;
+  render(){
+    return (
+        <div style={{height: 450}}>
+          <div className='sidebarStyle'>
+            <div>Address: {this.state.add}</div>
+          </div>
+          <div className='buttonStyle'>
+            <Button size='medium' style={{fontSize: 13, backgroundColor: "#2A9D8F",color: "white",marginTop: 10, marginRight: 570, marginLeft: 570}}>
+              Select Location
+            </Button>
+          </div>
+          <div ref={el => this.mapContainer = el} className='mapContainer' />
+        </div>
+    )
   }
 }
 

@@ -1,5 +1,7 @@
 import React from "react";
 import {Header, Modal,  Form, Button } from "semantic-ui-react";
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
 
 
@@ -46,6 +48,8 @@ onChangeConfirmPassword(e) {
   onSubmitUsername(e) {
       e.preventDefault()
       this.state.username = this.state.newusername
+
+      
   }
 
   onSubmitEmail(e) {
