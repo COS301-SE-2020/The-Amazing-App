@@ -47,9 +47,19 @@ onChangeConfirmPassword(e) {
 
   onSubmitUsername(e) {
       e.preventDefault()
-      this.state.username = this.state.newusername
-
+     
+      this.token = Cookies.get('token');
+      const data = {'username': this.state.newusername }
+      const instance = axios.put('http://localhost:8000/api/auth/UpdateUsername',data,{headers: {Authorization : 'Bearer ' + this.token}}
+      ).then(res => {
+        if(res.status == 200){
+          this.state.username = this.state.newusername
+        }
+    }).catch(error => {
+        this.setState({username:error.message});
+    });
       
+
   }
 
   onSubmitEmail(e) {

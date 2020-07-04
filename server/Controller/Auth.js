@@ -184,6 +184,7 @@ module.exports = {
   // @access Private
 
   UpdateUsername: AsyncHandler(async (req, res, next) => {
+    console.log(req.body.username)
     const FieldToUpdate = {
       username: req.body.username,
     };
@@ -220,7 +221,7 @@ const SendTokenResponse = (user, StatusCode, res) => {
     httpOnly: true,
   };
 
-  if ((process.env.NODE_ENV = 'production')) {
+  if ((process.env.NODE_ENV === 'production')) {
     options.secure = true;
   }
   console.log('token');
