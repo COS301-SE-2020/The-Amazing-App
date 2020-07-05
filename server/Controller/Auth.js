@@ -217,13 +217,13 @@ const SendTokenResponse = (user, StatusCode, res) => {
     expires: new Date(
       Date.now() + process.env.JwtCookieExpire * 24 * 60 * 60 * 1000
     ),
-    httpOnly: true,
+    httpOnly: true
   };
 
-  if ((process.env.NODE_ENV = 'production')) {
+  if (process.env.NODE_ENV === 'production') {
     options.secure = true;
   }
-  console.log('token');
+ 
   res.status(StatusCode).cookie('token', token, options).json({
     success: true,
     token: token,

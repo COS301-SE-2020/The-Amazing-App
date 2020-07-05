@@ -9,7 +9,7 @@ const hpp = require('hpp');
 const RateLimit = require('express-rate-limit');
 const XssClean = require('xss-clean');
 const MongoSanitize = require('express-mongo-sanitize');
-const cookieparser = require('cookie-parser');
+const cookieParser = require('cookie-parser');
 const fileupload = require('express-fileupload');
 const ErrorHandler = require('./Middleware/Error');
 const ConnectDB = require('./Config/DataBaseConnection');
@@ -21,10 +21,10 @@ const app = express();
 app.use(cors());
 
 // Body parser
-app.use(express.json());
-
+app.use(express.json()); 
+ 
 // Cookie parser
-app.use(cookieparser());
+app.use(cookieParser());
 
 // load env vars
 enviro.config({ path: './Config/Config.env' });
