@@ -5,6 +5,7 @@ import axios from 'axios';
 import './login.css';
 import {Link} from 'react-router-dom'
 import { withRouter } from "react-router-dom";
+import Cookies from 'js-cookie';
 
 class SignIn extends React.Component
 {
@@ -28,7 +29,9 @@ class SignIn extends React.Component
                     console.log(res);
                     console.log(res.data);
                     if(res.status == 200){
+                        Cookies.set('token',res.data.token,{expires:2});
                         this.props.history.push("/DashBoard");
+
                     }
                 }).catch(error => {
                     this.setState({err:error.message});

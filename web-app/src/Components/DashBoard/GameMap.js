@@ -1,7 +1,6 @@
 import React from 'react';
 import mapboxgl from 'mapbox-gl';
 import Geocoder from '@mapbox/mapbox-gl-geocoder';
-import { Button} from "semantic-ui-react";
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import './styles.css'
 
@@ -30,13 +29,14 @@ class GameMap extends React.Component {
       accessToken: mapboxgl.accessToken,
       mapboxgl: mapboxgl
       })
-      console.log(geocoder);
+      //console.log(geocoder);
 
       map.addControl(geocoder);
 
       geocoder.on('result', (e) => {
-        console.log(e.result.place_name);
-        this.setState({ add: e.result.place_name})
+        //console.log(e.result.place_name);
+        this.setState({ add: e.result.place_name});
+        this.props.updateSomething(this.state.add);
       });
 
     map.on('click', () => {
@@ -53,11 +53,6 @@ class GameMap extends React.Component {
         <div style={{height: 450}}>
           <div className='sidebarStyle'>
             <div>Address: {this.state.add}</div>
-          </div>
-          <div className='buttonStyle'>
-            <Button size='medium' style={{fontSize: 13, backgroundColor: "#2A9D8F",color: "white",marginTop: 10, marginRight: 570, marginLeft: 570}}>
-              Select Location
-            </Button>
           </div>
           <div ref={el => this.mapContainer = el} className='mapContainer' />
         </div>
