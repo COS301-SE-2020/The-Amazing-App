@@ -2,16 +2,18 @@ import React from 'react';
 import map from "../Assets/map.jpg";
 import logo from '../../logo.png';
 import './login.css'
-import { Base64 } from 'js-base64';
 import axios from 'axios';
+import {Link} from 'react-router-dom'
+import { withRouter } from "react-router-dom";
 
-export default class SignUp extends React.Component {
+
+class SignUp extends React.Component {
 
     state = {username:"",email:"", password:"",err:""}
 
     onFormSubmit=event=>{
         event.preventDefault();
-        //check if all fields are filled in
+       //check if all fields are filled in
         if (this.state.username == "" || this.state.email == "" || this.state.password == "")
         {
             this.setState({err:"Please fill in all the fields!"});
@@ -34,20 +36,20 @@ export default class SignUp extends React.Component {
                 const data =
                     {
                         "username": this.state.username,
-                        "password": Base64.encode(this.state.password),//encodo password before saving to database
+                        "password": this.state.password,
                         "email": this.state.email,
                         "image": "base64"   
                     } 
-                    axios.post('http://localhost:8000/user/register',data)  
+                    axios.post('http://localhost:8000/api/auth/Register',data)  
                     .then(res => {
                         console.log(res);
                         console.log(res.data);
                         if(res.status == 200){
-                        
-                            //Load the home page 
-                        
+                            this.props.history.push("/DashBoard");
                         }
-                    })
+                    }).catch(error => {
+                        this.setState({err:'Email address already registered!'});
+                    });
                 }
             }
     }
@@ -58,9 +60,13 @@ export default class SignUp extends React.Component {
         <div class = "loginPage" >
             <span class="loginContainer">
                 <div class = "logReg">
-                    <ul>
-                        <li><a href="login.html">Login</a></li>
-                        <li><a class="active"  href="register.html">Register</a></li>
+                <ul style={{width:"50%",display:"flex",justifyContent:"space-around",alignItems:"center"}}>
+                        <Link to="/login">
+                        <li>Login</li>
+                        </Link>
+                        <Link to="SignUp">
+                        <li>Register</li>
+                        </Link>
                     </ul>
                 </div>
                 <div>
@@ -70,7 +76,9 @@ export default class SignUp extends React.Component {
                 Password: <input id="password" type="password" name="password" onChange={(e)=>this.setState({password:e.target.value})}/>
                 <div id="input">
                     <input type="submit" id="loginbtn" value="Register" />
-                    <a href="#">Forgot Password </a>
+                    <Link to="/Reset">
+                   <p> Forgot Password </p>
+                   </Link>
                     <p id="error">{this.state.err}</p>
                 </div>
                 </form>
@@ -82,5 +90,7 @@ export default class SignUp extends React.Component {
         );
     }
 }
+
+export default withRouter(SignUp);
 
 
