@@ -30,3 +30,16 @@
     left: 0;
     bottom: 0;
   }
+
+  .grid.container {
+    /*margin-top: 5em;
+    margin-right: 2em;*/
+  }
+  .inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }

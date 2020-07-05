@@ -3,6 +3,7 @@ import map from "../Assets/map.jpg";
 import logo from '../../logo.png';
 import './login.css'
 import axios from 'axios';
+import {Link} from 'react-router-dom'
 import { withRouter } from "react-router-dom";
 
 
@@ -59,9 +60,13 @@ class SignUp extends React.Component {
         <div class = "loginPage" >
             <span class="loginContainer">
                 <div class = "logReg">
-                    <ul>
-                        <li><a href="login.html">Login</a></li>
-                        <li><a class="active"  href="register.html">Register</a></li>
+                <ul style={{width:"50%",display:"flex",justifyContent:"space-around",alignItems:"center"}}>
+                        <Link to="/login">
+                        <li>Login</li>
+                        </Link>
+                        <Link to="SignUp">
+                        <li>Register</li>
+                        </Link>
                     </ul>
                 </div>
                 <div>
@@ -71,7 +76,9 @@ class SignUp extends React.Component {
                 Password: <input id="password" type="password" name="password" onChange={(e)=>this.setState({password:e.target.value})}/>
                 <div id="input">
                     <input type="submit" id="loginbtn" value="Register" />
-                    <a href="#">Forgot Password </a>
+                    <Link to="/Reset">
+                   <p> Forgot Password </p>
+                   </Link>
                     <p id="error">{this.state.err}</p>
                 </div>
                 </form>

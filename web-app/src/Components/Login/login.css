@@ -38,8 +38,8 @@ li a {
  }
 
 .active {
-  text-decoration: underline;
-  text-decoration-color: #FF4500;
+  /*text-decoration: none;
+  text-decoration-color: #FF4500;*/
   color: #2A9D8F;
 }
 
