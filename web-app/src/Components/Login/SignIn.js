@@ -60,7 +60,7 @@ class SignIn extends React.Component
                     Password: <input id="password" type="password" name="password"  onChange={(e)=>this.setState({password:e.target.value})}></input>
                     <div id="input">
                         <button id="loginbtn">Login</button>
-                        <Link to="/Reset">
+                        <Link to="/Forgot">
                    <p> Forgot Password </p>
                    </Link>
                         <p id="error">{this.state.err}</p>
