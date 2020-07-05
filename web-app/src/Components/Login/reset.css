@@ -38,9 +38,9 @@ ul {
    }
   
   .active {
-    text-decoration: underline;
+    /*text-decoration: underline;
     text-decoration-color: #FF4500;
-    color: #2A9D8F;
+    color: #2A9D8F;*/
   }
   
   .resetPage {

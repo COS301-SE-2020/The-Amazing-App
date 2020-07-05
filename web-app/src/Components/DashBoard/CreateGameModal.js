@@ -4,10 +4,24 @@ import MapModal from "./MapModal";
 import mapboxgl from 'mapbox-gl';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import GameName from "./GameName";
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoidGFwZWhuZGhsb3Z1IiwiYSI6ImNrYmV2eTRhdDBwbXUydHA4eTl6cW5neDMifQ.BVjVIq7FUmlnMZJC_BvRDQ';
 
-const gameObject = {
+  const gameObject1 = {
+    question: "",
+    answers: [],
+    location: ""
+  }
+
+  const gameObject2 = {
+    question: "",
+    answers: [],
+    location: ""
+  }
+
+  const gameObject3 = {
     question: "",
     answers: [],
     location: ""
@@ -28,35 +42,78 @@ class CreateGameModal extends React.Component {
       gameName: "",
       gameDesc: "",
       returnVal: "",
-      address: "",
-      quest: "",
+      address: [],
+      quest1: "",
       ans1: "",
       ans2: "",
-      ans3: ""
+      ans3: "",
+      quest2: "",
+      ans21: "",
+      ans22: "",
+      ans23: "",
+      quest3: "",
+      ans31: "",
+      ans32: "",
+      ans33: ""
     }
   }
 
-  addToGameProp = (event) =>{
+  addToGameProp1 = (event) =>{
     event.preventDefault();
-    gameObject.question = this.state.quest
-    gameObject.answers[0] = this.state.ans1
-    gameObject.answers[1] = this.state.ans2
-    gameObject.answers[2] = this.state.ans2
-    gameObject.location = this.state.address
+    gameObject1.question = this.state.quest1
+    gameObject1.answers[0] = this.state.ans1
+    gameObject1.answers[1] = this.state.ans2
+    gameObject1.answers[2] = this.state.ans2
+    gameObject1.location = this.state.address[0]
 
-    game.properties.push(gameObject);
-    console.log(game)
+    game.properties.push(gameObject1);
+  }
+
+  addToGameProp2 = (event) =>{
+    event.preventDefault();
+    gameObject2.question = this.state.quest2
+    gameObject2.answers[0] = this.state.ans21
+    gameObject2.answers[1] = this.state.ans22
+    gameObject2.answers[2] = this.state.ans23
+    gameObject2.location = this.state.address[1]
+
+    game.properties.push(gameObject2);
+  }
+
+  addToGameProp3 = (event) =>{
+    event.preventDefault();
+    gameObject3.question = this.state.quest3
+    gameObject3.answers[0] = this.state.ans31
+    gameObject3.answers[1] = this.state.ans32
+    gameObject3.answers[2] = this.state.ans33
+    gameObject3.location = this.state.address[2]
+
+    game.properties.push(gameObject3)
   }
 
   updateAddress(value){
     this.setState({
-      address: value
+      address: this.state.address.concat(value)
     })
   }
 
   getGameName(value){
     game.name = value.gameName
     game.description = value.descrip
+  }
+
+  onSubmitGame = (event) => {
+    event.preventDefault();
+    
+    this.token = Cookies.get('token');
+    const instance = axios.put('url',game,{headers: {Authorization : 'Bearer ' + this.token}}
+      ).then(res => {
+        if(res.status == 200){
+          //responce
+        }
+    }).catch(error => {
+        //error
+    });
   }
 
   render() {
@@ -82,8 +139,8 @@ class CreateGameModal extends React.Component {
               <div className="ui form" style={{width: 700}}>
                 <div className="field">
                     <label>Question 1</label>
-                    <input required type="text" value={this.state.quest} placeholder="Type Question..." 
-                      onChange={e => this.setState({quest: e.target.value})}
+                    <input required type="text" value={this.state.quest1} placeholder="Type Question..." 
+                      onChange={e => this.setState({quest1: e.target.value})}
                     />
                   </div>
               </div>
@@ -113,14 +170,14 @@ class CreateGameModal extends React.Component {
                 <MapModal getAddress={this.updateAddress.bind(this)}/>
                 <div className="ui form" style={{marginTop: 15, width: 520}}>
                     <div className="field disabled" style={{color: "grey"}}>
-                        <input required id="location1" type="text" value={this.state.address} 
-                          onChange={e => this.setState({address: this.state.address})}
+                        <input required id="location1" type="text" value={this.state.address[0]} 
+                          onChange={e => this.setState({address: this.state.address.concat(this.address[0])})}
                           placeholder="Selected Location Will Appear Here..."
                         />
                     </div>
                 </div>
               </div>
-              <Button style={{backgroundColor: "#2A9D8F", color: "white", marginTop: 10}} onClick={this.addToGameProp}>
+              <Button style={{backgroundColor: "#2A9D8F", color: "white", marginTop: 10}} onClick={this.addToGameProp1}>
                 <i className="checkmark icon"></i>
                 Save
               </Button>
@@ -130,8 +187,8 @@ class CreateGameModal extends React.Component {
               <div className="ui form" style={{width: 700}}>
                 <div className="field">
                     <label>Question 2</label>
-                    <input type="text" value={this.state.quest} placeholder="Type Question..."
-                      onChange={e => this.setState({quest: e.target.value})}
+                    <input type="text" value={this.state.quest2} placeholder="Type Question..."
+                      onChange={e => this.setState({quest2: e.target.value})}
                     />
                   </div>
               </div>
@@ -139,20 +196,20 @@ class CreateGameModal extends React.Component {
                 <div className="three fields">
                   <div className="field">
                     <label>Answer 1(Correct Option)</label>
-                    <input type="text" value={this.state.ans1} placeholder="Type Correct Answer..."
-                      onChange={e => this.setState({ans1: e.target.value})}
+                    <input type="text" value={this.state.ans21} placeholder="Type Correct Answer..."
+                      onChange={e => this.setState({ans21: e.target.value})}
                     />
                   </div>
                   <div className="field">
                     <label>Answer 2</label>
-                    <input type="text" value={this.state.ans2} placeholder="Type Answer..."
-                      onChange={e => this.setState({ans2: e.target.value})}
+                    <input type="text" value={this.state.ans22} placeholder="Type Answer..."
+                      onChange={e => this.setState({ans22: e.target.value})}
                     />
                   </div>
                   <div className="field">
                     <label>Answer 3</label>
-                    <input type="text" value={this.state.ans3} placeholder="Type Answer..."
-                      onChange={e => this.setState({ans3: e.target.value})}
+                    <input type="text" value={this.state.ans23} placeholder="Type Answer..."
+                      onChange={e => this.setState({ans23: e.target.value})}
                     />
                   </div>
                 </div>
@@ -161,14 +218,14 @@ class CreateGameModal extends React.Component {
                 <MapModal getAddress={this.updateAddress.bind(this)}/>
                 <div className="ui form" style={{marginTop: 15, width: 520}}>
                     <div className="field disabled" style={{color: "grey"}}>
-                      <input id="location2" type="text" value={this.state.address} 
-                        onChange={e => this.setState({address: this.state.address})}
+                      <input id="location2" type="text" value={this.state.address[1]} 
+                        onChange={e => this.setState({address: this.state.address.concat(this.address[1])})}
                         placeholder="Selected Location Will Appear Here..."
                       />
                     </div>
                 </div>
               </div>
-              <Button style={{backgroundColor: "#2A9D8F", color: "white", marginTop: 10}} onClick={this.addToGameProp}>
+              <Button style={{backgroundColor: "#2A9D8F", color: "white", marginTop: 10}} onClick={this.addToGameProp2}>
                 <i className="checkmark icon"></i>
                 Save
               </Button>
@@ -178,22 +235,30 @@ class CreateGameModal extends React.Component {
               <div className="ui form" style={{width: 700}}>
                 <div className="field">
                     <label>Question 3</label>
-                    <input type="text" placeholder="Type Question..."/>
+                    <input type="text" value={this.state.quest3} placeholder="Type Question..."
+                      onChange={e => this.setState({quest3: e.target.value})}
+                    />
                   </div>
               </div>
               <div className="ui form" style={{marginTop: 15}}>
                 <div className="three fields">
                   <div className="field">
                     <label>Answer 1(Correct Option)</label>
-                    <input type="text" placeholder="Type Correct Answer..."/>
+                    <input type="text" value={this.state.ans31} placeholder="Type Correct Answer..."
+                      onChange={e => this.setState({ans31: e.target.value})}
+                    />
                   </div>
                   <div className="field">
                     <label>Answer 2</label>
-                    <input type="text" placeholder="Type Answer..."/>
+                    <input type="text" value={this.state.ans32} placeholder="Type Answer..."
+                      onChange={e => this.setState({ans32: e.target.value})}
+                    />
                   </div>
                   <div className="field">
                     <label>Answer 3</label>
-                    <input type="text" placeholder="Type Answer..."/>
+                    <input type="text" value={this.state.ans33} placeholder="Type Answer..."
+                      onChange={e => this.setState({ans33: e.target.value})}
+                    />
                   </div>
                 </div>
               </div>
@@ -201,13 +266,19 @@ class CreateGameModal extends React.Component {
                 <MapModal getAddress={this.updateAddress.bind(this)}/>
                 <div className="ui form" style={{marginTop: 15, width: 520}}>
                     <div className="field disabled" style={{color: "grey"}}>
-                      <input id="location3" type="text" value={this.state.address[2]} placeholder="Selected Location Will Appear Here..."/>
+                      <input id="location3" type="text" value={this.state.address[2]} 
+                        onChange={e => this.setState({address: this.state.address.concat(this.address[2])})}
+                        placeholder="Selected Location Will Appear Here..."/>
                     </div>
                 </div>
+                <Button style={{backgroundColor: "#2A9D8F", color: "white", marginTop: 10}} onClick={this.addToGameProp3}>
+                  <i className="checkmark icon"></i>
+                  Save
+                </Button>
               </div>
             </div>
             <hr/>
-            <button className="ui button" style={{backgroundColor: "#2A9D8F", color: "white"}}>Submit Game</button>
+            <button className="ui button" onClick={this.onSubmitGame} style={{backgroundColor: "#2A9D8F", color: "white"}}>Submit Game</button>
           </Modal.Description>
         </Modal.Content>
       </Modal>
