@@ -34,7 +34,7 @@ class DashHomeMap extends React.Component {
           'id': '2',
           'title': 'Waterkloof',
           'description':
-              "This is where hip-hop was born, where the Yankees became a dynasty and where you can find New York City's leading zoo and botanical garden.",
+              "Waterkloof is a suburb of the city of Pretoria, South Africa, located to the east of the city centre.",
           'camera': {
               center: [28.2441 ,-25.7792],
               zoom: 14.21,
@@ -45,7 +45,7 @@ class DashHomeMap extends React.Component {
           'id': '3',
           'title': 'Menlo Park',
           'description':
-              "No matter how hip it looks on TV, NYC's most populous borough is best experienced in person. Read on to find out about live music, Prospect Park, Nets basketball and more.",
+              "Menlopark is an upmarket suburb in the city of Pretoria, South Africa.",
           'camera': {
               center: [28.2600 ,-25.7699],
               bearing: -8.9,
@@ -56,7 +56,7 @@ class DashHomeMap extends React.Component {
           'id': '1',
           'title': 'Arcadia',
           'description':
-              'Even if you think you know Manhattan—its world-class museums, fine dining and unforgettable views—the borough always has something new and exciting in store.',
+              'Arcadia is a suburb in Pretoria, South Africa that is known for its historical buildings, embassies and hotels.',
           'camera': {
               center: [28.2030 ,-25.7453],
               bearing: 25.3,
@@ -67,7 +67,7 @@ class DashHomeMap extends React.Component {
           'id': '4',
           'title': 'Brooklyn',
           'description':
-              "Taste food from around the globe, watch Mets baseball and US Open tennis, see cutting-edge art and more in one of the world's most diverse places.",
+              "Brooklyn is a suburb of the city of Pretoria, South Africa.",
           'camera': {
               center: [28.2393 ,-25.7646],
               bearing: 36,
@@ -78,7 +78,7 @@ class DashHomeMap extends React.Component {
           'id': '5',
           'title': 'Hatfield',
           'description':
-              'Take a free ferry ride to an island getaway filled with historic architecture, stunning views, gardens and many family-friendly attractions.',
+              'Hatfield is a suburb in Pretoria, South Africa with a high density of students and student accommodation due to its proximity to the University of Pretoria.',
           'camera': {
               center: [28.238,-25.748],
               bearing: 28.4,
@@ -119,7 +119,7 @@ class DashHomeMap extends React.Component {
           <div ref = {this.mapContainer} className = "mapContainer" id="mapp"></div>
           <div class="map-overlay-container">
               <div class="map-overlay">
-                  <h2 id="location-title"></h2>
+                  <h4 id="location-title"></h4>
                   <p id="location-description"></p>
               </div>
           </div>

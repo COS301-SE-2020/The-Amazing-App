@@ -54,12 +54,17 @@ class CreateGameModal extends React.Component {
       quest3: "",
       ans31: "",
       ans32: "",
-      ans33: ""
+      ans33: "",
+      save1: "Save",
+      save2: "Save",
+      save3: "Save",
+      submit: "Submit Game"
     }
   }
 
   addToGameProp1 = (event) =>{
     event.preventDefault();
+    this.setState({save1: "Saved !"})
     gameObject1.question = this.state.quest1
     gameObject1.answers[0] = this.state.ans1
     gameObject1.answers[1] = this.state.ans2
@@ -71,6 +76,7 @@ class CreateGameModal extends React.Component {
 
   addToGameProp2 = (event) =>{
     event.preventDefault();
+    this.setState({save2: "Saved !"})
     gameObject2.question = this.state.quest2
     gameObject2.answers[0] = this.state.ans21
     gameObject2.answers[1] = this.state.ans22
@@ -82,6 +88,7 @@ class CreateGameModal extends React.Component {
 
   addToGameProp3 = (event) =>{
     event.preventDefault();
+    this.setState({save3: "Saved !"})
     gameObject3.question = this.state.quest3
     gameObject3.answers[0] = this.state.ans31
     gameObject3.answers[1] = this.state.ans32
@@ -104,8 +111,8 @@ class CreateGameModal extends React.Component {
 
   onSubmitGame = (event) => {
     event.preventDefault();
-    
-    this.token = Cookies.get('token');
+    this.setState({submit: "Submitted !"});
+    /*this.token = Cookies.get('token');
     const instance = axios.put('url',game,{headers: {Authorization : 'Bearer ' + this.token}}
       ).then(res => {
         if(res.status == 200){
@@ -113,7 +120,7 @@ class CreateGameModal extends React.Component {
         }
     }).catch(error => {
         //error
-    });
+    });*/
   }
 
   render() {
@@ -179,7 +186,7 @@ class CreateGameModal extends React.Component {
               </div>
               <Button style={{backgroundColor: "#2A9D8F", color: "white", marginTop: 10}} onClick={this.addToGameProp1}>
                 <i className="checkmark icon"></i>
-                Save
+                {this.state.save1}
               </Button>
             </div>
             <hr/>
@@ -227,7 +234,7 @@ class CreateGameModal extends React.Component {
               </div>
               <Button style={{backgroundColor: "#2A9D8F", color: "white", marginTop: 10}} onClick={this.addToGameProp2}>
                 <i className="checkmark icon"></i>
-                Save
+                {this.state.save2}
               </Button>
             </div>
             <hr/>
@@ -273,12 +280,12 @@ class CreateGameModal extends React.Component {
                 </div>
                 <Button style={{backgroundColor: "#2A9D8F", color: "white", marginTop: 10}} onClick={this.addToGameProp3}>
                   <i className="checkmark icon"></i>
-                  Save
+                  {this.state.save3}
                 </Button>
               </div>
             </div>
             <hr/>
-            <button className="ui button" onClick={this.onSubmitGame} style={{backgroundColor: "#2A9D8F", color: "white"}}>Submit Game</button>
+            <button className="ui button" onClick={this.onSubmitGame} style={{backgroundColor: "#2A9D8F", color: "white"}}>{this.state.submit}</button>
           </Modal.Description>
         </Modal.Content>
       </Modal>

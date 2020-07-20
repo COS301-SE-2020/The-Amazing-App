@@ -27,7 +27,7 @@ class SideNavComponent extends React.Component {
               <CreateGameModal />
               <br />
               <MyGamesModal />
-              <RecentlyPlayedComponent />
+              {/*<RecentlyPlayedComponent />*/}
             </Col>
           </Col>
           <Col style={{marginRight: 10}}>
