@@ -11,11 +11,12 @@ class NavBar extends React.Component
     {
         const myStyle = {
             fontSize: 16,
-            color: "white"
+            color: "white",
+            fontFamily: "'Helvetica Neue', Arial, Helvetica, sans-serif"
         };
         
        return(<Navbar sticky="top" style={{backgroundColor: "#2A9D8F"}}>
-                    <Navbar.Brand style={{marginLeft: 75, color: "white", fontSize: 16}} >
+                    <Navbar.Brand style={{marginLeft: 75, color: "white", fontSize: 15}} >
                         <img src={logo} className="ui small circular image" alt="userImage" style={{height: 50, width: 50}}/>
                     </Navbar.Brand>
                     <Nav className="mr-auto">
