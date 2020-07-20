@@ -5,8 +5,6 @@ import UpdatePreferences from "./UpdatePreferences";
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-var username = '';
-
 const instance = axios.get('http://localhost:8000/api/auth/me',{headers: {Authorization : 'Bearer ' + Cookies.get('token')}}
 ).then(res => {
   if(res.status == 200){
@@ -19,9 +17,9 @@ const instance = axios.get('http://localhost:8000/api/auth/me',{headers: {Author
 const trigger = (
     <div>
         <img src={image2} className="ui avatar image" alt="userImage" style={{height: 20, width: 20}}/>
-          <span style={{fontSize: 14, color: "white"}} >
+        <span style={{fontSize: 14, color: "white"}} >
             {Cookies.get('username')}
-          </span>
+        </span>
     </div>
 )
 

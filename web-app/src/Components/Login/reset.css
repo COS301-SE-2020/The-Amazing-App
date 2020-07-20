@@ -38,9 +38,9 @@ ul {
    }
   
   .active {
-    text-decoration: underline;
+    /*text-decoration: underline;
     text-decoration-color: #FF4500;
-    color: #2A9D8F;
+    color: #2A9D8F;*/
   }
   
   .resetPage {
@@ -73,13 +73,7 @@ ul {
     text-decoration: none;
   }
   
-  #username {
-    margin-top: 10px;
-    margin-bottom: 5px;
-    width: 370px;
-    height: 30px;
-    border-radius: 10px;
-  }
+ 
   
   #password {
     margin-top: 10px;
@@ -104,19 +98,7 @@ ul {
       text-align: center;
   }
   
-  #logo{
   
-    margin-left:auto;
-    margin-right:auto;
-    display: block;
-    width:15%;
-  }
-  
-  #image {
-    margin-top:-160px;
-    z-index: -100;
-    position: relative;
-  }
   
   #error {
     color: red;
