@@ -4,6 +4,8 @@ import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import './styles.css'
 
 mapboxgl.accessToken = 'pk.eyJ1IjoidGFwZWhuZGhsb3Z1IiwiYSI6ImNrYmV2eTRhdDBwbXUydHA4eTl6cW5neDMifQ.BVjVIq7FUmlnMZJC_BvRDQ';
+let slideLat = 0;
+let slideLong = 0;
 
 class DashHomeMap extends React.Component {
   constructor(props){
@@ -85,20 +87,23 @@ class DashHomeMap extends React.Component {
       }
   ];
 
-  function playback(index) {
-    title.textContent = locations[index].title;
-    description.textContent = locations[index].description;
-
-    map.flyTo(locations[index].camera);
-
-    map.once('moveend', () => {
-        window.setTimeout(function() {
-            //move to the next one
-            index = index + 1 === locations.length ? 0 : index + 1;
-            playback(index);
-        }, 3000); //3 seconds.
-    });
-  }
+    function playback(index){    
+        title.textContent = locations[index].title;
+        description.textContent = locations[index].description;
+        slideLong = locations[index].camera.center[0];
+        slideLat = locations[index].camera.center[1];
+        
+        let marker = new mapboxgl.Marker().setLngLat([slideLong, slideLat]).addTo(map);
+        map.flyTo(locations[index].camera);
+        map.once('moveend', () => {
+            window.setTimeout(function() {
+                //move to the next one
+                index = index + 1 === locations.length ? 0 : index + 1;
+                marker.remove();
+                playback(index)
+            }, 3000); //3 seconds.
+        });
+    }
 
     title.textContent = locations[locations.length - 1].title;
     description.textContent = locations[locations.length - 1].description;
