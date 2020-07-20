@@ -13,19 +13,32 @@ export default class UpdatePreferences extends React.Component {
     this.onChangeUserName = this.onChangeUserName.bind(this);
     this.onChangeUserEmail = this.onChangeUserEmail.bind(this);
     this.onChangeUserPassword = this.onChangeUserPassword.bind(this);
-    this.onChangeConfirmPassword = this.onChangeUserPassword.bind(this);
+    this.onChangeNewPassword = this.onChangeNewPassword.bind(this);
     this.onSubmitUsername = this.onSubmitUsername.bind(this);
     this.onSubmitEmail = this.onSubmitEmail.bind(this);
     this.onSubmitPassword = this.onSubmitPassword.bind(this);
     this.state = {
-      username: 'TheTshegofatso',
-      email: 'Tshegofatso@gmail.com',
-      password: '*******',
+      username: '',
+      email: '',
+      password:'',
       newusername: '',
       newemail: '',
       newpassword: '',
-      confirmpassword: ''
-  }
+      currentpassword: '',
+      err:''
+    }
+    this.token = Cookies.get('token');
+    const instance = axios.get('http://localhost:8000/api/auth/me',{headers: {Authorization : 'Bearer ' + this.token}}
+    ).then(res => {
+      if(res.status == 200){
+        this.state.username = res.data.data.username;
+        this.state.email = res.data.data.email;
+       // this.state.password = res.data.data.password;
+        console.log(this.state.password);
+      }
+      }).catch(error => {
+         console.log(error.message);
+      });
 
   }
   onChangeUserName(e) {
@@ -38,11 +51,11 @@ onChangeUserEmail(e) {
 }
 
 onChangeUserPassword(e) {
-    this.setState({ newpassword: e.target.value })
+    this.setState({ currentpassword: e.target.value })
 }
 
-onChangeConfirmPassword(e) {
-  this.setState({ confirmpassword: e.target.value })
+onChangeNewPassword(e) {
+  this.setState({ newpassword: e.target.value })
 }
 
   onSubmitUsername(e) {
@@ -78,7 +91,25 @@ onChangeConfirmPassword(e) {
 
   onSubmitPassword(e) {
     e.preventDefault()
-
+  
+  const regPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+  if (regPassword.test(this.state.newpassword) == true){
+    this.token = Cookies.get('token');
+    const data = {'CurrentPassword': this.state.currentpassword,
+                  'NewPassword': this.state.newpassword
+    }
+    const instance = axios.put('http://localhost:8000/api/auth/ChangePassword',data,{headers: {Authorization : 'Bearer ' + this.token}}
+    ).then(res => {
+      if(res.status == 200){
+        this.state.err= 'Password updated successfully!'
+      }
+      }).catch(error => {
+          this.setState({err:error.message});
+      });
+  }
+  else{
+    this.setState({err:"Password must contain 1 uppercase letter, 1 lowercase letter,1 number, 1 special character and must be 8 characters long!"});
+  }
 
   }
 
@@ -155,7 +186,7 @@ onChangeConfirmPassword(e) {
             </span>
             <br></br>
             <span style={{margin: 50}}>
-                Password:
+                Password: {this.state.err}
                 <br></br>
                 <Modal 
                 style={{marginTop: 100, top: "auto",bottom: "auto",left: "auto",right: "auto",position: "relative",height: 300, width:400}} 
@@ -169,20 +200,20 @@ onChangeConfirmPassword(e) {
                 <div>
                 <Form size="small" style={{width: 200}} onSubmit={this.onSubmitPassword}>
                 <Form.Field
-                  label='New Password'
+                  label='Current Password'
                   control='input'
                   type= 'password'
                   placeholder='New password'  
-                  value={this.state.newpassword} 
+                  value={this.state.currentpassword} 
                   onChange={this.onChangeUserPassword}
                 />
                 <Form.Field
-                  label='Confirm Password'
+                  label='New Password'
                   control='input'
                   type= 'password'
                   placeholder='Confirm Password'
-                  value={this.state.confirmpassword} 
-                  onChange={this.onChangeConfirmPassword}
+                  value={this.state.newpassword} 
+                  onChange={this.onChangeNewPassword}
                 />
                  <input type="submit" className="ui button" style={{backgroundColor: "#2A9D8F", color: "white"}} value="Submit"/>
               </Form>
