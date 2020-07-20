@@ -154,6 +154,7 @@ module.exports = {
     // Validate current pasword MatchPassword
     if (!(await user.MatchPassword(req.body.CurrentPassword))) {
       next(new ErrorResponse(`Password is incorrect`, 401));
+      
     }
 
     user.password = req.body.NewPassword;
