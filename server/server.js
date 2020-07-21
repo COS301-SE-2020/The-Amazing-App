@@ -68,6 +68,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Mount routers
 app.use('/api/user/preference', require('./Routes/UserPrefence'));
 app.use('/api/auth', require('./Routes/Auth'));
+app.use('/api/game', require('./Routes/GameLocation'));
 
 // Error handler
 app.use(ErrorHandler);

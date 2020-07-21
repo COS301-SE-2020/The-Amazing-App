@@ -1,70 +1,37 @@
 const mongoose = require('mongoose');
-const geocoder = require('../Utils/GeoCoder'); 
 const Schema = mongoose.Schema;
 // @desc game creation schema
-let GameShema = new Schema({
-  name: {
+let GameSchema = new Schema({
+  user_id:{
+    type:String,
+    required:[true,'Game id is required'],
+  },
+  _id:{
+    type:String,
+    required:[true,'Game id is required'],
+    unique: [true, 'Game id has to be uniquire ']
+
+  },
+  name:{
     type: String,
-    required: [true, 'Please add a name for the game'],
-    unique: [true, 'The name for the game entered exist'],
-    maxlenght: [50, 'Name can not be more than 50 characters'],
+    required: [true, 'Game name is required'],
+    unique: [true, 'Game name has to be uniquire ']
   },
-  address: {
-    type: [String],
-    required: [true, 'Game missing address'],
+  description:{
+    type: String,
+    required: [true, 'Game description is required']
   },
-  location: {
-    type: {
-      type: String,
-      enum: ['Point'],
-      required: true,
-    },
-    coordinates: {
-      type: [Number],
-      required: true,
-      index: '2dsphere',
-    },
-    formattedAddress: String,
-    street: String,
-    city: String,
-    state: String,
-    zipcode: String,
-    country: String,
-    quistions: {
-      type: [String],
-      reqiured: true,
-      answers: {
-        type: [String],
-        reqiured: true,
-      },
-    },
-    photo: {
-      type: String,
-      default: 'no-photo.jpg',
-    },
-    CreatedAt: {
-      type: Date,
-      defaut: Date.now,
-    },
+  properties:[{
+    question:{type:String},
+    answers:[{type:String}],
+    location:{type:String}
+  }],
+  image:{
+    type:String
   },
+  date: {
+    type: Date,
+    default: Date.now,
+  }
 });
-
-// @desc create an array of coodinates  
-GameShema.pre('save', async function (next) {
-  const lac = await geocoder.geocode(this.address);
-  this.location = {
-      type: 'Point',
-      coordinates:[loc[0].lngitude, loc[0].latitude],
-      formattedAddress: loc[0].formattedAddress,
-      street: loc[0].street,
-      city: loc[0].city,
-      state: loc[0].state,
-      zipcode: loc[0].zipcode,
-      country: loc[0].country,
-  }  
-  // Stoping address from being saved in the database
-  this.address = undefined;
-  next();
-});
-
-module.exports = mongoose.model('games', GameShema);
+module.exports = mongoose.model('games', GameSchema);

@@ -29,7 +29,6 @@ let UserSchema = new Schema({
   image: {
     type: String,
   },
-  id: String,
   date: {
     type: Date,
     default: Date.now,
