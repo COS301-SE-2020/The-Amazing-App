@@ -6,6 +6,7 @@ import './login.css';
 import {Link} from 'react-router-dom'
 import { withRouter } from "react-router-dom";
 import Cookies from 'js-cookie';
+import Navbar from '../NavBar/navBar.js'
 
 class SignIn extends React.Component
 {
@@ -30,6 +31,7 @@ class SignIn extends React.Component
                     console.log(res.data);
                     if(res.status == 200){
                         Cookies.set('token',res.data.token,{expires:2});
+                        this.props.history.push("/NavBar");
                         this.props.history.push("/DashBoard");
 
                     }
@@ -60,7 +62,7 @@ class SignIn extends React.Component
                     Password: <input id="password" type="password" name="password"  onChange={(e)=>this.setState({password:e.target.value})}></input>
                     <div id="input">
                         <button id="loginbtn">Login</button>
-                        <Link to="/Reset">
+                        <Link to="/Forgot">
                    <p> Forgot Password </p>
                    </Link>
                         <p id="error">{this.state.err}</p>

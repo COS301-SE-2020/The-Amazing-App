@@ -16,12 +16,14 @@ class GameName extends React.Component {
     super(props);
     this.state = {
       name: "",
-      desc: ""
+      desc: "",
+      save: "Save"
     }
   }
 
   sendName = (event) => {
     event.preventDefault();
+    this.setState({save: "Saved !"});
     nameObject.gameName = this.state.name
     nameObject.descrip = this.state.desc
     this.props.getGameDetails(nameObject)
@@ -63,7 +65,7 @@ class GameName extends React.Component {
       </Row>
       <Button style={{backgroundColor: "#2A9D8F", color: "white", marginTop: 10}} onClick={this.sendName}>
       <i className="checkmark icon"></i>
-      Save
+      {this.state.save}
     </Button>
     </div>
     );

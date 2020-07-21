@@ -2,6 +2,7 @@ import React from 'react';
 import HomePage  from './HomePage';
 import SignIn from './Login/SignIn';
 import SignUp from './Login/SignUp';
+import Forgot from './Login/Forgot';
 import Reset from './Login/Reset';
 import NavBar from './NavBar/navBar'
 import {BrowserRouter, Route} from 'react-router-dom';
@@ -32,6 +33,9 @@ class App extends React.Component
                     </Route>
                     <Route path ='/Reset' exact>
                         <Reset />
+                    </Route>
+                    <Route path ='/Forgot' exact>
+                        <Forgot />
                     </Route>
                 </BrowserRouter>
                
