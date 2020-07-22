@@ -6,6 +6,8 @@ import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import GameName from "./GameName";
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import {Route, Redirect} from 'react-router-dom';
+import history from "../../history";
 
 mapboxgl.accessToken = 'pk.eyJ1IjoidGFwZWhuZGhsb3Z1IiwiYSI6ImNrYmV2eTRhdDBwbXUydHA4eTl6cW5neDMifQ.BVjVIq7FUmlnMZJC_BvRDQ';
 
@@ -30,6 +32,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoidGFwZWhuZGhsb3Z1IiwiYSI6ImNrYmV2eTRhdDBwbXUyd
 const game = {
   name: "",
   description: "",
+  user_id: "",
   properties: []
 }
 
@@ -60,6 +63,16 @@ class CreateGameModal extends React.Component {
       save3: "Save",
       submit: "Submit Game"
     }
+
+    this.token = Cookies.get('token');
+    const instance = axios.get('http://localhost:8000/api/auth/me',{headers: {Authorization : 'Bearer ' + this.token}}
+        ).then(res => {
+            if(res.status == 200){
+              game.user_id = res.data.data._id;
+            }
+            }).catch(error => {
+                console.log(error.message);
+        });
   }
 
   addToGameProp1 = (event) =>{
@@ -111,16 +124,20 @@ class CreateGameModal extends React.Component {
 
   onSubmitGame = (event) => {
     event.preventDefault();
+    console.log(game);
     this.setState({submit: "Submitted !"});
-    /*this.token = Cookies.get('token');
-    const instance = axios.put('url',game,{headers: {Authorization : 'Bearer ' + this.token}}
+    this.token = Cookies.get('token');
+    const instance = axios.post('http://localhost:8000/api/game/GameDetails',game,{headers: {Authorization : 'Bearer ' + this.token}}
       ).then(res => {
         if(res.status == 200){
-          //responce
+          console.log("Success!!!");
+          window.location.reload(true);
         }
     }).catch(error => {
-        //error
-    });*/
+        console.log(error.message);
+        console.log("Fail!!!");
+        window.location.reload(true);
+    });
   }
 
   render() {

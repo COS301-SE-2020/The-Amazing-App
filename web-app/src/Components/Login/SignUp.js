@@ -5,6 +5,7 @@ import './login.css'
 import axios from 'axios';
 import {Link} from 'react-router-dom'
 import { withRouter } from "react-router-dom";
+import Nav from '../NavBar/navBar';
 
 
 class SignUp extends React.Component {
@@ -56,6 +57,7 @@ class SignUp extends React.Component {
     render()
     {
         return(<div>
+            <Nav />
         <img src={logo} alt="logo" id="logo"></img>
         <div class = "loginPage" >
             <span class="loginContainer">
