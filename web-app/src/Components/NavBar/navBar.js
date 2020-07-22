@@ -20,14 +20,12 @@ class NavBar extends React.Component
                         <img src={logo} className="ui small circular image" alt="userImage" style={{height: 50, width: 50}}/>
                     </Navbar.Brand>
                     <Nav className="mr-auto">
-                    { /*<Nav.Link href="home">Home</ Nav.Link>
-                        <Nav.Link href="DashBoard">DashBoard</Nav.Link> */}
                     </Nav>
                     <Nav style={{marginRight: 50, color: "white", fontWeight: "normal"}} className="lead" pull Right>
-                            <Nav.Link href="/" style={myStyle} >Home</ Nav.Link>
-                            <Nav.Link href="DashBoard" style={myStyle}>Dashboard</Nav.Link>
-                            <Nav.Link  href="/signup" style={myStyle}>Signup</Nav.Link >
-                            <Nav.Link  href="/login" style={myStyle}>Login</Nav.Link >
+                            <Nav.Link href="/" className="active" style={myStyle} exact>Home</ Nav.Link>
+                            <Nav.Link href="DashBoard" style={myStyle} exact>Dashboard</Nav.Link>
+                            <Nav.Link  href="/signup" style={myStyle} exact>Signup</Nav.Link >
+                            <Nav.Link  href="/login" style={myStyle} exact>Login</Nav.Link >
                             <Nav.Link href="#">
                             <UserOptions />
                             </Nav.Link>

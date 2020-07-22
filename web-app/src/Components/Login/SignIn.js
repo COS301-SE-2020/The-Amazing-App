@@ -6,7 +6,7 @@ import './login.css';
 import {Link} from 'react-router-dom'
 import { withRouter } from "react-router-dom";
 import Cookies from 'js-cookie';
-import Navbar from '../NavBar/navBar.js'
+import Nav from '../NavBar/navBar.js'
 
 class SignIn extends React.Component
 {
@@ -44,6 +44,7 @@ class SignIn extends React.Component
     render()
     {
         return (<div>
+            <Nav />
             <img src={logo} alt="logo" id="logo"></img>
             <div class = "loginPage" >
                 <span class="loginContainer">

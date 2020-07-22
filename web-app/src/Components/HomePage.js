@@ -1,12 +1,14 @@
 import React from 'react';
 import map from "./Assets/map.jpg";
 import Footer from './NavBar/Footer'
+import Nav from './NavBar/navBar'
 
 class HomePage extends React.Component
 {
     render()
     {
         return <div>
+            <Nav />
         <h3 style={{textAlign: "center", color: "#FF4500", fontWeight: "bold", marginTop: 12, marginBottom: 12}}>
             The Amazing App
             <i className="map marker alternate icon"></i>

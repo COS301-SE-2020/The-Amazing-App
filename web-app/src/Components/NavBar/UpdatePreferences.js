@@ -40,7 +40,7 @@ export default class UpdatePreferences extends React.Component {
          console.log(error.message);
       });
 
-  }
+    }
   onChangeUserName(e) {
     this.setState({ newusername: e.target.value })
 
