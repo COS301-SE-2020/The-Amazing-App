@@ -6,12 +6,6 @@ let GameSchema = new Schema({
     type:String,
     required:[true,'Game id is required'],
   },
-  _id:{
-    type:String,
-    required:[true,'Game id is required'],
-    unique: [true, 'Game id has to be uniquire ']
-
-  },
   name:{
     type: String,
     required: [true, 'Game name is required'],
