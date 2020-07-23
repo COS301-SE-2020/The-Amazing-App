@@ -36,7 +36,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Dev logging middleware
 if ((process.NODE_ENV = 'development')) {
-  app.use(express.static('../web-app/build'));
+  app.use(morgan('dev'));
 }
 
 // File uploading
