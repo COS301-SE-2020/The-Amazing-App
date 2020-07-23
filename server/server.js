@@ -35,7 +35,7 @@ ConnectDB();
 app.use(express.urlencoded({ extended: true }));
 
 // Dev logging middleware
-if ((process.NODE_ENV = 'devolopment')) {
+if ((process.NODE_ENV = 'development')) {
   app.use(morgan('dev'));
 }
 
