@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "build": "cd ../web-app/build && run build",
-    "start": "NODE_ENV=production nodemon server.js",
+    "start": "NODE_ENV=production node server.js",
     "install-client": "cd ../web-app && npm install",
     "heroku-postbuild": "npm run install-client && npm run build",
     "start:dev": "node server.js",
