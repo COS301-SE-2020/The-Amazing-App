@@ -31,7 +31,7 @@ class SignIn extends React.Component
                     console.log(res.data);
                     if(res.status == 200){
                         Cookies.set('token',res.data.token,{expires:2});
-                        this.props.history.push("/NavBar");
+                        this.props.history.push("/");
                         this.props.history.push("/DashBoard");
 
                     }

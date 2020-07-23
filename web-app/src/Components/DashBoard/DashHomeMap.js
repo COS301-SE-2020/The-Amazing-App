@@ -32,9 +32,9 @@ class DashHomeMap extends React.Component {
     let locations = [
       {
           'id': '2',
-          'title': 'Waterkloof',
+          'title': 'Octopus',
           'description':
-              "Waterkloof is a suburb of the city of Pretoria, South Africa, located to the east of the city centre.",
+              "Octopus is a game where you need to solve riddles about plants and animals that live in water.",
           'camera': {
               center: [28.2441 ,-25.7792],
               zoom: 14.21,
@@ -43,9 +43,9 @@ class DashHomeMap extends React.Component {
       },
       {
           'id': '3',
-          'title': 'Menlo Park',
+          'title': 'cornQuest',
           'description':
-              "Menlopark is an upmarket suburb in the city of Pretoria, South Africa.",
+              "Play the interesting cornQuest game by solving mathematical riddles and puzzles in the game.",
           'camera': {
               center: [28.2600 ,-25.7699],
               bearing: -8.9,
@@ -54,9 +54,9 @@ class DashHomeMap extends React.Component {
       },
       {
           'id': '1',
-          'title': 'Arcadia',
+          'title': 'Detective',
           'description':
-              'Arcadia is a suburb in Pretoria, South Africa that is known for its historical buildings, embassies and hotels.',
+              'Play the detective role by solving riddles related to a crime that had recently happened.',
           'camera': {
               center: [28.2030 ,-25.7453],
               bearing: 25.3,
@@ -65,9 +65,9 @@ class DashHomeMap extends React.Component {
       },
       {
           'id': '4',
-          'title': 'Brooklyn',
+          'title': 'Vikings',
           'description':
-              "Brooklyn is a suburb of the city of Pretoria, South Africa.",
+              "Solve questions and riddles about science and fiction.",
           'camera': {
               center: [28.2393 ,-25.7646],
               bearing: 36,
@@ -76,9 +76,9 @@ class DashHomeMap extends React.Component {
       },
       {
           'id': '5',
-          'title': 'Hatfield',
+          'title': 'Gladiators',
           'description':
-              'Hatfield is a suburb in Pretoria, South Africa with a high density of students and student accommodation due to its proximity to the University of Pretoria.',
+              'Play the game Gladiators by solving historical questions and riddles.',
           'camera': {
               center: [28.238,-25.748],
               bearing: 28.4,
