@@ -38,8 +38,8 @@ li a {
  }
 
 .active {
-  text-decoration: underline;
-  text-decoration-color: #FF4500;
+  /*text-decoration: none;
+  text-decoration-color: #FF4500;*/
   color: #2A9D8F;
 }
 
@@ -51,12 +51,14 @@ li a {
     
 }
 
+
+
 .loginContainer {
 
     background-color: #E8E8E8;
     color: #2A9D8F;
     width:400px;
-    height:340px;
+    height:400px;
     margin-right:150px;
     float: right;
     border-radius: 60px;
@@ -114,6 +116,10 @@ li a:hover {
   margin-top:-160px;
   z-index: -100;
   position: relative;
+}
+
+#error {
+  color: red;
 }
 
 

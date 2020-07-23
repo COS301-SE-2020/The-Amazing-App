@@ -1,63 +1,27 @@
-### POST FOR ADMIN REGISTRATION
-POST http://localhost:8000/admin/register
-Content-Type: application/json
-
-{
-    "username": "TestUser1",
-    "password": "password@12",
-    "email": "Test@gmail.com",
-    "image": "base64"
-}
-
-### POST FOR ADMIN REGISTRATION
-POST http://localhost:8000/admin/register
-Content-Type: application/json
-
-{
-    "username": "TestUser2",
-    "password": "meow",
-    "email": "thebeast@mail.com",
-    "image": "base64"
-}
-
-### POST FOR ADMIN REGISTRATION
-POST http://localhost:8000/admin/register
-Content-Type: application/json
-
-{
-    "username": "TestUser3",
-    "password": "pasword@1",
-    "email": "loader@gmail.com",
-    "image": "base64"
-}
-
-### POST FOR ADMIN REGISTRATION
-POST http://localhost:8000/admin/register
-Content-Type: application/json
-
-{
-    "username": "beast",
-    "password": "meow2",
-    "email": "thebeast@gmail.com",
-    "image": "base64"
-}
-
-### POST FOR USER LOGIN
-POST http://localhost:8000/user/loginent-Type: application/json
-
-Cont
-{
-    "username": "thebeast@gmail.com",
-    "password": "meow2"
-}
 
 ### POST FOR ADMIN LOGIN
-POST http://localhost:8000/admin/login
+POST http://localhost:8000/user/Login
 Content-Type: application/json
 
 {
-    "username": "loader@gmail.com",
-    "password": "meow"
+    "email": "Test@gmail32.com",
+    "password": "password@12"
 }
 
+### POST FOR ADMIN RIGISTER
+POST http://localhost:8000/user/Register
+Content-Type: application/json
 
+{
+    "username": "Premodial22",
+    "email": "Test@gmail32.com",
+    "password": "password@12",
+    "image":"base64"
+}
+### POST FOR ADMIN Userpreference
+POST http://localhost:8000/admin/UpdateUserName
+Authentication: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZWVjZDY2MzU4OWZkOTIzOTQyNmUzYmEiLCJpYXQiOjE1OTMwNzI3NTI3MjksImV4cCI6MTU5MzA3Mjc1NjMyOSwiaXNzIjoiTmV3VGVjaCJ9.MequIUoN-a4Jx2WunwWelvxXlo67rOn-ar5UhnYXpa4
+
+
+### ERROR HANDLING 
+GET  http://localhost:8000

@@ -1,35 +1,88 @@
-const express = require('express')
-const app = express()
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-const mongoose = require('mongoose')
-const enviro = require('dotenv').config()
+const express = require('express');
+const path = require('path');
+const enviro = require('dotenv');
+const cors = require('cors');
+const morgan = require('morgan');
+const colors = require('colors');
+const helmet = require('helmet');
+const hpp = require('hpp');
+const RateLimit = require('express-rate-limit');
+const XssClean = require('xss-clean');
+const MongoSanitize = require('express-mongo-sanitize');
+const cookieParser = require('cookie-parser');
+const fileupload = require('express-fileupload');
+const ErrorHandler = require('./Middleware/Error');
+const ConnectDB = require('./Config/DataBaseConnection');
+const rateLimit = require('express-rate-limit');
 
-const uri = "mongodb+srv://"+process.env.USER+":"+process.env.PASS+"@cluster0-48kgz.mongodb.net/"+process.env.DB+"?retryWrites=true&w=majority";
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
-.then(()=>console.log("Connected to Database"))
-    .catch(err=>console.log(err))
+const app = express();
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-  );
-  if (req.method === 'OPTIONS') {
-      res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
-      return res.status(200).json({});
-  }
-  next();
+// Enable cross domains
+app.use(cors());
+
+// Body parser
+app.use(express.json()); 
+ 
+// Cookie parser
+app.use(cookieParser());
+
+// load env vars
+enviro.config({ path: './Config/Config.env' });
+
+// Connect to database
+ConnectDB();
+
+app.use(express.urlencoded({ extended: true }));
+
+// Dev logging middleware
+if ((process.NODE_ENV = 'development')) {
+  app.use(morgan('dev'));
+}
+
+// File uploading
+app.use(fileupload());
+
+// Sanitize dat
+app.use(MongoSanitize());
+
+// Set security hearders
+app.use(helmet());
+
+// Prevent  cross site scripting
+app.use(XssClean());
+
+// Rate limiting
+const limit = rateLimit({
+  windowMs: 10 * 60 * 1000, // 10 minutes
+  max: 100,
 });
 
-const admin = require('./Routes/AdminRoutes')
-const user = require('./Routes/UserRoutes')
-app.use('/admin',admin)
-app.use('/user',user)
-app.all('/',(req,res)=>{
-    res.status(404).send({error:{status: 404, message: "Not found"}})
-})
+app.use(limit);
 
-const port = process.env.PORT || 8000
-app.listen(port, ()=>console.log(`Server listening on port ${port}`))
+// Prevent http param pollution
+app.use(hpp());
+
+// Set static file
+app.use(express.static(path.join(__dirname, 'public')));
+
+//Mount routers
+app.use('/api/user/preference', require('./Routes/UserPrefence'));
+app.use('/api/auth', require('./Routes/Auth'));
+app.use('/api/game', require('./Routes/GameLocation'));
+
+// Error handler
+app.use(ErrorHandler);
+
+const port = process.env.PORT || 8000;
+const server = app.listen(port, () =>
+  console.log(
+    `Server run in ${process.env.NODE_ENV} mode on port ${port}`.yellow.bold
+  )
+);
+
+// Handle unandled promise rejection
+process.on('unhandledRejection', (error, promise) => {
+  console.log(`Error: ${error.message}`.red);
+  // Close server & exit process
+  server.close(() => process.exit(1));
+});

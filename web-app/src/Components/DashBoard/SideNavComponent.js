@@ -1,5 +1,4 @@
 import React from "react";
-import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -19,8 +18,8 @@ class SideNavComponent extends React.Component {
     };
 
     return (
-        <Row>
-          <Col xs={2.8} className="border-right border-bottom" style={{marginLeft: 40}}>
+        <Row style={{marginTop: 12, height: "100%"}}>
+          <Col xs={2.8} style={{marginLeft: 40}}>
             <Col style={colStyle}>
               <UserImageComponent />
               <NotificationsModal />
@@ -28,10 +27,10 @@ class SideNavComponent extends React.Component {
               <CreateGameModal />
               <br />
               <MyGamesModal />
-              <RecentlyPlayedComponent />
+              {/*<RecentlyPlayedComponent />*/}
             </Col>
           </Col>
-          <Col style={{marginRight: 20}}>
+          <Col style={{marginRight: 10}}>
             <AvailableGamesMapComponent />
           </Col>
         </Row>
