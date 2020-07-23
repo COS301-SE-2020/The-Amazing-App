@@ -4,9 +4,8 @@
   "description": "The Amazing App server",
   "main": "server.js",
   "scripts": {
-    "start": "NODE_ENV=production nodemon server.js",
-    "start:dev": "nodemon server.js",
-    "dev": "nodemon server",
+    "start": "NODE_ENV=production node server.js",
+    "dev": "node server",
     "test": "mocha --recursive --exit"
   },
   "author": "Premodial Zhou",
