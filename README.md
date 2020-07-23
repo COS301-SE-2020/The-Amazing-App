@@ -6,11 +6,19 @@ The Amazing App is a location-based mobile application game. A web application i
 ## NewTech - Demo 1
 https://drive.google.com/file/d/1UyQt6fZRNSJOJyFtMWCg19jUgQsAu5F5/view?usp=sharing
 
+## NewTech - Demo 2
+
 ## Project Management Tool
 https://trello.com/b/Jzv91cpj/cos301-capstone
 
-## SRC Document
+## SRC, Architectural Document
 https://www.overleaf.com/read/ddzzdsfnjcpb
+
+## User Manual
+https://www.overleaf.com/read/rfdsnffqpjxb
+
+## Coding Standard/Quality
+https://www.overleaf.com/read/ydvghstnbmkj
 
 ## Our Team
  > <b>Premodial Zhou : </b> <br>
@@ -43,8 +51,8 @@ https://www.overleaf.com/read/ddzzdsfnjcpb
     </details>
     
  > <b>Thamsanqa Dineka : </b> <br>
- * <a href="#"> GitHub  Profile  </a><br>
- * <a href="#"> GitHub  Account </a><br>
+ * <a href="https://thamie323.github.io/"> GitHub  Profile  </a><br>
+ * <a href="https://github.com/thamie323"> GitHub  Account </a><br>
  * <details>
    <summary><b>About myself</b></summary>
    <br>
