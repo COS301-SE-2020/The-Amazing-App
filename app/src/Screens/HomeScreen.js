@@ -1,8 +1,10 @@
 import React ,{useState  } from 'react';
-import {View, Text, StyleSheet,TouchableOpacity} from 'react-native'
+import FooterComponent from '../Componets/FooterComponent';
+import {View, Text, StyleSheet,TouchableOpacity, ScrollView} from 'react-native'
 import src from '../../assets/t3.jpg'
-import { Image, Divider } from 'react-native-elements';
+import { Image, Divider,Header } from 'react-native-elements';
 import SearchBarComponent from '../Componets/SearchBarComponent'
+import HeaderComponet from '../Componets/HeaderComponent';
 import useResults from '../Hooks/userResults';
 
 const HomeScreen = ({navigation})=>{
@@ -31,12 +33,8 @@ const HomeScreen = ({navigation})=>{
                 onTermChange={setTerm}
                 onTermSubmit={() => searchApi(term)}
             />
-            {errorMessage?<Text>{errorMessage}</Text> : null}
-            <ScrollView>
-                <ResultsList results
-                title="Cost Effective"
-                />
-            </ScrollView>
+            <FooterComponent navigation={navigation} />
+           
         </>
         
     )

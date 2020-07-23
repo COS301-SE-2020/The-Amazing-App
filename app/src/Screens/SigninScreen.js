@@ -28,7 +28,7 @@ const SigninScreen = ({navigation})=>{
                     </Text></Text>
                 </TouchableOpacity>
 
-                <Button  buttonStyle={buttonStyle} title='Signin' />
+                <Button  buttonStyle={buttonStyle} title='Signin' onPress={()=>navigation.navigate('Home')} />
                 
                 <TouchableOpacity onPress={()=>navigation.navigate('Signup')}>
                     <Text style={{alignSelf:'center'}}>

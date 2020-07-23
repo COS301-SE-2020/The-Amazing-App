@@ -6,20 +6,22 @@ import DashboardScreen from './src/Screens/DashboardScreen';
 import AccountScreen from './src/Screens/AccountScreen';
 import SigninScreen from './src/Screens/SigninScreen';
 import SignupScreen from './src/Screens/SignupScreen';
+import CreategroupScreen from './src/Screens/CreategroupScreen';
 
 const navigator = createStackNavigator(
   {
     Home: HomeScreen,
     Simulation: SimulationScreen,
     Dashboard: DashboardScreen,
-    Acccount: AccountScreen,
+    Account: AccountScreen,
     Signin: SigninScreen,
     Signup: SignupScreen,
+    Creategroup:CreategroupScreen,
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Signin',
     defaultNavigationOptions: {
-      title: 'Home',
+      title: 'Home'
     },
   }
 );
