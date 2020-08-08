@@ -1,29 +1,10 @@
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-import HomeScreen from './src/Screens/HomeScreen';
-import SimulationScreen from './src/Screens/SimulationScreen';
-import DashboardScreen from './src/Screens/DashboardScreen';
-import AccountScreen from './src/Screens/AccountScreen';
-import SigninScreen from './src/Screens/SigninScreen';
-import SignupScreen from './src/Screens/SignupScreen';
-import CreategroupScreen from './src/Screens/CreategroupScreen';
+import { createAppContainer,createSwitchNavigator } from 'react-navigation';
+import auth from './src/Router/auth';
+import main from './src/Router/main';
 
-const navigator = createStackNavigator(
-  {
-    Home: HomeScreen,
-    Simulation: SimulationScreen,
-    Dashboard: DashboardScreen,
-    Account: AccountScreen,
-    Signin: SigninScreen,
-    Signup: SignupScreen,
-    Creategroup:CreategroupScreen,
-  },
-  {
-    initialRouteName: 'Signin',
-    defaultNavigationOptions: {
-      title: 'Home'
-    },
-  }
-);
+const navigator = createSwitchNavigator( {
+    auth,
+    main
+});
 
 export default createAppContainer(navigator)
