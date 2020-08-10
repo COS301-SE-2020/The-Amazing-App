@@ -1,5 +1,5 @@
 import React from "react";
-import map from "../Assets/map.jpg";
+import map from "../assets/map.jpg";
 import Footer from "./NavBar/Footer";
 import Nav from "./NavBar/navBar";
 

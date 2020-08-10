@@ -1,9 +1,9 @@
 import React from "react";
 import { Icon, Image, Item } from "semantic-ui-react";
 import { Button } from "semantic-ui-react";
-import image3 from "../../../../Assets/detective.jpg";
-import image4 from "../../../../Assets/quest.png";
-import image5 from "../../../../Assets/octopus.png";
+import image3 from "../../../../assets/detective.jpg";
+import image4 from "../../../../assets/quest.png";
+import image5 from "../../../../assets/octopus.png";
 
 class MyGames extends React.Component {
   render() {

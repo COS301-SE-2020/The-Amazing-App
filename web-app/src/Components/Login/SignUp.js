@@ -1,6 +1,6 @@
 import React from "react";
-import map from "../../Assets/map.jpg";
-import logo from "../../Assets/logo.png";
+import map from "../../assets/map.jpg";
+import logo from "../../assets/logo.png";
 import "./login.css";
 import axios from "axios";
 import { Link } from "react-router-dom";

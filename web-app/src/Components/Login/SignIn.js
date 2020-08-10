@@ -1,98 +1,94 @@
 import React from "react";
-import map from "../../Assets/map.jpg";
-import logo from "../../Assets/logo.png";
-import axios from "axios";
-import "./login.css";
-import { Link } from "react-router-dom";
-import { withRouter } from "react-router-dom";
-import Cookies from "js-cookie";
-import Nav from "../NavBar/navBar.js";
 
-class SignIn extends React.Component {
-  state = { email: "", pasword: "", err: "" };
-  onFormSubmit = (event) => {
-    event.preventDefault();
-    const data = {
-      email: this.state.email,
-      password: this.state.password,
+import "../../assets/css/bootstrap.min.css";
+import "../../assets/scss/paper-kit.scss?v=1.2.0";
+import "../../assets/demo/demo.css?v=1.2.0";
+
+// reactstrap components
+import { Button, Card, Form, Input, Container, Row, Col } from "reactstrap";
+
+// core component
+
+function RegisterPage() {
+  document.documentElement.classList.remove("nav-open");
+  React.useEffect(() => {
+    document.body.classList.add("register-page");
+    return function cleanup() {
+      document.body.classList.remove("register-page");
     };
-    if (this.state.email == "" || this.state.password == "") {
-      this.setState({ err: "Please fill in all the fields!" });
-    } else {
-      axios
-        .post("http://localhost:8000/api/auth/Login", data)
-        .then((res) => {
-          console.log(res);
-          console.log(res.data);
-          if (res.status == 200) {
-            Cookies.set("token", res.data.token, { expires: 2 });
-            this.props.history.push("/");
-            this.props.history.push("/DashBoard");
-          }
-        })
-        .catch((error) => {
-          this.setState({ err: error.message });
-        });
-    }
-  };
-
-  render() {
-    return (
-      <div>
-        <Nav />
-        <img src={logo} alt="logo" id="logo"></img>
-        <div class="loginPage">
-          <span class="loginContainer">
-            <div class="logReg">
-              <ul
-                style={{
-                  width: "50%",
-                  display: "flex",
-                  justifyContent: "space-around",
-                  alignItems: "center",
-                }}
-              >
-                <Link to="/login">
-                  <li>Login</li>
-                </Link>
-                <Link to="SignUp">
-                  <li>Register</li>
-                </Link>
-              </ul>
-            </div>
-            <form onSubmit={this.onFormSubmit}>
-              Email:{" "}
-              <input
-                id="email"
-                type="email"
-                name="email"
-                onChange={(e) => this.setState({ email: e.target.value })}
-              ></input>
-              Password:{" "}
-              <input
-                id="password"
-                type="password"
-                name="password"
-                onChange={(e) => this.setState({ password: e.target.value })}
-              ></input>
-              <div id="input">
-                <button id="loginbtn">Login</button>
-                <Link to="/Forgot">
-                  <p> Forgot Password </p>
-                </Link>
-                <p id="error">{this.state.err}</p>
-              </div>
-            </form>
-          </span>
+  });
+  return (
+    <>
+      <div
+        className="page-header"
+        style={{
+          backgroundImage: "url(" + require("assets/img/login-image.jpg") + ")",
+        }}
+      >
+        <div className="filter" />
+        <Container>
+          <Row>
+            <Col className="ml-auto mr-auto" lg="4">
+              <Card className="card-register ml-auto mr-auto">
+                <h3 className="title mx-auto">Welcome</h3>
+                <div className="social-line text-center">
+                  <Button
+                    className="btn-neutral btn-just-icon mr-1"
+                    color="facebook"
+                    href="#pablo"
+                    onClick={(e) => e.preventDefault()}
+                  >
+                    <i className="fa fa-facebook-square" />
+                  </Button>
+                  <Button
+                    className="btn-neutral btn-just-icon mr-1"
+                    color="google"
+                    href="#pablo"
+                    onClick={(e) => e.preventDefault()}
+                  >
+                    <i className="fa fa-google-plus" />
+                  </Button>
+                  <Button
+                    className="btn-neutral btn-just-icon"
+                    color="twitter"
+                    href="#pablo"
+                    onClick={(e) => e.preventDefault()}
+                  >
+                    <i className="fa fa-twitter" />
+                  </Button>
+                </div>
+                <Form className="register-form">
+                  <label>Email</label>
+                  <Input placeholder="Email" type="text" />
+                  <label>Password</label>
+                  <Input placeholder="Password" type="password" />
+                  <Button block className="btn-round" color="danger">
+                    Register
+                  </Button>
+                </Form>
+                <div className="forgot">
+                  <Button
+                    className="btn-link"
+                    color="danger"
+                    href="#pablo"
+                    onClick={(e) => e.preventDefault()}
+                  >
+                    Forgot password?
+                  </Button>
+                </div>
+              </Card>
+            </Col>
+          </Row>
+        </Container>
+        <div className="footer register-footer text-center">
+          <h6>
+            © {new Date().getFullYear()}, made with{" "}
+            <i className="fa fa-heart heart" /> by Creative Tim
+          </h6>
         </div>
-        <img
-          src={map}
-          alt="map1"
-          style={{ width: 400, marginTop: -130, marginLeft: 170 }}
-        />
       </div>
-    );
-  }
+    </>
+  );
 }
 
-export default withRouter(SignIn);
+export default RegisterPage;
