@@ -1,14 +1,14 @@
 import React ,{ useState} from 'react';
-import {View, Text, StyleSheet,Image, TouchableOpacity,FlatList} from 'react-native'
+import { StyleSheet,Image, TouchableOpacity} from 'react-native'
 import {Header} from 'react-native-elements';
 import { Feather } from '@expo/vector-icons'; 
 import sc from '../../assets/t1.jpg';
 import { StatusBar } from 'expo-status-bar';
 
 
-const AccountScreen = ({navigation})=>{
+const SettingsScreen = ({navigation})=>{
    
-    return( 
+    return(
         <>
             <StatusBar style='#2A9D8F'/>
             <Header
@@ -16,7 +16,7 @@ const AccountScreen = ({navigation})=>{
                 <TouchableOpacity onPress={()=>navigation.openDrawer()}>
                     <Feather name="menu" size={30} color='#fff'/>
                 </TouchableOpacity>}
-                centerComponent={{ text: 'Profile', style: { color: '#fff',fontSize:22, fontWeight:'bold' } }}
+                centerComponent={{ text: 'Settings', style: { color: '#fff',fontSize:22, fontWeight:'bold' } }}
                 rightComponent={
                     <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
                         <Image source={sc}  style={style.imageStyle}/>
@@ -27,7 +27,7 @@ const AccountScreen = ({navigation})=>{
         </>
     )
 }
-style = StyleSheet.create({
+const style = StyleSheet.create({
     imageStyle:{
         width:40,
         height:40,
@@ -36,5 +36,4 @@ style = StyleSheet.create({
         borderColor:'#fff',
     }
 })
-export default AccountScreen;
-
+export default SettingsScreen;
