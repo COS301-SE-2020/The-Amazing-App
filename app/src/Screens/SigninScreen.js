@@ -5,11 +5,13 @@ import currentlocation from '../../assets/currentlocation.png'
 import ImageComponent from '../Componets/ImageComponent';
 import { StatusBar } from 'expo-status-bar';
 import { EvilIcons,MaterialCommunityIcons } from '@expo/vector-icons';
+import LoginApi from '../Api/LoginAPI';
 
 const SigninScreen = ({navigation})=>{
     const {containerStyle, inputStyle, buttonStyle} = style;
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isLoggedIn, Login] = LoginApi();
 
     <StatusBar style='#2A9D8F'/>
     return(
@@ -34,8 +36,8 @@ const SigninScreen = ({navigation})=>{
                     </Text></Text>
                 </TouchableOpacity>
 
-                <Button  buttonStyle={buttonStyle} title='Signin' onPress={()=>navigation.navigate('main')} />
-                
+                <Button  buttonStyle={buttonStyle} title='Signin' onPress={()=>Login(email,password)} />
+                {isLoggedIn?navigation.navigate('Home',{email:email}):null}
                 <TouchableOpacity onPress={()=>navigation.navigate('SignupScreen')}>
                     <Text style={{alignSelf:'center'}}>
                         Dont have an account ? <Text style={{color:'#2A9D8F'}}> Signup

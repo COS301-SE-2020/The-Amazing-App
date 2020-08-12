@@ -6,12 +6,13 @@ import useResults from '../Hooks/userResults';
 import { Feather } from '@expo/vector-icons'; 
 import sc from '../../assets/t1.jpg';
 import { StatusBar } from 'expo-status-bar';
-
+import User from '../Api/UserAPI'
 
 const HomeScreen = ({navigation})=>{
     const [searchApi, results, errorMessage] = useResults();
     const {term,setTerm} = useState('');
-   
+    const email = navigation.getParam('email');
+
     return(
         <>
             <StatusBar style='#2A9D8F'/>
@@ -39,7 +40,7 @@ const HomeScreen = ({navigation})=>{
             <View style={style.containerStyle}>
                 <Text style={{fontSize:22,color:'#2A9D8F'}}>Hello,</Text>
                 <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
-                    <Text style={{fontSize:22,fontWeight:'bold'}}>Rayna Vetrovs</Text>
+            <Text style={{fontSize:22,fontWeight:'bold'}}>{User(email)}</Text>
                 </TouchableOpacity>
                 <Text style={{paddingTop:10,fontSize:16}}>which game would you like to play</Text>
             </View>
