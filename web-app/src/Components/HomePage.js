@@ -17,6 +17,7 @@ import {
 } from "semantic-ui-react";
 import image from "../assets/map.jpg";
 import { Link } from "react-router-dom";
+import Navbar from "../Components/NavBar/Footer";
 
 const { MediaContextProvider, Media } = createMedia({
   breakpoints: {
@@ -54,7 +55,7 @@ const HomepageHeading = ({ mobile }) => (
         marginTop: mobile ? "0.5em" : "1.5em",
       }}
     />
-    <Button primary size="huge">
+    <Button style={{ backgroundColor: "teal" }} size="huge">
       <Link to="/login" style={{ color: "white" }}>
         Get Started
       </Link>
@@ -167,7 +168,7 @@ const HomepageLayout = () => (
       <Grid container stackable verticalAlign="middle">
         <Grid.Row>
           <Grid.Column width={8}>
-            <p style={{ fontSize: "1.33em" }}>
+            <p style={{ fontSize: "1.20em" }}>
               The Amazing App is a mobile-app location based game in which the
               game for the mobile app is created using a website. A website is
               used to create the game then the game creators will send an invite
@@ -187,6 +188,7 @@ const HomepageLayout = () => (
         </Grid.Row>
       </Grid>
     </Segment>
+    <Navbar />
   </ResponsiveContainer>
 );
 
