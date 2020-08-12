@@ -4,16 +4,14 @@ import { Input, Button } from 'react-native-elements';
 import currentlocation from '../../assets/currentlocation.png'
 import ImageComponent from '../Componets/ImageComponent';
 import { EvilIcons,MaterialCommunityIcons } from '@expo/vector-icons';
-
-
-
+import RegisterApi from '../Api/RegisterAPI';
 
 const SignupScreen = ({navigation})=>{
     const {containerStyle, inputStyle, buttonStyle} = style;
     const [Username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
-
+    const [isRegistered, Register] = RegisterApi();
 
     return(
         <View style={containerStyle} >
@@ -37,7 +35,10 @@ const SignupScreen = ({navigation})=>{
                      leftIcon={<EvilIcons name="lock" size={32} color="#2A9D8F" />}
                      />
                      
-                     <Button  buttonStyle={buttonStyle} title='Signup' />
+                     <Button  buttonStyle={buttonStyle} title='Signup' onPress={()=>{
+                                Register(email,password,Username)
+                     }}/>
+                     {isRegistered?navigation.navigate('Home',{email:email}):null}
                     <TouchableOpacity onPress={()=>navigation.navigate('SigninScreen')}>
                         <Text style={{alignSelf:'center'}}>
                             Already have an account ? <Text style={{color:'#2A9D8F'}}> Signin
