@@ -1,128 +1,57 @@
 import React from "react";
-import map from "../../assets/map.jpg";
-import logo from "../../assets/logo.png";
-import "./login.css";
-import axios from "axios";
+import {
+  Button,
+  Form,
+  Grid,
+  Header,
+  Image,
+  Message,
+  Segment,
+} from "semantic-ui-react";
+import image from "../../assets/logo.png";
 import { Link } from "react-router-dom";
-import { withRouter } from "react-router-dom";
-import Nav from "../NavBar/navBar";
 
-class SignUp extends React.Component {
-  state = { username: "", email: "", password: "", err: "" };
+const SignUp = () => (
+  <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
+    <Grid.Column style={{ maxWidth: 450 }}>
+      <Form size="medium">
+        <Segment stacked>
+          <div style={{ alignItems: "center" }}>
+            <img
+              src={image}
+              style={{ width: 130, height: 130, alignSelf: "center" }}
+            />
+          </div>
+          <Form.Input
+            fluid
+            icon="user"
+            iconPosition="left"
+            placeholder="Username"
+          />
+          <Form.Input
+            fluid
+            icon="envelope"
+            iconPosition="left"
+            placeholder="E-mail address"
+          />
+          <Form.Input
+            fluid
+            icon="lock"
+            iconPosition="left"
+            placeholder="Password"
+            type="password"
+          />
 
-  onFormSubmit = (event) => {
-    event.preventDefault();
-    //check if all fields are filled in
-    if (
-      this.state.username == "" ||
-      this.state.email == "" ||
-      this.state.password == ""
-    ) {
-      this.setState({ err: "Please fill in all the fields!" });
-    } else {
-      //valid email REGEX
-      const regEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-      //valid password REGEX
-      const regPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+          <Button fluid color="teal" size="medium">
+            Register
+          </Button>
+          <Message>
+            Already have an account ? <Link to="/login"> Login</Link>
+          </Message>
+        </Segment>
+      </Form>
+    </Grid.Column>
+  </Grid>
+);
 
-      //check if email address if valid
-      if (regEmail.test(this.state.email) == false) {
-        this.setState({ err: "Please enter a valid email address!" });
-      }
-      //check if password is valid
-      else if (regPassword.test(this.state.password) == false) {
-        this.setState({
-          err:
-            "Password must contain 1 uppercase letter, 1 lowercase letter,1 number, 1 special character and must be 8 characters long!",
-        });
-      } else {
-        const data = {
-          username: this.state.username,
-          password: this.state.password,
-          email: this.state.email,
-          image: "base64",
-        };
-        axios
-          .post("http://localhost:8000/api/auth/Register", data)
-          .then((res) => {
-            console.log(res);
-            console.log(res.data);
-            if (res.status == 200) {
-              this.props.history.push("/DashBoard");
-            }
-          })
-          .catch((error) => {
-            this.setState({ err: "Email address already registered!" });
-          });
-      }
-    }
-  };
-  render() {
-    return (
-      <div>
-        <Nav />
-        <img src={logo} alt="logo" id="logo"></img>
-        <div class="loginPage">
-          <span class="loginContainer">
-            <div class="logReg">
-              <ul
-                style={{
-                  width: "50%",
-                  display: "flex",
-                  justifyContent: "space-around",
-                  alignItems: "center",
-                }}
-              >
-                <Link to="/login">
-                  <li>Login</li>
-                </Link>
-                <Link to="SignUp">
-                  <li>Register</li>
-                </Link>
-              </ul>
-            </div>
-            <div>
-              <form onSubmit={this.onFormSubmit}>
-                Username:{" "}
-                <input
-                  id="username"
-                  type="text"
-                  name="username"
-                  onChange={(e) => this.setState({ username: e.target.value })}
-                />
-                Email address:{" "}
-                <input
-                  id="email"
-                  type="email"
-                  name="email"
-                  onChange={(e) => this.setState({ email: e.target.value })}
-                />
-                Password:{" "}
-                <input
-                  id="password"
-                  type="password"
-                  name="password"
-                  onChange={(e) => this.setState({ password: e.target.value })}
-                />
-                <div id="input">
-                  <input type="submit" id="loginbtn" value="Register" />
-                  <Link to="/Reset">
-                    <p> Forgot Password </p>
-                  </Link>
-                  <p id="error">{this.state.err}</p>
-                </div>
-              </form>
-            </div>
-          </span>
-        </div>
-        <img
-          src={map}
-          alt="map1"
-          style={{ width: 400, marginTop: -130, marginLeft: 170 }}
-        />
-      </div>
-    );
-  }
-}
-
-export default withRouter(SignUp);
+export default SignUp;

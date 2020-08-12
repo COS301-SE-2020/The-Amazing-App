@@ -1,94 +1,51 @@
 import React from "react";
+import {
+  Button,
+  Form,
+  Grid,
+  Header,
+  Image,
+  Message,
+  Segment,
+} from "semantic-ui-react";
+import image from "../../assets/logo.png";
+import { Link } from "react-router-dom";
 
-import "../../assets/css/bootstrap.min.css";
-import "../../assets/scss/paper-kit.scss?v=1.2.0";
-import "../../assets/demo/demo.css?v=1.2.0";
+const SignIn = () => (
+  <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
+    <Grid.Column style={{ maxWidth: 450 }}>
+      <Form size="medium">
+        <Segment stacked>
+          <div style={{ alignItems: "center" }}>
+            <img
+              src={image}
+              style={{ width: 130, height: 130, alignSelf: "center" }}
+            />
+          </div>
+          <Form.Input
+            fluid
+            icon="envelope"
+            iconPosition="left"
+            placeholder="E-mail address"
+          />
+          <Form.Input
+            fluid
+            icon="lock"
+            iconPosition="left"
+            placeholder="Password"
+            type="password"
+          />
 
-// reactstrap components
-import { Button, Card, Form, Input, Container, Row, Col } from "reactstrap";
+          <Button fluid color="teal" size="medium">
+            Login
+          </Button>
+          <Message>
+            Don't have an account ?<Link to="/signup"> Register</Link>
+          </Message>
+        </Segment>
+      </Form>
+    </Grid.Column>
+  </Grid>
+);
 
-// core component
-
-function RegisterPage() {
-  document.documentElement.classList.remove("nav-open");
-  React.useEffect(() => {
-    document.body.classList.add("register-page");
-    return function cleanup() {
-      document.body.classList.remove("register-page");
-    };
-  });
-  return (
-    <>
-      <div
-        className="page-header"
-        style={{
-          backgroundImage: "url(" + require("assets/img/login-image.jpg") + ")",
-        }}
-      >
-        <div className="filter" />
-        <Container>
-          <Row>
-            <Col className="ml-auto mr-auto" lg="4">
-              <Card className="card-register ml-auto mr-auto">
-                <h3 className="title mx-auto">Welcome</h3>
-                <div className="social-line text-center">
-                  <Button
-                    className="btn-neutral btn-just-icon mr-1"
-                    color="facebook"
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    <i className="fa fa-facebook-square" />
-                  </Button>
-                  <Button
-                    className="btn-neutral btn-just-icon mr-1"
-                    color="google"
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    <i className="fa fa-google-plus" />
-                  </Button>
-                  <Button
-                    className="btn-neutral btn-just-icon"
-                    color="twitter"
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    <i className="fa fa-twitter" />
-                  </Button>
-                </div>
-                <Form className="register-form">
-                  <label>Email</label>
-                  <Input placeholder="Email" type="text" />
-                  <label>Password</label>
-                  <Input placeholder="Password" type="password" />
-                  <Button block className="btn-round" color="danger">
-                    Register
-                  </Button>
-                </Form>
-                <div className="forgot">
-                  <Button
-                    className="btn-link"
-                    color="danger"
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    Forgot password?
-                  </Button>
-                </div>
-              </Card>
-            </Col>
-          </Row>
-        </Container>
-        <div className="footer register-footer text-center">
-          <h6>
-            © {new Date().getFullYear()}, made with{" "}
-            <i className="fa fa-heart heart" /> by Creative Tim
-          </h6>
-        </div>
-      </div>
-    </>
-  );
-}
-
-export default RegisterPage;
+export default SignIn;
