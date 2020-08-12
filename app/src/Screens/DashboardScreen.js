@@ -24,7 +24,7 @@ const DashboardScreen = ({navigation})=>{
                 }
                 containerStyle={{backgroundColor:'#2A9D8F'}}
             />
-            <TouchableOpacity onPress={()=>navigation.navigate('')}>
+            <TouchableOpacity onPress={()=>navigation.navigate('CreategroupScreen')}>
                
                     <Text>
                         Simulation

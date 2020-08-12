@@ -6,7 +6,7 @@ import CreategroupScreen from '../Screens/CreategroupScreen';
 const dashboard = createStackNavigator({
     DashboardScreen,
     SimulationScreen,
-    CreategroupScreen
+    c
 });
 
 export default dashboard;
