@@ -41,7 +41,6 @@ const style = StyleSheet.create({
         fontWeight:'bold',
         marginVertical:8,
         alignSelf: 'center',
-
     },
     logoStyle:{
         marginTop:310,

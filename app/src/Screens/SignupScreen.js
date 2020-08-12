@@ -5,9 +5,6 @@ import currentlocation from '../../assets/currentlocation.png'
 import ImageComponent from '../Componets/ImageComponent';
 import { EvilIcons,MaterialCommunityIcons } from '@expo/vector-icons';
 
-
-
-
 const SignupScreen = ({navigation})=>{
     const {containerStyle, inputStyle, buttonStyle} = style;
     const [Username, setUsername] = useState('');

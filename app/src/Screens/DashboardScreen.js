@@ -7,7 +7,7 @@ import { StatusBar } from 'expo-status-bar';
 
 
 const DashboardScreen = ({navigation})=>{
-   
+
     return(
         <>
             <StatusBar style='#2A9D8F'/>
@@ -24,12 +24,8 @@ const DashboardScreen = ({navigation})=>{
                 }
                 containerStyle={{backgroundColor:'#2A9D8F'}}
             />
-            <TouchableOpacity onPress={()=>navigation.navigate('CreategroupScreen')}>
-               
-                    <Text>
-                        Simulation
-                    </Text>
-       
+            <TouchableOpacity>
+            
             </TouchableOpacity>
         </>
     )

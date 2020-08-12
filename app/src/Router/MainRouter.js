@@ -8,6 +8,7 @@ import Settings from '../Screens/SettingsScreen';
 import Logout from '../Screens/LogoutScreen';
 import Sidebar from '../Componets/SideBarComponent';
 import { Dimensions } from 'react-native';
+
 const MainRouter = createDrawerNavigator({
     Home:{
         screen:Home,
@@ -44,7 +45,8 @@ const MainRouter = createDrawerNavigator({
             drawerIcon:({tintColor})=><Feather name='log-out' size={20} color={tintColor} />,
         }
     }
-},{
+},
+{
     contentComponent:props=><Sidebar {...props}/>,
 
     drawerWidth: Dimensions.get('window').width*0.7,
