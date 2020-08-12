@@ -4,6 +4,7 @@ import { Input,Button } from 'react-native-elements';
 import currentlocation from '../../assets/currentlocation.png'
 import ImageComponent from '../Componets/ImageComponent';
 import { StatusBar } from 'expo-status-bar';
+import { EvilIcons,MaterialCommunityIcons } from '@expo/vector-icons';
 
 const SigninScreen = ({navigation})=>{
     const {containerStyle, inputStyle, buttonStyle} = style;
@@ -17,11 +18,15 @@ const SigninScreen = ({navigation})=>{
             <View>
                     <Input  autoCorrect={false} autoCapitalize='none'
                      containerStyle={inputStyle} placeholder="Email"
-                      onChangeText={setEmail} value={email}/>
+                      onChangeText={setEmail} value={email}
+                      leftIcon={<MaterialCommunityIcons name="email" size={20} color="#2A9D8F" />}
+                      />
 
                     <Input containerStyle={inputStyle} secureTextEntry
                      autoCorrect={false} autoCapitalize='none' placeholder="Passwod"
-                     onChangeText={setPassword} value={password}/>
+                     onChangeText={setPassword} value={password}
+                     leftIcon={<EvilIcons name="lock" size={32} color="#2A9D8F" />}
+                     />
 
                 <TouchableOpacity>
                     <Text style={{alignSelf:'center',marginBottom:10}}>
@@ -31,7 +36,7 @@ const SigninScreen = ({navigation})=>{
 
                 <Button  buttonStyle={buttonStyle} title='Signin' onPress={()=>navigation.navigate('main')} />
                 
-                <TouchableOpacity onPress={()=>navigation.navigate('Signup')}>
+                <TouchableOpacity onPress={()=>navigation.navigate('SignupScreen')}>
                     <Text style={{alignSelf:'center'}}>
                         Dont have an account ? <Text style={{color:'#2A9D8F'}}> Signup
                     </Text></Text>

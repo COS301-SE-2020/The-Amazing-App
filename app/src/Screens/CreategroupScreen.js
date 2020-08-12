@@ -1,6 +1,7 @@
 import React ,{  } from 'react';
 import {View, StyleSheet, TouchableOpacity, ImageBackground , Image} from 'react-native'
 import { Input,Text, Button, Header,Icon} from 'react-native-elements';
+import FooterComponent from '../Componets/FooterComponent';
 import { FontAwesome,MaterialIcons, FontAwesome5,SimpleLineIcons } from '@expo/vector-icons'; 
 import sc from '../../assets/thor.jpg';
 import scs from '../../assets/t1.jpg';
@@ -41,7 +42,12 @@ const CreatgroupScreen = ({navigation})=>{
                  <SimpleLineIcons name="location-pin" size={24} color="#2A9D8F" />
                 }
                 />
+                <Button
+                    buttonStyle={style.buttonStyle}
+                    title="Submit"
+                />
             </View>
+            <FooterComponent />
         </>
     )
 }
@@ -76,6 +82,15 @@ const style = StyleSheet.create({
     inputStyle:{
         width:'70%',
         alignSelf:'center',
+    },
+    buttonStyle:{
+        width:150,
+        height:45,
+        marginBottom:35,
+        alignSelf:'center',
+        borderRadius:10,
+        backgroundColor: "#2A9D8F",
+        marginTop:15
     }
 })
 

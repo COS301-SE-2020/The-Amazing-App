@@ -2,7 +2,9 @@ import React ,{  useState} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import currentlocation from '../../assets/currentlocation.png'
-import ImageComponent from '../Componets/ImageComponent'
+import ImageComponent from '../Componets/ImageComponent';
+import { EvilIcons,MaterialCommunityIcons } from '@expo/vector-icons';
+
 
 
 
@@ -19,18 +21,24 @@ const SignupScreen = ({navigation})=>{
                 <View > 
                     <Input  autoCorrect={false}autoCapitalize='none'
                      containerStyle={inputStyle} placeholder="Username"
-                     onChangeText={setUsername} value={Username}/>
+                     onChangeText={setUsername} value={Username}
+                     leftIcon={<EvilIcons name="user" size={24} color="#2A9D8F" />}
+                     />
 
                     <Input autoCorrect={false} autoCapitalize='none'
                      containerStyle={inputStyle} placeholder="Email"
-                     onChangeText={setEmail} value={email}/>
+                     onChangeText={setEmail} value={email}
+                     leftIcon={<MaterialCommunityIcons name="email" size={20} color="#2A9D8F" />}
+                     />
 
                     <Input autoCorrect={false} autoCapitalize='none'
                      secureTextEntry containerStyle={inputStyle}  placeholder="Passwod"
-                     onChangeText={setPassword} value={password}/>
+                     onChangeText={setPassword} value={password}
+                     leftIcon={<EvilIcons name="lock" size={32} color="#2A9D8F" />}
+                     />
                      
                      <Button  buttonStyle={buttonStyle} title='Signup' />
-                    <TouchableOpacity onPress={()=>navigation.navigate('Signin')}>
+                    <TouchableOpacity onPress={()=>navigation.navigate('SigninScreen')}>
                         <Text style={{alignSelf:'center'}}>
                             Already have an account ? <Text style={{color:'#2A9D8F'}}> Signin
                         </Text></Text>
