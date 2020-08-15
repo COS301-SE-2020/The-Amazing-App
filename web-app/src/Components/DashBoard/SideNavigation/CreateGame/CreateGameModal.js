@@ -426,4 +426,9 @@ class CreateGameModal extends React.Component {
   }
 }
 
-export default CreateGameModal;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createProject: (project) => dispatch(createProject(project))
+  }
+}
+export default connect(null, mapDispatchToProps) (CreateGameModal);

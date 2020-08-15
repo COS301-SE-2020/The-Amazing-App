@@ -18,7 +18,7 @@ return(
       alt="userImage"
     />
     <Item.Content>
-<Item.Header as="a">wassup </Item.Header>
+<Item.Header as="a">{project.title} </Item.Header>
       <Item.Description>
         <p>
           Play the detective role by solving riddles related to a crime

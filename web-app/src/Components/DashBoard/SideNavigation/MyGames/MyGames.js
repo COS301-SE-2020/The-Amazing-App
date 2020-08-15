@@ -19,7 +19,7 @@ const MyGames = ({projects}) => {
         }
         </div>
      
-    );
+    )
   }
 
 export default MyGames;

@@ -1,9 +1,10 @@
-import React from "react";
+import React, { Component } from "react";
 import { Button, Header, Modal } from "semantic-ui-react";
 import MyGames from "./MyGames";
-import { connect} from 'react-redux'
+import rootReducer from '../../../../store/reducers/rootReducer'
+import { connect } from 'react-redux'
 import GameSummary from "./GameSummary";
-class MyGamesModal extends React.Component {
+class MyGamesModal extends Component {
   render() {
     console.log(this.props);
     const { projects } = this.props;
@@ -40,7 +41,7 @@ class MyGamesModal extends React.Component {
         <Modal.Header>My Games</Modal.Header>
         <Modal.Content>
           <Modal.Description>
-            <GameSummary projects={projects} />
+            <MyGames projects={projects} />
           </Modal.Description>
         </Modal.Content>
       </Modal>
@@ -53,4 +54,4 @@ const mapStateToProps = (state) =>{
     projects: state.project.projects
   }
 }
-export default connect(mapStateToProps ) (MyGamesModal);
+export default connect(mapStateToProps) (MyGamesModal);
