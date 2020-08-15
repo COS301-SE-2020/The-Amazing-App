@@ -15,7 +15,7 @@ import {
   Sidebar,
   Visibility,
 } from "semantic-ui-react";
-import image from "../assets/map.jpg";
+import image from "../Assets/map.jpg";
 import { Link } from "react-router-dom";
 import Navbar from "../Components/NavBar/Footer";
 
@@ -91,7 +91,7 @@ class DesktopContainer extends Component {
             style={{
               minHeight: 700,
               padding: "3em 0em",
-              backgroundImage: "url(" + require("../assets/back3.jpg") + ")",
+              backgroundImage: "url(" + require("../Assets/back3.jpg") + ")",
               backgroundRepeat: "no-repeat",
               backgroundPosition: "center",
               backgroundSize: "cover",
@@ -133,7 +133,7 @@ class MobileContainer extends Component {
               style={{
                 minHeight: 350,
                 padding: "8em 0em",
-                backgroundImage: "url(" + require("../assets/back3.jpg") + ")",
+                backgroundImage: "url(" + require("../Assets/back3.jpg") + ")",
               }}
               vertical
             >

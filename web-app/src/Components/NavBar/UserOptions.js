@@ -1,6 +1,6 @@
 import React from "react";
 import { Dropdown, Icon, Modal } from "semantic-ui-react";
-import image2 from "../../assets/no_picture.jpg";
+import image2 from "../../Assets/no_picture.jpg";
 import UpdatePreferences from "./UpdatePreferences";
 import axios from "axios";
 import Cookies from "js-cookie";
