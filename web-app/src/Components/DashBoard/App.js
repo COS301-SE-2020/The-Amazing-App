@@ -46,30 +46,13 @@ class App extends React.Component {
       marginLeft: "-200px",
     };
 
-    if (this.state.success == "") {
-      return (
-        <div
-          style={myStyle}
-          class="ui active centered inline massive loader"
-        ></div>
-      );
-    } else {
-      if (this.state.auth) {
-        return (
-          <div>
-            <Navbar />
-            <SideNavComponent />
-            <Footer />
-          </div>
-        );
-      } else {
-        return (
-          <div>
-            <SignIn />
-          </div>
-        );
-      }
-    }
+    return (
+      <div>
+        <Navbar />
+        <SideNavComponent />
+        <Footer />
+      </div>
+    );
   }
 }
 
