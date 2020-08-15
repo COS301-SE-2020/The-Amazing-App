@@ -5,6 +5,7 @@ import { Feather } from '@expo/vector-icons';
 import sc from '../../assets/t1.jpg';
 import { StatusBar } from 'expo-status-bar';
 import User from '../Api/UserAPI'
+import {MaterialIcons, FontAwesome, AntDesign} from '@expo/vector-icons'
 
 
 const AccountScreen = ({navigation})=>{
@@ -34,22 +35,25 @@ const AccountScreen = ({navigation})=>{
             <Divider style={{ backgroundColor: '#2A9D8F',height:1 , padingBottom:20}} />
             <View style={{paddingBottom:15}}>
                 
-               
-                <Text style={textStyle}>Username : {User(email)}</Text>
-                <Text style={textStyle}>Email : {email}</Text>
+                
+                <Text style={textStyle}><AntDesign name="user" size={24} color='#2A9D8F' /> Username : {User(email)}</Text>
+                <Text style={textStyle}><AntDesign name="mail" size={24} color='#2A9D8F' />Email : {email}</Text>
             </View>
             <View style={statContainer}>
                 <View style={statStyle}>
                     <Text style={statAmountStyle}>0</Text>
                     <Text style={statTitleStyle}>Games Enrolled</Text>
+                    <AntDesign name="play" size={24} color='white' />
                 </View>
                 <View style={statStyle}>
                     <Text style={statAmountStyle}>0</Text>
-                    <Text style={statTitleStyle}>Games Completed</Text>
+                    <Text style={statTitleStyle}>  Games Completed</Text>
+                    <AntDesign name="Trophy" size={24} color='white' />
                 </View>
                 <View style={statStyle}>
                     <Text style={statAmountStyle}>0</Text>
                     <Text style={statTitleStyle}>Groups</Text>
+                    <AntDesign name="team" size={24} color='white' />
                 </View>
             </View>
         </>
@@ -66,7 +70,7 @@ style = StyleSheet.create({
     imageStyle2:{
         width:200,
         height:200,
-        marginTop:15,
+        marginTop:120,
         borderRadius:100,
         overflow:'hidden',
         marginBottom:10
@@ -86,8 +90,9 @@ style = StyleSheet.create({
     statContainer:{
         flexDirection: 'row',
         justifyContent:'space-between',
-        margin:2,
-        paddingTop:15
+        marginTop:15,
+        padding:15,
+        backgroundColor: 'grey'
     },
     statStyle:{
         alignItems:'center',
@@ -102,7 +107,8 @@ style = StyleSheet.create({
         color:'#C3C5CD',
         fontSize:13,
         fontWeight:'bold',
-        marginTop:4
+        marginTop:4,
+        marginBottom:4
     }
 
 })
