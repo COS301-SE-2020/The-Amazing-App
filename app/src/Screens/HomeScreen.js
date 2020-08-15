@@ -24,14 +24,14 @@ const HomeScreen = ({navigation})=>{
                 </TouchableOpacity>}
                 centerComponent={{ text: 'Home', style: { color: '#fff',fontSize:22, fontWeight:'bold' } }}
                 rightComponent={
-                    <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
+                    <TouchableOpacity onPress={()=>navigation.navigate('Profile', {email:email})}>
                         <Image source={sc}  style={style.imageStyle}/>
                     </TouchableOpacity>
                 }
                 containerStyle={{backgroundColor:'#2A9D8F'}}
             />
             <View style={style.containerStyle}>
-                <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
+                <TouchableOpacity onPress={()=>navigation.navigate('Profile',{email:email})}>
                     <Image source={sc}  style={style.profileStyle}/>
                 </TouchableOpacity>
             </View>
@@ -40,7 +40,7 @@ const HomeScreen = ({navigation})=>{
 
             <View style={style.containerStyle}>
                 <Text style={{fontSize:22,color:'#2A9D8F'}}>Hello,</Text>
-                <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
+                <TouchableOpacity onPress={()=>navigation.navigate('Profile',{email:email})}>
             <Text style={{fontSize:22,fontWeight:'bold'}}>{User(email)}</Text>
                 </TouchableOpacity>
                 <Text style={{paddingTop:5,fontSize:16}}>which game would you like to play</Text>

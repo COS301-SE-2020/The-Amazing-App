@@ -25,7 +25,7 @@ const SigninScreen = ({navigation})=>{
                       />
 
                     <Input containerStyle={inputStyle} secureTextEntry
-                     autoCorrect={false} autoCapitalize='none' placeholder="Passwod"
+                     autoCorrect={false} autoCapitalize='none' placeholder="Password"
                      onChangeText={setPassword} value={password}
                      leftIcon={<EvilIcons name="lock" size={32} color="#2A9D8F" />}
                      />
