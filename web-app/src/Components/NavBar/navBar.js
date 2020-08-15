@@ -1,6 +1,7 @@
 import React from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import logo from "../../assets/logo.png";
+import { Link } from "react-router-dom";
 import UserOptions from "./UserOptions";
 
 class NavBar extends React.Component {

@@ -3,7 +3,7 @@ import { Form, Button } from "semantic-ui-react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Image } from "semantic-ui-react";
-import gameImage from "../../../../assets/noimageframe.jpg";
+import gameImage from "../../../../Assets/noimageframe.jpg";
 import "../../styles.css";
 
 const nameObject = {

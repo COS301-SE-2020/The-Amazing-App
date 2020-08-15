@@ -1,5 +1,5 @@
 import React from "react";
-import image2 from "../../../../assets/no_picture.jpg";
+import image2 from "../../../../Assets/no_picture.jpg";
 
 class UserImageComponent extends React.Component {
   render() {
