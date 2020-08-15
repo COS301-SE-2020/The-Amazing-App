@@ -4,6 +4,7 @@ import MyGames from "./MyGames";
 
 class MyGamesModal extends React.Component {
   render() {
+    const { projects } = this.props;
     return (
       <Modal
         style={{
@@ -37,7 +38,7 @@ class MyGamesModal extends React.Component {
         <Modal.Header>My Games</Modal.Header>
         <Modal.Content>
           <Modal.Description>
-            <MyGames />
+            <MyGames projects={projects} />
           </Modal.Description>
         </Modal.Content>
       </Modal>
@@ -45,4 +46,9 @@ class MyGamesModal extends React.Component {
   }
 }
 
+const mapStateToProps = (state) =>{
+  return {
+    projects: state.project.projetcs
+  }
+}
 export default MyGamesModal;

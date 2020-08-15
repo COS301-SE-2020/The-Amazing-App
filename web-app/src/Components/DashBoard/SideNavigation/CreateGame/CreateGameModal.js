@@ -8,6 +8,8 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { Route, Redirect } from "react-router-dom";
 import history from "../../../../history";
+import { connect } from "react-redux";
+import { createProject } from '../../../../store/actions/projectActions'
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoidGFwZWhuZGhsb3Z1IiwiYSI6ImNrYmV2eTRhdDBwbXUydHA4eTl6cW5neDMifQ.BVjVIq7FUmlnMZJC_BvRDQ";
@@ -130,6 +132,7 @@ class CreateGameModal extends React.Component {
   onSubmitGame = (event) => {
     event.preventDefault();
     console.log(game);
+    this.props.createProject(this.game)
     this.setState({ submit: "Submitted !" });
     this.token = Cookies.get("token");
     const instance = axios
