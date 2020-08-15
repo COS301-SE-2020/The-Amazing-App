@@ -7,6 +7,7 @@ import { Feather } from '@expo/vector-icons';
 import sc from '../../assets/t1.jpg';
 import { StatusBar } from 'expo-status-bar';
 import User from '../Api/UserAPI'
+import image from '../../assets/avatar.png'
 
 const HomeScreen = ({navigation})=>{
     const [searchApi, results, errorMessage] = useResults();
@@ -42,12 +43,86 @@ const HomeScreen = ({navigation})=>{
                 <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
             <Text style={{fontSize:22,fontWeight:'bold'}}>{User(email)}</Text>
                 </TouchableOpacity>
-                <Text style={{paddingTop:10,fontSize:16}}>which game would you like to play</Text>
+                <Text style={{paddingTop:5,fontSize:16}}>which game would you like to play</Text>
             </View>
             <SearchBarComponent term={term} 
                 onTermChange={setTerm}
                 onTermSubmit={() => searchApi(term)}
             />
+            <ScrollView>
+                <View style={style.itemStyle}>
+                    <View style={{flexDirection:'row'}}>
+                        <Image source={image} style={style.avatarStyle} />
+                        <View  style={style.textStyle}>
+                            <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>The Amazing Race</Text>
+                            <Text style={{color:'#f56042'}}>Location : Pretoria</Text>
+                        </View>
+                    </View>
+                </View>
+                <View style={style.itemStyle}>
+                    <View style={{flexDirection:'row'}}>
+                        <Image source={image} style={style.avatarStyle} />
+                        <View  style={style.textStyle}>
+                            <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>The Amazing Race</Text>
+                            <Text style={{color:'#f56042'}}>Location : Pretoria</Text>
+                        </View>
+                    </View>
+                </View>
+                <View style={style.itemStyle}>
+                    <View style={{flexDirection:'row'}}>
+                        <Image source={image} style={style.avatarStyle} />
+                        <View  style={style.textStyle}>
+                            <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>The Amazing Race</Text>
+                            <Text style={{color:'#f56042'}}>Location : Pretoria</Text>
+                        </View>
+                    </View>
+                </View>
+                <View style={style.itemStyle}>
+                    <View style={{flexDirection:'row'}}>
+                        <Image source={image} style={style.avatarStyle} />
+                        <View  style={style.textStyle}>
+                            <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>The Amazing Race</Text>
+                            <Text style={{color:'#f56042'}}>Location : Pretoria</Text>
+                        </View>
+                    </View>
+                </View>
+                <View style={style.itemStyle}>
+                    <View style={{flexDirection:'row'}}>
+                        <Image source={image} style={style.avatarStyle} />
+                        <View  style={style.textStyle}>
+                            <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>The Amazing Race</Text>
+                            <Text style={{color:'#f56042'}}>Location : Pretoria</Text>
+                        </View>
+                    </View>
+                </View>
+                <View style={style.itemStyle}>
+                    <View style={{flexDirection:'row'}}>
+                        <Image source={image} style={style.avatarStyle} />
+                        <View  style={style.textStyle}>
+                            <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>The Amazing Race</Text>
+                            <Text style={{color:'#f56042'}}>Location : Pretoria</Text>
+                        </View>
+                    </View>
+                </View>
+                <View style={style.itemStyle}>
+                    <View style={{flexDirection:'row'}}>
+                        <Image source={image} style={style.avatarStyle} />
+                        <View  style={style.textStyle}>
+                            <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>The Amazing Race</Text>
+                            <Text style={{color:'#f56042'}}>Location : Pretoria</Text>
+                        </View>
+                    </View>
+                </View>
+                <View style={style.itemStyle}>
+                    <View style={{flexDirection:'row'}}>
+                        <Image source={image} style={style.avatarStyle} />
+                        <View  style={style.textStyle}>
+                            <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>The Amazing Race</Text>
+                            <Text style={{color:'#f56042'}}>Location : Pretoria</Text>
+                        </View>
+                    </View>
+                </View>
+            </ScrollView>
         </>
     )
 }
@@ -63,9 +138,9 @@ const style = StyleSheet.create({
     profileStyle:{
         width:150,
         height:150,
-        marginTop:15,
+        marginTop:5,
         borderRadius:100,
-        marginBottom:10
+        marginBottom:5
     },
     containerStyle:
     {
@@ -73,5 +148,21 @@ const style = StyleSheet.create({
         marginTop:10,
         marginBottom:20,
     },
+    itemStyle:{
+        backgroundColor:'rgba(245, 247, 246, 0.8)', 
+        borderColor:'white',
+        borderWidth:1,
+        height:70   
+    },
+    avatarStyle:{
+        width:50,
+        height:50, 
+        borderRadius:50,
+        marginTop:6
+    },
+    textStyle:{
+        flexDirection:'column',
+        marginLeft:10
+    }
 })
 export default HomeScreen;
