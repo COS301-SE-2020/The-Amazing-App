@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Form, Grid, Message, Segment } from "semantic-ui-react";
-import image from "../../assets/logo.png";
+import image from "../../Assets/logo.png";
 import { Link } from "react-router-dom";
 
 class SignUp extends React.Component {

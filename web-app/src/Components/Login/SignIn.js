@@ -1,7 +1,9 @@
 import React from "react";
 import { Button, Form, Grid, Message, Segment } from "semantic-ui-react";
-import image from "../../assets/logo.png";
+import image from "../../Assets/logo.png";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { signIn } from "../../store/actions/authActions";
 
 class SignIn extends React.Component {
   state = { email: "", pasword: "", err: "" };
@@ -13,7 +15,7 @@ class SignIn extends React.Component {
       password: this.state.password,
     };
 
-    console.log(data);
+    this.props.signIn(data);
   };
 
   render() {
@@ -64,4 +66,10 @@ class SignIn extends React.Component {
   }
 }
 
-export default SignIn;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signIn: (creds) => dispatch(signIn(creds)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(SignIn);
