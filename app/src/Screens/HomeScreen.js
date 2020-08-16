@@ -162,7 +162,8 @@ const style = StyleSheet.create({
     },
     textStyle:{
         flexDirection:'column',
-        marginLeft:10
+        marginLeft:10,
+        
     }
 })
 export default HomeScreen;
