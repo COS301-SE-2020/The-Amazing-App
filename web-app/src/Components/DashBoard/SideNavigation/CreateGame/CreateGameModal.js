@@ -132,7 +132,7 @@ class CreateGameModal extends React.Component {
   onSubmitGame = (event) => {
     event.preventDefault();
     console.log(game);
-    this.props.createProject(this.game)
+    this.props.createProject(game)
     this.setState({ submit: "Submitted !" });
     this.token = Cookies.get("token");
     const instance = axios
@@ -431,4 +431,4 @@ const mapDispatchToProps = (dispatch) => {
     createProject: (project) => dispatch(createProject(project))
   }
 }
-export default connect(null, mapDispatchToProps) (CreateGameModal);
+export default connect(null, mapDispatchToProps)(CreateGameModal);
