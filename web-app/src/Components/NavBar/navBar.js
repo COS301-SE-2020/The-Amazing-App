@@ -24,7 +24,7 @@ class NavBar extends React.Component {
         </Navbar.Brand>
         <Nav className="mr-auto"></Nav>
         <Nav
-          style={{ marginRight: 50, color: "white", fontWeight: "normal" }}
+          style={{ marginRight: 100, color: "white", fontWeight: "normal" }}
           className="lead"
           pull
           Right
@@ -32,14 +32,8 @@ class NavBar extends React.Component {
           <Nav.Link href="/" className="active" style={myStyle} exact>
             Home
           </Nav.Link>
-          <Nav.Link href="DashBoard" style={myStyle} exact>
+          <Nav.Link className="active" href="dashboard" style={myStyle} exact>
             Dashboard
-          </Nav.Link>
-          <Nav.Link href="/signup" style={myStyle} exact>
-            Signup
-          </Nav.Link>
-          <Nav.Link href="/login" style={myStyle} exact>
-            Login
           </Nav.Link>
           <Nav.Link href="#">
             <UserOptions />

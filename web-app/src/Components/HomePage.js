@@ -59,7 +59,7 @@ const HomepageHeading = ({ mobile }) => (
       <Link to="/login" style={{ color: "white" }}>
         Get Started
       </Link>
-      <Icon name="right arrow" />
+      <Icon style={{ color: "white" }} name="right arrow" />
     </Button>
   </Container>
 );

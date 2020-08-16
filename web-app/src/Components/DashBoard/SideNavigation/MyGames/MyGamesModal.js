@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button, Header, Modal } from "semantic-ui-react";
 import MyGames from "./MyGames";
 import rootReducer from '../../../../store/reducers/rootReducer'
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 import GameSummary from "./GameSummary";
 class MyGamesModal extends Component {
   render() {
@@ -49,7 +49,7 @@ class MyGamesModal extends Component {
   }
 }
 
-const mapStateToProps = (state) =>{
+const mapStateToProps = (state) => {
   return {
     projects: state.project.projects
   }

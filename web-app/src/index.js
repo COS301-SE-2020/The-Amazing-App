@@ -1,21 +1,29 @@
-import React from 'react';
-import App from './Components/App';
-import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware, compose } from 'redux'
-import rootReducer from './store/reducers/rootReducer'
-import { Provider } from 'react-redux'
-import thunk from 'redux-thunk'  
-import { reduxFirestore, getFirestore } from 'redux-firestore'
-import { reactReduxFirebase, getFirebase } from 'react-redux-firebase'
-import fbConfig from './Config/fbConfig'
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter as Router } from "react-router-dom";
+import App from "./Components/App";
 
-const store = createStore(rootReducer,
-    compose(
-         applyMiddleware(thunk.withExtraArgument({ getFirebase,getFirestore })),
-         reduxFirestore(fbConfig),
-        reactReduxFirebase(fbConfig)
-         )
-     );
+// SETTING UP REDUX STORE
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware, compose } from "redux";
+import reduxThunk from "redux-thunk";
+import reducers from "./store/reducers";
 
-ReactDOM.render(<Provider store = {store}><App/></Provider>, document.querySelector('#root'));
+// ENHANCING STORE WITH FIREBASE
+import { reactReduxFirebase } from "react-redux-firebase";
+import firebase from "./Config/fbConfig";
+const createStoreWithFirebase = compose(reactReduxFirebase(firebase))(
+  createStore
+);
+const store = createStoreWithFirebase(
+  reducers,
+  {},
+  applyMiddleware(reduxThunk)
+);
 
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);
