@@ -2,7 +2,7 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 
-var firebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyAtJvbPZhsItr_y2jHm49RAq_keCe-34dE",
   authDomain: "the-amazing-app-77843.firebaseapp.com",
   databaseURL: "https://the-amazing-app-77843.firebaseio.com",
@@ -14,6 +14,5 @@ var firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-firebase.firestore().settings({ timestampsInSnapshots: true });
 
-export default firebaseConfig;
+export default firebase;

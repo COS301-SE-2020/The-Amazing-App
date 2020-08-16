@@ -1,32 +1,29 @@
 import React from "react";
-import App from "./Components/App";
 import ReactDOM from "react-dom";
-import { createStore, applyMiddleware, compose } from "redux";
-import rootReducer from "./store/reducers/rootReducer";
+import { BrowserRouter as Router } from "react-router-dom";
+import App from "./Components/App";
+
+// SETTING UP REDUX STORE
 import { Provider } from "react-redux";
-import thunk from "redux-thunk";
-import { reduxFirestore, getFirestore } from "redux-firestore";
-import { reactReduxFirebase, getFirebase } from "react-redux-firebase";
-import fbConfig from "./Config/fbConfig";
+import { createStore, applyMiddleware, compose } from "redux";
+import reduxThunk from "redux-thunk";
+import reducers from "./store/reducers";
 
-const store = createStore(
-  rootReducer,
-  compose(
-    applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
-    reactReduxFirebase(fbConfig), // redux binding for firebase
-    reduxFirestore(fbConfig) // redux bindings for firestore
-  )
+// ENHANCING STORE WITH FIREBASE
+import { reactReduxFirebase } from "react-redux-firebase";
+import firebase from "./Config/fbConfig";
+const createStoreWithFirebase = compose(reactReduxFirebase(firebase))(
+  createStore
 );
-
-const rrfProps = {
-  firebase: fbConfig,
-  config: fbConfig,
-  dispatch: store.dispatch,
-};
+const store = createStoreWithFirebase(
+  reducers,
+  {},
+  applyMiddleware(reduxThunk)
+);
 
 ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.querySelector("#root")
+  document.getElementById("root")
 );
