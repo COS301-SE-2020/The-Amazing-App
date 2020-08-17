@@ -3,13 +3,14 @@ import { Nav, Navbar } from "react-bootstrap";
 import logo from "../../Assets/logo.png";
 import { Link } from "react-router-dom";
 import UserOptions from "./UserOptions";
+import { Button } from "semantic-ui-react";
 
 class NavBar extends React.Component {
   render() {
     const myStyle = {
       fontSize: 16,
-      color: "white",
       fontFamily: "'Helvetica Neue', Arial, Helvetica, sans-serif",
+      fontWeight: "normal",
     };
 
     return (
@@ -29,11 +30,17 @@ class NavBar extends React.Component {
           pull
           Right
         >
-          <Nav.Link href="/" className="active" style={myStyle} exact>
+          <Nav.Link href="/" style={myStyle} exact>
             Home
           </Nav.Link>
           <Nav.Link className="active" href="dashboard" style={myStyle} exact>
             Dashboard
+          </Nav.Link>
+          <Nav.Link style={myStyle}>
+            <Button size="tiny" style={{ backgroundColor: "Transparent" }}>
+              Logout
+              <i className="sign-out"></i>
+            </Button>
           </Nav.Link>
           <Nav.Link href="#">
             <UserOptions />
