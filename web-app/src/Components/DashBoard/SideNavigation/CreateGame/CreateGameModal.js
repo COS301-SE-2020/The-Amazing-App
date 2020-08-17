@@ -134,22 +134,7 @@ class CreateGameModal extends React.Component {
     console.log(game);
     this.props.createProject(game)
     this.setState({ submit: "Submitted !" });
-    this.token = Cookies.get("token");
-    const instance = axios
-      .post("http://localhost:8000/api/game/GameDetails", game, {
-        headers: { Authorization: "Bearer " + this.token },
-      })
-      .then((res) => {
-        if (res.status == 200) {
-          console.log("Success!!!");
-          window.location.reload(true);
-        }
-      })
-      .catch((error) => {
-        console.log(error.message);
-        console.log("Fail!!!");
-        window.location.reload(true);
-      });
+    this.token = Cookies.get("token");   
   };
 
   render() {

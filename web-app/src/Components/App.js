@@ -4,14 +4,14 @@ import SignIn from "./Login/SignIn";
 import SignUp from "./Login/SignUp";
 import Forgot from "./Login/Forgot";
 import Reset from "./Login/Reset";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import DashBoard from "./DashBoard/DashBoard";
 
 class App extends React.Component {
   render() {
     return (
       <div>
-        <BrowserRouter>
+        <Switch>
           <Route path="/" exact>
             <HomePage />
           </Route>
@@ -30,7 +30,7 @@ class App extends React.Component {
           <Route path="/forgot" exact>
             <Forgot />
           </Route>
-        </BrowserRouter>
+        </Switch>
       </div>
     );
   }

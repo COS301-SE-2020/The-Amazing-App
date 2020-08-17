@@ -5,7 +5,7 @@ import apiStatusReducer from "./apiStatus";
 import projectReducers from "./projectReducer";
 
 export default combineReducers({
-  firebaseReducer,
+  firebase: firebaseReducer,
   authReducer,
   apiStatusReducer,
   project: projectReducers,

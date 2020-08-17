@@ -23,7 +23,10 @@ const store = createStoreWithFirebase(
 
 ReactDOM.render(
   <Provider store={store}>
+    <Router>
     <App />
-  </Provider>,
+    </Router>
+    </Provider>
+    ,
   document.getElementById("root")
 );
