@@ -2,8 +2,11 @@ import React ,{useState} from 'react';
 import {Alert} from 'react-native';
 import firebase from '../Config/Config';
 
-const User = (email) => {
+var Email =''; 
+
+export const User = (email) =>{
     const [isUser , setUser] = useState('');
+    Email = email;
 
     firebase.firestore().collection('Users').where('Email', '==', email).limit(1).get().then((query) => {  
         const thing = query.docs[0];
@@ -13,7 +16,13 @@ const User = (email) => {
 
 }
 
-export default(User);
+export const getEmail = () =>{
+
+    return Email;
+
+}
+
+
   
 
   

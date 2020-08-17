@@ -6,13 +6,14 @@ import useResults from '../Hooks/userResults';
 import { Feather } from '@expo/vector-icons'; 
 import sc from '../../assets/t1.jpg';
 import { StatusBar } from 'expo-status-bar';
-import User from '../Api/UserAPI'
+import {User} from '../Api/UserAPI'
 import image from '../../assets/avatar.png'
 
 const HomeScreen = ({navigation})=>{
     const [searchApi, results, errorMessage] = useResults();
     const {term,setTerm} = useState('');
     const email = navigation.getParam('email');
+    const username = User(email);
 
     return(
         <>
@@ -24,14 +25,14 @@ const HomeScreen = ({navigation})=>{
                 </TouchableOpacity>}
                 centerComponent={{ text: 'Home', style: { color: '#fff',fontSize:22, fontWeight:'bold' } }}
                 rightComponent={
-                    <TouchableOpacity onPress={()=>navigation.navigate('Profile', {email:email})}>
+                    <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
                         <Image source={sc}  style={style.imageStyle}/>
                     </TouchableOpacity>
                 }
                 containerStyle={{backgroundColor:'#2A9D8F'}}
             />
             <View style={style.containerStyle}>
-                <TouchableOpacity onPress={()=>navigation.navigate('Profile',{email:email})}>
+                <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
                     <Image source={sc}  style={style.profileStyle}/>
                 </TouchableOpacity>
             </View>
@@ -40,8 +41,8 @@ const HomeScreen = ({navigation})=>{
 
             <View style={style.containerStyle}>
                 <Text style={{fontSize:22,color:'#2A9D8F'}}>Hello,</Text>
-                <TouchableOpacity onPress={()=>navigation.navigate('Profile',{email:email})}>
-            <Text style={{fontSize:22,fontWeight:'bold'}}>{User(email)}</Text>
+                <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
+            <Text style={{fontSize:22,fontWeight:'bold'}}>{username}</Text>
                 </TouchableOpacity>
                 <Text style={{paddingTop:5,fontSize:16}}>which game would you like to play</Text>
             </View>
