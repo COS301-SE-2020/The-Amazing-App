@@ -24,9 +24,8 @@ const store = createStoreWithFirebase(
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-    <App />
+      <App />
     </Router>
-    </Provider>
-    ,
+  </Provider>,
   document.getElementById("root")
 );

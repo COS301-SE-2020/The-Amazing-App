@@ -5,7 +5,7 @@ import UpdatePreferences from "./UpdatePreferences";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const instance = axios
+/*const instance = axios
   .get("http://localhost:8000/api/auth/me", {
     headers: { Authorization: "Bearer " + Cookies.get("token") },
   })
@@ -16,7 +16,7 @@ const instance = axios
   })
   .catch((error) => {
     console.log(error.message);
-  });
+  });*/
 
 const trigger = (
   <div>
