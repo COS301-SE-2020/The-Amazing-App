@@ -1,18 +1,40 @@
 import React ,{ useState} from 'react';
-import { StyleSheet,Image, TouchableOpacity, View, Text} from 'react-native'
-import {Header, Divider} from 'react-native-elements';
-import {} from 'react-native-paper';
-import { Feather, AntDesign,MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'; 
+import { StyleSheet,Image, TouchableOpacity, View, Text, Modal} from 'react-native'
+import {Header, Divider, Input, Button} from 'react-native-elements';
+import { Feather, AntDesign,MaterialCommunityIcons, MaterialIcons,EvilIcons } from '@expo/vector-icons'; 
 import { Switch } from 'react-native-paper';
 import sc from '../../assets/t1.jpg';
 import { StatusBar } from 'expo-status-bar';
-
+s
 
 
 const SettingsScreen = ({navigation})=>{
-    const [isSwitchOn, setIsSwitchOn] = React.useState(false);
+    const [isSwitchOn, setIsSwitchOn] = React.useState(true);
+    const [modalOpen, setModelOpen] = useState(false);
     const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
-   
+
+    const operation=()=>{
+            return(
+                <View>
+                    <Text style={style.operationStyle}>
+                        Change username
+                    </Text>
+                    <Divider style={style.dividerStyle} />
+
+                      <Input 
+                        placeholderTextColor="white"
+                        textContentType={{color:'white'}}
+                        containerStyle={{marginTop:'10%', marginBottom:'30%'}}
+                        autoCorrect={false} autoCapitalize='none' placeholder="Enter new username"
+                        leftIcon={<EvilIcons name="lock" size={32} color="white"/>}
+                     />
+                    <Button  buttonStyle={buttonStyle} title='Submit'
+                        textStyle={{color:'red'}}
+                     />
+                    <Divider style={style.dividerStyle} />
+                </View>
+            )
+    }
     return(
         <>
             <StatusBar style='#2A9D8F'/>
@@ -31,14 +53,28 @@ const SettingsScreen = ({navigation})=>{
             />
             <View style={style.containerStyle}>
                 <View style={style.headStyle}/>
-                <View style={style.detailStyle}>
-                    <TouchableOpacity>
-                        <View style={{flexDirection:'row',flex:1, marginTop:15}}>
-                            <AntDesign name="user" size={30} color="#2A9D8F" />
-                            <Text style={style.textStyle}>Change usename</Text>
-                            <MaterialIcons name="keyboard-arrow-right" size={35} color="#2A9D8F" style={{marginLeft:'48%'}} />
+                <Modal visible={modalOpen} animationType='fade' transparent={true}>
+                    <View style={style.modalContainer}>
+                        <View style={style.modalStyle}>
+                            <TouchableOpacity onPress={()=>setModelOpen(false)}>
+                                <AntDesign name="closecircleo" size={30} 
+                                    color="white" 
+                                    style={{alignSelf:'center', paddingTop:10}}
+                                 />
+                            </TouchableOpacity>
+                            {operation()}
                         </View>
-                    </TouchableOpacity>
+                    </View>
+                </Modal>
+
+                <View style={style.detailStyle}>
+                <TouchableOpacity onPress={()=>setModelOpen(true)}>
+                     <View style={{flexDirection:'row', marginTop:15}}>
+                        <AntDesign name="user" size={30} color="#2A9D8F" />
+                        <Text style={style.textStyle}>Change usename</Text>
+                        <MaterialIcons name="keyboard-arrow-right" size={35} color="#2A9D8F" style={{marginLeft:'48%'}} />
+                    </View>
+                </TouchableOpacity>
                     <Divider style={style.dividerStyle2} />
                     <TouchableOpacity>
                         <View style={{flexDirection:'row', marginTop:20}}>
@@ -101,7 +137,7 @@ const style = StyleSheet.create({
     detailStyle:{
         backgroundColor:'white',
         width:'100%',
-        height:'25%',
+        height:'26%',
         alignSelf:'center',
         borderWidth:1,
         borderColor:'rgba(42, 157, 143, 0.4)',
@@ -115,19 +151,47 @@ const style = StyleSheet.create({
         color:'#2A9D8F',
         paddingLeft:5
     },
-    dividerStyle:{ 
-        backgroundColor: '#2A9D8F',
+    dividerStyle:{
+        backgroundColor: 'white',
         height:1 , 
         marginTop:10,
-        width:'94%',
-        alignSelf:'flex-end'
     },
     dividerStyle2:{
         backgroundColor: 'rgba(42, 157, 143, 0.24)',
         height:1 , 
         marginTop:10,
         width:'94%',
-        alignSelf:'flex-end'
+        alignSelf:'flex-end',
+    },
+    modalStyle:{
+        width:'70%', 
+        height:'50%',
+        alignSelf:'center',
+        marginTop:'40%',
+        backgroundColor:'rgba(42, 157, 143, 1)',
+        borderRadius:10
+    },
+    modalContainer:{
+        width:'100%', 
+        height:'100%',
+        backgroundColor:'rgba(42, 157, 143, 0.4)'
+    },
+    operationStyle:{
+        fontSize:20,
+        fontWeight:'bold',
+        color:'white',
+        alignSelf:'center',
+        paddingTop:5,
+        paddingBottom:5
+    },
+    buttonStyle:{
+        width:100,
+        height:40,
+        marginBottom:35,
+        alignSelf:'center',
+        borderRadius:10,
+        backgroundColor: "#2A9D8F"
     }
+
 })
 export default SettingsScreen;
