@@ -4,14 +4,14 @@ import {Header, Divider} from 'react-native-elements';
 import { Feather } from '@expo/vector-icons'; 
 import sc from '../../assets/t1.jpg';
 import { StatusBar } from 'expo-status-bar';
-import User from '../Api/UserAPI'
+import {User, getEmail} from '../Api/UserAPI';
 import {MaterialIcons, FontAwesome, AntDesign} from '@expo/vector-icons'
 
 
 const AccountScreen = ({navigation})=>{
     const {imageStyle,imageStyle2, containerStyle, textStyle, statContainer, statAmountStyle, statStyle, statTitleStyle} = style;
-    const email = navigation.getParam('email');
-    
+    const email = getEmail();
+    const username = User(email)
     return( 
         <>
             <StatusBar style='#2A9D8F'/>
@@ -22,7 +22,7 @@ const AccountScreen = ({navigation})=>{
                 </TouchableOpacity>}
                 centerComponent={{ text: 'Profile', style: { color: '#fff',fontSize:22, fontWeight:'bold' } }}
                 rightComponent={
-                    <TouchableOpacity onPress={()=>navigation.navigate('Profile',{email:email})}>
+                    <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
                         <Image source={sc}  style={style.imageStyle}/>
                     </TouchableOpacity>
                 }
@@ -36,7 +36,7 @@ const AccountScreen = ({navigation})=>{
             <View style={{paddingBottom:15}}>
                 
                 
-                <Text style={textStyle}><AntDesign name="user" size={24} color='#2A9D8F' /> Username : {User(email)}</Text>
+                <Text style={textStyle}><AntDesign name="user" size={24} color='#2A9D8F' /> Username : {username}</Text>
                 <Text style={textStyle}><AntDesign name="mail" size={24} color='#2A9D8F' />Email : {email}</Text>
             </View>
             <View style={statContainer}>

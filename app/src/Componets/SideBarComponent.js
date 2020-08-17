@@ -4,11 +4,12 @@ import sc from '../../assets/t1.jpg';
 import {DrawerNavigatorItems} from 'react-navigation-drawer';
 
 export default SideBarComponent =(props)=>{
+    
     return(
         <ScrollView>
             <View style={{ width : undefined,padding : 16,paddingTop : 48,backgroundColor: '#2A9D8F',}}>
                 <Image source={sc} style={style.profileStyle} />
-                <Text style={style.nameStyle}>Premodial Zou</Text>
+                <Text style={style.nameStyle}></Text>
             </View>
             <View style={style.container}>
                 <DrawerNavigatorItems {...props} />
