@@ -30,13 +30,13 @@ const SigninScreen = ({navigation})=>{
                      leftIcon={<EvilIcons name="lock" size={32} color="#2A9D8F" />}
                      />
 
-                <TouchableOpacity>
-                    <Text style={{alignSelf:'center',marginBottom:10}}>
-                        Forgot <Text style={{color:'#2A9D8F'}}> Password
-                    </Text></Text>
+                <TouchableOpacity onPress={()=>navigation.navigate('ForgetPasswordScreen')}>
+                    <Text style={{alignSelf:'center',marginBottom:10,color:'#2A9D8F'}}>
+                        Forgot  Password
+                    </Text>
                 </TouchableOpacity>
 
-                <Button  buttonStyle={buttonStyle} title='Signin' onPress={()=>Login(email,password)} />
+                <Button  buttonStyle={buttonStyle} title='Sign In' onPress={()=>Login(email,password)} />
                 {isLoggedIn?navigation.navigate('Home',{email:email}):null}
                 <TouchableOpacity onPress={()=>navigation.navigate('SignupScreen')}>
                     <Text style={{alignSelf:'center'}}>

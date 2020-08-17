@@ -1,11 +1,12 @@
 import SigninScreen from '../Screens/SigninScreen';
 import SignupScreen from '../Screens/SignupScreen';
 import {createStackNavigator} from 'react-navigation-stack';
-
+import ForgetPasswordScreen  from '../Screens/ForgetPassordScreen';
 
 const AuthRouter= createStackNavigator({
-    SigninScreen
-    ,SignupScreen
+    SigninScreen,
+    SignupScreen,
+    ForgetPasswordScreen
 },{
     headerMode: 'none'
 })

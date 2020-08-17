@@ -35,7 +35,7 @@ const SignupScreen = ({navigation})=>{
                      leftIcon={<EvilIcons name="lock" size={32} color="#2A9D8F" />}
                      />
                      
-                     <Button  buttonStyle={buttonStyle} title='Signup' onPress={()=>{
+                     <Button  buttonStyle={buttonStyle} title='Sign Up' onPress={()=>{
                                 Register(email,password,Username)
                      }}/>
                      {isRegistered?navigation.navigate('Home',{email:email}):null}
