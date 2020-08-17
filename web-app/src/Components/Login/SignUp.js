@@ -1,31 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Form, Grid, Message, Segment } from "semantic-ui-react";
 import image from "../../Assets/logo.png";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { signup, signin, resetPassword } from "../../store/actions/auth";
+import useForm from "../../utils/useForm";
+import validate from "../../utils/validateSignUpForm";
 
-class SignUp extends React.Component {
-  state = { username: "", email: "", password: "", err: "" };
+const Login = ({
+  signup,
+  signin,
+  resetPassword,
+  authMsg,
+  history,
+  loading,
+}) => {
+  const [newUser, setNewUser] = useState(false);
+  const [reset, SetReset] = useState(false);
+  const [credentials, handleChange, handleSubmit, errors] = useForm(
+    login,
+    validate,
+    reset
+  );
 
-  onFormSubmit = (event) => {
-    event.preventDefault();
-    const data = {
-      username: this.state.username,
-      password: this.state.password,
-      email: this.state.email,
-    };
+  function login() {
+    // signin
+    signup(credentials.email, credentials.password, credentials.username);
+  }
 
-    console.log(data);
-  };
-
-  render() {
-    return (
+  return (
+    <div className="login">
       <Grid
         textAlign="center"
         style={{ height: "100vh" }}
         verticalAlign="middle"
       >
         <Grid.Column style={{ maxWidth: 450 }}>
-          <Form onSubmit={this.onFormSubmit} size="medium">
+          <Form size="medium" onSubmit={handleSubmit} noValidate>
             <Segment stacked>
               <div style={{ alignItems: "center" }}>
                 <img
@@ -33,31 +44,75 @@ class SignUp extends React.Component {
                   style={{ width: 130, height: 130, alignSelf: "center" }}
                 />
               </div>
+              {authMsg && (
+                <p className="auth-message" style={{ color: "teal" }}>
+                  {authMsg}
+                </p>
+              )}
               <Form.Input
                 fluid
                 icon="user"
                 iconPosition="left"
                 placeholder="Username"
+                name="username"
                 id="usersname"
-                onChange={(e) => this.setState({ username: e.target.value })}
+                type="text"
+                value={credentials.username}
+                onChange={handleChange}
+                className={errors.UsernameIsEmpty && "input-error"}
               />
+              <div>
+                {errors.UsernameIsEmpty && (
+                  <small>{errors.UsernameIsEmpty}</small>
+                )}
+              </div>
               <Form.Input
                 fluid
                 icon="envelope"
+                type="email"
+                name="email"
                 iconPosition="left"
                 placeholder="E-mail address"
                 id="useremail"
-                onChange={(e) => this.setState({ email: e.target.value })}
+                value={credentials.email}
+                onChange={handleChange}
+                className={
+                  (errors.emailIsEmpty || errors.emailFormatInvalid) &&
+                  "input-error"
+                }
               />
-              <Form.Input
-                fluid
-                icon="lock"
-                iconPosition="left"
-                placeholder="Password"
-                type="password"
-                id="userpassword"
-                onChange={(e) => this.setState({ password: e.target.value })}
-              />
+              <div>
+                {errors.emailIsEmpty && <small>{errors.emailIsEmpty}</small>}
+                {errors.emailFormatInvalid && (
+                  <small>{errors.emailFormatInvalid}</small>
+                )}
+              </div>
+
+              {!reset && (
+                <div>
+                  <Form.Input
+                    fluid
+                    icon="lock"
+                    iconPosition="left"
+                    placeholder="Password"
+                    name="password"
+                    value={credentials.password}
+                    type="password"
+                    id="userpassword"
+                    onChange={handleChange}
+                    className={
+                      (errors.passIsStrong || errors.passIsEmpty) &&
+                      "input-error"
+                    }
+                  />
+                  <div>
+                    {errors.passIsStrong && (
+                      <small>{errors.passIsStrong}</small>
+                    )}
+                    {errors.passIsEmpty && <small>{errors.passIsEmpty}</small>}
+                  </div>
+                </div>
+              )}
 
               <Button fluid color="teal" size="medium">
                 Register
@@ -69,8 +124,22 @@ class SignUp extends React.Component {
           </Form>
         </Grid.Column>
       </Grid>
-    );
-  }
+    </div>
+  );
+};
+
+function mapStateToProps(state) {
+  return {
+    authMsg: state.authReducer.authMsg,
+    loading: state.apiStatusReducer.apiCallsInProgress > 0,
+  };
 }
 
-export default SignUp;
+function mapDispatchToProps(dispatch) {
+  return {
+    signup: (email, password, username) =>
+      dispatch(signup(email, password, username)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

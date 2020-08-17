@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { signup, signin, resetPassword } from "../../store/actions/auth";
 import useForm from "../../utils/useForm";
 import validate from "../../utils/validateLoginForm";
+import Spinner from "./Spinner";
 
 const Login = ({
   signup,
@@ -24,28 +25,14 @@ const Login = ({
   );
 
   function login() {
-    if (newUser) {
-      // signup
-      signup(credentials.email, credentials.password);
-    } else {
-      if (reset) {
-        // reset password
-        resetPassword(credentials.email);
-      } else {
-        // signin
-        signin(credentials.email, credentials.password, () =>
-          history.push("/")
-        );
-      }
-    }
+    // signin
+    signin(credentials.email, credentials.password, () =>
+      history.push("/dashboard")
+    );
   }
 
   return (
     <div className="login">
-      <h2>
-        {reset ? "Reset password" : newUser ? "Create an account" : "Sign in"}
-      </h2>
-      {authMsg && <p className="auth-message">{authMsg}</p>}
       <Grid
         textAlign="center"
         style={{ height: "100vh" }}
@@ -60,28 +47,32 @@ const Login = ({
                   style={{ width: 130, height: 130, alignSelf: "center" }}
                 />
               </div>
+              {authMsg && (
+                <p className="auth-message" style={{ color: "teal" }}>
+                  {authMsg}
+                </p>
+              )}
+              <Form.Input
+                fluid
+                icon="envelope"
+                type="email"
+                name="email"
+                iconPosition="left"
+                placeholder="E-mail address"
+                id="useremail"
+                value={credentials.email}
+                onChange={handleChange}
+                className={
+                  (errors.emailIsEmpty || errors.emailFormatInvalid) &&
+                  "input-error"
+                }
+              />
               <div>
-                <Form.Input
-                  fluid
-                  icon="envelope"
-                  type="email"
-                  name="email"
-                  iconPosition="left"
-                  placeholder="E-mail address"
-                  id="useremail"
-                  value={credentials.email}
-                  onChange={handleChange}
-                  className={
-                    (errors.emailIsEmpty || errors.emailFormatInvalid) &&
-                    "input-error"
-                  }
-                />
                 {errors.emailIsEmpty && <small>{errors.emailIsEmpty}</small>}
                 {errors.emailFormatInvalid && (
                   <small>{errors.emailFormatInvalid}</small>
                 )}
               </div>
-
               {!reset && (
                 <div>
                   <Form.Input
@@ -99,14 +90,25 @@ const Login = ({
                       "input-error"
                     }
                   />
-                  {errors.passIsStrong && <small>{errors.passIsStrong}</small>}
-                  {errors.passIsEmpty && <small>{errors.passIsEmpty}</small>}
+                  <div>
+                    {errors.passIsStrong && (
+                      <small>{errors.passIsStrong}</small>
+                    )}
+                    {errors.passIsEmpty && <small>{errors.passIsEmpty}</small>}
+                  </div>
                 </div>
               )}
-
-              <Button id="loginbtn" fluid color="teal" size="medium">
+              <Button
+                type="submit"
+                id="loginbtn"
+                fluid
+                color="teal"
+                size="medium"
+                className="btn-login"
+              >
                 Login
               </Button>
+
               <Message>
                 Don't have an account ?<Link to="/signup"> Register</Link>
               </Message>
@@ -127,7 +129,6 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    signup: (email, password) => dispatch(signup(email, password)),
     signin: (email, password, callback) =>
       dispatch(signin(email, password, callback)),
     resetPassword: (email) => dispatch(resetPassword(email)),

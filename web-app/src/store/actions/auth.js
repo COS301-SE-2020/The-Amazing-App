@@ -13,13 +13,19 @@ import { beginApiCall, apiCallError } from "./apiStatus";
 import firebase from "../../Config/fbConfig";
 
 // Signing up with Firebase
-export const signup = (email, password) => async (dispatch) => {
+export const signup = (email, password, username) => async (dispatch) => {
   try {
     dispatch(beginApiCall());
+    const db = firebase.firestore().collection("Users");
+    //console.log(email + " " + username + " " + password);
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then((dataBeforeEmail) => {
+        db.add({
+          Username: username,
+          Email: email,
+        });
         firebase.auth().onAuthStateChanged(function (user) {
           user.sendEmailVerification();
         });
@@ -31,14 +37,14 @@ export const signup = (email, password) => async (dispatch) => {
             dispatch({
               type: SIGNUP_SUCCESS,
               payload:
-                "Your account was successfully created! Now you need to verify your e-mail address, please go check your inbox.",
+                "Your account was successfully created! Please check your inbox to verify the email then login.",
             });
           } else {
             // Signup failed
             dispatch({
               type: SIGNUP_ERROR,
               payload:
-                "Something went wrong, we couldn't create your account. Please try again.",
+                "Oops! We couldn't create your account. Please try again.",
             });
           }
         });
@@ -47,16 +53,14 @@ export const signup = (email, password) => async (dispatch) => {
         dispatch(apiCallError());
         dispatch({
           type: SIGNUP_ERROR,
-          payload:
-            "Something went wrong, we couldn't create your account. Please try again.",
+          payload: "Oops! We couldn't create your account. Please try again.",
         });
       });
   } catch (err) {
     dispatch(apiCallError());
     dispatch({
       type: SIGNUP_ERROR,
-      payload:
-        "Something went wrong, we couldn't create your account. Please try again.",
+      payload: "Oops! We couldn't create your account. Please try again.",
     });
   }
 };
@@ -77,7 +81,7 @@ export const signin = (email, password, callback) => async (dispatch) => {
           console.log("ELSE", data.user.emailVerified);
           dispatch({
             type: EMAIL_NOT_VERIFIED,
-            payload: "You haven't verified your e-mail address.",
+            payload: "Please verify your email address to login.",
           });
         }
       })
@@ -85,12 +89,15 @@ export const signin = (email, password, callback) => async (dispatch) => {
         dispatch(apiCallError());
         dispatch({
           type: SIGNIN_ERROR,
-          payload: "Invalid login credentials",
+          payload: "Oops! Invalid login credentials.",
         });
       });
   } catch (err) {
     dispatch(apiCallError());
-    dispatch({ type: SIGNIN_ERROR, payload: "Invalid login credentials" });
+    dispatch({
+      type: SIGNIN_ERROR,
+      payload: "Oops! Invalid login credentials.",
+    });
   }
 };
 

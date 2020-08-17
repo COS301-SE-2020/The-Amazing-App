@@ -12,24 +12,12 @@ class App extends React.Component {
     return (
       <div>
         <Switch>
-          <Route path="/" exact>
-            <HomePage />
-          </Route>
-          <Route path="/dashBoard" exact>
-            <DashBoard />
-          </Route>
-          <Route path="/login" exact>
-            <SignIn />
-          </Route>
-          <Route path="/signup" exact>
-            <SignUp />
-          </Route>
-          <Route path="/reset" exact>
-            <Reset />
-          </Route>
-          <Route path="/forgot" exact>
-            <Forgot />
-          </Route>
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/dashboard" component={DashBoard} />
+          <Route exact path="/login" component={SignIn} />
+          <Route exact path="/signup" component={SignUp} />
+          <Route exact path="/reset" component={Reset} />
+          <Route exact path="/forgot" component={Forgot} />
         </Switch>
       </div>
     );
