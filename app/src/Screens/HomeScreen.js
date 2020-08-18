@@ -13,7 +13,6 @@ const HomeScreen = ({navigation})=>{
     const [searchApi, results, errorMessage] = useResults();
     const {term,setTerm} = useState('');
     const email = navigation.getParam('email');
-    const username = User(email);
 
     return(
         <>
@@ -42,7 +41,7 @@ const HomeScreen = ({navigation})=>{
             <View style={style.containerStyle}>
                 <Text style={{fontSize:22,color:'#2A9D8F'}}>Hello,</Text>
                 <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
-            <Text style={{fontSize:22,fontWeight:'bold'}}>{username}</Text>
+            <Text style={{fontSize:22,fontWeight:'bold'}}>{User(email)}</Text>
                 </TouchableOpacity>
                 <Text style={{paddingTop:5,fontSize:16}}>which game would you like to play</Text>
             </View>

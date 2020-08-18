@@ -26,8 +26,21 @@ export const updateUsername = (username) => {
     firebase.firestore().collection('Users').where('Email', '==', Email).limit(1).get().then((query) => {  
         const thing = query.docs[0];
         thing.ref.update({Username:username});
-        Alert.alert('Updated!');
+        Alert.alert('Username Updated!');
     }); 
+
+}
+
+export const updatePassword= (newPassword, oldPassword) => {
+   
+    
+    firebase.auth().signInWithEmailAndPassword(Email,oldPassword)
+    .then((res) => {
+        var user = firebase.auth().currentUser;
+        user.updatePassword(newPassword).then(function() {
+            Alert.alert('Password Updated!')
+        })
+    })
 
 }
 

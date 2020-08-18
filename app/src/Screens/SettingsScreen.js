@@ -6,7 +6,7 @@ import { Switch } from 'react-native-paper';
 import sc from '../../assets/t1.jpg';
 import { StatusBar } from 'expo-status-bar';
 import * as ImagePicker from 'expo-image-picker';
-import {updateUsername} from '../Api/UserAPI';
+import {updateUsername, updatePassword} from '../Api/UserAPI';
 
 
 
@@ -52,22 +52,28 @@ const SettingsScreen = ({navigation})=>{
                 <Divider style={style.dividerStyle} />
 
                   <Input 
+                    secureTextEntry
                     placeholderTextColor="white"
                     textContentType={{color:'white'}}
                     containerStyle={{marginTop:'5%'}}
                     autoCorrect={false} autoCapitalize='none' placeholder="Enter old password"
+                    onChangeText={setoldPassword} value={oldPassword}
                     leftIcon={<EvilIcons name="lock" size={32} color="white"/>}
 
                  />
 
                 <Input 
-                    
+                    secureTextEntry
                     placeholderTextColor="white"
                     textContentType={{color:'white'}}
                     autoCorrect={false} autoCapitalize='none' placeholder="Enter new password"
+                    onChangeText={setnewPassword} value={newPassword}
                     leftIcon={<EvilIcons name="lock" size={32} color="white"/>}
                  />
-                <Button  buttonStyle={style.buttonStyle} title='Submit'
+                <Button  buttonStyle={style.buttonStyle} title='Submit' onPress={()=>{
+                        updatePassword(newPassword,oldPassword)
+                        setModelOpen(false)
+                    }}
                  />
                 <Divider style={style.dividerStyle} />
             </View>
