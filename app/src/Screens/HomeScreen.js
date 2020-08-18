@@ -4,9 +4,8 @@ import { Image, Divider,Header } from 'react-native-elements';
 import SearchBarComponent from '../Componets/SearchBarComponent'
 import useResults from '../Hooks/userResults';
 import { Feather } from '@expo/vector-icons'; 
-import sc from '../../assets/t1.jpg';
 import { StatusBar } from 'expo-status-bar';
-import {User} from '../Api/UserAPI'
+import {User,getPicture} from '../Api/UserAPI'
 import image from '../../assets/avatar.png'
 
 const HomeScreen = ({navigation})=>{
@@ -25,14 +24,14 @@ const HomeScreen = ({navigation})=>{
                 centerComponent={{ text: 'Home', style: { color: '#fff',fontSize:22, fontWeight:'bold' } }}
                 rightComponent={
                     <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
-                        <Image source={sc}  style={style.imageStyle}/>
+                        <Image source={getPicture()}  style={style.imageStyle}/>
                     </TouchableOpacity>
                 }
                 containerStyle={{backgroundColor:'#2A9D8F'}}
             />
             <View style={style.containerStyle}>
                 <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
-                    <Image source={sc}  style={style.profileStyle}/>
+                    <Image source={getPicture()}  style={style.profileStyle}/>
                 </TouchableOpacity>
             </View>
 

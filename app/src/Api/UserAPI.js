@@ -61,16 +61,17 @@ export const updatePicture = async (image) => {
 }
 
 export const getPicture =() => {
-    var picture ='';
+    const [picture , setPicture] = useState('');
     firebase.firestore().collection('Users').where('Email', '==', Email).limit(1).get().then((query) => {  
         const thing = query.docs[0];
-        picture = thing.data().Picture;
+        setPicture(thing.data().Picture);
     }); 
 
     if (picture == '')
     {
         return sc;
     }
+    const result = {uri: picture}
 
-    return picture;
+    return result;
 }

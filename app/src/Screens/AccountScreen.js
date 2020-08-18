@@ -2,7 +2,7 @@ import React ,{ useState} from 'react';
 import {View, Text, StyleSheet,Image, TouchableOpacity,FlatList} from 'react-native'
 import {Header, Divider} from 'react-native-elements';
 import { Feather } from '@expo/vector-icons'; 
-import sc from '../../assets/t1.jpg';
+import {getPicture} from '../Api/UserAPI'
 import { StatusBar } from 'expo-status-bar';
 import {User, getEmail} from '../Api/UserAPI';
 import {MaterialIcons, FontAwesome, AntDesign} from '@expo/vector-icons'
@@ -23,13 +23,13 @@ const AccountScreen = ({navigation})=>{
                 centerComponent={{ text: 'Profile', style: { color: '#fff',fontSize:22, fontWeight:'bold' } }}
                 rightComponent={
                     <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
-                        <Image source={sc}  style={style.imageStyle}/>
+                        <Image source={getPicture()}  style={style.imageStyle}/>
                     </TouchableOpacity>
                 }
                 containerStyle={{backgroundColor:'#2A9D8F'}}
             />
              <View style={containerStyle}>
-                 <Image source={sc}  style={imageStyle2}/>
+                 <Image source={getPicture()}  style={imageStyle2}/>
             </View>
 
             <Divider style={{ backgroundColor: '#2A9D8F',height:1 , padingBottom:20}} />

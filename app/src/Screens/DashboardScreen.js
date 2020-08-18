@@ -2,7 +2,7 @@ import React ,{ useState} from 'react';
 import {View, Text, StyleSheet,Image, TouchableOpacity,FlatList} from 'react-native'
 import {Header} from 'react-native-elements';
 import { Feather } from '@expo/vector-icons'; 
-import sc from '../../assets/t1.jpg';
+import {getPicture} from '../Api/UserAPI'
 import { StatusBar } from 'expo-status-bar';
 import image from '../../assets/avatar1.png'
 import { ScrollView } from 'react-native-gesture-handler';
@@ -20,7 +20,7 @@ const DashboardScreen = ({navigation})=>{
                 centerComponent={{ text: 'Dashboard', style: { color: '#fff',fontSize:22, fontWeight:'bold' } }}
                 rightComponent={
                     <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
-                        <Image source={sc}  style={style.imageStyle}/>
+                        <Image source={getPicture()}  style={style.imageStyle}/>
                     </TouchableOpacity>
                 }
                 containerStyle={{backgroundColor:'#2A9D8F'}}

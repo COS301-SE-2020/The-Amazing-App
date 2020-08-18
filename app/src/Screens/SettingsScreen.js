@@ -3,10 +3,9 @@ import { StyleSheet,Image, TouchableOpacity, View, Text, Modal, Alert} from 'rea
 import {Header, Divider, Input, Button} from 'react-native-elements';
 import { Feather, AntDesign,MaterialCommunityIcons, MaterialIcons,EvilIcons, Entypo } from '@expo/vector-icons'; 
 import { Switch } from 'react-native-paper';
-import sc from '../../assets/t1.jpg';
 import { StatusBar } from 'expo-status-bar';
 import * as ImagePicker from 'expo-image-picker';
-import {updateUsername, updatePassword,updatePicture} from '../Api/UserAPI';
+import {updateUsername, updatePassword,updatePicture,getPicture} from '../Api/UserAPI';
 
 
 
@@ -121,7 +120,7 @@ const SettingsScreen = ({navigation})=>{
                 centerComponent={{ text: 'Settings', style: { color: '#fff',fontSize:22, fontWeight:'bold' } }}
                 rightComponent={
                     <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
-                        <Image source={sc}  style={style.imageStyle}/>
+                        <Image source={getPicture()}  style={style.imageStyle}/>
                     </TouchableOpacity>
                 }
                 containerStyle={{backgroundColor:'#2A9D8F'}}
