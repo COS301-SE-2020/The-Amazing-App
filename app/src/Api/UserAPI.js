@@ -1,6 +1,8 @@
 import React ,{useState} from 'react';
 import {Alert} from 'react-native';
 import firebase from '../Config/Config';
+import 'firebase/storage';
+import sc from '../../assets/t1.jpg';
 
 var Email =''; 
 
@@ -44,6 +46,31 @@ export const updatePassword= (newPassword, oldPassword) => {
 
 }
 
+export const updatePicture = async (image) => {
   
+    const response = await fetch(image);
+    const blob = await response.blob();
+    var ref = firebase.storage().ref(Email);
+    ref.put(blob);
+    const downloadURL = await firebase.storage().ref(Email).getDownloadURL();
+    firebase.firestore().collection('Users').where('Email', '==', Email).limit(1).get().then((query) => {  
+        const thing = query.docs[0];
+        thing.ref.update({Picture:downloadURL});
+    }); 
+    Alert.alert('Profile Picture Updated!')
+}
 
-  
+export const getPicture =() => {
+    var picture ='';
+    firebase.firestore().collection('Users').where('Email', '==', Email).limit(1).get().then((query) => {  
+        const thing = query.docs[0];
+        picture = thing.data().Picture;
+    }); 
+
+    if (picture == '')
+    {
+        return sc;
+    }
+
+    return picture;
+}

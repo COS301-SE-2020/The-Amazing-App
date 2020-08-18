@@ -1,12 +1,12 @@
 import React ,{ useState} from 'react';
-import { StyleSheet,Image, TouchableOpacity, View, Text, Modal} from 'react-native'
+import { StyleSheet,Image, TouchableOpacity, View, Text, Modal, Alert} from 'react-native'
 import {Header, Divider, Input, Button} from 'react-native-elements';
 import { Feather, AntDesign,MaterialCommunityIcons, MaterialIcons,EvilIcons, Entypo } from '@expo/vector-icons'; 
 import { Switch } from 'react-native-paper';
 import sc from '../../assets/t1.jpg';
 import { StatusBar } from 'expo-status-bar';
 import * as ImagePicker from 'expo-image-picker';
-import {updateUsername, updatePassword} from '../Api/UserAPI';
+import {updateUsername, updatePassword,updatePicture} from '../Api/UserAPI';
 
 
 
@@ -104,6 +104,10 @@ const SettingsScreen = ({navigation})=>{
             aspect: [4, 3],
             quality: 1,
         });
+       
+        updatePicture(result.uri);
+        setModelOpen(false);
+          
       }
 
     return(
