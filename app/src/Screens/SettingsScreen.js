@@ -13,10 +13,31 @@ const SettingsScreen = ({navigation})=>{
     const [isSwitchOn, setIsSwitchOn] = React.useState(true);
     const [modalOpen, setModelOpen] = useState(false);
     const [isOperation, setisOperation] = useState('');
+    const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
+
+    /*
+            This state varible are used for changing 
+            user preference 
+    */
     const [username, setUsername] = useState('');
     const [newPassword, setnewPassword] = useState('');
     const [oldPassword, setoldPassword] = useState('');
-    const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
+    const [url, setUrl] = useState('');
+
+     /*
+        Uploading the picture method 
+    */
+   const onChooseImagePress = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+            quality: 1,
+        });
+        setUrl(result.uri);
+        console.log(url)
+        setModelOpen(false)
+
+    }
 
     const operation=()=>{
         switch(isOperation){
@@ -85,15 +106,6 @@ const SettingsScreen = ({navigation})=>{
         )
       }
     }
-    
-    const onChooseImagePress = async () => {
-          let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4, 3],
-            quality: 1,
-        });
-      }
 
     return(
         <>
