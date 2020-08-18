@@ -1,5 +1,5 @@
 import React from "react";
-import { Dropdown, Icon, Modal } from "semantic-ui-react";
+import { Dropdown, Icon, Modal, Button } from "semantic-ui-react";
 import image2 from "../../Assets/no_picture.jpg";
 import UpdatePreferences from "./UpdatePreferences";
 import axios from "axios";
@@ -24,7 +24,7 @@ const trigger = (
       src={image2}
       className="ui avatar image"
       alt="userImage"
-      style={{ height: 20, width: 20 }}
+      style={{ height: 25, width: 25 }}
     />
     <span style={{ fontSize: 14, color: "white" }}>
       {Cookies.get("username")}
@@ -32,10 +32,7 @@ const trigger = (
   </div>
 );
 
-const options = [
-  <UpdatePreferences />,
-  { key: "sign-out", text: "Sign Out", icon: "sign out" },
-];
+const options = [<UpdatePreferences />];
 
 const UserOptions = () => (
   <Dropdown
