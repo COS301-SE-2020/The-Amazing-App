@@ -15,7 +15,7 @@ const ForgetPasswordScreen = ({navigation})=>{
                             Yo! Forgot Your Password?
                         </Text>
                         <Text style={style.textStyle}>
-                            No wory Enter your email to reset your password 
+                            No worry Enter your email to reset your password 
                         </Text>
                         <Input  autoCorrect={false} autoCapitalize='none'
                         containerStyle={style.inputStyle} placeholder="Email"

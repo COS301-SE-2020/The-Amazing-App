@@ -22,6 +22,14 @@ export const getEmail = () =>{
 
 }
 
+export const updateUsername = (username) => {
+    firebase.firestore().collection('Users').where('Email', '==', Email).limit(1).get().then((query) => {  
+        const thing = query.docs[0];
+        thing.ref.update({Username:username});
+        Alert.alert('Updated!');
+    }); 
+
+}
 
   
 

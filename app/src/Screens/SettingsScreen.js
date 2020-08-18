@@ -6,6 +6,7 @@ import { Switch } from 'react-native-paper';
 import sc from '../../assets/t1.jpg';
 import { StatusBar } from 'expo-status-bar';
 import * as ImagePicker from 'expo-image-picker';
+import {updateUsername} from '../Api/UserAPI';
 
 
 
@@ -32,9 +33,13 @@ const SettingsScreen = ({navigation})=>{
                         containerStyle={{marginTop:'10%'}}
                         style={{textContentType:'white'}}
                         autoCorrect={false} autoCapitalize='none' placeholder="Enter new username"
+                        onChangeText={setUsername} value={username}
                         leftIcon={<EvilIcons name="lock" size={32} color="white"/>}
                      />
-                    <Button  buttonStyle={style.buttonStyle} title='Submit'
+                    <Button  buttonStyle={style.buttonStyle} title='Submit' onPress={()=>{
+                        updateUsername(username)
+                        setModelOpen(false)
+                    }}
                      />
                     <Divider style={style.dividerStyle} />
                 </View>
@@ -134,7 +139,7 @@ const SettingsScreen = ({navigation})=>{
                 }}>
                      <View style={{flexDirection:'row', marginTop:15}}>
                         <AntDesign name="user" size={30} color="#2A9D8F" />
-                        <Text style={style.textStyle}>Change usename</Text>
+                        <Text style={style.textStyle}>Change username</Text>
                         <MaterialIcons name="keyboard-arrow-right" size={35} color="#2A9D8F" style={{marginLeft:'48%'}} />
                     </View>
                 </TouchableOpacity>
