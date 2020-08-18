@@ -75,3 +75,10 @@ export const getPicture =() => {
 
     return result;
 }
+
+export const forgotPassword = (email) => {
+    firebase.auth().sendPasswordResetEmail(email)
+      .then(function (user) {
+        Alert.alert('Please check your email...')
+      })
+  }
