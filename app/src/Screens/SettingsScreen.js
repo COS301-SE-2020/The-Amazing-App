@@ -1,20 +1,26 @@
 import React ,{ useState} from 'react';
 import { StyleSheet,Image, TouchableOpacity, View, Text, Modal} from 'react-native'
 import {Header, Divider, Input, Button} from 'react-native-elements';
-import { Feather, AntDesign,MaterialCommunityIcons, MaterialIcons,EvilIcons } from '@expo/vector-icons'; 
+import { Feather, AntDesign,MaterialCommunityIcons, MaterialIcons,EvilIcons, Entypo } from '@expo/vector-icons'; 
 import { Switch } from 'react-native-paper';
 import sc from '../../assets/t1.jpg';
 import { StatusBar } from 'expo-status-bar';
-s
+import * as ImagePicker from 'expo-image-picker';
+
 
 
 const SettingsScreen = ({navigation})=>{
     const [isSwitchOn, setIsSwitchOn] = React.useState(true);
     const [modalOpen, setModelOpen] = useState(false);
+    const [isOperation, setisOperation] = useState('');
+    const [username, setUsername] = useState('');
+    const [newPassword, setnewPassword] = useState('');
+    const [oldPassword, setoldPassword] = useState('');
     const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
 
     const operation=()=>{
-            return(
+        switch(isOperation){
+            case 'username':return(
                 <View>
                     <Text style={style.operationStyle}>
                         Change username
@@ -23,18 +29,72 @@ const SettingsScreen = ({navigation})=>{
 
                       <Input 
                         placeholderTextColor="white"
-                        textContentType={{color:'white'}}
-                        containerStyle={{marginTop:'10%', marginBottom:'30%'}}
+                        containerStyle={{marginTop:'10%'}}
+                        style={{textContentType:'white'}}
                         autoCorrect={false} autoCapitalize='none' placeholder="Enter new username"
                         leftIcon={<EvilIcons name="lock" size={32} color="white"/>}
                      />
-                    <Button  buttonStyle={buttonStyle} title='Submit'
-                        textStyle={{color:'red'}}
+                    <Button  buttonStyle={style.buttonStyle} title='Submit'
                      />
                     <Divider style={style.dividerStyle} />
                 </View>
             )
+        case 'password':return(
+            <View>
+                <Text style={style.operationStyle}>
+                    Change password
+                </Text>
+                <Divider style={style.dividerStyle} />
+
+                  <Input 
+                    placeholderTextColor="white"
+                    textContentType={{color:'white'}}
+                    containerStyle={{marginTop:'5%'}}
+                    autoCorrect={false} autoCapitalize='none' placeholder="Enter old password"
+                    leftIcon={<EvilIcons name="lock" size={32} color="white"/>}
+
+                 />
+
+                <Input 
+                    
+                    placeholderTextColor="white"
+                    textContentType={{color:'white'}}
+                    autoCorrect={false} autoCapitalize='none' placeholder="Enter new password"
+                    leftIcon={<EvilIcons name="lock" size={32} color="white"/>}
+                 />
+                <Button  buttonStyle={style.buttonStyle} title='Submit'
+                 />
+                <Divider style={style.dividerStyle} />
+            </View>
+        )
+
+      case 'profile':return(
+            <View>
+                <Text style={style.operationStyle}>
+                    Change Profile Picture
+                </Text>
+                <Divider style={style.dividerStyle} />
+                <Entypo name="image" size={80} color="white" style={{alignSelf:'center'
+                  ,marginBottom:15,marginTop:20  
+                }} />
+                <Button  buttonStyle={style.buttonStyle} title='Upload'
+                onPress={()=>{onChooseImagePress()}}
+                 />
+                <Divider style={style.dividerStyle} />
+            </View>
+        )
+      }
     }
+    
+    const onChooseImagePress = async () => {
+          let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+      }
+
     return(
         <>
             <StatusBar style='#2A9D8F'/>
@@ -68,7 +128,10 @@ const SettingsScreen = ({navigation})=>{
                 </Modal>
 
                 <View style={style.detailStyle}>
-                <TouchableOpacity onPress={()=>setModelOpen(true)}>
+                <TouchableOpacity onPress={()=>{
+                    setisOperation('username')
+                    setModelOpen(true)
+                }}>
                      <View style={{flexDirection:'row', marginTop:15}}>
                         <AntDesign name="user" size={30} color="#2A9D8F" />
                         <Text style={style.textStyle}>Change usename</Text>
@@ -76,7 +139,10 @@ const SettingsScreen = ({navigation})=>{
                     </View>
                 </TouchableOpacity>
                     <Divider style={style.dividerStyle2} />
-                    <TouchableOpacity>
+                    <TouchableOpacity  onPress={()=>{
+                    setisOperation('password')
+                    setModelOpen(true)
+                }}>
                         <View style={{flexDirection:'row', marginTop:20}}>
                             <AntDesign name="lock" size={30} color="#2A9D8F" />
                             <Text style={style.textStyle}>Change password</Text>
@@ -84,7 +150,10 @@ const SettingsScreen = ({navigation})=>{
                         </View>
                     </TouchableOpacity>
                     <Divider style={style.dividerStyle2} />
-                    <TouchableOpacity>
+                    <TouchableOpacity  onPress={()=>{
+                    setisOperation('profile')
+                    setModelOpen(true)
+                }}>
                         <View style={{flexDirection:'row', marginTop:20}}>
                             <AntDesign name="picture" size={30} color="#2A9D8F" />
                             <Text style={style.textStyle}>Change profile picture</Text>
@@ -165,7 +234,7 @@ const style = StyleSheet.create({
     },
     modalStyle:{
         width:'70%', 
-        height:'50%',
+        height:380,
         alignSelf:'center',
         marginTop:'40%',
         backgroundColor:'rgba(42, 157, 143, 1)',
@@ -190,8 +259,8 @@ const style = StyleSheet.create({
         marginBottom:35,
         alignSelf:'center',
         borderRadius:10,
-        backgroundColor: "#2A9D8F"
+        backgroundColor: "rgba(255,250,250, 0.4)"
     }
-
+    
 })
 export default SettingsScreen;

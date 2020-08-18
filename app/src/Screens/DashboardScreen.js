@@ -29,6 +29,7 @@ const DashboardScreen = ({navigation})=>{
                 <Text style={style.titleStyle}>Group</Text>
             </View>
             <ScrollView>
+            <TouchableOpacity>
             <View style={style.itemStyle}>
                 <View style={{flexDirection:'row'}}>
                     <Image source={image} style={style.avatarStyle} />
@@ -39,6 +40,7 @@ const DashboardScreen = ({navigation})=>{
                     </View>
                 </View>
             </View>
+            </TouchableOpacity>
             <View style={style.itemStyle}>
                 <View style={{flexDirection:'row'}}>
                     <Image source={image} style={style.avatarStyle} />
