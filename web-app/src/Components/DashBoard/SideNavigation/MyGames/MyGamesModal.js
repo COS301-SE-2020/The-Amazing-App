@@ -4,6 +4,9 @@ import MyGames from "./MyGames";
 import rootReducer from '../../../../store/reducers/rootReducer'
 import { connect } from "react-redux";
 import GameSummary from "./GameSummary";
+import { firestoreConnect } from 'react-redux-firebase'
+import { compose } from 'redux'
+
 class MyGamesModal extends Component {
   render() {
     console.log(this.props);
@@ -50,8 +53,14 @@ class MyGamesModal extends Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log(state);
   return {
     projects: state.project.projects
   }
 }
-export default connect(mapStateToProps) (MyGamesModal);
+export default compose(
+  connect(mapStateToProps),
+  firestoreConnect([
+    { collection: 'projects' }
+  ])
+) (MyGamesModal);
