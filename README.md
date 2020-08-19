@@ -24,6 +24,9 @@ https://www.overleaf.com/read/rfdsnffqpjxb
 ## Coding Standard/Quality
 https://www.overleaf.com/read/ydvghstnbmkj
 
+## Technical Installation Manual
+https://www.overleaf.com/read/nqwjvtjfrdzv
+
 ## Our Team
  > <b>Premodial Zhou : </b> <br>
  * <a href="https://premodial.github.io/"> GitHub  Profile  </a><br>
