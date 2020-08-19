@@ -67,7 +67,7 @@ export const getPicture =() => {
         setPicture(thing.data().Picture);
     }); 
 
-    if (picture == '')
+    if (picture == null)
     {
         return sc;
     }
