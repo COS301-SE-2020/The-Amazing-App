@@ -66,7 +66,7 @@ const HomeScreen = ({navigation})=>{
                         <Image source={image} style={style.avatarStyle} />
                         <View  style={style.textStyle}>
                             <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>{item.data().name}</Text>
-                            <Text style={{color:'#f56042'}}>Location :{item.data().properties[0].location}</Text>
+                            <Text style={{color:'#f56042'}}>Location :Pretoria</Text>
                         </View>
                     </View>
                 </View>

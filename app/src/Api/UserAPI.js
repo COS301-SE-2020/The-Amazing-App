@@ -1,10 +1,12 @@
 import React ,{useState} from 'react';
-import {Alert} from 'react-native';
+import {Alert, LogBox} from 'react-native';
 import firebase from '../Config/Config';
 import 'firebase/storage';
 import sc from '../../assets/t1.jpg';
+import {YellowBox} from 'react-native';
 
 var Email =''; 
+YellowBox.ignoredYellowBox = ['Warning: ReactNative.createElement'];
 
 export const User = (email) =>{
     const [isUser , setUser] = useState('');
