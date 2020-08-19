@@ -1,15 +1,15 @@
 import React from 'react';
 import {Image,View, Text, StyleSheet , ScrollView} from 'react-native';
-import sc from '../../assets/t1.jpg';
 import {DrawerNavigatorItems} from 'react-navigation-drawer';
+import {getPicture,getEmail,User} from '../Api/UserAPI'
 
 export default SideBarComponent =(props)=>{
     
     return(
         <ScrollView>
             <View style={{ width : undefined,padding : 16,paddingTop : 48,backgroundColor: '#2A9D8F',}}>
-                <Image source={sc} style={style.profileStyle} />
-                <Text style={style.nameStyle}></Text>
+                <Image source={getPicture()} style={style.profileStyle} />
+                <Text style={style.nameStyle}>{User(getEmail())}</Text>
             </View>
             <View style={style.container}>
                 <DrawerNavigatorItems {...props} />

@@ -1,10 +1,11 @@
 import React ,{ useState} from 'react';
 import { StyleSheet,Text, TouchableOpacity, SafeAreaView, View} from 'react-native'
 import {Input, Button} from 'react-native-elements';
+import {forgotPassword} from '../Api/UserAPI'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const ForgetPasswordScreen = ({navigation})=>{
-   
+    const [email, setEmail] = useState('');
     return(
         <>
             <SafeAreaView>
@@ -15,13 +16,14 @@ const ForgetPasswordScreen = ({navigation})=>{
                             Yo! Forgot Your Password?
                         </Text>
                         <Text style={style.textStyle}>
-                            No wory Enter your email to reset your password 
+                            No worry Enter your email to reset your password 
                         </Text>
                         <Input  autoCorrect={false} autoCapitalize='none'
                         containerStyle={style.inputStyle} placeholder="Email"
+                        onChangeText={setEmail} value={email}
                         leftIcon={<MaterialCommunityIcons name="email" size={20} color="white" />}
                         />
-                        <Button  buttonStyle={style.buttonStyle} title='Send Request' onPress={()=>Login(email,password)} />
+                        <Button  buttonStyle={style.buttonStyle} title='Send Request' onPress={()=>forgotPassword(email)} />
                     </View>
                 </View>
             </SafeAreaView>

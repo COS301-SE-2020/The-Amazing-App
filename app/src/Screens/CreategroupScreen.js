@@ -5,7 +5,7 @@ import FooterComponent from '../Componets/FooterComponent';
 import { FontAwesome,MaterialIcons, FontAwesome5,SimpleLineIcons } from '@expo/vector-icons'; 
 import LoginApi from '../Api/LoginAPI';
 import sc from '../../assets/thor.jpg';
-import scs from '../../assets/t1.jpg';
+import {getPicture} from '../Api/UserAPI'
 
 import { StatusBar } from 'expo-status-bar';
 
@@ -45,7 +45,7 @@ const CreatgroupScreen = ({navigation})=>{
                 centerComponent={{ text: 'Create Group', style: { color: '#fff',fontSize:22, fontWeight:'bold' } }}
                 rightComponent={
                     <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
-                        <Image source={scs}  style={style.imageStyle}/>
+                        <Image source={getPicture()}  style={style.imageStyle}/>
                     </TouchableOpacity>
                 }
                 containerStyle={{backgroundColor:'#2A9D8F'}}

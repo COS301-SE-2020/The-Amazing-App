@@ -1,11 +1,11 @@
 import React ,{ useState} from 'react';
-import { StyleSheet,Image, TouchableOpacity, View, Text, Modal} from 'react-native'
+import { StyleSheet,Image, TouchableOpacity, View, Text, Modal, Alert} from 'react-native'
 import {Header, Divider, Input, Button} from 'react-native-elements';
 import { Feather, AntDesign,MaterialCommunityIcons, MaterialIcons,EvilIcons, Entypo } from '@expo/vector-icons'; 
 import { Switch } from 'react-native-paper';
-import sc from '../../assets/t1.jpg';
 import { StatusBar } from 'expo-status-bar';
 import * as ImagePicker from 'expo-image-picker';
+import {updateUsername, updatePassword,updatePicture,getPicture} from '../Api/UserAPI';
 
 
 
@@ -29,14 +29,14 @@ const SettingsScreen = ({navigation})=>{
     */
    const onChooseImagePress = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.All,
-        allowsEditing: true,
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
             quality: 1,
         });
-        setUrl(result.uri);
-        console.log(url)
-        setModelOpen(false)
-
+    
+        updatePicture(result.uri);
+        setModelOpen(false);
     }
 
     const operation=()=>{
@@ -53,9 +53,13 @@ const SettingsScreen = ({navigation})=>{
                         containerStyle={{marginTop:'10%'}}
                         style={{textContentType:'white'}}
                         autoCorrect={false} autoCapitalize='none' placeholder="Enter new username"
+                        onChangeText={setUsername} value={username}
                         leftIcon={<EvilIcons name="lock" size={32} color="white"/>}
                      />
-                    <Button  buttonStyle={style.buttonStyle} title='Submit'
+                    <Button  buttonStyle={style.buttonStyle} title='Submit' onPress={()=>{
+                        updateUsername(username)
+                        setModelOpen(false)
+                    }}
                      />
                     <Divider style={style.dividerStyle} />
                 </View>
@@ -68,22 +72,28 @@ const SettingsScreen = ({navigation})=>{
                 <Divider style={style.dividerStyle} />
 
                   <Input 
+                    secureTextEntry
                     placeholderTextColor="white"
                     textContentType={{color:'white'}}
                     containerStyle={{marginTop:'5%'}}
                     autoCorrect={false} autoCapitalize='none' placeholder="Enter old password"
+                    onChangeText={setoldPassword} value={oldPassword}
                     leftIcon={<EvilIcons name="lock" size={32} color="white"/>}
 
                  />
 
                 <Input 
-                    
+                    secureTextEntry
                     placeholderTextColor="white"
                     textContentType={{color:'white'}}
                     autoCorrect={false} autoCapitalize='none' placeholder="Enter new password"
+                    onChangeText={setnewPassword} value={newPassword}
                     leftIcon={<EvilIcons name="lock" size={32} color="white"/>}
                  />
-                <Button  buttonStyle={style.buttonStyle} title='Submit'
+                <Button  buttonStyle={style.buttonStyle} title='Submit' onPress={()=>{
+                        updatePassword(newPassword,oldPassword)
+                        setModelOpen(false)
+                    }}
                  />
                 <Divider style={style.dividerStyle} />
             </View>
@@ -106,6 +116,7 @@ const SettingsScreen = ({navigation})=>{
         )
       }
     }
+    
 
     return(
         <>
@@ -118,7 +129,7 @@ const SettingsScreen = ({navigation})=>{
                 centerComponent={{ text: 'Settings', style: { color: '#fff',fontSize:22, fontWeight:'bold' } }}
                 rightComponent={
                     <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
-                        <Image source={sc}  style={style.imageStyle}/>
+                        <Image source={getPicture()}  style={style.imageStyle}/>
                     </TouchableOpacity>
                 }
                 containerStyle={{backgroundColor:'#2A9D8F'}}
@@ -146,7 +157,7 @@ const SettingsScreen = ({navigation})=>{
                 }}>
                      <View style={{flexDirection:'row', marginTop:15}}>
                         <AntDesign name="user" size={30} color="#2A9D8F" />
-                        <Text style={style.textStyle}>Change usename</Text>
+                        <Text style={style.textStyle}>Change username</Text>
                         <MaterialIcons name="keyboard-arrow-right" size={35} color="#2A9D8F" style={{marginLeft:'48%'}} />
                     </View>
                 </TouchableOpacity>
