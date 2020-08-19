@@ -3,8 +3,7 @@ import {View, StyleSheet, TouchableOpacity, ImageBackground , Image} from 'react
 import { Input,Text, Button, Header,Icon} from 'react-native-elements';
 import FooterComponent from '../Componets/FooterComponent';
 import { FontAwesome,MaterialIcons, FontAwesome5,SimpleLineIcons } from '@expo/vector-icons'; 
-import LoginApi from '../Api/LoginAPI';
-import sc from '../../assets/thor.jpg';
+import {createGroup} from '../Api/GameAPI';
 import scs from '../../assets/t1.jpg';
 
 import { StatusBar } from 'expo-status-bar';
@@ -19,10 +18,15 @@ const CreatgroupScreen = ({navigation})=>{
     const [gameName, setGamename] =useState('')
     const [groupDescription, setGroupdescription] =useState('')
     const [gameLocation, setGameLocation] =useState('')
-    const [userId,isLoggedIn] =  LoginApi();
 
-    const createGroup=()=>{
-        
+    const creater=()=>{
+      const  data={
+            'groupName' : groupName,
+            'groupDescription' : groupDescription,
+            'gameName': gameName,
+            'gameLocation':gameLocation
+        }
+        createGroup(data);
     }
 
 
@@ -65,7 +69,11 @@ const CreatgroupScreen = ({navigation})=>{
                 <Button
                     buttonStyle={style.buttonStyle}
                     title="Submit"
-                    onPress={()=>createGroup()}
+                    onPress={()=>{
+                        creater()
+                        navigation.navigate('Dashboard')
+                    }
+                    }
                 />
             </View>
             <FooterComponent />

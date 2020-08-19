@@ -1,13 +1,20 @@
-import React ,{ useState} from 'react';
+import React ,{  useEffect} from 'react';
 import {View, Text, StyleSheet,Image, TouchableOpacity,FlatList} from 'react-native'
 import {Header} from 'react-native-elements';
 import { Feather } from '@expo/vector-icons'; 
 import {getPicture} from '../Api/UserAPI';
 import { StatusBar } from 'expo-status-bar';
 import image from '../../assets/avatar1.png';
+import useResults from '../Hooks/useResults';
 import { ScrollView } from 'react-native-gesture-handler';
 
 const DashboardScreen = ({navigation})=>{
+
+    const [results,getGroups] = useResults();
+
+    useEffect(() => {
+        getGroups();
+      });
 
     return(
         <>
@@ -29,18 +36,27 @@ const DashboardScreen = ({navigation})=>{
                 <Text style={style.titleStyle}>Group</Text>
             </View>
             <ScrollView>
-            <TouchableOpacity onPress={()=>{navigation.navigate('Simulation')}}>
-            <View style={style.itemStyle}>
-                <View style={{flexDirection:'row'}}>
-                    <Image source={image} style={style.avatarStyle} />
-                        <View  style={style.textStyle}>
-                        <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>Tree Find</Text>
-                        <Text >Game : The Amazing Race</Text>
-                        <Text style={{color:'#f56042'}}>Location : Pretoria</Text>
+            <FlatList 
+             showsHorizontalScrollIndicator={false}
+             data={results}
+             keyExtractor={result=>result.id}
+             renderItem={({item})=>{
+                 return( 
+                    <TouchableOpacity onPress={()=>{navigation.navigate('Simulation')}}>
+                    <View style={style.itemStyle}>
+                        <View style={{flexDirection:'row'}}>
+                            <Image source={image} style={style.avatarStyle} />
+                            <View  style={style.textStyle}>
+                                <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>{item.data().groupName}</Text>
+                                <Text >Game : {item.data().gameName}</Text>
+                                <Text style={{color:'#f56042'}}>Location :{item.data().location}</Text>
+                            </View>
+                        </View>
                     </View>
-                </View>
-            </View>
-            </TouchableOpacity>
+                    </TouchableOpacity>
+                 )
+             }}
+            />
             </ScrollView>
         </>
     )

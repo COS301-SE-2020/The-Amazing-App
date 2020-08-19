@@ -17,25 +17,6 @@ export default () => {
         firebase.auth().signInWithEmailAndPassword(email,password)
         .then((response) => {
           const uid = response.user.uid
-            setUserid(uid)
-            console.log(uid);
-            console.log(uid);
-            console.log(uid);
-            console.log(uid);
-            console.log(uid);
-            console.log(uid);
-            console.log(uid);
-            console.log(uid);
-            console.log(uid);
-            console.log(uid);
-            console.log(uid);
-            console.log(uid);
-            console.log(uid);
-            console.log(uid);
-            console.log(uid);
-            console.log(uid);
-            console.log(uid);
-   
             setisLoggedIn(true)
         })
       .catch(error => Alert.alert(error.message))

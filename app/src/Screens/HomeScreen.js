@@ -1,17 +1,23 @@
-import React ,{ useState} from 'react';
-import {View, Text, StyleSheet,TouchableOpacity, ScrollView} from 'react-native'
+import React ,{ useState, useEffect} from 'react';
+import {View, Text, StyleSheet,TouchableOpacity, ScrollView, FlatList} from 'react-native'
 import { Image, Divider,Header } from 'react-native-elements';
 import SearchBarComponent from '../Componets/SearchBarComponent'
-import useResults from '../Hooks/userResults';
+import useResults from '../Hooks/useResults';
 import { Feather } from '@expo/vector-icons'; 
 import { StatusBar } from 'expo-status-bar';
 import {User,getPicture} from '../Api/UserAPI'
 import image from '../../assets/avatar.png'
 
 const HomeScreen = ({navigation})=>{
-    const [searchApi, results, errorMessage] = useResults();
     const {term,setTerm} = useState('');
     const email = navigation.getParam('email');
+
+    const [results, getGroups, games, getGames] = useResults();
+
+    useEffect(() => {
+        getGames();
+      });
+
 
     return(
         <>
@@ -49,78 +55,24 @@ const HomeScreen = ({navigation})=>{
                 onTermSubmit={() => searchApi(term)}
             />
             <ScrollView>
-                <View style={style.itemStyle}>
+            <FlatList 
+             showsHorizontalScrollIndicator={false}
+             data={games}
+             keyExtractor={result=>result.id}
+             renderItem={({item})=>{
+                 return( 
+                    <View style={style.itemStyle}>
                     <View style={{flexDirection:'row'}}>
                         <Image source={image} style={style.avatarStyle} />
                         <View  style={style.textStyle}>
-                            <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>The Amazing Race</Text>
-                            <Text style={{color:'#f56042'}}>Location : Pretoria</Text>
+                            <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>{item.data().name}</Text>
+                            <Text style={{color:'#f56042'}}>Location :{item.data().properties[0].location}</Text>
                         </View>
                     </View>
                 </View>
-                <View style={style.itemStyle}>
-                    <View style={{flexDirection:'row'}}>
-                        <Image source={image} style={style.avatarStyle} />
-                        <View  style={style.textStyle}>
-                            <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>The Amazing Race</Text>
-                            <Text style={{color:'#f56042'}}>Location : Pretoria</Text>
-                        </View>
-                    </View>
-                </View>
-                <View style={style.itemStyle}>
-                    <View style={{flexDirection:'row'}}>
-                        <Image source={image} style={style.avatarStyle} />
-                        <View  style={style.textStyle}>
-                            <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>The Amazing Race</Text>
-                            <Text style={{color:'#f56042'}}>Location : Pretoria</Text>
-                        </View>
-                    </View>
-                </View>
-                <View style={style.itemStyle}>
-                    <View style={{flexDirection:'row'}}>
-                        <Image source={image} style={style.avatarStyle} />
-                        <View  style={style.textStyle}>
-                            <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>The Amazing Race</Text>
-                            <Text style={{color:'#f56042'}}>Location : Pretoria</Text>
-                        </View>
-                    </View>
-                </View>
-                <View style={style.itemStyle}>
-                    <View style={{flexDirection:'row'}}>
-                        <Image source={image} style={style.avatarStyle} />
-                        <View  style={style.textStyle}>
-                            <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>The Amazing Race</Text>
-                            <Text style={{color:'#f56042'}}>Location : Pretoria</Text>
-                        </View>
-                    </View>
-                </View>
-                <View style={style.itemStyle}>
-                    <View style={{flexDirection:'row'}}>
-                        <Image source={image} style={style.avatarStyle} />
-                        <View  style={style.textStyle}>
-                            <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>The Amazing Race</Text>
-                            <Text style={{color:'#f56042'}}>Location : Pretoria</Text>
-                        </View>
-                    </View>
-                </View>
-                <View style={style.itemStyle}>
-                    <View style={{flexDirection:'row'}}>
-                        <Image source={image} style={style.avatarStyle} />
-                        <View  style={style.textStyle}>
-                            <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>The Amazing Race</Text>
-                            <Text style={{color:'#f56042'}}>Location : Pretoria</Text>
-                        </View>
-                    </View>
-                </View>
-                <View style={style.itemStyle}>
-                    <View style={{flexDirection:'row'}}>
-                        <Image source={image} style={style.avatarStyle} />
-                        <View  style={style.textStyle}>
-                            <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>The Amazing Race</Text>
-                            <Text style={{color:'#f56042'}}>Location : Pretoria</Text>
-                        </View>
-                    </View>
-                </View>
+                 )
+             }}
+            />
             </ScrollView>
         </>
     )

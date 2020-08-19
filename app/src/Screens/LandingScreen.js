@@ -1,9 +1,9 @@
-import React  from 'react';
+import React from 'react';
 import { StyleSheet,View, TouchableOpacity, SafeAreaView, ImageBackground, Text} from 'react-native'
 import sc from '../../assets/back3.jpg';
 
 const LandingScreen = ({navigation})=>{
-   
+    
     return(
         <>
             <SafeAreaView>
@@ -12,7 +12,7 @@ const LandingScreen = ({navigation})=>{
                     <TouchableOpacity onPress={()=>navigation.navigate('auth')}>
                         <View style={style.buttonStyle}>
                             <Text style={style.textStyle}>
-                                Let's GO ....
+                                Let's GO .....
                             </Text>
                         </View>
                     </TouchableOpacity>
