@@ -56,7 +56,7 @@ class GameName extends React.Component {
           </Col>
           <Col>
             <Row>
-              <Col>
+              {/*<Col>
                 <Image
                   style={{ marginTop: 25, marginLeft: 30 }}
                   src={gameImage}
@@ -77,7 +77,7 @@ class GameName extends React.Component {
                   <i className="ui upload icon"></i>
                   Upload image
                 </label>
-              </Col>
+                </Col>*/}
             </Row>
           </Col>
         </Row>

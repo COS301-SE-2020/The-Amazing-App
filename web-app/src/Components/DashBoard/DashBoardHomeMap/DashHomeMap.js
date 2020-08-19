@@ -64,27 +64,6 @@ class DashHomeMap extends React.Component {
           zoom: 14.5,
         },
       },
-      {
-        id: "4",
-        title: "Vikings",
-        description: "Solve questions and riddles about science and fiction.",
-        camera: {
-          center: [28.2393, -25.7646],
-          bearing: 36,
-          zoom: 14.37,
-        },
-      },
-      {
-        id: "5",
-        title: "Gladiators",
-        description:
-          "Play the game Gladiators by solving historical questions and riddles.",
-        camera: {
-          center: [28.238, -25.748],
-          bearing: 28.4,
-          zoom: 14.64,
-        },
-      },
     ];
 
     function playback(index) {
@@ -103,7 +82,7 @@ class DashHomeMap extends React.Component {
           index = index + 1 === locations.length ? 0 : index + 1;
           marker.remove();
           playback(index);
-        }, 3000); //3 seconds.
+        }, 10000); //3 seconds.
       });
     }
 

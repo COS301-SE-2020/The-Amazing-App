@@ -31,19 +31,37 @@ class NavBar extends React.Component {
           Right
         >
           <Nav.Link href="/" style={myStyle} exact>
-            Home
+            <Button size="medium" style={{ backgroundColor: "Transparent" }}>
+              Home
+            </Button>
           </Nav.Link>
-          <Nav.Link className="active" href="dashboard" style={myStyle} exact>
-            Dashboard
+          <Nav.Link href="dashboard" style={myStyle} exact>
+            <Button
+              size="medium"
+              style={{
+                backgroundColor: "Transparent",
+                color: "white",
+                border: "2px solid white",
+              }}
+            >
+              Dashboard
+            </Button>
           </Nav.Link>
           <Nav.Link style={myStyle}>
-            <Button size="tiny" style={{ backgroundColor: "Transparent" }}>
+            <Button size="medium" style={{ backgroundColor: "Transparent" }}>
               Logout
               <i className="sign-out"></i>
             </Button>
           </Nav.Link>
           <Nav.Link href="#">
-            <UserOptions />
+            <Button
+              size="medium"
+              style={{
+                backgroundColor: "Transparent",
+              }}
+            >
+              <UserOptions />
+            </Button>
           </Nav.Link>
         </Nav>
       </Navbar>
