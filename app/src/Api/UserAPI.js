@@ -72,7 +72,7 @@ export const getPicture =() => {
         return sc;
     }
     const result = {uri: picture}
-
+    
     return result;
 }
 

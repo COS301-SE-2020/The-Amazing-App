@@ -1,7 +1,7 @@
 import React from 'react';
 import {createDrawerNavigator} from 'react-navigation-drawer';
 import {Feather, AntDesign, MaterialIcons} from '@expo/vector-icons';
-import Dashboard from '../Router/DashboardRouter';
+import Dashboard from '../Router/SimulationRouter';
 import Home from '../Screens/HomeScreen';
 import Profile from '../Screens/AccountScreen';
 import Settings from '../Screens/SettingsScreen';

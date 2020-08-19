@@ -4,6 +4,8 @@ import firebase from '../Config/Config';
 
 export default () => {
   const [isLoggedIn , setisLoggedIn] = useState(false);
+  const [userId, setUserid] = useState('');
+ 
  
   const Login = async (email, password)=>{
       if(email === '' ||  password === '') {
@@ -12,9 +14,28 @@ export default () => {
       else {
     
         const db = firebase.firestore().collection('Users');
-      
         firebase.auth().signInWithEmailAndPassword(email,password)
-        .then((res) => {
+        .then((response) => {
+          const uid = response.user.uid
+            setUserid(uid)
+            console.log(uid);
+            console.log(uid);
+            console.log(uid);
+            console.log(uid);
+            console.log(uid);
+            console.log(uid);
+            console.log(uid);
+            console.log(uid);
+            console.log(uid);
+            console.log(uid);
+            console.log(uid);
+            console.log(uid);
+            console.log(uid);
+            console.log(uid);
+            console.log(uid);
+            console.log(uid);
+            console.log(uid);
+   
             setisLoggedIn(true)
         })
       .catch(error => Alert.alert(error.message))
@@ -26,6 +47,6 @@ export default () => {
         
       }
   }
-  return[isLoggedIn, Login];
+  return[isLoggedIn, Login,userId];
 }
 

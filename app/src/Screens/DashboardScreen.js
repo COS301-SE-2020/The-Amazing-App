@@ -4,7 +4,7 @@ import {Header} from 'react-native-elements';
 import { Feather } from '@expo/vector-icons'; 
 import {getPicture} from '../Api/UserAPI';
 import { StatusBar } from 'expo-status-bar';
-import image from '../../assets/avatar1.png'
+import image from '../../assets/avatar1.png';
 import { ScrollView } from 'react-native-gesture-handler';
 
 const DashboardScreen = ({navigation})=>{
@@ -29,7 +29,7 @@ const DashboardScreen = ({navigation})=>{
                 <Text style={style.titleStyle}>Group</Text>
             </View>
             <ScrollView>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>{navigation.navigate('Simulation')}}>
             <View style={style.itemStyle}>
                 <View style={{flexDirection:'row'}}>
                     <Image source={image} style={style.avatarStyle} />
@@ -41,96 +41,6 @@ const DashboardScreen = ({navigation})=>{
                 </View>
             </View>
             </TouchableOpacity>
-            <View style={style.itemStyle}>
-                <View style={{flexDirection:'row'}}>
-                    <Image source={image} style={style.avatarStyle} />
-                    <View  style={style.textStyle}>
-                        <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>Tree Find</Text>
-                        <Text >Game : The Amazing Race</Text>
-                        <Text style={{color:'#f56042'}}>Location : Pretoria</Text>
-                    </View>
-                </View>
-            </View>
-            <View style={style.itemStyle}>
-                <View style={{flexDirection:'row'}}>
-                    <Image source={image} style={style.avatarStyle} />
-                    <View  style={style.textStyle}>
-                        <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>Tree Find</Text>
-                        <Text >Game : The Amazing Race</Text>
-                        <Text style={{color:'#f56042'}}>Location : Pretoria</Text>
-                    </View>
-                </View>
-            </View>
-            <View style={style.itemStyle}>
-                <View style={{flexDirection:'row'}}>
-                    <Image source={image} style={style.avatarStyle} />
-                    <View  style={style.textStyle}>
-                        <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>Tree Find</Text>
-                        <Text >Game : The Amazing Race</Text>
-                        <Text style={{color:'#f56042'}}>Location : Pretoria</Text>
-                    </View>
-                </View>
-            </View>
-            <View style={style.itemStyle}>
-                <View style={{flexDirection:'row'}}>
-                    <Image source={image} style={style.avatarStyle} />
-                    <View  style={style.textStyle}>
-                        <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>Tree Find</Text>
-                        <Text >Game : The Amazing Race</Text>
-                        <Text style={{color:'#f56042'}}>Location : Pretoria</Text>
-                    </View>
-                </View>
-            </View>
-            <View style={style.itemStyle}>
-                <View style={{flexDirection:'row'}}>
-                    <Image source={image} style={style.avatarStyle} />
-                    <View  style={style.textStyle}>
-                        <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>Tree Find</Text>
-                        <Text >Game : The Amazing Race</Text>
-                        <Text style={{color:'#f56042'}}>Location : Pretoria</Text>
-                    </View>
-                </View>
-            </View>
-            <View style={style.itemStyle}>
-                <View style={{flexDirection:'row'}}>
-                    <Image source={image} style={style.avatarStyle} />
-                    <View  style={style.textStyle}>
-                        <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>Tree Find</Text>
-                        <Text >Game : The Amazing Race</Text>
-                        <Text style={{color:'#f56042'}}>Location : Pretoria</Text>
-                    </View>
-                </View>
-            </View>
-            <View style={style.itemStyle}>
-                <View style={{flexDirection:'row'}}>
-                    <Image source={image} style={style.avatarStyle} />
-                    <View  style={style.textStyle}>
-                        <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>Tree Find</Text>
-                        <Text >Game : The Amazing Race</Text>
-                        <Text style={{color:'#f56042'}}>Location : Pretoria</Text>
-                    </View>
-                </View>
-            </View>
-            <View style={style.itemStyle}>
-                <View style={{flexDirection:'row'}}>
-                    <Image source={image} style={style.avatarStyle} />
-                    <View  style={style.textStyle}>
-                        <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>Tree Find</Text>
-                        <Text >Game : The Amazing Race</Text>
-                        <Text style={{color:'#f56042'}}>Location : Pretoria</Text>
-                    </View>
-                </View>
-            </View>
-            <View style={style.itemStyle}>
-                <View style={{flexDirection:'row'}}>
-                    <Image source={image} style={style.avatarStyle} />
-                    <View  style={style.textStyle}>
-                        <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>Tree Find</Text>
-                        <Text >Game : The Amazing Race</Text>
-                        <Text style={{color:'#f56042'}}>Location : Pretoria</Text>
-                    </View>
-                </View>
-            </View>
             </ScrollView>
         </>
     )
