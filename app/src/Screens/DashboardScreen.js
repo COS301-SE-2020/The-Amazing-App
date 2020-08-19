@@ -4,7 +4,7 @@ import {Header} from 'react-native-elements';
 import { Feather } from '@expo/vector-icons'; 
 import {getPicture} from '../Api/UserAPI';
 import { StatusBar } from 'expo-status-bar';
-import image from '../../assets/avatar1.png'
+import image from '../../assets/avatar1.png';
 import { ScrollView } from 'react-native-gesture-handler';
 
 const DashboardScreen = ({navigation})=>{

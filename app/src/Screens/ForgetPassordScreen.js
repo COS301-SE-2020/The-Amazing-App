@@ -23,7 +23,9 @@ const ForgetPasswordScreen = ({navigation})=>{
                         onChangeText={setEmail} value={email}
                         leftIcon={<MaterialCommunityIcons name="email" size={20} color="white" />}
                         />
-                        <Button  buttonStyle={style.buttonStyle} title='Send Request' onPress={()=>forgotPassword(email)} />
+                        <Button  buttonStyle={style.buttonStyle} title='Send Request' onPress={()=>{forgotPassword(email)
+                        navigation.navigate('SigninScreen')}
+                        } />
                     </View>
                 </View>
             </SafeAreaView>

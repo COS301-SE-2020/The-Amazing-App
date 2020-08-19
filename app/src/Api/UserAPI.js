@@ -67,12 +67,30 @@ export const getPicture =() => {
         setPicture(thing.data().Picture);
     }); 
 
-    if (picture == '')
-    {
+    if (picture === ''){
         return sc;
     }
     const result = {uri: picture}
-
+    console.log(picture)
+    console.log(picture)
+    console.log(picture)
+    console.log(picture)
+    console.log(picture)
+    console.log(picture)
+    console.log(picture)
+    console.log(picture)
+    console.log(picture)
+    console.log(picture)
+    console.log(picture)
+    console.log(picture)
+    console.log(picture)
+    console.log(picture)
+    console.log(picture)
+    console.log(picture)
+    console.log(picture)
+    console.log(picture)
+    console.log(picture)
+    console.log(picture)
     return result;
 }
 
