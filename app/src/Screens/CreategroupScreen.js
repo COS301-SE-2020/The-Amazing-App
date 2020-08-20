@@ -42,27 +42,40 @@ const CreatgroupScreen = ({navigation})=>{
                 }
                 containerStyle={{backgroundColor:'#2A9D8F'}}
             />
-            <View style={style.titleContainer}>
+           <View style={style.overLayer}>
+           <View style={style.titleContainer}>
                 <Text style={style.titleStyle}>Game Details</Text>
             </View>
+            <View style={style.blade} >
+
+            </View>
             <View style={style.detailContainer}>
-                <Input containerStyle={style.inputStyle} placeholder='Group Name'leftIcon={
-                    <FontAwesome name="group" size={24} color="#2A9D8F" />
+                <Input containerStyle={style.inputStyle}
+                
+                placeholder='Group Name'leftIcon={
+                    <FontAwesome name="group" size={24} color="white" />
                     }
+                    placeholderTextColor='white'
                  onChangeText={setGroupname} value={groupName}
                 />
-                 <Input containerStyle={style.inputStyle} placeholder='Group Description'leftIcon={
-                 <MaterialIcons name="description" size={24} color="#2A9D8F" />
+                 <Input containerStyle={style.inputStyle} placeholder='Group Description'
+                 placeholderTextColor='white'
+                 leftIcon={
+                 <MaterialIcons name="description" size={24} color="white" />
                 }
                      onChangeText={setGroupdescription} value={groupDescription}
                 />
-                <Input containerStyle={style.inputStyle} placeholder='Game Name'leftIcon={
-                <FontAwesome5 name="user-circle" size={24} color="#2A9D8F" />
+                <Input containerStyle={style.inputStyle} 
+                placeholderTextColor='white'
+                placeholder='Game Name'leftIcon={
+                <FontAwesome5 name="user-circle" size={24} color="white" />
                 }
                 onChangeText={setGamename} value={gameName}
                 />
-                <Input containerStyle={style.inputStyle} placeholder='Game Location'leftIcon={
-                 <SimpleLineIcons name="location-pin" size={24} color="#2A9D8F" />
+                <Input containerStyle={style.inputStyle}
+                placeholderTextColor='white'
+                placeholder='Game Location'leftIcon={
+                 <SimpleLineIcons name="location-pin" size={24} color="white" />
                 }
                 onChangeText={setGameLocation} value={gameLocation}
                 />
@@ -77,6 +90,7 @@ const CreatgroupScreen = ({navigation})=>{
                 />
             </View>
             <FooterComponent />
+           </View>
         </>
     )
 }
@@ -93,10 +107,10 @@ const style = StyleSheet.create({
     titleStyle:{
         fontSize:18,
         fontWeight:'bold',
-        color:'#2A9D8F',
+        color:'white',
     },
     titleContainer:{
-        backgroundColor:'rgba(42, 157, 143, 0.4)',
+        backgroundColor:'rgba(42, 157, 143, 0.7)',
         alignItems:'center',
         marginTop:30,
         paddingBottom:15,
@@ -106,7 +120,13 @@ const style = StyleSheet.create({
         borderRadius:5
     },
     detailContainer:{
-        marginTop:30,
+        backgroundColor:'rgba(42, 157, 143, 0.7)',
+        alignItems:'center',
+        paddingBottom:15,
+        paddingTop:15,
+        marginLeft:35,
+        marginRight:35,
+        borderRadius:5
     },
     inputStyle:{
         width:'70%',
@@ -120,6 +140,22 @@ const style = StyleSheet.create({
         borderRadius:10,
         backgroundColor: "#2A9D8F",
         marginTop:15
+    },
+    overLayer:{
+        width:'100%',
+        height:'100%',
+        backgroundColor:'rgba(42, 157, 143, 0.01)',
+
+    },
+    blade:{
+        backgroundColor:'white',
+        alignItems:'center',
+        paddingBottom:15,
+        paddingTop:15,
+        marginLeft:35,
+        marginRight:35,
+        borderRadius:5,
+        
     }
 })
 
