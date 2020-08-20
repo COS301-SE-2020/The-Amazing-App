@@ -36,20 +36,6 @@ const MapComponent = ()=>{
                         </View>
                     </Callout>
              </Marker>    
-             <Marker coordinate={{latitude:-26.2142,longitude:28.049}}>
-                <Callout >
-                    <View>
-                        <Text>Task 4</Text>
-                    </View>
-                </Callout>
-             </Marker>
-             <Marker coordinate={{latitude:-26.2142,longitude:28.04}} title='TITLE 1'>
-              <Callout >
-                    <View>
-                        <Text>Task 5</Text>
-                    </View>
-                </Callout>
-             </Marker>
         </MapView>
        )
 }

@@ -1,98 +1,145 @@
-import React from 'react';
-import map from "../Assets/map.jpg";
-import logo from '../../logo.png';
-import './login.css'
-import axios from 'axios';
-import {Link} from 'react-router-dom'
-import { withRouter } from "react-router-dom";
-import Nav from '../NavBar/navBar';
+import React, { useState } from "react";
+import { Button, Form, Grid, Message, Segment } from "semantic-ui-react";
+import image from "../../Assets/logo.png";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { signup, signin, resetPassword } from "../../store/actions/auth";
+import useForm from "../../utils/useForm";
+import validate from "../../utils/validateSignUpForm";
 
+const Login = ({
+  signup,
+  signin,
+  resetPassword,
+  authMsg,
+  history,
+  loading,
+}) => {
+  const [newUser, setNewUser] = useState(false);
+  const [reset, SetReset] = useState(false);
+  const [credentials, handleChange, handleSubmit, errors] = useForm(
+    login,
+    validate,
+    reset
+  );
 
-class SignUp extends React.Component {
+  function login() {
+    // signin
+    signup(credentials.email, credentials.password, credentials.username);
+  }
 
-    state = {username:"",email:"", password:"",err:""}
-
-    onFormSubmit=event=>{
-        event.preventDefault();
-       //check if all fields are filled in
-        if (this.state.username == "" || this.state.email == "" || this.state.password == "")
-        {
-            this.setState({err:"Please fill in all the fields!"});
-        }
-        else {
-            //valid email REGEX
-            const regEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-            //valid password REGEX
-            const regPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
-
-            //check if email address if valid
-            if (regEmail.test(this.state.email) == false){
-                this.setState({err:"Please enter a valid email address!"});
-            }
-            //check if password is valid
-            else if (regPassword.test(this.state.password) == false){
-                this.setState({err:"Password must contain 1 uppercase letter, 1 lowercase letter,1 number, 1 special character and must be 8 characters long!"});
-            }
-            else {
-                const data =
-                    {
-                        "username": this.state.username,
-                        "password": this.state.password,
-                        "email": this.state.email,
-                        "image": "base64"   
-                    } 
-                    axios.post('http://localhost:8000/api/auth/Register',data)  
-                    .then(res => {
-                        console.log(res);
-                        console.log(res.data);
-                        if(res.status == 200){
-                            this.props.history.push("/DashBoard");
-                        }
-                    }).catch(error => {
-                        this.setState({err:'Email address already registered!'});
-                    });
+  return (
+    <div className="login">
+      <Grid
+        textAlign="center"
+        style={{ height: "100vh" }}
+        verticalAlign="middle"
+      >
+        <Grid.Column style={{ maxWidth: 450 }}>
+          <Form size="medium" onSubmit={handleSubmit} noValidate>
+            <Segment stacked>
+              <div style={{ alignItems: "center" }}>
+                <img
+                  src={image}
+                  style={{ width: 130, height: 130, alignSelf: "center" }}
+                />
+              </div>
+              {authMsg && (
+                <p className="auth-message" style={{ color: "teal" }}>
+                  {authMsg}
+                </p>
+              )}
+              <Form.Input
+                fluid
+                icon="user"
+                iconPosition="left"
+                placeholder="Username"
+                name="username"
+                id="usersname"
+                type="text"
+                value={credentials.username}
+                onChange={handleChange}
+                className={errors.UsernameIsEmpty && "input-error"}
+              />
+              <div>
+                {errors.UsernameIsEmpty && (
+                  <small>{errors.UsernameIsEmpty}</small>
+                )}
+              </div>
+              <Form.Input
+                fluid
+                icon="envelope"
+                type="email"
+                name="email"
+                iconPosition="left"
+                placeholder="E-mail address"
+                id="useremail"
+                value={credentials.email}
+                onChange={handleChange}
+                className={
+                  (errors.emailIsEmpty || errors.emailFormatInvalid) &&
+                  "input-error"
                 }
-            }
-    }
-    render()
-    {
-        return(<div>
-            <Nav />
-        <img src={logo} alt="logo" id="logo"></img>
-        <div class = "loginPage" >
-            <span class="loginContainer">
-                <div class = "logReg">
-                <ul style={{width:"50%",display:"flex",justifyContent:"space-around",alignItems:"center"}}>
-                        <Link to="/login">
-                        <li>Login</li>
-                        </Link>
-                        <Link to="SignUp">
-                        <li>Register</li>
-                        </Link>
-                    </ul>
-                </div>
+              />
+              <div>
+                {errors.emailIsEmpty && <small>{errors.emailIsEmpty}</small>}
+                {errors.emailFormatInvalid && (
+                  <small>{errors.emailFormatInvalid}</small>
+                )}
+              </div>
+
+              {!reset && (
                 <div>
-                <form onSubmit={this.onFormSubmit}>
-                Username: <input id="username" type="text" name="username" onChange={(e)=>this.setState({username:e.target.value})} />
-                Email address: <input id="email" type="email" name="email"onChange={(e)=>this.setState({email:e.target.value})}/>
-                Password: <input id="password" type="password" name="password" onChange={(e)=>this.setState({password:e.target.value})}/>
-                <div id="input">
-                    <input type="submit" id="loginbtn" value="Register" />
-                    <Link to="/Reset">
-                   <p> Forgot Password </p>
-                   </Link>
-                    <p id="error">{this.state.err}</p>
+                  <Form.Input
+                    fluid
+                    icon="lock"
+                    iconPosition="left"
+                    placeholder="Password"
+                    name="password"
+                    value={credentials.password}
+                    type="password"
+                    id="userpassword"
+                    onChange={handleChange}
+                    className={
+                      (errors.passIsStrong || errors.passIsEmpty) &&
+                      "input-error"
+                    }
+                  />
+                  <div>
+                    {errors.passIsStrong && (
+                      <small>{errors.passIsStrong}</small>
+                    )}
+                    {errors.passIsEmpty && <small>{errors.passIsEmpty}</small>}
+                  </div>
                 </div>
-                </form>
-                </div>
-            </span> 
-        </div>
-        <img src={map} alt="map1" style={{width: 400, marginTop: -130, marginLeft:170}} />
-        </div>
-        );
-    }
+              )}
+
+              <Button fluid color="teal" size="medium">
+                Register
+              </Button>
+              <Message>
+                Already have an account ? <Link to="/login"> Login</Link>
+              </Message>
+            </Segment>
+          </Form>
+        </Grid.Column>
+      </Grid>
+    </div>
+  );
+};
+
+function mapStateToProps(state) {
+  return {
+    authMsg: state.authReducer.authMsg,
+    loading: state.apiStatusReducer.apiCallsInProgress > 0,
+  };
 }
 
-export default withRouter(SignUp);
+function mapDispatchToProps(dispatch) {
+  return {
+    signup: (email, password, username) =>
+      dispatch(signup(email, password, username)),
+  };
+}
 
-
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
