@@ -2,6 +2,7 @@ import React from "react";
 import mapboxgl from "mapbox-gl";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import "../styles.css";
+import { db } from "../../../Config/fbConfig";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoidGFwZWhuZGhsb3Z1IiwiYSI6ImNrYmV2eTRhdDBwbXUydHA4eTl6cW5neDMifQ.BVjVIq7FUmlnMZJC_BvRDQ";
@@ -15,11 +16,25 @@ class DashHomeMap extends React.Component {
       lng: 28.229271,
       lat: -25.747868,
       zoom: 10,
+      games: null,
     };
     this.mapContainer = React.createRef();
   }
 
   componentDidMount() {
+    db.collection("projects")
+      .get()
+      .then((snapshot) => {
+        const games = [];
+        snapshot.forEach((doc) => {
+          const data = doc.data();
+          games.push(data);
+        });
+        this.setState({ games: games });
+        //console.log(snapshot.docs[1]._document.proto.fields.location[0]);
+        //console.log(games[0].properties[0].location);
+      });
+
     const map = new mapboxgl.Map({
       container: this.mapContainer.current,
       style: "mapbox://styles/mapbox/streets-v11",
@@ -32,29 +47,6 @@ class DashHomeMap extends React.Component {
 
     let locations = [
       {
-        id: "2",
-        title: "Octopus",
-        description:
-          "Octopus is a game where you need to solve riddles about plants and animals that live in water.",
-        camera: {
-          center: [28.2441, -25.7792],
-          zoom: 14.21,
-          pitch: 50,
-        },
-      },
-      {
-        id: "3",
-        title: "cornQuest",
-        description:
-          "Play the interesting cornQuest game by solving mathematical riddles and puzzles in the game.",
-        camera: {
-          center: [28.26, -25.7699],
-          bearing: -8.9,
-          zoom: 14.68,
-        },
-      },
-      {
-        id: "1",
         title: "Detective",
         description:
           "Play the detective role by solving riddles related to a crime that had recently happened.",

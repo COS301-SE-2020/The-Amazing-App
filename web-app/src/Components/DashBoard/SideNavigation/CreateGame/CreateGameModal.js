@@ -134,7 +134,6 @@ class CreateGameModal extends React.Component {
     console.log(game);
     this.props.createProject(game);
     this.setState({ submit: "Submitted !" });
-    alert("Game submitted succesfully!!");
     //history.push("/dashboard");
   };
 

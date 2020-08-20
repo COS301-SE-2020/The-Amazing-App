@@ -6,6 +6,10 @@ import UserOptions from "./UserOptions";
 import { Button } from "semantic-ui-react";
 
 class NavBar extends React.Component {
+  logout = () => {
+    window.location.href = "/login";
+  };
+
   render() {
     const myStyle = {
       fontSize: 16,
@@ -48,7 +52,11 @@ class NavBar extends React.Component {
             </Button>
           </Nav.Link>
           <Nav.Link style={myStyle}>
-            <Button size="medium" style={{ backgroundColor: "Transparent" }}>
+            <Button
+              size="medium"
+              onClick={this.logout}
+              style={{ backgroundColor: "Transparent" }}
+            >
               Logout
               <i className="sign-out"></i>
             </Button>
