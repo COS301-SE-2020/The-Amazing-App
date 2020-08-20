@@ -74,6 +74,44 @@ const HomeScreen = ({navigation})=>{
                  )
              }}
             />
+                    <View style={style.itemStyle}>
+                            <View style={{flexDirection:'row'}}>
+                                <Image source={image} style={style.avatarStyle} />
+                                <View  style={style.textStyle}>
+                                    <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>The amaizing Race</Text>
+                                    <Text style={{color:'#f56042'}}>Location :Pretoria</Text>
+                                </View>
+                             </View>
+                        </View>
+
+                        <View style={style.itemStyle}>
+                            <View style={{flexDirection:'row'}}>
+                                <Image source={image} style={style.avatarStyle} />
+                                <View  style={style.textStyle}>
+                                    <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>Treasure Hunt</Text>
+                                    <Text style={{color:'#f56042'}}>Location :Pretoria</Text>
+                                </View>
+                             </View>
+                        </View>
+                        <View style={style.itemStyle}>
+                            <View style={{flexDirection:'row'}}>
+                                <Image source={image} style={style.avatarStyle} />
+                                <View  style={style.textStyle}>
+                                    <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>The Dective</Text>
+                                    <Text style={{color:'#f56042'}}>Location :Pretoria</Text>
+                                </View>
+                             </View>
+                        </View>
+                        <View style={style.itemStyle}>
+                            <View style={{flexDirection:'row'}}>
+                                <Image source={image} style={style.avatarStyle} />
+                                <View  style={style.textStyle}>
+                                    <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>The Amaizing App</Text>
+                                    <Text style={{color:'#f56042'}}>Location :Pretoria</Text>
+                                </View>
+                             </View>
+                        </View>
+
             </ScrollView>
         </>
     )

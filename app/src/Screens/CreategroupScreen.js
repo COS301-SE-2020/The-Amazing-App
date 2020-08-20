@@ -5,7 +5,7 @@ import FooterComponent from '../Componets/FooterComponent';
 import { FontAwesome,MaterialIcons, FontAwesome5,SimpleLineIcons } from '@expo/vector-icons'; 
 import {createGroup} from '../Api/GameAPI';
 import scs from '../../assets/t1.jpg';
-
+import {getEmail} from '../Api/UserAPI'
 import { StatusBar } from 'expo-status-bar';
 
 
@@ -24,7 +24,8 @@ const CreatgroupScreen = ({navigation})=>{
             'groupName' : groupName,
             'groupDescription' : groupDescription,
             'gameName': gameName,
-            'gameLocation':gameLocation
+            'gameLocation':gameLocation,
+            'userID':getEmail()
         }
         createGroup(data);
     }
