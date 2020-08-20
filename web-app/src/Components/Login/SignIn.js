@@ -1,79 +1,138 @@
-import React from 'react';
-import map from "../Assets/map.jpg";
-import logo from '../../logo.png';
-import axios from 'axios';
-import './login.css';
-import {Link} from 'react-router-dom'
-import { withRouter } from "react-router-dom";
-import Cookies from 'js-cookie';
-import Nav from '../NavBar/navBar.js'
+import React, { useState } from "react";
+import { Button, Form, Grid, Message, Segment } from "semantic-ui-react";
+import image from "../../Assets/logo.png";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { signup, signin, resetPassword } from "../../store/actions/auth";
+import useForm from "../../utils/useForm";
+import validate from "../../utils/validateLoginForm";
+import Spinner from "./Spinner";
 
-class SignIn extends React.Component
-{
+const Login = ({
+  signup,
+  signin,
+  resetPassword,
+  authMsg,
+  history,
+  loading,
+}) => {
+  const [newUser, setNewUser] = useState(false);
+  const [reset, SetReset] = useState(false);
+  const [credentials, handleChange, handleSubmit, errors] = useForm(
+    login,
+    validate,
+    reset
+  );
 
-    state = {email:'',pasword:'',err:''}
-    onFormSubmit=event=>{
-        event.preventDefault();
-        const data =
-            {
-                "email": this.state.email,
-                "password": this.state.password,
-                 
-            }
-            if (this.state.email == '' || this.state.password == '')
-            {
-                this.setState({err:"Please fill in all the fields!"});
-            }
-            else{
-                axios.post('http://localhost:8000/api/auth/Login',data)  
-                .then(res => {
-                    console.log(res);
-                    console.log(res.data);
-                    if(res.status == 200){
-                        Cookies.set('token',res.data.token,{expires:2});
-                        this.props.history.push("/");
-                        this.props.history.push("/DashBoard");
+  function login() {
+    // signin
+    signin(credentials.email, credentials.password, () =>
+      history.push("/dashboard")
+    );
+  }
 
+  return (
+    <div className="login">
+      <Grid
+        textAlign="center"
+        style={{ height: "100vh" }}
+        verticalAlign="middle"
+      >
+        <Grid.Column style={{ maxWidth: 450 }}>
+          <Form size="medium" onSubmit={handleSubmit} noValidate>
+            <Segment stacked>
+              <div style={{ alignItems: "center" }}>
+                <img
+                  src={image}
+                  style={{ width: 130, height: 130, alignSelf: "center" }}
+                />
+              </div>
+              {authMsg && (
+                <p className="auth-message" style={{ color: "teal" }}>
+                  {authMsg}
+                </p>
+              )}
+              <Form.Input
+                fluid
+                icon="envelope"
+                type="email"
+                name="email"
+                iconPosition="left"
+                placeholder="E-mail address"
+                id="useremail"
+                value={credentials.email}
+                onChange={handleChange}
+                className={
+                  (errors.emailIsEmpty || errors.emailFormatInvalid) &&
+                  "input-error"
+                }
+              />
+              <div>
+                {errors.emailIsEmpty && <small>{errors.emailIsEmpty}</small>}
+                {errors.emailFormatInvalid && (
+                  <small>{errors.emailFormatInvalid}</small>
+                )}
+              </div>
+              {!reset && (
+                <div>
+                  <Form.Input
+                    fluid
+                    icon="lock"
+                    iconPosition="left"
+                    placeholder="Password"
+                    name="password"
+                    value={credentials.password}
+                    type="password"
+                    id="userpassword"
+                    onChange={handleChange}
+                    className={
+                      (errors.passIsStrong || errors.passIsEmpty) &&
+                      "input-error"
                     }
-                }).catch(error => {
-                    this.setState({err:error.message});
-                });
-            }
-    }
+                  />
+                  <div>
+                    {errors.passIsStrong && (
+                      <small>{errors.passIsStrong}</small>
+                    )}
+                    {errors.passIsEmpty && <small>{errors.passIsEmpty}</small>}
+                  </div>
+                </div>
+              )}
+              <Button
+                type="submit"
+                id="loginbtn"
+                fluid
+                color="teal"
+                size="medium"
+                className="btn-login"
+              >
+                Login
+              </Button>
 
-    render()
-    {
-        return (<div>
-            <Nav />
-            <img src={logo} alt="logo" id="logo"></img>
-            <div class = "loginPage" >
-                <span class="loginContainer">
-                    <div class = "logReg">
-                    <ul style={{width:"50%",display:"flex",justifyContent:"space-around",alignItems:"center"}}>
-                        <Link to="/login">
-                        <li>Login</li>
-                        </Link>
-                        <Link to="SignUp">
-                        <li>Register</li>
-                        </Link>
-                    </ul>
-                    </div>
-                    <form onSubmit={this.onFormSubmit}>
-                    Email: <input id="email" type="email" name="email"  onChange={(e)=>this.setState({email:e.target.value})}></input>
-                    Password: <input id="password" type="password" name="password"  onChange={(e)=>this.setState({password:e.target.value})}></input>
-                    <div id="input">
-                        <button id="loginbtn">Login</button>
-                        <Link to="/Forgot">
-                   <p> Forgot Password </p>
-                   </Link>
-                        <p id="error">{this.state.err}</p>
-                    </div>
-                </form>
-                </span> 
-            </div>
-            <img src={map} alt="map1" style={{width: 400, marginTop: -130, marginLeft:170}} />
-            </div>);
-    }
+              <Message>
+                Don't have an account ?<Link to="/signup"> Register</Link>
+              </Message>
+            </Segment>
+          </Form>
+        </Grid.Column>
+      </Grid>
+    </div>
+  );
+};
+
+function mapStateToProps(state) {
+  return {
+    authMsg: state.authReducer.authMsg,
+    loading: state.apiStatusReducer.apiCallsInProgress > 0,
+  };
 }
 
-export default withRouter(SignIn);
+function mapDispatchToProps(dispatch) {
+  return {
+    signin: (email, password, callback) =>
+      dispatch(signin(email, password, callback)),
+    resetPassword: (email) => dispatch(resetPassword(email)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
