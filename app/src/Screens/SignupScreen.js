@@ -1,17 +1,19 @@
-import React ,{  useState} from 'react';
+import React ,{  useState, useContext} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import currentlocation from '../../assets/currentlocation.png'
 import ImageComponent from '../Componets/ImageComponent';
 import { EvilIcons,MaterialCommunityIcons } from '@expo/vector-icons';
 import RegisterApi from '../Api/RegisterAPI';
+import {AuthContext} from '../Context/AuthContext';
 
 const SignupScreen = ({navigation})=>{
     const {containerStyle, inputStyle, buttonStyle} = style;
     const [Username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
-    const [isRegistered, Register] = RegisterApi();
+    const [Register] = RegisterApi();
+    const authContext = useContext(AuthContext);
 
     return(
         <View style={containerStyle} >
@@ -38,7 +40,7 @@ const SignupScreen = ({navigation})=>{
                      <Button  buttonStyle={buttonStyle} title='Sign Up' onPress={()=>{
                                 Register(email,password,Username)
                      }}/>
-                     {isRegistered?navigation.navigate('Home',{email:email}):null}
+                     {authContext.isRegistered?navigation.navigate('Home'):null}
                     <TouchableOpacity onPress={()=>navigation.navigate('SigninScreen')}>
                         <Text style={{alignSelf:'center'}}>
                             Already have an account ? <Text style={{color:'#2A9D8F'}}> Signin

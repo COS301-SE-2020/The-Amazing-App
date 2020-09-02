@@ -1,15 +1,17 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import {Image,View, Text, StyleSheet , ScrollView} from 'react-native';
 import {DrawerNavigatorItems} from 'react-navigation-drawer';
-import {getPicture,getEmail,User} from '../Api/UserAPI'
+import {UserContext} from '../Context/UserContext';
+import {getPicture} from '../Api/UserAPI';
 
 export default SideBarComponent =(props)=>{
+    const user = useContext(UserContext);
     
     return(
         <ScrollView>
             <View style={{ width : undefined,padding : 16,paddingTop : 48,backgroundColor: '#2A9D8F',}}>
-                <Image source={getPicture()} style={style.profileStyle} />
-                <Text style={style.nameStyle}>{User(getEmail())}</Text>
+                <Image source={user.image} style={style.profileStyle} />
+                <Text style={style.nameStyle}>{user.username}</Text>
             </View>
             <View style={style.container}>
                 <DrawerNavigatorItems {...props} />

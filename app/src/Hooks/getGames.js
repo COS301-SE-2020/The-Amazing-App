@@ -2,7 +2,8 @@ import  React, {useState} from 'react';
 import firebase from '../Config/Config';
 
 export default ()=>{
-    const [results,setResults, games, setGames] = useState([]);
+    const [results,setResults] = useState([]);
+    const [games, setGames] = useState([]);
 
     const getGroups =async()=>{
         try{

@@ -1,17 +1,15 @@
-import React ,{ useState} from 'react';
+import React ,{ useContext} from 'react';
 import {View, Text, StyleSheet,Image, TouchableOpacity,FlatList} from 'react-native'
 import {Header, Divider} from 'react-native-elements';
 import { Feather } from '@expo/vector-icons'; 
-import {getPicture} from '../Api/UserAPI'
 import { StatusBar } from 'expo-status-bar';
-import {User, getEmail} from '../Api/UserAPI';
 import {MaterialIcons, FontAwesome, AntDesign} from '@expo/vector-icons'
-
+import {UserContext} from '../Context/UserContext';
 
 const AccountScreen = ({navigation})=>{
-    const {imageStyle,imageStyle2, containerStyle, textStyle, statContainer, statAmountStyle, statStyle, statTitleStyle} = style;
-    const email = getEmail();
-    const username = User(email)
+    const { containerStyle, textStyle, statContainer, statAmountStyle, statStyle, statTitleStyle} = style;
+    const userContext = useContext(UserContext);
+    
     return( 
         <>
             <StatusBar style='#2A9D8F'/>
@@ -23,21 +21,21 @@ const AccountScreen = ({navigation})=>{
                 centerComponent={{ text: 'Profile', style: { color: '#fff',fontSize:22, fontWeight:'bold' } }}
                 rightComponent={
                     <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
-                        <Image source={getPicture()}  style={style.imageStyle}/>
+                         <Image source={userContext.image}  style={style.imageStyle}/>
                     </TouchableOpacity>
                 }
                 containerStyle={{backgroundColor:'#2A9D8F'}}
             />
              <View style={containerStyle}>
-                 <Image source={getPicture()}  style={imageStyle2}/>
+                <Image source={userContext.image}  style={style.imageStyle2}/>
             </View>
 
             <Divider style={{ backgroundColor: '#2A9D8F',height:1 , padingBottom:20}} />
             <View style={{paddingBottom:15}}>
                 
                 
-                <Text style={textStyle}><AntDesign name="user" size={24} color='#2A9D8F' /> Username : {username}</Text>
-                <Text style={textStyle}><AntDesign name="mail" size={24} color='#2A9D8F' />Email : {email}</Text>
+                <Text style={textStyle}><AntDesign name="user" size={24} color='#2A9D8F' /> Username : {userContext.username}</Text>
+                <Text style={textStyle}><AntDesign name="mail" size={24} color='#2A9D8F' />Email : {userContext.email}</Text>
             </View>
             <View style={statContainer}>
                 <View style={statStyle}>

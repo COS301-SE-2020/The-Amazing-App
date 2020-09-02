@@ -13,7 +13,6 @@ const JoingroupScreen = ({navigation})=>{
                 centerComponent={{ text: 'Create Group', style: { color: '#fff',fontSize:22, fontWeight:'bold' } }}
                 rightComponent={
                     <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
-                        <Image source={getPicture()}  style={style.imageStyle}/>
                     </TouchableOpacity>
                 }
                 containerStyle={{backgroundColor:'#2A9D8F'}}

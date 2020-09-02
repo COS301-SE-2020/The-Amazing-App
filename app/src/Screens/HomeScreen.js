@@ -1,24 +1,78 @@
-import React ,{ useState, useEffect} from 'react';
-import {View, Text, StyleSheet,TouchableOpacity, ScrollView, FlatList} from 'react-native'
+import React ,{ useState, useEffect,useContext} from 'react';
+import {View, Text, StyleSheet,TouchableOpacity, ScrollView,Modal, FlatList} from 'react-native'
 import { Image, Divider,Header } from 'react-native-elements';
 import SearchBarComponent from '../Componets/SearchBarComponent'
 import useResults from '../Hooks/useResults';
 import { Feather, AntDesign } from '@expo/vector-icons'; 
 import { StatusBar } from 'expo-status-bar';
-import {User,getPicture} from '../Api/UserAPI'
-import image from '../../assets/avatar.png'
+import avatar from '../../assets/avatar3.png';
+import {UserContext} from '../Context/UserContext';
+import image from '../../assets/avatar1.png';
+import { Button } from 'react-native-paper';
 
 const HomeScreen = ({navigation})=>{
-    const {term,setTerm} = useState('');
-    const email = navigation.getParam('email');
 
-    const [results, getGroups, games, getGames] = useResults()
+    const {term,setTerm} = useState('');
+    const {gameId,setgameId} = useState('');
+    const {groupId,setgoupId} = useState('');
+    const [modalOpen, setModelOpen] = useState(false);
+    const userContext = useContext(UserContext);
+    const [results,getGroups, games, getGames] = useResults()
 
 
     useEffect(() => {
         getGames();
-      });
+        getGroups();
+      },[]);
 
+      const choice=()=>{
+        if(results.length < 0){
+            return(
+                <View style={{height:340}}>
+                    <View style={{marginBottom:10,marginTop:10}}>
+                        <Text style={{alignSelf:'center',color:'white',fontWeight:'bold',fontSize:13}}>
+                            Select a group to play 
+                        </Text>
+                    </View>
+                    <ScrollView>
+                        <FlatList 
+                        showsHorizontalScrollIndicator={false}
+                        data={results}
+                        keyExtractor={results=>results.id}
+                        renderItem={({item})=>{
+                            return( 
+                                <TouchableOpacity onPress={()=>{setModelOpen(false)}}>
+                                <View style={style.itemStyle2}>
+                                    <View style={{flexDirection:'row'}}>
+                                        <Image source={avatar} style={style.avatarStyle2} />
+                                        <View  style={style.textStyle2}>
+                                            <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>{item.data().groupName}</Text>
+                                        </View>
+                                    </View>
+                                </View>
+                                </TouchableOpacity>
+                            )
+                        }}
+                        />
+                    </ScrollView>
+                </View>
+            );
+        }
+        return(
+            <View>
+                <Text>
+                    Eish group found ):
+                </Text>
+                <View>
+                    <Text>
+                        Clic me to create a new group
+                    </Text>
+                    <Button title='Create Group' />
+                </View>
+            </View>
+        )
+    }
+    
     return(
         <>
             <StatusBar style='#2A9D8F'/>
@@ -30,14 +84,15 @@ const HomeScreen = ({navigation})=>{
                 centerComponent={{ text: 'Home', style: { color: '#fff',fontSize:22, fontWeight:'bold' } }}
                 rightComponent={
                     <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
-                        <Image source={getPicture()}  style={style.imageStyle}/>
+                          <Image source={userContext.image}  style={style.imageStyle}/>
                     </TouchableOpacity>
                 }
                 containerStyle={{backgroundColor:'#2A9D8F'}}
             />
+           
             <View style={style.containerStyle}>
                 <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
-                    <Image source={getPicture()}  style={style.profileStyle}/>
+                     <Image source={userContext.image}  style={style.profileStyle}/>
                 </TouchableOpacity>
             </View>
 
@@ -46,7 +101,7 @@ const HomeScreen = ({navigation})=>{
             <View style={style.containerStyle}>
                 <Text style={{fontSize:22,color:'#2A9D8F'}}>Hello,</Text>
                 <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
-            <Text style={{fontSize:22,fontWeight:'bold'}}>{User(email)}</Text>
+            <Text style={{fontSize:22,fontWeight:'bold'}}>{userContext.username}</Text>
                 </TouchableOpacity>
                 <Text style={{paddingTop:5,fontSize:16}}>which game would you like to play</Text>
             </View>
@@ -54,6 +109,19 @@ const HomeScreen = ({navigation})=>{
                 onTermChange={setTerm}
                 onTermSubmit={() => searchApi(term)}
             />
+             <Modal visible={modalOpen} animationType='fade' transparent={true}>
+                    <View style={style.modalContainer}>
+                        <View style={style.modalStyle}>
+                            <TouchableOpacity onPress={()=>setModelOpen(false)}>
+                                <AntDesign name="closecircleo" size={30} 
+                                    color="white" 
+                                    style={{alignSelf:'center', paddingTop:10}}
+                                 />
+                            </TouchableOpacity>
+                            {choice()}
+                        </View>
+                    </View>
+                </Modal>
             <ScrollView>
             <FlatList 
              showsHorizontalScrollIndicator={false}
@@ -61,57 +129,20 @@ const HomeScreen = ({navigation})=>{
              keyExtractor={result=>result.id}
              renderItem={({item})=>{
                  return( 
-                  
-                        <View style={style.itemStyle}>
+                    <TouchableOpacity onPress={()=>setModelOpen(true)}>
+                       <View style={style.itemStyle}>
                             <View style={{flexDirection:'row'}}>
                                 <Image source={image} style={style.avatarStyle} />
                                 <View  style={style.textStyle}>
                                     <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>{item.data().name}</Text>
-                                    <Text style={{color:'#f56042'}}>Location :Pretoria</Text>
+                                    <Text style={{color:'#f56042'}}>Location :{item.id}</Text>
                                 </View>
                              </View>
-                        </View>
+                        </View> 
+                    </TouchableOpacity>
                  )
              }}
             />
-                    <View style={style.itemStyle}>
-                            <View style={{flexDirection:'row'}}>
-                                <Image source={image} style={style.avatarStyle} />
-                                <View  style={style.textStyle}>
-                                    <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>The amaizing Race</Text>
-                                    <Text style={{color:'#f56042'}}>Location :Pretoria</Text>
-                                </View>
-                             </View>
-                        </View>
-
-                        <View style={style.itemStyle}>
-                            <View style={{flexDirection:'row'}}>
-                                <Image source={image} style={style.avatarStyle} />
-                                <View  style={style.textStyle}>
-                                    <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>Treasure Hunt</Text>
-                                    <Text style={{color:'#f56042'}}>Location :Pretoria</Text>
-                                </View>
-                             </View>
-                        </View>
-                        <View style={style.itemStyle}>
-                            <View style={{flexDirection:'row'}}>
-                                <Image source={image} style={style.avatarStyle} />
-                                <View  style={style.textStyle}>
-                                    <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>The Dective</Text>
-                                    <Text style={{color:'#f56042'}}>Location :Pretoria</Text>
-                                </View>
-                             </View>
-                        </View>
-                        <View style={style.itemStyle}>
-                            <View style={{flexDirection:'row'}}>
-                                <Image source={image} style={style.avatarStyle} />
-                                <View  style={style.textStyle}>
-                                    <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>The Amaizing App</Text>
-                                    <Text style={{color:'#f56042'}}>Location :Pretoria</Text>
-                                </View>
-                             </View>
-                        </View>
-
             </ScrollView>
         </>
     )
@@ -157,7 +188,7 @@ const style = StyleSheet.create({
     },
     modalStyle:{
         width:'70%', 
-        height:380,
+        height:410,
         alignSelf:'center',
         marginTop:'40%',
         backgroundColor:'rgba(42, 157, 143, 1)',
@@ -167,6 +198,22 @@ const style = StyleSheet.create({
         width:'100%', 
         height:'100%',
         backgroundColor:'rgba(42, 157, 143, 0.4)'
+    },
+    itemStyle2:{
+        backgroundColor:'rgba(245, 247, 246, 0.8)', 
+        borderColor:'white',
+        borderWidth:1,
+        height:50   
+    },
+    avatarStyle2:{
+        width:40,
+        height:40, 
+        borderRadius:30,
+        marginTop:6
+    },
+    textStyle2:{
+        flexDirection:'column',
+        marginLeft:10
     }
 })
 export default HomeScreen;

@@ -1,15 +1,16 @@
-import React ,{ useState} from 'react';
+import React ,{ useState,useContext} from 'react';
 import { StyleSheet,Image, TouchableOpacity, View, Text, Modal, Alert} from 'react-native'
 import {Header, Divider, Input, Button} from 'react-native-elements';
 import { Feather, AntDesign,MaterialCommunityIcons, MaterialIcons,EvilIcons, Entypo } from '@expo/vector-icons'; 
 import { Switch } from 'react-native-paper';
 import { StatusBar } from 'expo-status-bar';
 import * as ImagePicker from 'expo-image-picker';
-import {updateUsername, updatePassword,updatePicture,getPicture} from '../Api/UserAPI';
-
+import {updateUsername, updatePassword,updatePicture} from '../Api/UserAPI';
+import {UserContext} from '../Context/UserContext';
 
 
 const SettingsScreen = ({navigation})=>{
+    const userContext =  useContext(UserContext);
     const [isSwitchOn, setIsSwitchOn] = React.useState(true);
     const [modalOpen, setModelOpen] = useState(false);
     const [isOperation, setisOperation] = useState('');
@@ -31,7 +32,7 @@ const SettingsScreen = ({navigation})=>{
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
-            aspect: [4, 3],
+            aspect: [4, 5],
             quality: 1,
         });
     
@@ -129,7 +130,7 @@ const SettingsScreen = ({navigation})=>{
                 centerComponent={{ text: 'Settings', style: { color: '#fff',fontSize:22, fontWeight:'bold' } }}
                 rightComponent={
                     <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
-                        <Image source={getPicture()}  style={style.imageStyle}/>
+                         <Image source={userContext.image}  style={style.imageStyle}/>
                     </TouchableOpacity>
                 }
                 containerStyle={{backgroundColor:'#2A9D8F'}}

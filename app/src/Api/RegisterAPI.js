@@ -1,33 +1,20 @@
-import React ,{useState} from 'react';
-import {Alert} from 'react-native';
+import React ,{useContext} from 'react';
 import firebase from '../Config/Config';
+import {AuthContext} from '../Context/AuthContext';
 
-export default (email, password, username) => {
-  const [isRegistered , setisRegister] = useState(false);
- 
+export default () => {
+
   const Register = async (email, password, username)=>{
-      if(email === '' ||  password === '' || username === '') {
-        Alert.alert('Enter details to signup!')
-      }
-      else {
-    
+    const authContext = useContext(AuthContext);
+    try {
         const db = firebase.firestore().collection('Users');
-      
-        firebase.auth().createUserWithEmailAndPassword(email,password).then((res) => {
-        db.add({
-            Username: username,
-            Email: email
-        });
-          setisRegister(true);
-        })
-        .catch(error => 
-          {
-            Alert.alert(error.message)
-            setisRegister(false)
-          })  
-        
-      }
+        await  firebase.auth().createUserWithEmailAndPassword(email,password);
+        db.add({Username: username,Email: email});
+        authContext.isRegistered(true);
+    } catch (error) {
+      authContext.isRegistered(false);
+    }   
   }
-  return[isRegistered, Register];
+  return [Register];
 }
 

@@ -1,16 +1,18 @@
-import React ,{ useState} from 'react';
+import React ,{ useState, useContext} from 'react';
 import {View, StyleSheet, TouchableOpacity, ImageBackground , Image} from 'react-native'
 import { Input,Text, Button, Header,Icon} from 'react-native-elements';
 import FooterComponent from '../Componets/FooterComponent';
 import { FontAwesome,MaterialIcons, FontAwesome5,SimpleLineIcons } from '@expo/vector-icons'; 
 import {createGroup} from '../Api/GameAPI';
-import scs from '../../assets/t1.jpg';
-import {getEmail} from '../Api/UserAPI'
+import {UserContext} from '../Context/UserContext';
+import {AuthContext} from '../Context/AuthContext';
 import { StatusBar } from 'expo-status-bar';
 
 
 const CreatgroupScreen = ({navigation})=>{
 
+    const userContext = useContext(UserContext);
+    const authContext = useContext(AuthContext);
     /**
      * Group details for a game being created 
      */
@@ -25,7 +27,8 @@ const CreatgroupScreen = ({navigation})=>{
             'groupDescription' : groupDescription,
             'gameName': gameName,
             'gameLocation':gameLocation,
-            'userID':getEmail()
+            'userId':authContext.userId,
+            'member':[]
         }
         createGroup(data);
     }
@@ -38,7 +41,7 @@ const CreatgroupScreen = ({navigation})=>{
                 centerComponent={{ text: 'Create Group', style: { color: '#fff',fontSize:22, fontWeight:'bold' } }}
                 rightComponent={
                     <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
-                        <Image source={scs}  style={style.imageStyle}/>
+                        <Image source={userContext.image}  style={style.imageStyle}/>
                     </TouchableOpacity>
                 }
                 containerStyle={{backgroundColor:'#2A9D8F'}}
@@ -52,13 +55,13 @@ const CreatgroupScreen = ({navigation})=>{
             </View>
             <View style={style.detailContainer}>
                 <Input containerStyle={style.inputStyle}
-                
                 placeholder='Group Name'leftIcon={
                     <FontAwesome name="group" size={24} color="white" />
                     }
                     placeholderTextColor='white'
                  onChangeText={setGroupname} value={groupName}
                 />
+                
                  <Input containerStyle={style.inputStyle} placeholder='Group Description'
                  placeholderTextColor='white'
                  leftIcon={

@@ -1,17 +1,15 @@
-import React ,{  useEffect} from 'react';
+import React ,{  useEffect, useContext} from 'react';
 import {View, Text, StyleSheet,Image, TouchableOpacity,FlatList} from 'react-native'
 import {Header} from 'react-native-elements';
 import { Feather } from '@expo/vector-icons'; 
-import {getPicture} from '../Api/UserAPI';
 import { StatusBar } from 'expo-status-bar';
 import image from '../../assets/avatar1.png';
 import useResults from '../Hooks/useResults';
 import { ScrollView } from 'react-native-gesture-handler';
-
+import {UserContext} from '../Context/UserContext';
 const DashboardScreen = ({navigation})=>{
-
+    const userContext = useContext(UserContext);
     const [results,getGroups] = useResults();
-
     useEffect(() => {
         getGroups();
       });
@@ -27,7 +25,7 @@ const DashboardScreen = ({navigation})=>{
                 centerComponent={{ text: 'Dashboard', style: { color: '#fff',fontSize:22, fontWeight:'bold' } }}
                 rightComponent={
                     <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
-                        <Image source={getPicture()}  style={style.imageStyle}/>
+                        <Image source={userContext.image}  style={style.imageStyle}/>
                     </TouchableOpacity>
                 }
                 containerStyle={{backgroundColor:'#2A9D8F'}}
