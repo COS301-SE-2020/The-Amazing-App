@@ -2,10 +2,7 @@ import React from "react";
 import {Header, Modal,  Form, Button } from "semantic-ui-react";
 import Cookies from 'js-cookie';
 import axios from 'axios';
-
-
-
-
+import Results from './Results'
 
 
 export default class UpdatePreferences extends React.Component {
@@ -66,7 +63,7 @@ onChangeNewPassword(e) {
      
      // this.token = Cookies.get('token');
       const data = {'username': this.state.newusername }
-      const instance = axios.put('/Users.json',data//,{headers: {Authorization : 'Bearer ' + this.token}}
+      const instance = Results.put('/Users.json',data//,{headers: {Authorization : 'Bearer ' + this.token}}
       ).then(res => {
         if(res.status == 200){
           this.state.username = this.state.newusername
