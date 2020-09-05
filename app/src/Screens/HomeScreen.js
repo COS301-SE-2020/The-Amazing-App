@@ -1,6 +1,6 @@
 import React ,{ useState, useEffect,useContext} from 'react';
 import {View, Text, StyleSheet,TouchableOpacity, ScrollView,Modal, FlatList} from 'react-native'
-import { Image, Divider,Header } from 'react-native-elements';
+import { Image, Divider,Header,Button} from 'react-native-elements';
 import SearchBarComponent from '../Componets/SearchBarComponent'
 import useResults from '../Hooks/useResults';
 import { Feather, AntDesign } from '@expo/vector-icons'; 
@@ -8,7 +8,6 @@ import { StatusBar } from 'expo-status-bar';
 import avatar from '../../assets/avatar3.png';
 import {UserContext} from '../Context/UserContext';
 import image from '../../assets/avatar1.png';
-import { Button } from 'react-native-paper';
 
 const HomeScreen = ({navigation})=>{
 
@@ -41,7 +40,10 @@ const HomeScreen = ({navigation})=>{
                         keyExtractor={results=>results.id}
                         renderItem={({item})=>{
                             return( 
-                                <TouchableOpacity onPress={()=>{setModelOpen(false)}}>
+                                <TouchableOpacity onPress={()=>{
+                                    setgoupId(item.id);
+                                    setModelOpen(false);
+                                }}>
                                 <View style={style.itemStyle2}>
                                     <View style={{flexDirection:'row'}}>
                                         <Image source={avatar} style={style.avatarStyle2} />
@@ -59,15 +61,18 @@ const HomeScreen = ({navigation})=>{
             );
         }
         return(
-            <View>
-                <Text>
+            <View style={{alignItems:'center', marginTop:50}}>
+                <Text style={{color:'white', fontWeight:'bold', fontSize:18,marginBottom:30}}>
                     Eish group found ):
                 </Text>
                 <View>
-                    <Text>
-                        Clic me to create a new group
+                    <Text style={{color:'white',fontWeight:'bold',marginBottom:30}}>
+                        You need to create a group
                     </Text>
-                    <Button title='Create Group' />
+                    <Button  buttonStyle={style.buttonStyle} title='Create Group'
+                     titleStyle={{color:'#888e8f',fontWeight:'bolds'}} 
+                     onPress={()=>navigation.navigate('Creategroup')}
+                     />
                 </View>
             </View>
         )
@@ -129,13 +134,16 @@ const HomeScreen = ({navigation})=>{
              keyExtractor={result=>result.id}
              renderItem={({item})=>{
                  return( 
-                    <TouchableOpacity onPress={()=>setModelOpen(true)}>
+                    <TouchableOpacity onPress={()=>{
+                        setgameId(item.id);
+                        setModelOpen(true);
+                    }}>
                        <View style={style.itemStyle}>
                             <View style={{flexDirection:'row'}}>
                                 <Image source={image} style={style.avatarStyle} />
                                 <View  style={style.textStyle}>
                                     <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>{item.data().name}</Text>
-                                    <Text style={{color:'#f56042'}}>Location :{item.id}</Text>
+                                    <Text style={{color:'#f56042'}}>Location :Error</Text>
                                 </View>
                              </View>
                         </View> 
@@ -214,6 +222,14 @@ const style = StyleSheet.create({
     textStyle2:{
         flexDirection:'column',
         marginLeft:10
+    },
+    buttonStyle:{
+        width:150,
+        height:50,
+        marginBottom:35,
+        alignSelf:'center',
+        borderRadius:10,
+        backgroundColor: 'white',
     }
 })
 export default HomeScreen;

@@ -12,7 +12,7 @@ const DashboardScreen = ({navigation})=>{
     const [results,getGroups] = useResults();
     useEffect(() => {
         getGroups();
-      });
+      },[]);
 
     return(
         <>

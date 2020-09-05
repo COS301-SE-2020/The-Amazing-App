@@ -18,7 +18,7 @@ export default ()=>{
     const getGames =async()=>{
         try{
             const querySnapshot = await firebase.firestore().collection('projects').get();
-            setResults(querySnapshot.docs);
+            setGames(querySnapshot.docs);
         }
         catch(eror){
             console.log('Something went wrong')
