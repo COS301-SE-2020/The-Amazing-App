@@ -17,7 +17,7 @@ const test = ({navigation})=>{
         let location = await Location.getCurrentPositionAsync({});
         setLocation(location);
       })();
-    });
+    },[]);
     
     const [locat, getCoordinates] = useLocation();
     return(

@@ -25,7 +25,5 @@ export default ()=>{
         }
     } 
 
-
-   
     return [results, getGroups, games, getGames];
 };

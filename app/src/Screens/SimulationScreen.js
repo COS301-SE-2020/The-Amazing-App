@@ -6,8 +6,22 @@ import  {Header} from 'react-native-elements';
 import {UserContext} from '../Context/UserContext';
 import { StatusBar } from 'expo-status-bar';
 import { Feather, MaterialIcons } from '@expo/vector-icons'; 
-
+import * as Location from 'expo-location';
 const SimulationScreen = ({navigation})=>{
+
+    useEffect(() => {
+        (async () => {
+          let { status } = await Location.requestPermissionsAsync();
+          if (status !== 'granted') {
+            setErrorMsg('Permission to access location was denied');
+          }
+    
+          let location = await Location.getCurrentPositionAsync({});
+          setLocation(location);
+        })();
+      },[]);
+      
+
     const userContext = useContext(UserContext);
     return(
         <SafeAreaView>
