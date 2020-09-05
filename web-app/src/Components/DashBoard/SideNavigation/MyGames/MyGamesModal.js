@@ -1,16 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import { Button, Header, Modal } from "semantic-ui-react";
 import MyGames from "./MyGames";
-import rootReducer from '../../../../store/reducers/rootReducer'
-import { connect } from "react-redux";
-import GameSummary from "./GameSummary";
-import { firestoreConnect } from 'react-redux-firebase'
-import { compose } from 'redux'
 
-class MyGamesModal extends Component {
+class MyGamesModal extends React.Component {
   render() {
-    console.log(this.props);
-    const { projects } = this.props;
     return (
       <Modal
         style={{
@@ -20,7 +13,6 @@ class MyGamesModal extends Component {
           left: "auto",
           right: "auto",
           position: "relative",
-          height: 600,
         }}
         trigger={
           <Button
@@ -42,9 +34,9 @@ class MyGamesModal extends Component {
         closeIcon
       >
         <Modal.Header>My Games</Modal.Header>
-        <Modal.Content>
+        <Modal.Content scrolling>
           <Modal.Description>
-            <MyGames projects={projects} />
+            <MyGames />
           </Modal.Description>
         </Modal.Content>
       </Modal>
@@ -52,13 +44,4 @@ class MyGamesModal extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  console.log(state);
-  return {
-    projects: state.project.projects
-  }
-}
-export default compose(
-  firestoreConnect(() => ['projects']),
-  connect(mapStateToProps)
-) (MyGamesModal);
+export default MyGamesModal;

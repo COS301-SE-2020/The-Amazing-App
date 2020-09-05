@@ -11,6 +11,7 @@ export const createProject = (project) => async (dispatch) => {
       createdAt: new Date(),
     }).then(() => {
       dispatch({ type: "CREATE_PROJECT_SUCCESS" });
+      window.location.href = "/dashboard";
     });
   } catch (err) {
     dispatch({ type: "CREATE_PROJECT_ERROR" }, err);

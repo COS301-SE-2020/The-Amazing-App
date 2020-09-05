@@ -9,7 +9,7 @@ import Cookies from "js-cookie";
 import { Route, Redirect } from "react-router-dom";
 import history from "../../../../history";
 import { connect } from "react-redux";
-import { createProject } from '../../../../store/actions/projectActions'
+import { createProject } from "../../../../store/actions/projectActions";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoidGFwZWhuZGhsb3Z1IiwiYSI6ImNrYmV2eTRhdDBwbXUydHA4eTl6cW5neDMifQ.BVjVIq7FUmlnMZJC_BvRDQ";
@@ -132,9 +132,9 @@ class CreateGameModal extends React.Component {
   onSubmitGame = (event) => {
     event.preventDefault();
     console.log(game);
-    this.props.createProject(game)
+    this.props.createProject(game);
     this.setState({ submit: "Submitted !" });
-    this.token = Cookies.get("token");   
+    //history.push("/dashboard");
   };
 
   render() {
@@ -413,7 +413,7 @@ class CreateGameModal extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    createProject: (project) => dispatch(createProject(project))
-  }
-}
+    createProject: (project) => dispatch(createProject(project)),
+  };
+};
 export default connect(null, mapDispatchToProps)(CreateGameModal);

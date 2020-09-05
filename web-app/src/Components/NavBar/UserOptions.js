@@ -24,9 +24,10 @@ const trigger = (
       src={image2}
       className="ui avatar image"
       alt="userImage"
-      style={{ height: 25, width: 25 }}
+      style={{ height: 18, width: 18 }}
     />
     <span style={{ fontSize: 14, color: "white" }}>
+      Tapiwa
       {Cookies.get("username")}
     </span>
   </div>

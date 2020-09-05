@@ -1,7 +1,10 @@
 import React from "react";
 import {Header, Modal,  Form, Button } from "semantic-ui-react";
-import axios from 'axios';
 import Cookies from 'js-cookie';
+import axios from 'axios';
+
+
+
 
 
 
@@ -61,9 +64,9 @@ onChangeNewPassword(e) {
   onSubmitUsername(e) {
       e.preventDefault()
      
-      this.token = Cookies.get('token');
+     // this.token = Cookies.get('token');
       const data = {'username': this.state.newusername }
-      const instance = axios.put('http://localhost:8000/api/auth/UpdateUsername',data,{headers: {Authorization : 'Bearer ' + this.token}}
+      const instance = axios.put('/Users.json',data//,{headers: {Authorization : 'Bearer ' + this.token}}
       ).then(res => {
         if(res.status == 200){
           this.state.username = this.state.newusername
@@ -81,7 +84,7 @@ onChangeNewPassword(e) {
     const data = {'email': this.state.newemail}
     const instance = axios.put('http://localhost:8000/api/auth/UpdateEmail',data,{headers: {Authorization : 'Bearer ' + this.token}}
     ).then(res => {
-      if(res.status == 200){
+      if(res.status ==  200){
         this.state.email= this.state.newemail
       }
   }).catch(error => {
