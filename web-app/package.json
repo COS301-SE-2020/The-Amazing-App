@@ -38,11 +38,14 @@
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.3.0",
     "semantic-ui-react": "^0.88.2",
+    "serve": "^11.3.2",
     "typescript": "^3.5.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "dev": "react-scripts start",
+    "start": "serve -s build",
     "build": "react-scripts build",
+    "heroku-postbuild": "npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "compile-sass": "node-sass src/assets/scss/paper-kit.scss src/assets/css/paper-kit.css",
