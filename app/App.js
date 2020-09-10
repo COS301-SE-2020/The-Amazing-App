@@ -9,7 +9,7 @@ import test from './src/Screens/test';
 
 console.disableYellowBox = true; 
 const navigator = createSwitchNavigator( {
-    test,
+    //test,
     landingScreen,
     auth,
     main

@@ -3,6 +3,9 @@ import firebase from '../Config/Config';
 import {AuthContext} from '../Context/AuthContext';
 import {UserContext} from '../Context/UserContext';
 import source from '../../assets/t1.jpg';
+import { Alert } from 'react-native';
+import 'firebase/firestore'
+
 export default () => {
   const authContext = useContext(AuthContext);
   const userContext = useContext(UserContext);
@@ -11,20 +14,17 @@ export default () => {
       try {
         const User = await firebase.auth().signInWithEmailAndPassword(email,password);
         const query = await firebase.firestore().collection('Users').where('Email', '==', email).limit(1).get();
-        const query2 = await  firebase.firestore().collection('Users')
-        .where('Email', '==',email).limit(1).get();
-        const user = query2.docs[0];
+        const user = query.docs[0];
         const picture = await user.data().Picture; 
         const result = {uri: picture};
-        authContext.setisLogedIn(true);
-        authContext.setUserId(User.user.uid);
-
-        const username = query.docs[0];
-        userContext.setUsername(username.data().Username);
+        authContext.setisLoggedIn(true);
+        authContext.setUserId(user.user.uid)
+        userContext.setUsername(user.data().Username);
         userContext.setEmail(email);
         picture == null?userContext.setImage(source):userContext.setImage(result);
       } catch (error) {
-        authContext.setisLogedIn(false)
+        authContext.setisLoggedIn(false);
+        Alert.alert(error);
       }      
 
   }

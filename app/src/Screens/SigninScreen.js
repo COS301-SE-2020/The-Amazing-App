@@ -6,14 +6,15 @@ import ImageComponent from '../Componets/ImageComponent';
 import { StatusBar } from 'expo-status-bar';
 import { EvilIcons,MaterialCommunityIcons } from '@expo/vector-icons';
 import {AuthContext} from '../Context/AuthContext';
+import {UserContext} from '../Context/UserContext';
 import useLogin from '../Api/LoginAPI';
 
 const SigninScreen = ({navigation})=>{
     const {containerStyle, inputStyle, buttonStyle} = style;
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     const [Login] = useLogin();
+    const [password, setPassword] = useState('');
     const authContext = useContext(AuthContext);
+    const userContext = useContext(UserContext);
 
     <StatusBar style='#2A9D8F'/>
     return(
@@ -22,7 +23,7 @@ const SigninScreen = ({navigation})=>{
             <View>
                     <Input  autoCorrect={false} autoCapitalize='none'
                      containerStyle={inputStyle} placeholder="Email"
-                      onChangeText={setEmail} value={email}
+                      onChangeText={userContext.setEmail} value={userContext.email}
                       leftIcon={<MaterialCommunityIcons name="email" size={20} color="#2A9D8F" />}
                       />
 
@@ -38,8 +39,8 @@ const SigninScreen = ({navigation})=>{
                     </Text>
                 </TouchableOpacity>
 
-                <Button  buttonStyle={buttonStyle} title='Sign In' onPress={()=>Login(email,password)} />
-                {authContext.isLogedin?navigation.navigate('Home'):null}
+                <Button  buttonStyle={buttonStyle} title='Sign In' onPress={()=>Login(userContext.email,password)} />
+                {authContext.isLoggedin?navigation.navigate('Home'):null}
                 <TouchableOpacity onPress={()=>navigation.navigate('SignupScreen')}>
                     <Text style={{alignSelf:'center'}}>
                         Dont have an account ? <Text style={{color:'#2A9D8F'}}> Signup
