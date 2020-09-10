@@ -18,13 +18,13 @@ export default () => {
         const picture = await user.data().Picture; 
         const result = {uri: picture};
         authContext.setisLoggedIn(true);
-        authContext.setUserId(user.user.uid)
+        authContext.setUserId(User.user.uid)
         userContext.setUsername(user.data().Username);
         userContext.setEmail(email);
         picture == null?userContext.setImage(source):userContext.setImage(result);
       } catch (error) {
         authContext.setisLoggedIn(false);
-        Alert.alert(error);
+        console.log(error);
       }      
 
   }
