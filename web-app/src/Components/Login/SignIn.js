@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Button, Form, Grid, Message, Segment } from "semantic-ui-react";
+import {
+  Button,
+  Form,
+  Grid,
+  Message,
+  Segment,
+  Loader,
+} from "semantic-ui-react";
 import image from "../../Assets/logo.png";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -8,14 +15,7 @@ import useForm from "../../utils/useForm";
 import validate from "../../utils/validateLoginForm";
 import Spinner from "./Spinner";
 
-const Login = ({
-  signup,
-  signin,
-  resetPassword,
-  authMsg,
-  history,
-  loading,
-}) => {
+const Login = ({ signup, signin, resetPassword, authMsg, history }) => {
   const [newUser, setNewUser] = useState(false);
   const [reset, SetReset] = useState(false);
   const [credentials, handleChange, handleSubmit, errors] = useForm(
@@ -23,12 +23,17 @@ const Login = ({
     validate,
     reset
   );
+  const [loading, setLoading] = useState(false);
 
   function login() {
     // signin
+    setLoading(true);
     signin(credentials.email, credentials.password, () =>
       history.push("/dashboard")
     );
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
   }
 
   return (
@@ -105,8 +110,11 @@ const Login = ({
                 color="teal"
                 size="medium"
                 className="btn-login"
+                disabled={loading}
               >
-                Login
+                {loading && <Loader active />}
+                {loading && <span>Login In</span>}
+                {!loading && <span>Login</span>}
               </Button>
 
               <Message>
