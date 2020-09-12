@@ -106,7 +106,6 @@ const style = StyleSheet.create({
         borderRadius:20,
         borderWidth:3,
         borderColor:'#fff',
-
     },
     titleStyle:{
         fontSize:18,
@@ -149,7 +148,6 @@ const style = StyleSheet.create({
         width:'100%',
         height:'100%',
         backgroundColor:'rgba(42, 157, 143, 0.01)',
-
     },
     blade:{
         backgroundColor:'white',
@@ -159,7 +157,6 @@ const style = StyleSheet.create({
         marginLeft:35,
         marginRight:35,
         borderRadius:5,
-        
     }
 })
 

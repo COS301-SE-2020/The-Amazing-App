@@ -19,6 +19,7 @@ const test = ({navigation})=>{
       })();
     },[]);
     
+    const [locat, getCoordinates] = useLocation();
     return(
         <> 
             <View style={{alignItems:'center',paddingTop:80}}>

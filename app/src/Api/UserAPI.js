@@ -60,11 +60,11 @@ export const updatePicture = async (image) => {
 }
 
 
-export const forgotPassword = async (userEmail) => {
+export const forgotPassword = async () => {
+    const userContext = useContext(UserContext);
+    
     try {
-        await firebase.auth().sendPasswordResetEmail(userEmail).then(function (user) {
-            Alert.alert('Please check your email...')
-          });
+        await firebase.auth().sendPasswordResetEmail(userContext.email);
         //on success
     } catch (error) {
         //if failed

@@ -3,11 +3,11 @@ const AuthContext = React.createContext();
 
 const  AuthProvider = (props) => {
   const [userId, setUserId] = useState('');
-  const [isLoggedin, setisLoggedIn] = useState(false);
+  const [isLogedin, setisLogedIn] = useState(false);
   const [isRegistered, setisRegistered] = useState(false);
   return (
     < AuthContext.Provider
-        value={{userId,setUserId,isLoggedin,setisLoggedIn,isRegistered,setisRegistered}}
+        value={{userId,setUserId,isLogedin,setisLogedIn,isRegistered,setisRegistered}}
         >
         {props.children}
     </ AuthContext.Provider>

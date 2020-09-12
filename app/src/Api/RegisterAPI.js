@@ -9,7 +9,7 @@ export default () => {
     try {
         const db = firebase.firestore().collection('Users');
         await  firebase.auth().createUserWithEmailAndPassword(email,password);
-        db.add({Username: username,Email: email,Points:0});
+        db.add({Username: username,Email: email});
         authContext.isRegistered(true);
     } catch (error) {
       authContext.isRegistered(false);

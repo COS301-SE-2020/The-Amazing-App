@@ -5,8 +5,7 @@ import {forgotPassword} from '../Api/UserAPI'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const ForgetPasswordScreen = ({navigation})=>{
-    const [userEmail, setEmail] = useState('');
-
+    const [email, setEmail] = useState('');
     return(
         <>
             <SafeAreaView>
@@ -21,10 +20,10 @@ const ForgetPasswordScreen = ({navigation})=>{
                         </Text>
                         <Input  autoCorrect={false} autoCapitalize='none'
                         containerStyle={style.inputStyle} placeholder="Email"
-                        onChangeText={setEmail} value={userEmail}
+                        onChangeText={setEmail} value={email}
                         leftIcon={<MaterialCommunityIcons name="email" size={20} color="white" />}
                         />
-                        <Button  buttonStyle={style.buttonStyle} title='Send Request' onPress={()=>{forgotPassword(userEmail)
+                        <Button  buttonStyle={style.buttonStyle} title='Send Request' onPress={()=>{forgotPassword(email)
                         navigation.navigate('SigninScreen')}
                         } />
                     </View>

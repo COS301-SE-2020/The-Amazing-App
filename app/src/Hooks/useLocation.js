@@ -1,20 +1,19 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import * as Location from 'expo-location';
 
 export default ()=>{
-    const [latitude , setLatitude] = useState(0);
-    const [longitude , setLongitude] = useState(0);
-
-    const getCoordinates = async (address)=>{
-        try{
-            const results = await Location.geocodeAsync('Gautrain Hatfield Station, Cnr Grosvenor Road and Arcadia Street, Hatfield, Pretoria, Gauteng 0083, South Africa');
-            setLatitude(results[0].latitude);
-            setLongitude(results[0].longitude);
+    const [userLocation, setUserLocation] = useState([]);
+    useEffect(() => {
+        getUserCoord()
+    },[]) 
+    const getUserCoord = async ()=>{
+        let { status } = await Location.requestPermissionsAsync()
+        if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied')
         }
-        catch{
-            console.log('error');
-        }
+        let location = await Location.getCurrentPositionAsync({})
+        const loc = {'latitude':location.coords.latitude,'longitude':location.coords.longitude}
+        setUserLocation(loc) 
     }
-
-    return [latitude, longitude, getCoordinates];
+    return [userLocation, getUserCoord];
 }
