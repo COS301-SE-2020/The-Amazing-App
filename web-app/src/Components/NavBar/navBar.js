@@ -4,10 +4,21 @@ import logo from "../../Assets/logo.png";
 import { Link } from "react-router-dom";
 import UserOptions from "./UserOptions";
 import { Button } from "semantic-ui-react";
+import firebase from "../../Config/fbConfig";
 
 class NavBar extends React.Component {
   logout = () => {
-    window.location.href = "/login";
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        console.log("Sign Out Successfull!!");
+        window.location.href = "/login";
+      })
+      .catch(() => {
+        window.location.href = "/dashboard";
+        alert("Signout Failed!!");
+      });
   };
 
   render() {
