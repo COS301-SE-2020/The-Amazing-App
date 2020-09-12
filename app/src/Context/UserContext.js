@@ -9,7 +9,7 @@ const UserProvider = (props) => {
   
   return (
     <UserContext.Provider
-        value={{email,setEmail,image,setImage, username, setUsername,}}
+        value={{email,setEmail,image,setImage, username, setUsername}}
     >
         {props.children}
     </UserContext.Provider>
