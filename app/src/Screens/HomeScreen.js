@@ -11,9 +11,9 @@ import image from '../../assets/avatar1.png';
 
 const HomeScreen = ({navigation})=>{
 
-    const {term,setTerm} = useState('');
-    const {gameId,setgameId} = useState('');
-    const {groupId,setgoupId} = useState('');
+    const [term,setTerm] = useState('');
+    const [gameId,setgameId]= useState('');
+    const [groupId,setgroupId] = useState('');
     const [modalOpen, setModelOpen] = useState(false);
     const userContext = useContext(UserContext);
     const [results,getGroups, games, getGames] = useResults()
@@ -41,7 +41,7 @@ const HomeScreen = ({navigation})=>{
                         renderItem={({item})=>{
                             return( 
                                 <TouchableOpacity onPress={()=>{
-                                    setgoupId(item.id);
+                                    setgroupId(item.id);
                                     setModelOpen(false);
                                 }}>
                                 <View style={style.itemStyle2}>
@@ -63,14 +63,14 @@ const HomeScreen = ({navigation})=>{
         return(
             <View style={{alignItems:'center', marginTop:50}}>
                 <Text style={{color:'white', fontWeight:'bold', fontSize:18,marginBottom:30}}>
-                    Eish group found ):
+                    No group found ):
                 </Text>
                 <View>
                     <Text style={{color:'white',fontWeight:'bold',marginBottom:30}}>
                         You need to create a group
                     </Text>
                     <Button  buttonStyle={style.buttonStyle} title='Create Group'
-                     titleStyle={{color:'#888e8f',fontWeight:'bolds'}} 
+                     titleStyle={{color:'#888e8f',fontWeight:'bold'}} 
                      onPress={()=>navigation.navigate('Creategroup')}
                      />
                 </View>

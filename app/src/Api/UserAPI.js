@@ -45,14 +45,10 @@ export const updatePicture = async (image) => {
         firebase.firestore().collection('Users').where('Email', '==', Email).limit(1).get().then((query) => {  
             const thing = query.docs[0];
             thing.ref.update({Picture:downloadURL});
+            const result = {uri: picture};
+            userContext.setImage(result);
         }); 
 
-        const query2 = await  firebase.firestore().collection('Users')
-        .where('Email', '==',email).limit(1).get();
-        const user2 = query2.docs[0];
-        const picture = await user2.data().Picture; 
-        const result = {uri: picture};
-        userContext.setImage(result);
         //on success
     } catch (error) {
         //on fail
