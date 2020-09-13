@@ -9,12 +9,14 @@ import {
   watchPositionAsync,
   Accuracy,
 } from 'expo-location'
-import { Value } from 'react-native-reanimated'
+import { set, Value } from 'react-native-reanimated'
 const MapComponent = ({ data, userLoc }) => {
   const [userLocations, getUserCoord] = useLocation()
   const [destination , setDestination] = useState(data[0])
-  const [userLocation, setUserLocation] = useState([])
-  const [reachDestination,setReachDestination ] = useState([])
+  const [userLocation, setUserLocation] = useState(userLocations)
+
+
+  const MapStyle=[{"elementType": "geometry", "stylers": [{"color": "#242f3e"}]},{"elementType": "labels.text.fill","stylers": [{"color": "#746855"}]},{"elementType": "labels.text.stroke","stylers": [{"color": "#242f3e"}]},{"featureType": "administrative.locality","elementType": "labels.text.fill","stylers": [{"color": "#d59563"}]},{"featureType": "poi","elementType": "labels.text.fill","stylers": [{"color": "#d59563"}]},{"featureType": "poi.park","elementType": "geometry","stylers": [{"color": "#263c3f"}]},{"featureType": "poi.park","elementType": "labels.text.fill","stylers": [{"color": "#6b9a76"}]},{"featureType": "road","elementType": "geometry","stylers": [{"color": "#38414e"}]},{"featureType": "road","elementType": "geometry.stroke","stylers": [{"color": "#212a37"}]},{"featureType": "road","elementType": "labels.text.fill","stylers": [{"color": "#9ca5b3"}]},{"featureType": "road.highway","elementType": "geometry","stylers": [{"color": "#746855"}]},{"featureType": "road.highway","elementType": "geometry.stroke","stylers": [{"color": "#1f2835"}]},{"featureType": "road.highway","elementType": "labels.text.fill","stylers": [{"color": "#f3d19c"}]},{"featureType": "transit","elementType": "geometry","stylers": [{"color": "#2f3948"}]},{"featureType": "transit.station","elementType": "labels.text.fill","stylers": [{"color": "#d59563"}]},{"featureType": "water","elementType": "geometry","stylers": [{"color": "#17263c"}]},{"featureType": "water","elementType": "labels.text.fill","stylers": [{"color": "#515c6d"}]},{"featureType": "water","elementType": "labels.text.stroke","stylers": [{"color": "#17263c"}]}];
 
   const startWatching = async () => {
     try {
@@ -37,10 +39,8 @@ const MapComponent = ({ data, userLoc }) => {
     } catch (e) {
       setErr(e);
     }
-  };
-  setInterval(()=>{
-    startWatching();
-},100)
+  }; 
+
   useEffect(() => {
     startWatching();
   },[]);
@@ -56,19 +56,29 @@ const MapComponent = ({ data, userLoc }) => {
         latitudeDelta: 0.01,
         longitudeDelta: 0.01,
       }}
+      showsBuildings
+      showsUserLocation 
+      showsMyLocationButton 
+      showsIndoors 
+      userLocationPriority='high'
+      userLocationUpdateInterval
+      followsUserLocation 
+      customMapStyle={MapStyle}
     >
       {data.map((data) => {
-        return (
         
-            <MapView.Marker
+        return (
+            <Marker
             coordinate={{ latitude: data.latitude, longitude: data.longitude }}
+            key={data.latitude}
+            
             pinColor={pinColor}
           >
             <Callout>
               <Text>Lets Go</Text>
             </Callout>
      
-          </MapView.Marker>
+          </Marker>
         )
       })}
           <MapViewDirections
@@ -82,16 +92,7 @@ const MapComponent = ({ data, userLoc }) => {
           optimizeWaypoints={true}
           resetOnChange={false}
           precision={"low"}
-          splitWaypoints={true}
-          onStart={(params)=>Speech.speak('Ready to start!! lets go')}
-          onReady={(results)=>{
-            console.log(results.coordinates)
-            console.log(results.coordinates[results.coordinates.length-1])
-            setReachDestination(userLocation)
-            //setUserLocation(results.coordinates[results.coordinates.length-1])
-            console.log(destination)
-          }}
-          onError={(error)=>console.log(error)}
+      
         />
     </MapView>
   )

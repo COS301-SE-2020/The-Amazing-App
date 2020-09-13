@@ -12,7 +12,7 @@ const SimulationScreen = ({ navigation }) => {
   const data = [
     { latitude: -26.2023, longitude: 28.0436 },
     { latitude: -26.21, longitude: 28.0436 },
-    { latitude: -26.21, longitude: 28.049 },
+    { latitude: -26.22, longitude: 28.049 },
   ]
   useEffect(() => {
     ;(async () => {
