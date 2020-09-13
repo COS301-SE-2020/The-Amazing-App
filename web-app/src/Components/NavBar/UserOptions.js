@@ -7,17 +7,19 @@ import Cookies from "js-cookie";
 import { db } from "../../Config/fbConfig";
 
 let email = Cookies.get("email");
-const doc_query = db.collection("Users").where("Email", "==", email);
-doc_query.get().then(function (querySnapshot) {
-  querySnapshot.forEach((doc) => {
-    //console.log(doc.data());
-    //setUsername(username);
-    //let username = doc.data().Username;
-    Cookies.set("username", doc.data().Username, {
-      expires: 2,
+if (email){
+  const doc_query = db.collection("Users").where("Email", "==", email);
+  doc_query.get().then(function (querySnapshot) {
+    querySnapshot.forEach((doc) => {
+      //console.log(doc.data());
+      //setUsername(username);
+      //let username = doc.data().Username;
+      Cookies.set("username", doc.data().Username, {
+        expires: 2,
+      });
     });
   });
-});
+}
 /*const instance = axios
   .get("http://localhost:8000/api/auth/me", {
     headers: { Authorization: "Bearer " + Cookies.get("token") },

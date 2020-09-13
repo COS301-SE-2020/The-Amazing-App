@@ -26,24 +26,15 @@ export default class UpdatePreferences extends React.Component {
       currentpassword: "",
       err: "",
     };
-    /*this.token = Cookies.get("token");
-    const instance = axios
-      .get("http://localhost:8000/api/auth/me", {
-        headers: { Authorization: "Bearer " + this.token },
-      })
-      .then((res) => {
-        if (res.status == 200) {
-          this.state.username = res.data.data.username;
-          this.state.email = res.data.data.email;
-          // this.state.password = res.data.data.password;
-          console.log(this.state.password);
-        }
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });*/
-    this.state.username = Cookies.get("username");
+   
+    
     this.state.email = Cookies.get("email");
+    console.log('Email: ' + this.state.email);
+    firebase.firestore().collection('Users').where('Email', '==', this.state.email).limit(1).get().then((query) => {  
+      const user = query.docs[0];
+      this.state.username = user.data().Username;
+  }); 
+    
   }
   onChangeUserName(e) {
     this.setState({ newusername: e.target.value });
@@ -65,18 +56,15 @@ export default class UpdatePreferences extends React.Component {
   onSubmitUsername(e) {
     e.preventDefault();
 
-    let user = firebase.auth().currentUser;
-    user
-      .updateProfile({
-        Username: this.state.newusername,
-      })
-      .then(function () {
-        console.log("Update successful!!");
-        this.state.username = this.state.newusername;
-      })
-      .catch(function (error) {
-        console.log("Error in updating username!!");
-      });
+    firebase.firestore().collection('Users').where('Email', '==', this.state.email).limit(1).get().then((query) => {  
+      const user = query.docs[0];
+      this.state.username = this.state.newusername;
+      user.ref.update({Username: this.state.newusername});
+      alert('Username updated!');
+    }).catch((error) =>{
+      console.log(error.message);
+
+    });
 
     // this.token = Cookies.get('token');
     /*const data = { username: this.state.newusername };
