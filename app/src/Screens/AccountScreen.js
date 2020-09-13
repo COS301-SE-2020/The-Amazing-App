@@ -40,8 +40,8 @@ const AccountScreen = ({navigation})=>{
             <View style={statContainer}>
                 <View style={statStyle}>
                     <Text style={statAmountStyle}>0</Text>
-                    <Text style={statTitleStyle}>Games Enrolled</Text>
-                    <AntDesign name="play" size={24} color='white' />
+                    <Text style={statTitleStyle}>Points</Text>
+                    <AntDesign name="star" size={24} color='white' />
                 </View>
                 <View style={statStyle}>
                     <Text style={statAmountStyle}>0</Text>

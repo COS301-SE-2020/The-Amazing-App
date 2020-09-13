@@ -9,7 +9,9 @@ import SimulationScreen from './src/Screens/SimulationScreen'
 
 console.disableYellowBox = true
 const navigator = createSwitchNavigator({
-  SimulationScreen,
+  landingScreen,
+  auth,
+  main,
 })
 
 const AppContainer = createAppContainer(navigator)
