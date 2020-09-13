@@ -2,7 +2,7 @@ import React,{useState, useEffect} from 'react';
 import * as Location from 'expo-location';
 
 export default ()=>{
-    const [userLocation, setUserLocation] = useState([]);
+    const [userLocations, setUserLocation] = useState([]);
     useEffect(() => {
         getUserCoord()
     },[]) 
@@ -15,5 +15,6 @@ export default ()=>{
         const loc = {'latitude':location.coords.latitude,'longitude':location.coords.longitude}
         setUserLocation(loc) 
     }
-    return [userLocation, getUserCoord];
+
+    return [userLocations, getUserCoord];
 }

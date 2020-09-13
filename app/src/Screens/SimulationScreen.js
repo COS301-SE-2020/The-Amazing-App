@@ -8,6 +8,7 @@ import { StatusBar } from 'expo-status-bar'
 import { Feather, MaterialIcons } from '@expo/vector-icons'
 import * as Location from 'expo-location'
 const SimulationScreen = ({ navigation }) => {
+  
   const data = [
     { latitude: -26.2023, longitude: 28.0436 },
     { latitude: -26.21, longitude: 28.0436 },
@@ -26,11 +27,12 @@ const SimulationScreen = ({ navigation }) => {
       } catch (error) {
         let status = Location.getProviderStatusAsync();
         if(!(await status).locationServicesEnabled){
-          alert('+++++++++++++++++++++++')
+          alert('')
         }
       }
     })()
   }, [])
+
   const [userLoc, setUserLocation] = useState(null)
   const userContext = useContext(UserContext)
   return (

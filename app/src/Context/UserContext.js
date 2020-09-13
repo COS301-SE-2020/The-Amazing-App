@@ -6,10 +6,10 @@ const UserProvider = (props) => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [image, setImage] = useState(null);
-  
+  const [userLocation, setUserLocation] = useState();
   return (
     <UserContext.Provider
-        value={{email,setEmail,image,setImage, username, setUsername}}
+        value={{email,setEmail,image,setImage, username, setUsername,userLocation,setUserLocation}}
     >
         {props.children}
     </UserContext.Provider>
