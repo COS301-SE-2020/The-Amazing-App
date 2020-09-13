@@ -1,18 +1,23 @@
 import React ,{useContext} from 'react';
 import firebase from '../Config/Config';
 import {AuthContext} from '../Context/AuthContext';
+import { UserContext } from '../Context/UserContext';
 
 export default () => {
-
+  const authContext = useContext(AuthContext);
+  const userContext =useContext(UserContext);
   const Register = async (email, password, username)=>{
-    const authContext = useContext(AuthContext);
+    
     try {
         const db = firebase.firestore().collection('Users');
-        await  firebase.auth().createUserWithEmailAndPassword(email,password);
-        db.add({Username: username,Email: email});
-        authContext.isRegistered(true);
+        const User = await  firebase.auth().createUserWithEmailAndPassword(email,password);
+        db.add({Username: username,Email: email,Points:0});
+        authContext.setUserId(User.user.uid);
+        userContext.setImage(result);
+        authContext.setisRegistered(true);
     } catch (error) {
-      authContext.isRegistered(false);
+      authContext.setisRegistered(false);
+      console.log(error)
     }   
   }
   return [Register];

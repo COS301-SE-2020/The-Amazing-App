@@ -93,7 +93,7 @@ const HomeScreen = ({ navigation }) => {
             marginBottom: 30,
           }}
         >
-          Eish group found ):
+          Eish group not found ):
         </Text>
         <View>
           <Text

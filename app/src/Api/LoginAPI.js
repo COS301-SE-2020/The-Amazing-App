@@ -1,4 +1,5 @@
 import React ,{useContext} from 'react';
+import {Alert} from 'react-native';
 import firebase from '../Config/Config';
 import {AuthContext} from '../Context/AuthContext';
 import {UserContext} from '../Context/UserContext';
@@ -11,20 +12,17 @@ export default () => {
       try {
         const User = await firebase.auth().signInWithEmailAndPassword(email,password);
         const query = await firebase.firestore().collection('Users').where('Email', '==', email).limit(1).get();
-        const query2 = await  firebase.firestore().collection('Users')
-        .where('Email', '==',email).limit(1).get();
-        const user = query2.docs[0];
+        const user = query.docs[0];
         const picture = await user.data().Picture; 
         const result = {uri: picture};
-        authContext.setisLogedIn(true);
+        authContext.setisLoggedIn(true);
         authContext.setUserId(User.user.uid);
-
-        const username = query.docs[0];
-        userContext.setUsername(username.data().Username);
+        userContext.setUsername(user.data().Username);
         userContext.setEmail(email);
         picture == null?userContext.setImage(source):userContext.setImage(result);
       } catch (error) {
-        authContext.setisLogedIn(false)
+        authContext.setisLoggedIn(false);
+        Alert.alert('Unable to login');
       }      
 
   }

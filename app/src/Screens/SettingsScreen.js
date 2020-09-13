@@ -5,7 +5,7 @@ import { Feather, AntDesign,MaterialCommunityIcons, MaterialIcons,EvilIcons, Ent
 import { Switch } from 'react-native-paper';
 import { StatusBar } from 'expo-status-bar';
 import * as ImagePicker from 'expo-image-picker';
-import {updateUsername, updatePassword,updatePicture} from '../Api/UserAPI';
+import UserAPI from '../Api/UserAPI';
 import {UserContext} from '../Context/UserContext';
 
 
@@ -15,12 +15,12 @@ const SettingsScreen = ({navigation})=>{
     const [modalOpen, setModelOpen] = useState(false);
     const [isOperation, setisOperation] = useState('');
     const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
+    const [updateUsername,updatePassword,updatePicture] = UserAPI();
 
     /*
             This state varible are used for changing 
             user preference 
     */
-    const [username, setUsername] = useState('');
     const [newPassword, setnewPassword] = useState('');
     const [oldPassword, setoldPassword] = useState('');
     const [url, setUrl] = useState('');
@@ -54,11 +54,11 @@ const SettingsScreen = ({navigation})=>{
                         containerStyle={{marginTop:'10%'}}
                         style={{textContentType:'white'}}
                         autoCorrect={false} autoCapitalize='none' placeholder="Enter new username"
-                        onChangeText={setUsername} value={username}
+                        onChangeText={userContext.setUsername} value={userContext.username}
                         leftIcon={<EvilIcons name="lock" size={32} color="white"/>}
                      />
                     <Button  buttonStyle={style.buttonStyle} title='Submit' onPress={()=>{
-                        updateUsername(username)
+                        updateUsername(userContext.username)
                         setModelOpen(false)
                     }}
                      />
@@ -92,7 +92,7 @@ const SettingsScreen = ({navigation})=>{
                     leftIcon={<EvilIcons name="lock" size={32} color="white"/>}
                  />
                 <Button  buttonStyle={style.buttonStyle} title='Submit' onPress={()=>{
-                        updatePassword(newPassword,oldPassword)
+                        updatePassword(userContext.email,newPassword,oldPassword)
                         setModelOpen(false)
                     }}
                  />
