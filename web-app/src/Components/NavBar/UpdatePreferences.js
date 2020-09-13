@@ -56,31 +56,27 @@ export default class UpdatePreferences extends React.Component {
       const user = query.docs[0];
       this.state.username = this.state.newusername;
       user.ref.update({Username: this.state.newusername});
+      Cookies.set("username",this.state.newusername)
       alert('Username updated!');
     }).catch((error) =>{
       console.log(error.message);
 
     });
 
-    // this.token = Cookies.get('token');
-    /*const data = { username: this.state.newusername };
-    const instance = Results.put(
-      "/Users.json",
-      data //,{headers: {Authorization : 'Bearer ' + this.token}}
-    )
-      .then((res) => {
-        if (res.status == 200) {
-          this.state.username = this.state.newusername;
-        }
-      })
-      .catch((error) => {
-        this.setState({ username: error.message });
-      });*/
   }
 
   onSubmitEmail(e) {
     e.preventDefault();
-
+    var user = firebase.auth().currentUser;
+    user.updateEmail(this.state.newemail);
+    this.state.email = this.state.newemail;
+    firebase.firestore().collection('Users').where('Email', '==', Cookies.get("email")).limit(1).get().then((query) => {  
+      const user = query.docs[0];
+      user.ref.update({Email:this.state.newemail});
+      Cookies.set("email",this.state.email);
+      alert("Email updated!");
+    });
+    
    
   }
 
