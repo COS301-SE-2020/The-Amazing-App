@@ -29,11 +29,7 @@ export default class UpdatePreferences extends React.Component {
    
     
     this.state.email = Cookies.get("email");
-    console.log('Email: ' + this.state.email);
-    firebase.firestore().collection('Users').where('Email', '==', this.state.email).limit(1).get().then((query) => {  
-      const user = query.docs[0];
-      this.state.username = user.data().Username;
-  }); 
+    this.state.username = Cookies.get("username");
     
   }
   onChangeUserName(e) {
@@ -85,20 +81,7 @@ export default class UpdatePreferences extends React.Component {
   onSubmitEmail(e) {
     e.preventDefault();
 
-    this.token = Cookies.get("token");
-    const data = { email: this.state.newemail };
-    const instance = axios
-      .put("http://localhost:8000/api/auth/UpdateEmail", data, {
-        headers: { Authorization: "Bearer " + this.token },
-      })
-      .then((res) => {
-        if (res.status == 200) {
-          this.state.email = this.state.newemail;
-        }
-      })
-      .catch((error) => {
-        this.setState({ email: error.message });
-      });
+   
   }
 
   onSubmitPassword(e) {
@@ -106,28 +89,18 @@ export default class UpdatePreferences extends React.Component {
 
     const regPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
     if (regPassword.test(this.state.newpassword) == true) {
-      this.token = Cookies.get("token");
-      const data = {
-        CurrentPassword: this.state.currentpassword,
-        NewPassword: this.state.newpassword,
-      };
-      const instance = axios
-        .put("http://localhost:8000/api/auth/ChangePassword", data, {
-          headers: { Authorization: "Bearer " + this.token },
-        })
-        .then((res) => {
-          if (res.status == 200) {
-            this.state.err = "Password updated successfully!";
-          }
-        })
-        .catch((error) => {
-          this.setState({ err: error.message });
-        });
-    } else {
-      this.setState({
-        err:
-          "Password must contain 1 uppercase letter, 1 lowercase letter,1 number, 1 special character and must be 8 characters long!",
+      firebase.auth().signInWithEmailAndPassword(this.state.email,this.state.currentpassword).then((res) => {
+          var user = firebase.auth().currentUser;
+          user.updatePassword(this.state.newpassword).then(function() {
+              alert('Password Updated!');
+          })
+      }).catch((error) => {
+        alert(error.message);
       });
+      
+    } else {
+          alert("Password must contain 1 uppercase letter, 1 lowercase letter,1 number, 1 special character and must be 8 characters long!");
+
     }
   }
 
