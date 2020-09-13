@@ -1,10 +1,8 @@
 import React from "react";
-import { Redirect } from "react-router";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SideNavComponent from "./SideNavigation/SideNavComponent";
 import Footer from "../NavBar/Footer";
 import Navbar from "../NavBar/navBar";
-import axios from "axios";
 import Cookies from "js-cookie";
 import SignIn from "../Login/SignIn";
 import db from "../../Config/fbConfig";
@@ -46,6 +44,7 @@ class App extends React.Component {
         console.log(error.message);
         this.setState({ success: "notfound" });
       });*/
+    //console.log("Email here " + Cookies.get("email"));
   }
 
   render() {

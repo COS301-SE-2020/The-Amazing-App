@@ -10,10 +10,9 @@ import {
 import image from "../../Assets/logo.png";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { signup, signin, resetPassword } from "../../store/actions/auth";
+import { signin, resetPassword } from "../../store/actions/auth";
 import useForm from "../../utils/useForm";
 import validate from "../../utils/validateLoginForm";
-import Spinner from "./Spinner";
 
 const Login = ({ signup, signin, resetPassword, authMsg, history }) => {
   const [newUser, setNewUser] = useState(false);

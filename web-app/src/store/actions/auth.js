@@ -82,9 +82,13 @@ export const signin = (email, password, callback) => async (dispatch) => {
             });
           });
           //console.log("Token here " + firebase.auth().currentUser.getIdToken());
-          /*Cookies.set("token", firebase.auth().currentUser.email, {
+          Cookies.set("email", firebase.auth().currentUser.email, {
             expires: 2,
-          });*/
+          });
+          Cookies.set("userid", firebase.auth().currentUser.uid, {
+            expires: 2,
+          });
+          //console.log("User ID " + firebase.auth().currentUser.uid);
           dispatch({ type: SIGNIN_SUCCESS });
           callback();
         } else {
