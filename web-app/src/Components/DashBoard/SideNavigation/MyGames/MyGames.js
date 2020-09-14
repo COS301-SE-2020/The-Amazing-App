@@ -1,10 +1,8 @@
 import React from "react";
-import { Icon, Image, Item, Card } from "semantic-ui-react";
+import { Card } from "semantic-ui-react";
 import { Button } from "semantic-ui-react";
 import { db } from "../../../../Config/fbConfig";
-/*import image3 from "./detective.jpg";
-import image4 from "./quest.png";
-import image5 from "./octopus.png";*/
+import Cookies from "js-cookie";
 
 class MyGames extends React.Component {
   state = {
@@ -16,7 +14,9 @@ class MyGames extends React.Component {
     const doc_query = db.collection("projects").where("name", "==", name);
     doc_query.get().then(function (querySnapshot) {
       querySnapshot.forEach((doc) => {
-        doc.ref.delete();
+        if (doc.data().user_id == Cookies.get("userid")) {
+          doc.ref.delete();
+        }
       });
     });
   }
@@ -28,7 +28,10 @@ class MyGames extends React.Component {
         const games = [];
         snapshot.forEach((doc) => {
           const data = doc.data();
-          games.push(data);
+          if (data.user_id == Cookies.get("userid")) {
+            //console.log(doc.data());
+            games.push(data);
+          }
         });
         this.setState({ games: games });
         //console.log(snapshot.docs[1]._document.proto.fields.location[0]);
@@ -43,7 +46,11 @@ class MyGames extends React.Component {
         const games = [];
         snapshot.forEach((doc) => {
           const data = doc.data();
-          games.push(data);
+          if (data.user_id == Cookies.get("userid")) {
+            //console.log(doc.data());
+            games.push(data);
+          }
+          //games.push(data);
         });
         this.setState({ games: games });
         //console.log(snapshot.docs[1]._document.proto.fields.location[0]);

@@ -11,6 +11,7 @@ import {
 } from "./actionTypes";
 import { beginApiCall, apiCallError } from "./apiStatus";
 import firebase from "../../Config/fbConfig";
+import Cookies from "js-cookie";
 
 // Signing up with Firebase
 export const signup = (email, password, username) => async (dispatch) => {
@@ -75,6 +76,19 @@ export const signin = (email, password, callback) => async (dispatch) => {
       .then((data) => {
         if (data.user.emailVerified) {
           console.log("IF", data.user.emailVerified);
+          data.user.getIdToken().then(function (token) {
+            Cookies.set("token", token, {
+              expires: 2,
+            });
+          });
+          //console.log("Token here " + firebase.auth().currentUser.getIdToken());
+          Cookies.set("email", firebase.auth().currentUser.email, {
+            expires: 2,
+          });
+          Cookies.set("userid", firebase.auth().currentUser.uid, {
+            expires: 2,
+          });
+          //console.log("User ID " + firebase.auth().currentUser.uid);
           dispatch({ type: SIGNIN_SUCCESS });
           callback();
         } else {

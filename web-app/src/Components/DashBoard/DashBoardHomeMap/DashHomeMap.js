@@ -28,13 +28,13 @@ class DashHomeMap extends React.Component {
         const games = [];
         snapshot.forEach((doc) => {
           const data = doc.data();
+          console.log(data);
           games.push(data);
         });
         this.setState({ games: games });
         //console.log(snapshot.docs[1]._document.proto.fields.location[0]);
         //console.log(games[0].properties[0].location);
       });
-
     const map = new mapboxgl.Map({
       container: this.mapContainer.current,
       style: "mapbox://styles/mapbox/streets-v11",
@@ -45,7 +45,21 @@ class DashHomeMap extends React.Component {
     let title = document.getElementById("location-title");
     let description = document.getElementById("location-description");
 
-    let locations = [
+    let locations = [];
+    //locations = this.state.games;
+    console.log("hello guys");
+
+    if (
+      typeof this.state.games != undefined &&
+      this.state.games != null &&
+      this.state.games.length > 0
+    ) {
+      for (let i = 0; i < this.state.games.length; i++) {
+        locations[i] = this.state.games[i];
+      }
+    }
+
+    /*let locations = [
       {
         title: "Detective",
         description:
@@ -56,35 +70,39 @@ class DashHomeMap extends React.Component {
           zoom: 14.5,
         },
       },
-    ];
+    ];*/
 
-    function playback(index) {
-      title.textContent = locations[index].title;
-      description.textContent = locations[index].description;
-      slideLong = locations[index].camera.center[0];
-      slideLat = locations[index].camera.center[1];
+    if (typeof locations != undefined && locations.length > 0) {
+      function playback(index) {
+        title.textContent = locations[index].name;
+        description.textContent = locations[index].description;
+        slideLong = locations[index].camera.center[0];
+        slideLat = locations[index].camera.center[1];
 
-      let marker = new mapboxgl.Marker()
-        .setLngLat([slideLong, slideLat])
-        .addTo(map);
-      map.flyTo(locations[index].camera);
-      map.once("moveend", () => {
-        window.setTimeout(function () {
-          //move to the next one
-          index = index + 1 === locations.length ? 0 : index + 1;
-          marker.remove();
-          playback(index);
-        }, 10000); //3 seconds.
+        let marker = new mapboxgl.Marker()
+          .setLngLat([slideLong, slideLat])
+          .addTo(map);
+        map.flyTo(locations[index].camera);
+        map.once("moveend", () => {
+          window.setTimeout(function () {
+            //move to the next one
+            index = index + 1 === locations.length ? 0 : index + 1;
+            marker.remove();
+            playback(index);
+          }, 10000); //3 seconds.
+        });
+      }
+
+      title.textContent = locations[locations.length - 1].title;
+      description.textContent = locations[locations.length - 1].description;
+
+      map.on("load", () => {
+        playback(0);
       });
     }
-
-    title.textContent = locations[locations.length - 1].title;
-    description.textContent = locations[locations.length - 1].description;
-
-    map.on("load", () => {
-      playback(0);
-    });
   }
+
+  componentWillMount() {}
 
   render() {
     return (

@@ -1,12 +1,11 @@
 import React from "react";
-import { Redirect } from "react-router";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SideNavComponent from "./SideNavigation/SideNavComponent";
 import Footer from "../NavBar/Footer";
 import Navbar from "../NavBar/navBar";
-import axios from "axios";
 import Cookies from "js-cookie";
 import SignIn from "../Login/SignIn";
+import db from "../../Config/fbConfig";
 
 class App extends React.Component {
   constructor(props) {
@@ -14,25 +13,22 @@ class App extends React.Component {
     this.state = {
       auth: false,
       success: "",
+      validTok: null,
     };
   }
 
   componentDidMount() {
-    this.token = Cookies.get("token");
-    const instance = axios
-      .get("http://localhost:8000/api/auth/me", {
-        headers: { Authorization: "Bearer " + this.token },
-      })
-      .then((res) => {
-        if (res.status == 200) {
-          this.setState({ auth: true });
-          this.setState({ success: "found" });
+    db.auth().onAuthStateChanged(
+      function (user) {
+        if (user) {
+          user.getIdToken().then((idToken) => {
+            // console.log(idToken); // It shows the Firebase token now
+            this.setState({ validTok: idToken });
+            this.setState({ success: "found" });
+          });
         }
-      })
-      .catch((error) => {
-        console.log(error.message);
-        this.setState({ success: "notfound" });
-      });
+      }.bind(this)
+    );
   }
 
   render() {
@@ -46,13 +42,31 @@ class App extends React.Component {
       marginLeft: "-200px",
     };
 
-    return (
-      <div>
-        <Navbar />
-        <SideNavComponent />
-        <Footer />
-      </div>
-    );
+    this.token = Cookies.get("token");
+    if (this.state.success == "" && this.state.validTok == null) {
+      return (
+        <div
+          style={myStyle}
+          class="ui active centered inline massive loader"
+        ></div>
+      );
+    } else {
+      if (this.state.validTok == this.token) {
+        return (
+          <div>
+            <Navbar />
+            <SideNavComponent />
+            <Footer />
+          </div>
+        );
+      } else {
+        return (
+          <div>
+            <SignIn />
+          </div>
+        );
+      }
+    }
   }
 }
 
