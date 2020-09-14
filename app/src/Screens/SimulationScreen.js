@@ -1,40 +1,18 @@
-import React, { useContext, useEffect,useState } from 'react'
+import React, {useContext} from 'react'
 import { SafeAreaView } from 'react-navigation'
 import { TouchableOpacity, Image, StyleSheet } from 'react-native'
 import MapComponent from '../Componets/MapComponent'
 import { Header } from 'react-native-elements'
-import { UserContext } from '../Context/UserContext'
-import { StatusBar } from 'expo-status-bar'
-import { Feather, MaterialIcons } from '@expo/vector-icons'
-import * as Location from 'expo-location'
+import { MaterialIcons } from '@expo/vector-icons'
+import {UserContext} from '../Context/UserContext'
+
 const SimulationScreen = ({ navigation }) => {
-  
+  const userContext = useContext(UserContext);
   const data = [
     { latitude: -26.2023, longitude: 28.0436 },
     { latitude: -26.21, longitude: 28.0436 },
     { latitude: -26.22, longitude: 28.049 },
   ]
-  useEffect(() => {
-    ;(async () => {
-      try {
-        let { status } = await Location.requestPermissionsAsync()
-        if (status !== 'granted') {
-          setErrorMsg('Permission to access location was denied')
-        }
-        let location = await Location.getCurrentPositionAsync({})
-        const loc = {'latitude':location.coords.latitude,'longitude':location.coords.longitude}
-        setUserLocation(loc)
-      } catch (error) {
-        let status = Location.getProviderStatusAsync();
-        if(!(await status).locationServicesEnabled){
-          alert('')
-        }
-      }
-    })()
-  }, [])
-
-  const [userLoc, setUserLocation] = useState(null)
-  const userContext = useContext(UserContext)
   return (
     <SafeAreaView>
       <Header
@@ -54,7 +32,7 @@ const SimulationScreen = ({ navigation }) => {
         }
         containerStyle={{ backgroundColor:'#2A9D8F'}}
       />
-      <MapComponent data={data} userLoc={userLoc}/>
+      <MapComponent data={data}/>
     </SafeAreaView>
   )
 }

@@ -1,20 +1,26 @@
-import React,{useState, useEffect} from 'react';
-import * as Location from 'expo-location';
+import React,{useState, useEffect,useContext} from 'react';
+import {UserContext} from '../Context/UserContext'
+import {
+    watchPositionAsync,
+    Accuracy,
+  } from 'expo-location'
 
 export default ()=>{
-    const [userLocations, setUserLocation] = useState([]);
-    useEffect(() => {
-        getUserCoord()
-    },[]) 
-    const getUserCoord = async ()=>{
-        let { status } = await Location.requestPermissionsAsync()
-        if (status !== 'granted') {
-        setErrorMsg('Permission to access location was denied')
+    const startWatching = async () => {
+        const userContext = useContext(UserContext);
+        try {
+            await watchPositionAsync({
+                accuracy: Accuracy.BestForNavigation,
+                timeInterval: 100000,
+                distanceInterval: 10,
+              },(location) => {
+                const coords = {'latitude':location.coords.latitude,'longitude':location.coords.longitude}
+                userContext.setUserLocation(loc)
+              });
+        }catch (e){
+            console.log(e)
         }
-        let location = await Location.getCurrentPositionAsync({})
-        const loc = {'latitude':location.coords.latitude,'longitude':location.coords.longitude}
-        setUserLocation(loc) 
-    }
+      };     
 
-    return [userLocations, getUserCoord];
+    return [startWatching];
 }
