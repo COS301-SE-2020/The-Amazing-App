@@ -29,22 +29,6 @@ class App extends React.Component {
         }
       }.bind(this)
     );
-    /*this.token = Cookies.get("token");
-    const instance = axios
-      .get("http://localhost:8000/api/auth/me", {
-        headers: { Authorization: "Bearer " + this.token },
-      })
-      .then((res) => {
-        if (res.status == 200) {
-          this.setState({ auth: true });
-          this.setState({ success: "found" });
-        }
-      })
-      .catch((error) => {
-        console.log(error.message);
-        this.setState({ success: "notfound" });
-      });*/
-    //console.log("Email here " + Cookies.get("email"));
   }
 
   render() {
@@ -59,7 +43,7 @@ class App extends React.Component {
     };
 
     this.token = Cookies.get("token");
-    if (this.state.success == "" && this.state.validTok == "") {
+    if (this.state.success == "" && this.state.validTok == null) {
       return (
         <div
           style={myStyle}
