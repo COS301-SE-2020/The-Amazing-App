@@ -29,7 +29,7 @@ class MyGames extends React.Component {
         snapshot.forEach((doc) => {
           const data = doc.data();
           if (data.user_id == Cookies.get("userid")) {
-            //console.log(doc.data());
+            console.log(doc.data().properties[0].location);
             games.push(data);
           }
         });

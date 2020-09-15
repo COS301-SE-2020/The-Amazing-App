@@ -43,15 +43,10 @@
     "typescript": "^3.5.3"
   },
   "scripts": {
-    "dev": "react-scripts start",
-    "start": "serve -s build",
+    "start": "react-scripts start",
     "build": "react-scripts build",
-    "heroku-postbuild": "npm run build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "compile-sass": "node-sass src/assets/scss/paper-kit.scss src/assets/css/paper-kit.css",
-    "minify-sass": "node-sass src/assets/scss/paper-kit.scss src/assets/css/paper-kit.min.css --output-style compressed",
-    "map-sass": "node-sass src/assets/scss/paper-kit.scss src/assets/css/paper-kit.css --source-map true"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
