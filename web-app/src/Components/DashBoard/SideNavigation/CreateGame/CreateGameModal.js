@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Modal } from "semantic-ui-react";
 import MapModal from "./MapModal";
-//import mapboxgl from "mapbox-gl";
+import mapboxgl from "mapbox-gl";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import GameName from "./GameName";
 import axios from "axios";
@@ -139,6 +139,7 @@ class CreateGameModal extends React.Component {
 
   render() {
     return (
+      <div className="create">
       <Modal
         style={{
           marginTop: 80,
@@ -407,6 +408,7 @@ class CreateGameModal extends React.Component {
           </Modal.Description>
         </Modal.Content>
       </Modal>
+      </div>
     );
   }
 }

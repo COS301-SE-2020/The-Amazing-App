@@ -5,8 +5,6 @@ import Enzyme,{mount ,shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import NavBar from '../navBar';
 import MDBFooter from '../Footer'
-import { BrowserRouter as Router } from "react-router-dom";
-import SignIn from '../../Login/SignIn'
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from 'redux';
 

@@ -7,7 +7,7 @@ import image5 from "../../../../Assets/octopus.png";
 
 const GameSummary = ({ project }) => {
   return (
-    <div>
+    <div className="gameSummary">
       <Item.Group>
         <Item>
           <Item.Image
@@ -17,7 +17,7 @@ const GameSummary = ({ project }) => {
             alt="userImage"
           />
           <Item.Content>
-            <Item.Header as="a">{project.title} </Item.Header>
+            <Item.Header as="a">game</Item.Header>
             <Item.Description>
               <p>
                 Play the detective role by solving riddles related to a crime
