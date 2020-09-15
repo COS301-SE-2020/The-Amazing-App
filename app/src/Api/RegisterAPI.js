@@ -11,7 +11,7 @@ export default () => {
     try {
         const db = firebase.firestore().collection('Users');
         const User = await  firebase.auth().createUserWithEmailAndPassword(email,password);
-        db.add({Username: username,Email: email,Points:0});
+        db.add({Username: username,Email: email,Points:0,GamesPlayed:0,Groups:0});
         authContext.setUserId(User.user.uid);
         userContext.setImage(result);
         authContext.setisRegistered(true);

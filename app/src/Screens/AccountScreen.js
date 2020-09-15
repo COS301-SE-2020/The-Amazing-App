@@ -39,17 +39,17 @@ const AccountScreen = ({navigation})=>{
             </View>
             <View style={statContainer}>
                 <View style={statStyle}>
-                    <Text style={statAmountStyle}>0</Text>
+                    <Text style={statAmountStyle}>{userContext.points}</Text>
                     <Text style={statTitleStyle}>Points</Text>
                     <AntDesign name="star" size={24} color='white' />
                 </View>
                 <View style={statStyle}>
-                    <Text style={statAmountStyle}>0</Text>
+                    <Text style={statAmountStyle}>{userContext.numGames}</Text>
                     <Text style={statTitleStyle}>  Games Completed</Text>
                     <AntDesign name="Trophy" size={24} color='white' />
                 </View>
                 <View style={statStyle}>
-                    <Text style={statAmountStyle}>0</Text>
+                    <Text style={statAmountStyle}>{userContext.numGroups}</Text>
                     <Text style={statTitleStyle}>Groups</Text>
                     <AntDesign name="team" size={24} color='white' />
                 </View>
