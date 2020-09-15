@@ -1,4 +1,4 @@
-const { Item } = require("semantic-ui-react")
+const { Item, Grid } = require("semantic-ui-react")
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Enzyme,{mount ,shallow} from 'enzyme';
@@ -15,37 +15,41 @@ const store = createStore(() => [], {}, applyMiddleware());
 
 describe('Login component',()=>
 {
-    
+   it('it should render',()=>{
+        const component = renderer.create('div.login');
 
-    it('should not render any buttons',()=>{
-        const button = shallow(<Provider  store={store}><Footer />
-            </Provider>);
-        expect(button.find('Button').length).toBe(0);
-        //expect(button_.length).toBe(1);
+        const tree = component.toJSON();
+        expect(tree).toMatchSnapshot();
     });
 
+    it('should not render any buttons',()=>{
+        const calculator = mount(<Grid />);
+        const form = calculator.find('Button')
+        expect(form.length).toBe(0);
+       // expect(form.find('button').length).toBe(0);
+        //expect(button_.length).toBe(1);
+    });
+    it('should render required form elements', () => {
+        const calculator = shallow(<Provider  store={store}><SignIn />
+            </Provider>);
+    
+        const form = calculator.find('Grid');
+        expect(form.length).toBe(0);
+       // expect(form.find('input').length).toBe(2);
+        //expect(form.find('button').length).toBe(1);
+        //expect(form.find('p.result').length).toBe(1);
+      });
     it('should render required Divs', () => {
-        const calculator = shallow(<Provider  store={store}><Footer />
+        const calculator = shallow(<Provider  store={store}><SignIn />
             </Provider>);  
         // expect(links.length).toBe(0);
         const length = 0;
        // expect(form.find('input').length).toBe(2);
-        expect(calculator.find('Div').length).toBe(0);
+        expect(calculator.find('MDBContainer').length).toBe(0);
        
         //expect(form.find('button').length).toBe(1);
        // expect(form.find('p.result').length).toBe(1);
-      });
-
-    it('Testing footer text',()=>{
-        const footer = shallow(<Provider  store={store}><Footer />
-            </Provider>);
-        const footer_ = footer.find('Nav.Link Nav.Link');
-        const footer__ = true;
-        expect(footer__).toBe(true);
-    });
-
-   
-    
+      });    
 
 
 })

@@ -10,7 +10,7 @@ import SignIn from '../../Login/SignIn'
 Enzyme.configure({ adapter: new Adapter() });
 
 
-describe('Login component',()=>
+describe('Navbar  component',()=>
 {
     it('it should render',()=>{
         const component = renderer.create(<NavBar />);
@@ -20,13 +20,13 @@ describe('Login component',()=>
     });
     
 
-    it('should render required buttons',()=>{
+    it('should show required buttons',()=>{
         const button = shallow(<NavBar />);
         expect(button.find('Button').length).toBe(4);
         //expect(button_.length).toBe(1);
     });
 
-    it('should render required Links', () => {
+    it('should show required Links', () => {
         const calculator = mount(<NavBar />);
         // expect(links.length).toBe(0);
         const length = 0;
@@ -38,20 +38,10 @@ describe('Login component',()=>
       });
     it('Testing the Navbar brand',()=>{
         const brand = shallow(<NavBar />);
-        expect(brand.find('Navbar.brand').length).toBe(0);
+        expect(brand.find('Navbar.Brand').length).toBe(0);
         //const logo__ = true;
       //  expect(logo__).toBe(true);
     });
-
-    it('Testing footer text',()=>{
-        const footer = shallow(<NavBar />);
-        const footer_ = footer.find('Nav.Link Nav.Link');
-        const footer__ = true;
-        expect(footer__).toBe(true);
-    });
-
-   
-    
 
 
 })
