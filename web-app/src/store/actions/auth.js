@@ -85,6 +85,9 @@ export const signin = (email, password, callback) => async (dispatch) => {
           Cookies.set("email", firebase.auth().currentUser.email, {
             expires: 2,
           });
+          Cookies.set("outval", "in", {
+            expires: 2,
+          });
           Cookies.set("userid", firebase.auth().currentUser.uid, {
             expires: 2,
           });
