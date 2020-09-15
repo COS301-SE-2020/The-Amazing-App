@@ -1,0 +1,220 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navbar  component it should render 1`] = `
+<nav
+  className="navbar navbar-expand navbar-light sticky-top"
+  style={
+    Object {
+      "backgroundColor": "#2A9D8F",
+    }
+  }
+>
+  <span
+    className="navbar-brand"
+    style={
+      Object {
+        "color": "white",
+        "fontSize": 15,
+        "marginLeft": 75,
+      }
+    }
+  >
+    <img
+      alt="userImage"
+      className="ui small circular image"
+      src="logo.png"
+      style={
+        Object {
+          "height": 50,
+          "width": 50,
+        }
+      }
+    />
+  </span>
+  <div
+    className="mr-auto navbar-nav"
+    onKeyDown={[Function]}
+  />
+  <div
+    Right={true}
+    className="lead navbar-nav"
+    onKeyDown={[Function]}
+    pull={true}
+    style={
+      Object {
+        "color": "white",
+        "fontWeight": "normal",
+        "marginRight": 100,
+      }
+    }
+  >
+    <a
+      className="nav-link"
+      data-rb-event-key="/"
+      exact={true}
+      href="/"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      style={
+        Object {
+          "fontFamily": "'Helvetica Neue', Arial, Helvetica, sans-serif",
+          "fontSize": 16,
+          "fontWeight": "normal",
+        }
+      }
+    >
+      <button
+        className="ui medium button"
+        onClick={[Function]}
+        style={
+          Object {
+            "backgroundColor": "Transparent",
+          }
+        }
+      >
+        Home
+      </button>
+    </a>
+    <a
+      className="nav-link"
+      data-rb-event-key="dashboard"
+      exact={true}
+      href="dashboard"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      style={
+        Object {
+          "fontFamily": "'Helvetica Neue', Arial, Helvetica, sans-serif",
+          "fontSize": 16,
+          "fontWeight": "normal",
+        }
+      }
+    >
+      <button
+        className="ui medium button"
+        onClick={[Function]}
+        style={
+          Object {
+            "backgroundColor": "Transparent",
+            "border": "2px solid white",
+            "color": "white",
+          }
+        }
+      >
+        Dashboard
+      </button>
+    </a>
+    <a
+      className="nav-link"
+      data-rb-event-key={null}
+      href="#"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+      style={
+        Object {
+          "fontFamily": "'Helvetica Neue', Arial, Helvetica, sans-serif",
+          "fontSize": 16,
+          "fontWeight": "normal",
+        }
+      }
+    >
+      <button
+        className="ui medium button"
+        onClick={[Function]}
+        style={
+          Object {
+            "backgroundColor": "Transparent",
+          }
+        }
+      >
+        Logout
+        <i
+          className="sign-out"
+        />
+      </button>
+    </a>
+    <a
+      className="nav-link"
+      data-rb-event-key="#"
+      href="#"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+    >
+      <button
+        className="ui medium button"
+        onClick={[Function]}
+        style={
+          Object {
+            "backgroundColor": "Transparent",
+          }
+        }
+      >
+        <div
+          aria-expanded={false}
+          className="ui top left pointing dropdown"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onMouseDown={[Function]}
+          role="listbox"
+          tabIndex={0}
+        >
+          <div>
+            <img
+              alt="userImage"
+              className="ui avatar image"
+              src="no_picture.jpg"
+              style={
+                Object {
+                  "height": 22,
+                  "width": 22,
+                }
+              }
+            />
+            <span
+              style={
+                Object {
+                  "color": "white",
+                  "fontSize": 14,
+                }
+              }
+            />
+          </div>
+          <div
+            className="menu transition"
+          >
+            <button
+              className="ui small button"
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              style={
+                Object {
+                  "backgroundColor": "white",
+                  "color": "black",
+                  "marginTop": 5,
+                }
+              }
+            >
+              <i
+                className="settings icon"
+                style={
+                  Object {
+                    "marginRight": 15,
+                  }
+                }
+              />
+              Settings
+            </button>
+          </div>
+        </div>
+      </button>
+    </a>
+  </div>
+</nav>
+`;
