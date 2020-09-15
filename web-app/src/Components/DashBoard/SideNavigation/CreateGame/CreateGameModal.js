@@ -39,7 +39,7 @@ const game = {
   properties: [],
 };
 
-//const gamesArray = [];
+const gamesArray = [];
 
 class CreateGameModal extends React.Component {
   constructor(props) {

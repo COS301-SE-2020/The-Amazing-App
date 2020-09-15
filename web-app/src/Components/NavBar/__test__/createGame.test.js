@@ -1,105 +1,67 @@
 const { Item } = require("semantic-ui-react")
 import React from 'react';
-import Enzyme,{shallow} from 'enzyme';
+import renderer from 'react-test-renderer';
+import Enzyme,{mount ,shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import NavBar from '../navBar';
- 
+import MDBFooter from '../Footer'
+window.URL.createObjectURL = function() {};
+import Modal from '../../DashBoard/SideNavigation/CreateGame/MapModal'
+import { BrowserRouter as Router } from "react-router-dom";
+import SignIn from '../../Login/SignIn'
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from 'redux';
+
+jest.mock('mapbox-gl/dist/mapbox-gl', () => ({
+    GeolocateControl: jest.fn(),
+    Map: jest.fn(() => ({
+      addControl: jest.fn(),
+      on: jest.fn(),
+      remove: jest.fn()
+    })),
+    NavigationControl: jest.fn()
+  }));
+  
 Enzyme.configure({ adapter: new Adapter() });
+const store = createStore(() => [], {}, applyMiddleware());
 
-
-describe('Footer',()=>
+describe('CreateGame component test',()=>
 {
-    it('should be show text',()=>{
-        const wrapper = shallow(<NavBar />);
-        const text_ = wrapper.find('Nav.Link Nav.Link');
-        const text = true;
-        expect(text).toBe(true);
-    });
+    it('it should render',()=>{
+        const component = renderer.create(<Modal />);
 
-    it('Testing the button',()=>{
-        const button = shallow(<NavBar />);
-        const button_ = button.find('Nav.Link Nav.Link');
-        const button__ = true;
-        expect(button__).toBe(true);
+        const tree = component.toJSON();
+        expect(tree).toMatchSnapshot();
     });
 
 
-    it('Testing logo link',()=>{
-        const log = shallow(<NavBar />);
-        const logo_ = log.find('Nav.Link Nav.Link');
-        const logo__ = true;
-        expect(logo__).toBe(true);
+    it('should render map',()=>{
+        const button = shallow(<Modal />);
+        expect(button.find('GameMap').length).toBe(1);
+        //expect(button_.length).toBe(1);
     });
 
-    it('Testing footer text',()=>{
-        const footer = shallow(<NavBar />);
-        const footer_ = footer.find('Nav.Link Nav.Link');
-        const footer__ = true;
-        expect(footer__).toBe(true);
-    });
-
-    it('Testing footer bacground color',()=>{
-        const color = shallow(<NavBar />);
-        const color_ = color.find('Nav.Link Nav.Link');
-        const color__ = true;
-        expect(color__).toBe(true);
-    });
-
-    it('Testing footer font size',()=>{
-        const font = shallow(<NavBar />);
-        const font_ = font.find('Nav.Link Nav.Link');
-        const font__ = true;
-        expect(font__).toBe(true);
-    });
-
-    it('should be able to show the logo',()=>{
-        const button = shallow(<NavBar />);
-        const button_ = button.find('Nav.Link Nav.Link');
-        const button__ = true;
-        expect(button__).toBe(true);
-    });
-
-    it('Testing if the links',()=>{
-        const button = shallow(<NavBar />);
-        const button_ = button.find('Nav.Link Nav.Link');
-        const button__ = true;
-        expect(button__).toBe(true);
-    });
-
-    it('should show text',()=>{
-        const button = shallow(<NavBar />);
-        const button_ = button.find('Nav.Link Nav.Link');
-        const button__ = true;
-        expect(button__).toBe(true);
-    });
-
-    it('should show text in buttons',()=>{
-        const button = shallow(<NavBar />);
-        const button_ = button.find('Nav.Link Nav.Link');
-        const button__ = true;
-        expect(button__).toBe(true);
-    });
-
-    it('Testing button links',()=>{
-        const button = shallow(<NavBar />);
-        const button_ = button.find('Nav.Link Nav.Link');
-        const button__ = true;
-        expect(button__).toBe(true);
-    });
-
-    it('should show text',()=>{
-        const button = shallow(<NavBar />);
-        const button_ = button.find('Nav.Link Nav.Link');
-        const button__ = true;
-        expect(button__).toBe(true);
-    });
-
-    it('Testing links to home pages',()=>{
-        const button = shallow(<NavBar />);
-        const button_ = button.find('Nav.Link Nav.Link');
-        const button__ = true;
-        expect(button__).toBe(true);
-    });
-
+    it('should show correct number of buttons', () => {
+        const calculator = shallow(<Modal />);  
+        // expect(links.length).toBe(0);
+     //   const length = 0;
+       // expect(form.find('input').length).toBe(2);
+        expect(calculator.find('Form').length).toBe(1);
+       
+        //expect(form.find('button').length).toBe(1);
+       // expect(form.find('p.result').length).toBe(1);
+      });    
+    /*  it('should render required Divs', () => {
+        const calculator = shallow(<MDBFooter />);  
+        // expect(links.length).toBe(0);
+     //   const length = 0;
+       // expect(form.find('input').length).toBe(2);
+       const internal = calculator.find('div.footer-copyright')
+        expect(internal.find('MDBContainer').length).toBe(1);
+       
+        //expect(form.find('button').length).toBe(1);
+       // expect(form.find('p.result').length).toBe(1);
+      });    */
+      
 
 })

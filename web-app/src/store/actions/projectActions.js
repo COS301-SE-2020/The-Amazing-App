@@ -1,5 +1,6 @@
-import { beginApiCall, apiCallError } from "./apiStatus";
+import { beginApiCall } from "./apiStatus";
 import firebase from "../../Config/fbConfig";
+import Cookies from "js-cookie";
 
 export const createProject = (project) => async (dispatch) => {
   try {
@@ -7,7 +8,7 @@ export const createProject = (project) => async (dispatch) => {
     const db = firebase.firestore().collection("projects");
     db.add({
       ...project,
-      user_id: 123,
+      user_id: Cookies.get("userid"),
       createdAt: new Date(),
     }).then(() => {
       dispatch({ type: "CREATE_PROJECT_SUCCESS" });
