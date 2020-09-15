@@ -70,5 +70,6 @@ const forgotPassword = async () => {
     }
   }
 
+  
   return [forgotPassword, updateUsername,updatePassword,updatePicture]
 }
