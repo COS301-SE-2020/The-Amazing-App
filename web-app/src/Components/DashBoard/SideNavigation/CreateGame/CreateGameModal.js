@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Modal } from "semantic-ui-react";
 import MapModal from "./MapModal";
-//import mapboxgl from "mapbox-gl";
+import mapboxgl from "mapbox-gl";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import GameName from "./GameName";
 import axios from "axios";
@@ -39,7 +39,7 @@ const game = {
   properties: [],
 };
 
-//const gamesArray = [];
+const gamesArray = [];
 
 class CreateGameModal extends React.Component {
   constructor(props) {
