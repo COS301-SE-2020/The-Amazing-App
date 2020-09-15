@@ -28,6 +28,8 @@ const CreatgroupScreen = ({navigation})=>{
             'gameName': gameName,
             'gameLocation':gameLocation,
             'userId':authContext.userId,
+            'gameId':'',
+            'game':'',
             'member':[]
         }
         createGroup(data);

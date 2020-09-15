@@ -16,11 +16,12 @@ import { StatusBar } from 'expo-status-bar'
 import avatar from '../../assets/avatar3.png'
 import { UserContext } from '../Context/UserContext'
 import image from '../../assets/avatar1.png'
-
+import {registerGame} from '../Api/GameAPI'
+import {Paragraph} from 'react-native-paper'
 const HomeScreen = ({ navigation }) => {
-  const { term, setTerm } = useState('')
-  const { gameId, setgameId } = useState('')
-  const { groupId, setgoupId } = useState('')
+  const [term, setTerm ]= useState('')
+  const [gameId, setgameId ]= useState('')
+  const [groupId, setgoupId ] = useState('')
   const [modalOpen, setModelOpen] = useState(false)
   const userContext = useContext(UserContext)
   const [results, getGroups, games, getGames] = useResults()
@@ -29,6 +30,14 @@ const HomeScreen = ({ navigation }) => {
     getGames()
     getGroups()
   }, [])
+
+  const addGameToGroup=()=>{
+   const data = {
+      'gameId':gameId,
+      'game' :'true'
+    }
+    registerGame(data,groupId);
+  }
 
   const choice = () => {
     if (results.length > 0) {
@@ -56,6 +65,7 @@ const HomeScreen = ({ navigation }) => {
                   <TouchableOpacity
                     onPress={() => {
                       setgoupId(item.id)
+                      addGameToGroup()
                       setModelOpen(false)
                     }}
                   >
@@ -186,7 +196,7 @@ const HomeScreen = ({ navigation }) => {
                 }}
               >
                 <View style={style.itemStyle}>
-                  <View style={{ flexDirection: 'row' }}>
+                  <View style={{ flexDirection: 'row',width:'98%' }}>
                     <Image source={image} style={style.avatarStyle} />
                     <View style={style.textStyle}>
                       <Text
@@ -198,7 +208,7 @@ const HomeScreen = ({ navigation }) => {
                       >
                         {item.data().name}
                       </Text>
-                      <Text style={{ color: '#f56042' }}>Location :Error</Text>
+                      <Text style={{ color: '#f56042',width:'98%'}}>Location :{item.data().properties[0].location.split(',')}</Text>
                     </View>
                   </View>
                 </View>
@@ -235,6 +245,7 @@ const style = StyleSheet.create({
     borderColor: 'white',
     borderWidth: 1,
     height: 70,
+    
   },
   avatarStyle: {
     width: 50,
@@ -244,7 +255,8 @@ const style = StyleSheet.create({
   },
   textStyle: {
     flexDirection: 'column',
-    marginLeft: 10,
+    marginLeft: 5,
+    width:'98%'
   },
   modalStyle: {
     width: '70%',
