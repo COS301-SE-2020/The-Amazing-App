@@ -14,6 +14,18 @@ export default () => {
         const query = await firebase.firestore().collection('Users').where('Email', '==', email).limit(1).get();
         const user = query.docs[0];
         const picture = await user.data().Picture; 
+        const point = await user.data().Points; 
+        const games = await user.data().GamesPlayed; 
+        const groups = await user.data().Groups; 
+        if (point){
+          userContext.setPoints(point);
+        }
+        if (games){
+          userContext.setNumGames(games);
+        }
+        if (groups){
+          userContext.setNumGroups(groups);
+        }
         const result = {uri: picture};
         authContext.setisLoggedIn(true);
         authContext.setUserId(User.user.uid);
