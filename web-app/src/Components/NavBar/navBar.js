@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import UserOptions from "./UserOptions";
 import { Button } from "semantic-ui-react";
 import firebase from "../../Config/fbConfig";
+import Cookies from "js-cookie";
 
 class NavBar extends React.Component {
   logout = () => {
@@ -13,10 +14,14 @@ class NavBar extends React.Component {
       .signOut()
       .then(() => {
         console.log("Sign Out Successfull!!");
+        Cookies.set("outval", "out", {
+          expires: 2,
+        });
         window.location.href = "/login";
+        //history.pushState("/login")
       })
       .catch(() => {
-        window.location.href = "/dashboard";
+        window.location.href = "/login";
         alert("Signout Failed!!");
       });
   };
