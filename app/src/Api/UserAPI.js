@@ -48,7 +48,7 @@ const updatePicture = async (image) => {
             thing.ref.update({Picture:downloadURL});
             const result = {uri: downloadURL};
             userContext.setImage(result);
-            Alert.alert('Profile picture updated!')
+            Alert.alert('Profile picture updated!');
         }); 
 
         //on success
@@ -71,5 +71,5 @@ const forgotPassword = async () => {
   }
 
   
-  return [forgotPassword, updateUsername,updatePassword,updatePicture]
+  return [updateUsername,updatePassword, updatePicture,forgotPassword]
 }
