@@ -1,0 +1,13 @@
+k6_cloud_test:
+  name: k6 cloud test run
+  runs-on: ubuntu-latest
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Run k6 cloud test
+      uses: k6io/action@v0.1
+      with:
+        filename: test.js
+        cloud: true
+        token: 88ac69e3ef8ea2010e24de107fb62a5025f3e3e1062ae0d13a7ea7a35c6cf36a
