@@ -47,7 +47,6 @@ const DashboardScreen = ({navigation})=>{
                             <View  style={style.textStyle}>
                                 <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>{item.data().groupName}</Text>
                                 <Text >Game : {item.data().gameName}</Text>
-                                <Text style={{color:'#f56042'}}>Location :{item.data().location}</Text>
                             </View>
                         </View>
                     </View>

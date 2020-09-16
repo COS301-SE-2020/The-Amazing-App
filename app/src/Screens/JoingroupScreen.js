@@ -1,12 +1,15 @@
-import React ,{  } from 'react';
+import React ,{ useState } from 'react';
 import {View, StyleSheet, TouchableOpacity, ImageBackground , Image} from 'react-native'
 import { Input,Text, Button, Header,Icon} from 'react-native-elements';
 import FooterComponent from '../Componets/FooterComponent';
 import { FontAwesome,MaterialIcons, FontAwesome5,SimpleLineIcons } from '@expo/vector-icons'; 
 import { StatusBar } from 'expo-status-bar';
+import JoinGroupAPI from '../Api/JoinGroupAPI'
 
 
 const JoingroupScreen = ({navigation})=>{
+    const [groupName, setGroupName] =useState('');
+    const [JoinGroup] = JoinGroupAPI();
     return(
        <>
            <StatusBar style='#2A9D8F'/>
@@ -28,16 +31,16 @@ const JoingroupScreen = ({navigation})=>{
             <View style={style.detailContainer}>
             <Input containerStyle={style.inputStyle}
                 placeholderTextColor='white'
-                placeholder='Group ID'leftIcon={
+                placeholder='Enter Group Name'leftIcon={
                  <SimpleLineIcons name="globe-alt" size={24} color="white" />
                 }
-                
+                onChangeText={setGroupName} value={groupName}
                 />
                 <Button
                     buttonStyle={style.buttonStyle}
                     title="Submit"
                     onPress={()=>{
-                        creater()
+                        JoinGroup(groupName)
                         navigation.navigate('Dashboard')
                     }
                     }
