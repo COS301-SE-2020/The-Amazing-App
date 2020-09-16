@@ -5,6 +5,7 @@ import auth from './src/Router/AuthRouter'
 import landingScreen from './src/Screens/LandingScreen'
 import { AuthProvider } from './src/Context/AuthContext'
 import { UserProvider } from './src/Context/UserContext'
+import { GameProvider } from './src/Context/GameContext'
 import SimulationScreen from './src/Screens/SimulationScreen'
 
 console.disableYellowBox = true
@@ -20,7 +21,9 @@ const App = () => {
   return (
     <AuthProvider>
       <UserProvider>
-        <AppContainer />
+        <GameProvider>
+          <AppContainer />
+        </GameProvider>
       </UserProvider>
     </AuthProvider>
   )
