@@ -2,7 +2,6 @@ import React from "react";
 import mapboxgl from "mapbox-gl";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import "../styles.css";
-import { db } from "../../../Config/fbConfig";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoidGFwZWhuZGhsb3Z1IiwiYSI6ImNrYmV2eTRhdDBwbXUydHA4eTl6cW5neDMifQ.BVjVIq7FUmlnMZJC_BvRDQ";
@@ -16,25 +15,11 @@ class DashHomeMap extends React.Component {
       lng: 28.229271,
       lat: -25.747868,
       zoom: 10,
-      games: null,
     };
     this.mapContainer = React.createRef();
   }
 
   componentDidMount() {
-    db.collection("projects")
-      .get()
-      .then((snapshot) => {
-        const games = [];
-        snapshot.forEach((doc) => {
-          const data = doc.data();
-          games.push(data);
-        });
-        this.setState({ games: games });
-        //console.log(snapshot.docs[1]._document.proto.fields.location[0]);
-        //console.log(games[0].properties[0].location);
-      });
-
     const map = new mapboxgl.Map({
       container: this.mapContainer.current,
       style: "mapbox://styles/mapbox/streets-v11",
@@ -42,11 +27,21 @@ class DashHomeMap extends React.Component {
       zoom: this.state.zoom,
     });
 
+    map.addControl(
+      new mapboxgl.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true,
+        },
+        trackUserLocation: true,
+      })
+    );
+
     let title = document.getElementById("location-title");
     let description = document.getElementById("location-description");
 
     let locations = [
       {
+        id: "1",
         title: "Detective",
         description:
           "Play the detective role by solving riddles related to a crime that had recently happened.",

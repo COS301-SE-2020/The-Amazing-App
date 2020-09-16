@@ -39,7 +39,7 @@ const game = {
   properties: [],
 };
 
-//const gamesArray = [];
+const gamesArray = [];
 
 class CreateGameModal extends React.Component {
   constructor(props) {
@@ -139,6 +139,7 @@ class CreateGameModal extends React.Component {
 
   render() {
     return (
+      <div className="create">
       <Modal
         style={{
           marginTop: 80,
@@ -407,6 +408,7 @@ class CreateGameModal extends React.Component {
           </Modal.Description>
         </Modal.Content>
       </Modal>
+      </div>
     );
   }
 }

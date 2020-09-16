@@ -1,13 +1,12 @@
 import React from "react";
-import { Redirect } from "react-router";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SideNavComponent from "./SideNavigation/SideNavComponent";
 import Footer from "../NavBar/Footer";
 import Navbar from "../NavBar/navBar";
-import axios from "axios";
 import Cookies from "js-cookie";
 import SignIn from "../Login/SignIn";
 import db from "../../Config/fbConfig";
+import { auth } from "firebase";
 
 class App extends React.Component {
   constructor(props) {
@@ -16,6 +15,7 @@ class App extends React.Component {
       auth: false,
       success: "",
       validTok: null,
+      auth: false,
     };
   }
 
@@ -26,26 +26,14 @@ class App extends React.Component {
           user.getIdToken().then((idToken) => {
             // console.log(idToken); // It shows the Firebase token now
             this.setState({ validTok: idToken });
+            if (this.state.validTok == Cookies.get("token")) {
+              this.setState({ auth: true });
+            }
             this.setState({ success: "found" });
           });
         }
       }.bind(this)
     );
-    /*this.token = Cookies.get("token");
-    const instance = axios
-      .get("http://localhost:8000/api/auth/me", {
-        headers: { Authorization: "Bearer " + this.token },
-      })
-      .then((res) => {
-        if (res.status == 200) {
-          this.setState({ auth: true });
-          this.setState({ success: "found" });
-        }
-      })
-      .catch((error) => {
-        console.log(error.message);
-        this.setState({ success: "notfound" });
-      });*/
   }
 
   render() {
@@ -59,8 +47,11 @@ class App extends React.Component {
       marginLeft: "-200px",
     };
 
-    this.token = Cookies.get("token");
-    if (this.state.success == "" && this.state.validTok == "") {
+    //this.token = Cookies.get("token");
+    if (this.state.success == "" && Cookies.get("outval") == "in") {
+      console.log(
+        "success " + this.state.success + " valid " + this.state.validTok
+      );
       return (
         <div
           style={myStyle}
@@ -68,7 +59,7 @@ class App extends React.Component {
         ></div>
       );
     } else {
-      if (this.state.validTok == this.token) {
+      if (this.state.auth) {
         return (
           <div>
             <Navbar />
