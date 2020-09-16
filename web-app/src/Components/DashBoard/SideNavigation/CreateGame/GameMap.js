@@ -2,7 +2,7 @@ import React from "react";
 import mapboxgl from "mapbox-gl";
 import Geocoder from "@mapbox/mapbox-gl-geocoder";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
-import "../../styles.css";
+//import "../../styles.css";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoidGFwZWhuZGhsb3Z1IiwiYSI6ImNrYmV2eTRhdDBwbXUydHA4eTl6cW5neDMifQ.BVjVIq7FUmlnMZJC_BvRDQ";
