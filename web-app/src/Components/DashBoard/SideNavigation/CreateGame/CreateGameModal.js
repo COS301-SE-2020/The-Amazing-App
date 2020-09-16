@@ -7,7 +7,7 @@ import GameName from "./GameName";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { Route, Redirect } from "react-router-dom";
-import history from "../../../../history";
+//import history from "../../../../history";
 import { connect } from "react-redux";
 import { createProject } from "../../../../store/actions/projectActions";
 
@@ -140,248 +140,112 @@ class CreateGameModal extends React.Component {
   render() {
     return (
       <div className="create">
-      <Modal
-        style={{
-          marginTop: 80,
-          top: "auto",
-          left: "auto",
-          right: "auto",
-          position: "relative",
-        }}
-        trigger={
-          <Button
-            size="medium"
-            style={{
-              marginTop: 12,
-              fontSize: 13,
-              marginLeft: 10,
-              backgroundColor: "#2A9D8F",
-              color: "white",
-            }}
-          >
-            <i className="users icon"></i>
-            Create Game
-          </Button>
-        }
-        centered={false}
-        closeIcon
-      >
-        <Modal.Header>Create Game</Modal.Header>
-        <Modal.Content scrolling>
-          <GameName getGameDetails={this.getGameName.bind(this)} />
-          <hr />
-          <Modal.Description style={{ marginTop: 10 }}>
-            <div style={{ marginTop: 5 }}>
-              <div className="ui form" style={{ width: 700 }}>
-                <div className="field">
-                  <label>Question 1</label>
-                  <input
-                    required
-                    type="text"
-                    value={this.state.quest1}
-                    placeholder="Type Question..."
-                    onChange={(e) => this.setState({ quest1: e.target.value })}
-                  />
-                </div>
-              </div>
-              <div className="ui form" style={{ marginTop: 15 }}>
-                <div className="three fields">
-                  <div className="field">
-                    <label>Answer 1(Correct Option)</label>
-                    <input
-                      required
-                      type="text"
-                      value={this.state.ans1}
-                      placeholder="Type Correct Answer..."
-                      onChange={(e) => this.setState({ ans1: e.target.value })}
-                    />
-                  </div>
-                  <div className="field">
-                    <label>Answer 2</label>
-                    <input
-                      required
-                      type="text"
-                      value={this.state.ans2}
-                      placeholder="Type Answer..."
-                      onChange={(e) => this.setState({ ans2: e.target.value })}
-                    />
-                  </div>
-                  <div className="field">
-                    <label>Answer 3</label>
-                    <input
-                      required
-                      type="text"
-                      value={this.state.ans3}
-                      placeholder="Type Answer..."
-                      onChange={(e) => this.setState({ ans3: e.target.value })}
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="ui form" style={{ marginTop: 15 }}>
-                <MapModal getAddress={this.updateAddress.bind(this)} />
-                <div className="ui form" style={{ marginTop: 15, width: 520 }}>
-                  <div className="field disabled" style={{ color: "grey" }}>
-                    <input
-                      required
-                      id="location1"
-                      type="text"
-                      value={this.state.address[0]}
-                      onChange={(e) =>
-                        this.setState({
-                          address: this.state.address.concat(this.address[0]),
-                        })
-                      }
-                      placeholder="Selected Location Will Appear Here..."
-                    />
-                  </div>
-                </div>
-              </div>
-              <Button
-                style={{
-                  backgroundColor: "#2A9D8F",
-                  color: "white",
-                  marginTop: 10,
-                }}
-                onClick={this.addToGameProp1}
-              >
-                <i className="checkmark icon"></i>
-                {this.state.save1}
-              </Button>
-            </div>
+        <Modal
+          style={{
+            marginTop: 80,
+            top: "auto",
+            left: "auto",
+            right: "auto",
+            position: "relative",
+          }}
+          trigger={
+            <Button
+              size="medium"
+              style={{
+                marginTop: 12,
+                fontSize: 13,
+                marginLeft: 10,
+                backgroundColor: "#2A9D8F",
+                color: "white",
+              }}
+            >
+              <i className="users icon"></i>
+              Create Game
+            </Button>
+          }
+          centered={false}
+          closeIcon
+        >
+          <Modal.Header>Create Game</Modal.Header>
+          <Modal.Content scrolling>
+            <GameName getGameDetails={this.getGameName.bind(this)} />
             <hr />
-            <div style={{ marginTop: 5 }}>
-              <div className="ui form" style={{ width: 700 }}>
-                <div className="field">
-                  <label>Question 2</label>
-                  <input
-                    type="text"
-                    value={this.state.quest2}
-                    placeholder="Type Question..."
-                    onChange={(e) => this.setState({ quest2: e.target.value })}
-                  />
-                </div>
-              </div>
-              <div className="ui form" style={{ marginTop: 15 }}>
-                <div className="three fields">
+            <Modal.Description style={{ marginTop: 10 }}>
+              <div style={{ marginTop: 5 }}>
+                <div className="ui form" style={{ width: 700 }}>
                   <div className="field">
-                    <label>Answer 1(Correct Option)</label>
+                    <label>Question 1</label>
                     <input
+                      required
                       type="text"
-                      value={this.state.ans21}
-                      placeholder="Type Correct Answer..."
-                      onChange={(e) => this.setState({ ans21: e.target.value })}
-                    />
-                  </div>
-                  <div className="field">
-                    <label>Answer 2</label>
-                    <input
-                      type="text"
-                      value={this.state.ans22}
-                      placeholder="Type Answer..."
-                      onChange={(e) => this.setState({ ans22: e.target.value })}
-                    />
-                  </div>
-                  <div className="field">
-                    <label>Answer 3</label>
-                    <input
-                      type="text"
-                      value={this.state.ans23}
-                      placeholder="Type Answer..."
-                      onChange={(e) => this.setState({ ans23: e.target.value })}
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="ui form" style={{ marginTop: 15 }}>
-                <MapModal getAddress={this.updateAddress.bind(this)} />
-                <div className="ui form" style={{ marginTop: 15, width: 520 }}>
-                  <div className="field disabled" style={{ color: "grey" }}>
-                    <input
-                      id="location2"
-                      type="text"
-                      value={this.state.address[1]}
+                      value={this.state.quest1}
+                      placeholder="Type Question..."
                       onChange={(e) =>
-                        this.setState({
-                          address: this.state.address.concat(this.address[1]),
-                        })
+                        this.setState({ quest1: e.target.value })
                       }
-                      placeholder="Selected Location Will Appear Here..."
                     />
                   </div>
                 </div>
-              </div>
-              <Button
-                style={{
-                  backgroundColor: "#2A9D8F",
-                  color: "white",
-                  marginTop: 10,
-                }}
-                onClick={this.addToGameProp2}
-              >
-                <i className="checkmark icon"></i>
-                {this.state.save2}
-              </Button>
-            </div>
-            <hr />
-            <div style={{ marginTop: 5 }}>
-              <div className="ui form" style={{ width: 700 }}>
-                <div className="field">
-                  <label>Question 3</label>
-                  <input
-                    type="text"
-                    value={this.state.quest3}
-                    placeholder="Type Question..."
-                    onChange={(e) => this.setState({ quest3: e.target.value })}
-                  />
-                </div>
-              </div>
-              <div className="ui form" style={{ marginTop: 15 }}>
-                <div className="three fields">
-                  <div className="field">
-                    <label>Answer 1(Correct Option)</label>
-                    <input
-                      type="text"
-                      value={this.state.ans31}
-                      placeholder="Type Correct Answer..."
-                      onChange={(e) => this.setState({ ans31: e.target.value })}
-                    />
-                  </div>
-                  <div className="field">
-                    <label>Answer 2</label>
-                    <input
-                      type="text"
-                      value={this.state.ans32}
-                      placeholder="Type Answer..."
-                      onChange={(e) => this.setState({ ans32: e.target.value })}
-                    />
-                  </div>
-                  <div className="field">
-                    <label>Answer 3</label>
-                    <input
-                      type="text"
-                      value={this.state.ans33}
-                      placeholder="Type Answer..."
-                      onChange={(e) => this.setState({ ans33: e.target.value })}
-                    />
+                <div className="ui form" style={{ marginTop: 15 }}>
+                  <div className="three fields">
+                    <div className="field">
+                      <label>Answer 1(Correct Option)</label>
+                      <input
+                        required
+                        type="text"
+                        value={this.state.ans1}
+                        placeholder="Type Correct Answer..."
+                        onChange={(e) =>
+                          this.setState({ ans1: e.target.value })
+                        }
+                      />
+                    </div>
+                    <div className="field">
+                      <label>Answer 2</label>
+                      <input
+                        required
+                        type="text"
+                        value={this.state.ans2}
+                        placeholder="Type Answer..."
+                        onChange={(e) =>
+                          this.setState({ ans2: e.target.value })
+                        }
+                      />
+                    </div>
+                    <div className="field">
+                      <label>Answer 3</label>
+                      <input
+                        required
+                        type="text"
+                        value={this.state.ans3}
+                        placeholder="Type Answer..."
+                        onChange={(e) =>
+                          this.setState({ ans3: e.target.value })
+                        }
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="ui form" style={{ marginTop: 15 }}>
-                <MapModal getAddress={this.updateAddress.bind(this)} />
-                <div className="ui form" style={{ marginTop: 15, width: 520 }}>
-                  <div className="field disabled" style={{ color: "grey" }}>
-                    <input
-                      id="location3"
-                      type="text"
-                      value={this.state.address[2]}
-                      onChange={(e) =>
-                        this.setState({
-                          address: this.state.address.concat(this.address[2]),
-                        })
-                      }
-                      placeholder="Selected Location Will Appear Here..."
-                    />
+                <div className="ui form" style={{ marginTop: 15 }}>
+                  <MapModal getAddress={this.updateAddress.bind(this)} />
+                  <div
+                    className="ui form"
+                    style={{ marginTop: 15, width: 520 }}
+                  >
+                    <div className="field disabled" style={{ color: "grey" }}>
+                      <input
+                        required
+                        id="location1"
+                        type="text"
+                        value={this.state.address[0]}
+                        onChange={(e) =>
+                          this.setState({
+                            address: this.state.address.concat(this.address[0]),
+                          })
+                        }
+                        placeholder="Selected Location Will Appear Here..."
+                      />
+                    </div>
                   </div>
                 </div>
                 <Button
@@ -390,24 +254,193 @@ class CreateGameModal extends React.Component {
                     color: "white",
                     marginTop: 10,
                   }}
-                  onClick={this.addToGameProp3}
+                  onClick={this.addToGameProp1}
                 >
                   <i className="checkmark icon"></i>
-                  {this.state.save3}
+                  {this.state.save1}
                 </Button>
               </div>
-            </div>
-            <hr />
-            <button
-              className="ui button"
-              onClick={this.onSubmitGame}
-              style={{ backgroundColor: "#2A9D8F", color: "white" }}
-            >
-              {this.state.submit}
-            </button>
-          </Modal.Description>
-        </Modal.Content>
-      </Modal>
+              <hr />
+              <div style={{ marginTop: 5 }}>
+                <div className="ui form" style={{ width: 700 }}>
+                  <div className="field">
+                    <label>Question 2</label>
+                    <input
+                      type="text"
+                      value={this.state.quest2}
+                      placeholder="Type Question..."
+                      onChange={(e) =>
+                        this.setState({ quest2: e.target.value })
+                      }
+                    />
+                  </div>
+                </div>
+                <div className="ui form" style={{ marginTop: 15 }}>
+                  <div className="three fields">
+                    <div className="field">
+                      <label>Answer 1(Correct Option)</label>
+                      <input
+                        type="text"
+                        value={this.state.ans21}
+                        placeholder="Type Correct Answer..."
+                        onChange={(e) =>
+                          this.setState({ ans21: e.target.value })
+                        }
+                      />
+                    </div>
+                    <div className="field">
+                      <label>Answer 2</label>
+                      <input
+                        type="text"
+                        value={this.state.ans22}
+                        placeholder="Type Answer..."
+                        onChange={(e) =>
+                          this.setState({ ans22: e.target.value })
+                        }
+                      />
+                    </div>
+                    <div className="field">
+                      <label>Answer 3</label>
+                      <input
+                        type="text"
+                        value={this.state.ans23}
+                        placeholder="Type Answer..."
+                        onChange={(e) =>
+                          this.setState({ ans23: e.target.value })
+                        }
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="ui form" style={{ marginTop: 15 }}>
+                  <MapModal getAddress={this.updateAddress.bind(this)} />
+                  <div
+                    className="ui form"
+                    style={{ marginTop: 15, width: 520 }}
+                  >
+                    <div className="field disabled" style={{ color: "grey" }}>
+                      <input
+                        id="location2"
+                        type="text"
+                        value={this.state.address[1]}
+                        onChange={(e) =>
+                          this.setState({
+                            address: this.state.address.concat(this.address[1]),
+                          })
+                        }
+                        placeholder="Selected Location Will Appear Here..."
+                      />
+                    </div>
+                  </div>
+                </div>
+                <Button
+                  style={{
+                    backgroundColor: "#2A9D8F",
+                    color: "white",
+                    marginTop: 10,
+                  }}
+                  onClick={this.addToGameProp2}
+                >
+                  <i className="checkmark icon"></i>
+                  {this.state.save2}
+                </Button>
+              </div>
+              <hr />
+              <div style={{ marginTop: 5 }}>
+                <div className="ui form" style={{ width: 700 }}>
+                  <div className="field">
+                    <label>Question 3</label>
+                    <input
+                      type="text"
+                      value={this.state.quest3}
+                      placeholder="Type Question..."
+                      onChange={(e) =>
+                        this.setState({ quest3: e.target.value })
+                      }
+                    />
+                  </div>
+                </div>
+                <div className="ui form" style={{ marginTop: 15 }}>
+                  <div className="three fields">
+                    <div className="field">
+                      <label>Answer 1(Correct Option)</label>
+                      <input
+                        type="text"
+                        value={this.state.ans31}
+                        placeholder="Type Correct Answer..."
+                        onChange={(e) =>
+                          this.setState({ ans31: e.target.value })
+                        }
+                      />
+                    </div>
+                    <div className="field">
+                      <label>Answer 2</label>
+                      <input
+                        type="text"
+                        value={this.state.ans32}
+                        placeholder="Type Answer..."
+                        onChange={(e) =>
+                          this.setState({ ans32: e.target.value })
+                        }
+                      />
+                    </div>
+                    <div className="field">
+                      <label>Answer 3</label>
+                      <input
+                        type="text"
+                        value={this.state.ans33}
+                        placeholder="Type Answer..."
+                        onChange={(e) =>
+                          this.setState({ ans33: e.target.value })
+                        }
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="ui form" style={{ marginTop: 15 }}>
+                  <MapModal getAddress={this.updateAddress.bind(this)} />
+                  <div
+                    className="ui form"
+                    style={{ marginTop: 15, width: 520 }}
+                  >
+                    <div className="field disabled" style={{ color: "grey" }}>
+                      <input
+                        id="location3"
+                        type="text"
+                        value={this.state.address[2]}
+                        onChange={(e) =>
+                          this.setState({
+                            address: this.state.address.concat(this.address[2]),
+                          })
+                        }
+                        placeholder="Selected Location Will Appear Here..."
+                      />
+                    </div>
+                  </div>
+                  <Button
+                    style={{
+                      backgroundColor: "#2A9D8F",
+                      color: "white",
+                      marginTop: 10,
+                    }}
+                    onClick={this.addToGameProp3}
+                  >
+                    <i className="checkmark icon"></i>
+                    {this.state.save3}
+                  </Button>
+                </div>
+              </div>
+              <hr />
+              <button
+                className="ui button"
+                onClick={this.onSubmitGame}
+                style={{ backgroundColor: "#2A9D8F", color: "white" }}
+              >
+                {this.state.submit}
+              </button>
+            </Modal.Description>
+          </Modal.Content>
+        </Modal>
       </div>
     );
   }
