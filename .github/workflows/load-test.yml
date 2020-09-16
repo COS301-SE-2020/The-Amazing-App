@@ -1,23 +1,17 @@
-
-
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
+# .github/workflows/load-test.yml
 on:
-  push:
-    branches: [ master ]
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+  [push]
+    
 jobs:
-  k6_cloud_test:
-    name: k6 cloud test run
+  k6_load_test:
+    name: k6 Load Test
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v1
 
-      - name: Run k6 cloud test
+      - name: Run local k6 test
         uses: k6io/action@v0.1
         with:
           filename: test.js
-          cloud: true
-          token: 88ac69e3ef8ea2010e24de107fb62a5025f3e3e1062ae0d13a7ea7a35c6cf36a
