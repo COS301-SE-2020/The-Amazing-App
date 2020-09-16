@@ -4,10 +4,26 @@ import logo from "../../Assets/logo.png";
 import { Link } from "react-router-dom";
 import UserOptions from "./UserOptions";
 import { Button } from "semantic-ui-react";
+import firebase from "../../Config/fbConfig";
+import Cookies from "js-cookie";
 
 class NavBar extends React.Component {
   logout = () => {
-    window.location.href = "/login";
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        console.log("Sign Out Successfull!!");
+        Cookies.set("outval", "out", {
+          expires: 2,
+        });
+        window.location.href = "/login";
+        //history.pushState("/login")
+      })
+      .catch(() => {
+        window.location.href = "/login";
+        alert("Signout Failed!!");
+      });
   };
 
   render() {

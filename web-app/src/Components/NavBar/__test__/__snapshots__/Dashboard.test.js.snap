@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`dashboard MyGame component test it should render 1`] = `
+<button
+  className="ui medium button"
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  style={
+    Object {
+      "backgroundColor": "#2A9D8F",
+      "color": "white",
+      "fontSize": 13,
+      "marginLeft": 10,
+      "marginTop": 12,
+      "width": 135,
+    }
+  }
+>
+  <i
+    className="trophy icon"
+  />
+  My Games
+</button>
+`;

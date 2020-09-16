@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Button, Form, Grid, Message, Segment } from "semantic-ui-react";
+import {
+  Button,
+  Form,
+  Grid,
+  Message,
+  Segment,
+  Loader,
+} from "semantic-ui-react";
 import image from "../../Assets/logo.png";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -7,14 +14,7 @@ import { signup, signin, resetPassword } from "../../store/actions/auth";
 import useForm from "../../utils/useForm";
 import validate from "../../utils/validateSignUpForm";
 
-const Login = ({
-  signup,
-  signin,
-  resetPassword,
-  authMsg,
-  history,
-  loading,
-}) => {
+const Login = ({ signup, signin, resetPassword, authMsg, history }) => {
   const [newUser, setNewUser] = useState(false);
   const [reset, SetReset] = useState(false);
   const [credentials, handleChange, handleSubmit, errors] = useForm(
@@ -22,10 +22,15 @@ const Login = ({
     validate,
     reset
   );
+  const [loading, setLoading] = useState(false);
 
   function login() {
     // signin
+    setLoading(true);
     signup(credentials.email, credentials.password, credentials.username);
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
   }
 
   return (
@@ -114,8 +119,10 @@ const Login = ({
                 </div>
               )}
 
-              <Button fluid color="teal" size="medium">
-                Register
+              <Button fluid color="teal" size="medium" disabled={loading}>
+                {loading && <Loader active />}
+                {loading && <span>Signing Up</span>}
+                {!loading && <span>Register</span>}
               </Button>
               <Message>
                 Already have an account ? <Link to="/login"> Login</Link>
