@@ -7,9 +7,13 @@ import image from '../../assets/avatar1.png';
 import useResults from '../Hooks/useResults';
 import { ScrollView } from 'react-native-gesture-handler';
 import {UserContext} from '../Context/UserContext';
+import {GameContext} from '../Context/GameContext';
+import gameDetails from '../Hooks/gemeDetails';
 const DashboardScreen = ({navigation})=>{
     const userContext = useContext(UserContext);
+    const gameContext = useContext(GameContext);
     const [results,getGroups] = useResults();
+    const [setGameState] = gameDetails();
     useEffect(() => {
         getGroups();
       },[]);
@@ -40,7 +44,11 @@ const DashboardScreen = ({navigation})=>{
              keyExtractor={result=>result.id}
              renderItem={({item})=>{
                  return( 
-                    <TouchableOpacity onPress={()=>{navigation.navigate('Simulation')}}>
+                    <TouchableOpacity onPress={async()=>{
+                        gameContext.setGameId(item.data().gameId)
+                       await setGameState()
+                        navigation.navigate('Simulation')
+                        }}>
                     <View style={style.itemStyle}>
                         <View style={{flexDirection:'row'}}>
                             <Image source={image} style={style.avatarStyle} />
