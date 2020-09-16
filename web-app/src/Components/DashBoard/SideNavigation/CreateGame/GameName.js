@@ -4,7 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Image } from "semantic-ui-react";
 import gameImage from "../../../../Assets/noimageframe.jpg";
-import "../../styles.css";
+//import "../../styles.css";
 
 const nameObject = {
   gameName: "",
