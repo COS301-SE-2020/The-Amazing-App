@@ -47,6 +47,7 @@ const LogoutScreen = ({navigation})=>{
                     }
                 />
             </View>
+            <FooterComponent/>
             </View>
         </>
     )
@@ -101,6 +102,7 @@ const style = StyleSheet.create({
         width:'100%',
         height:'100%',
         backgroundColor:'rgba(42, 157, 143, 0.01)',
+        marginTop:200
     },
     blade:{
         backgroundColor:'white',

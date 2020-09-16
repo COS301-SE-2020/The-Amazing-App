@@ -47,7 +47,7 @@ const DashboardScreen = ({navigation})=>{
                     <TouchableOpacity onPress={async()=>{
                         gameContext.setGameId(item.data().gameId)
                        await setGameState()
-                        navigation.navigate('Simulation')
+                        navigation.navigate('Instructions')
                         }}>
                     <View style={style.itemStyle}>
                         <View style={{flexDirection:'row'}}>

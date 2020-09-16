@@ -95,7 +95,6 @@ const CreatgroupScreen = ({navigation})=>{
                     }
                 />
             </View>
-            <FooterComponent />
            </View>
         </>
     )
@@ -122,7 +121,8 @@ const style = StyleSheet.create({
         paddingTop:15,
         marginLeft:35,
         marginRight:35,
-        borderRadius:5
+        borderRadius:5,
+        marginTop:100
     },
     detailContainer:{
         backgroundColor:'rgba(42, 157, 143, 0.7)',
