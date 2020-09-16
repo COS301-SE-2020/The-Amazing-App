@@ -1,24 +1,22 @@
-import React ,{  useEffect, useContext} from 'react';
+import React ,{ useEffect,useContext} from 'react';
 import {View, Text, StyleSheet,Image, TouchableOpacity,FlatList} from 'react-native'
-import {Header} from 'react-native-elements';
+import {Header, Divider} from 'react-native-elements';
 import { Feather } from '@expo/vector-icons'; 
 import { StatusBar } from 'expo-status-bar';
-import image from '../../assets/avatar1.png';
-import useResults from '../Hooks/useResults';
+import {MaterialIcons, FontAwesome, AntDesign} from '@expo/vector-icons'
 import { ScrollView } from 'react-native-gesture-handler';
 import {UserContext} from '../Context/UserContext';
-import {GameContext} from '../Context/GameContext';
-import gameDetails from '../Hooks/gemeDetails';
-const DashboardScreen = ({navigation})=>{
-    const userContext = useContext(UserContext);
-    const gameContext = useContext(GameContext);
-    const [results,getGroups] = useResults();
-    const [setGameState] = gameDetails();
-    useEffect(() => {
-        getGroups();
-      },[]);
+import image from '../../assets/avatar1.png';
+import useResults from '../Hooks/getPlayers';
 
-    return(
+const LeaderBoard = ({navigation})=>{
+    const { containerStyle, textStyle, statContainer, statAmountStyle, statStyle, statTitleStyle} = style;
+    const [players,getPlayers] = useResults();
+    const userContext = useContext(UserContext);
+    useEffect(() => {
+        getPlayers();
+      },[]);
+    return( 
         <>
             <StatusBar style='#2A9D8F'/>
             <Header
@@ -26,47 +24,39 @@ const DashboardScreen = ({navigation})=>{
                 <TouchableOpacity onPress={()=>navigation.openDrawer()}>
                     <Feather name="menu" size={30} color='#fff'/>
                 </TouchableOpacity>}
-                centerComponent={{ text: 'Dashboard', style: { color: '#fff',fontSize:22, fontWeight:'bold' } }}
+                centerComponent={{ text: 'LeaderBoard', style: { color: '#fff',fontSize:22, fontWeight:'bold' } }}
                 rightComponent={
                     <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
-                        <Image source={userContext.image}  style={style.imageStyle}/>
+                         <Image source={userContext.image}  style={style.imageStyle}/>
                     </TouchableOpacity>
                 }
                 containerStyle={{backgroundColor:'#2A9D8F'}}
             />
-            <View style={style.titleContainer}>
-                <Text style={style.titleStyle}>Group</Text>
-            </View>
+            
             <ScrollView>
             <FlatList 
              showsHorizontalScrollIndicator={false}
-             data={results}
-             keyExtractor={result=>result.id}
+             data={players}
+             keyExtractor={(result)=>result.id}
              renderItem={({item})=>{
-                 return( 
-                    <TouchableOpacity onPress={async()=>{
-                        gameContext.setGameId(item.data().gameId)
-                       await setGameState()
-                        navigation.navigate('Simulation')
-                        }}>
-                    <View style={style.itemStyle}>
-                        <View style={{flexDirection:'row'}}>
-                            <Image source={image} style={style.avatarStyle} />
-                            <View  style={style.textStyle}>
-                                <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>{item.data().groupName}</Text>
-                                <Text >Game : {item.data().gameName}</Text>
+                    return( 
+                        <View style={style.itemStyle}>
+                            <View style={{flexDirection:'row'}}>
+                                <Image source={image} style={style.avatarStyle} />
+                                <View  style={style.textStyle}>
+                                    <Text style={{fontSize:14, fontWeight:'bold', color:'#2A9D8F'}}>{item.data().Username}</Text>
+                                    <Text style={{color:'#f56042'}}>Points :{item.data().Points}</Text>
+                                </View>
                             </View>
                         </View>
-                    </View>
-                    </TouchableOpacity>
-                 )
+                    )
              }}
             />
             </ScrollView>
         </>
     )
 }
-const style = StyleSheet.create({
+style = StyleSheet.create({
     titleContainer:{
         backgroundColor:'rgba(42, 157, 143, 0.3)',
         height:50
@@ -103,4 +93,5 @@ const style = StyleSheet.create({
         marginLeft:10
     }
 })
-export default DashboardScreen;
+export default LeaderBoard;
+
