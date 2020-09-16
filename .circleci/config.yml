@@ -25,9 +25,6 @@ jobs:
             - v1-dependencies-
 
       - run: npm install
-      - run:
-          name: "Run Jest and Collect Coverage Reports"
-          command: jest --collectCoverage=true
           
       - save_cache:
           paths:
