@@ -15,6 +15,9 @@ export default () => {
         userContext.setUsername('');
         userContext.setEmail('');
         userContext.setImage(null);
+        userContext.setPoints(0);
+        userContext.setNumGames(0);
+        userContext.setNumGroups(0);
       } catch (error) {
         Alert.alert('Unable to logout');
       }      
