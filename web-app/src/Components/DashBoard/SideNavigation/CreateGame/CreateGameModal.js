@@ -6,8 +6,6 @@ import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import GameName from "./GameName";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { Route, Redirect } from "react-router-dom";
-//import history from "../../../../history";
 import { connect } from "react-redux";
 import { createProject } from "../../../../store/actions/projectActions";
 
