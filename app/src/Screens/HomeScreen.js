@@ -15,7 +15,6 @@ import { Feather, AntDesign } from '@expo/vector-icons'
 import { StatusBar } from 'expo-status-bar'
 import avatar from '../../assets/avatar3.png'
 import { UserContext } from '../Context/UserContext'
-import { GameContext } from '../Context/GameContext'
 import image from '../../assets/avatar1.png'
 import {registerGame} from '../Api/GameAPI'
 import {Paragraph} from 'react-native-paper'
@@ -23,18 +22,15 @@ import {Paragraph} from 'react-native-paper'
 const HomeScreen = ({ navigation }) => {
   const [term, setTerm ]= useState('')
   const [gameId, setgameId ]= useState('')
-  const [groupId, setgroupId ] = useState('')
+  const [groupId, setgoupId ] = useState('')
   const [modalOpen, setModelOpen] = useState(false)
   const userContext = useContext(UserContext);
-  const gameContext = useContext(GameContext)
-  const [results, getGroups, games, getGames] = useResults()
+  const [results, getGroups, games, getGames] = useResults();
 
-  useEffect(async () => {
-    await getGames()
-    await getGroups()
+  useEffect(() => {
+    getGames()
+    getGroups()
   }, [])
-
-  gameContext.setGroups(results);
 
   const addGameToGroup=()=>{
    const data = {
@@ -45,7 +41,7 @@ const HomeScreen = ({ navigation }) => {
   }
 
   const choice = () => {
-    if (gameContext.groups.length > 0) {
+    if (results.length > 0) {
       return (
         <View style={{ height: 340 }}>
           <View style={{ marginBottom: 10, marginTop: 10 }}>
@@ -63,13 +59,13 @@ const HomeScreen = ({ navigation }) => {
           <ScrollView>
             <FlatList
               showsHorizontalScrollIndicator={false}
-              data={gameContext.groups}
+              data={results}
               keyExtractor={(results) => results.id}
               renderItem={({ item }) => {
                 return (
                   <TouchableOpacity
                     onPress={() => {
-                      setgroupId(item.id)
+                      setgoupId(item.id)
                       addGameToGroup()
                       setModelOpen(false)
                     }}
