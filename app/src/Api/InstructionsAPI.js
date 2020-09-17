@@ -22,6 +22,8 @@ export default () => {
     try {
             const game = await firebase.firestore().collection('projects').doc(gameContext.gameId).get();
             gameContext.setGameLocation(game.data().properties[0].location);
+            gameContext.setProperties(game.data().properties);
+            console.log(gameContext.gameProperties)
             //On success
         }catch (error) {
             //On Fail

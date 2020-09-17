@@ -6,16 +6,19 @@ import { FontAwesome,MaterialIcons, FontAwesome5,SimpleLineIcons, Feather } from
 import { StatusBar } from 'expo-status-bar';
 import {GameContext} from '../Context/GameContext';
 import {UserContext} from '../Context/UserContext';
-import useInstructions from '../Api/InstructionsAPI'
-
+import useInstructions from '../Api/InstructionsAPI';
+import gameDetails from '../Hooks/gemeDetails';
+import gemeDetails from '../Hooks/gemeDetails';
 
 const InstructionScreen = ({navigation})=>{
     const gameContext = useContext(GameContext);
     const userContext = useContext(UserContext);
     const [getDesc,getLocation] = useInstructions();
+    const [setGameState] = gemeDetails();
     useEffect(() => {
         getDesc();
         getLocation();
+        
       },[]);
 
     return(

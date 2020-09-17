@@ -10,7 +10,8 @@ const GameProvider = (props) => {
 
   return(
     <GameContext.Provider
-        value={{gameId,setGameId,gameProperties,setProperties, gameCoord, setCoord,gameDesc,setGameDesc,gameLocation,setGameLocation}}
+        value={{gameId,setGameId,gameProperties,setProperties, gameCoord, 
+          setCoord,gameDesc,setGameDesc,gameLocation,setGameLocation}}
     >
         {props.children}
     </GameContext.Provider>

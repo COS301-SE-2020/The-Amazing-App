@@ -46,7 +46,6 @@ const DashboardScreen = ({navigation})=>{
                  return( 
                     <TouchableOpacity onPress={async()=>{
                         gameContext.setGameId(item.data().gameId)
-                       await setGameState()
                         navigation.navigate('Instructions')
                         }}>
                     <View style={style.itemStyle}>
