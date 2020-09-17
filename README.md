@@ -1,4 +1,5 @@
 # The-Amazing-App
+[![Coverage Status](https://coveralls.io/repos/github/COS301-SE-2020/The-Amazing-App/badge.svg?branch=master)](https://coveralls.io/github/COS301-SE-2020/The-Amazing-App?branch=master)
 
 ## Description
 The Amazing App is a location-based mobile application game. A web application is used to create the game. Markers will be created on a map in which players have to physically visit in order to solve riddles and retrieve information.
