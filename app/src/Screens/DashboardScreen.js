@@ -17,7 +17,7 @@ const DashboardScreen = ({navigation})=>{
     useEffect(() => {
         getGroups();
       },[]);
-
+    gameContext.setGroups(results);
     return(
         <>
             <StatusBar style='#2A9D8F'/>
@@ -40,7 +40,7 @@ const DashboardScreen = ({navigation})=>{
             <ScrollView>
             <FlatList 
              showsHorizontalScrollIndicator={false}
-             data={results}
+             data={gameContext.groups}
              keyExtractor={result=>result.id}
              renderItem={({item})=>{
                  return( 

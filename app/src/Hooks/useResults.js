@@ -11,7 +11,7 @@ export default ()=>{
         try{
             const query1 = await firebase.firestore().collection('groups').where("userId", '==', authContext.userId ).get();
             const query2 = await firebase.firestore().collection('groups').where("member", "array-contains", authContext.userId ).get();
-            const groups = query1.docs.concat(query2.docs);
+            const groups = await query1.docs.concat(query2.docs);
             setResults(groups);
         }
         catch(eror){

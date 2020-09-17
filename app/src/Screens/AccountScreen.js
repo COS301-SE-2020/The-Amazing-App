@@ -7,7 +7,6 @@ import {MaterialIcons, FontAwesome, AntDesign} from '@expo/vector-icons'
 import {UserContext} from '../Context/UserContext';
 
 const AccountScreen = ({navigation})=>{
-    const { containerStyle, textStyle, statContainer, statAmountStyle, statStyle, statTitleStyle} = style;
     const userContext = useContext(UserContext);
     
     return( 
@@ -26,7 +25,7 @@ const AccountScreen = ({navigation})=>{
                 }
                 containerStyle={{backgroundColor:'#2A9D8F'}}
             />
-             <View style={containerStyle}>
+             <View style={style.containerStyle}>
                 <Image source={userContext.image}  style={style.imageStyle2}/>
             </View>
 
@@ -34,23 +33,23 @@ const AccountScreen = ({navigation})=>{
             <View style={{paddingBottom:15}}>
                 
                 
-                <Text style={textStyle}><AntDesign name="user" size={24} color='#2A9D8F' /> Username : {userContext.username}</Text>
-                <Text style={textStyle}><AntDesign name="mail" size={24} color='#2A9D8F' />Email : {userContext.email}</Text>
+                <Text style={style.textStyle}><AntDesign name="user" size={24} color='#2A9D8F' /> Username : {userContext.username}</Text>
+                <Text style={style.textStyle}><AntDesign name="mail" size={24} color='#2A9D8F' />Email : {userContext.email}</Text>
             </View>
-            <View style={statContainer}>
-                <View style={statStyle}>
-                    <Text style={statAmountStyle}>{userContext.points}</Text>
-                    <Text style={statTitleStyle}>Points</Text>
+            <View style={style.statContainer}>
+                <View style={style.statStyle}>
+                    <Text style={style.statAmountStyle}>{userContext.points}</Text>
+                    <Text style={style.statTitleStyle}>Points</Text>
                     <AntDesign name="star" size={24} color='white' />
                 </View>
-                <View style={statStyle}>
-                    <Text style={statAmountStyle}>{userContext.numGames}</Text>
-                    <Text style={statTitleStyle}>  Games Completed</Text>
+                <View style={style.statStyle}>
+                    <Text style={style.statAmountStyle}>{userContext.numGames}</Text>
+                    <Text style={style.statTitleStyle}>  Games Completed</Text>
                     <AntDesign name="Trophy" size={24} color='white' />
                 </View>
-                <View style={statStyle}>
-                    <Text style={statAmountStyle}>{userContext.numGroups}</Text>
-                    <Text style={statTitleStyle}>Groups</Text>
+                <View style={style.statStyle}>
+                    <Text style={style.statAmountStyle}>{userContext.numGroups}</Text>
+                    <Text style={style.statTitleStyle}>Groups</Text>
                     <AntDesign name="team" size={24} color='white' />
                 </View>
             </View>

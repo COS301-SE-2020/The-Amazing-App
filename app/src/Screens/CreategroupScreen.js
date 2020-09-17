@@ -2,7 +2,7 @@ import React ,{ useState, useContext} from 'react';
 import {View, StyleSheet, TouchableOpacity, ImageBackground , Image} from 'react-native'
 import { Input,Text, Button, Header,Icon} from 'react-native-elements';
 import FooterComponent from '../Componets/FooterComponent';
-import { FontAwesome,MaterialIcons, FontAwesome5,SimpleLineIcons } from '@expo/vector-icons'; 
+import { FontAwesome,MaterialIcons, FontAwesome5,SimpleLineIcons,Feather} from '@expo/vector-icons'; 
 import {createGroup} from '../Api/GameAPI';
 import {UserContext} from '../Context/UserContext';
 import {AuthContext} from '../Context/AuthContext';
@@ -39,7 +39,11 @@ const CreatgroupScreen = ({navigation})=>{
     return(
        <>
            <StatusBar style='#2A9D8F'/>
-            <Header
+           <Header
+                leftComponent={
+                <TouchableOpacity onPress={()=>navigation.openDrawer()}>
+                    <Feather name="menu" size={30} color='#fff'/>
+                </TouchableOpacity>}
                 centerComponent={{ text: 'Create Group', style: { color: '#fff',fontSize:22, fontWeight:'bold' } }}
                 rightComponent={
                     <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>

@@ -75,7 +75,7 @@ const style = StyleSheet.create({
     },
     titleStyle2:{
         fontSize:14,
-        color:'red',
+        color:'black',
         padding:15,
     },
     titleContainer:{
