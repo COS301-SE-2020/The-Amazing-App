@@ -15,21 +15,26 @@ import { Feather, AntDesign } from '@expo/vector-icons'
 import { StatusBar } from 'expo-status-bar'
 import avatar from '../../assets/avatar3.png'
 import { UserContext } from '../Context/UserContext'
+import { GameContext } from '../Context/GameContext'
 import image from '../../assets/avatar1.png'
 import {registerGame} from '../Api/GameAPI'
 import {Paragraph} from 'react-native-paper'
+
 const HomeScreen = ({ navigation }) => {
   const [term, setTerm ]= useState('')
   const [gameId, setgameId ]= useState('')
-  const [groupId, setgoupId ] = useState('')
+  const [groupId, setgroupId ] = useState('')
   const [modalOpen, setModelOpen] = useState(false)
-  const userContext = useContext(UserContext)
+  const userContext = useContext(UserContext);
+  const gameContext = useContext(GameContext)
   const [results, getGroups, games, getGames] = useResults()
 
-  useEffect(() => {
-    getGames()
-    getGroups()
+  useEffect(async () => {
+    await getGames()
+    await getGroups()
   }, [])
+
+  gameContext.setGroups(results);
 
   const addGameToGroup=()=>{
    const data = {
@@ -40,7 +45,7 @@ const HomeScreen = ({ navigation }) => {
   }
 
   const choice = () => {
-    if (results.length > 0) {
+    if (gameContext.groups.length > 0) {
       return (
         <View style={{ height: 340 }}>
           <View style={{ marginBottom: 10, marginTop: 10 }}>
@@ -52,19 +57,19 @@ const HomeScreen = ({ navigation }) => {
                 fontSize: 13,
               }}
             >
-              Select a group to play
+              Select a group to play 
             </Text>
           </View>
           <ScrollView>
             <FlatList
               showsHorizontalScrollIndicator={false}
-              data={results}
+              data={gameContext.groups}
               keyExtractor={(results) => results.id}
               renderItem={({ item }) => {
                 return (
                   <TouchableOpacity
                     onPress={() => {
-                      setgoupId(item.id)
+                      setgroupId(item.id)
                       addGameToGroup()
                       setModelOpen(false)
                     }}
@@ -114,7 +119,7 @@ const HomeScreen = ({ navigation }) => {
           <Button
             buttonStyle={style.buttonStyle}
             title="Create Group"
-            titleStyle={{ color: '#888e8f', fontWeight: 'bolds' }}
+            titleStyle={{ color: '#888e8f', fontWeight: 'bold' }}
             onPress={() => navigation.navigate('Creategroup')}
           />
         </View>
