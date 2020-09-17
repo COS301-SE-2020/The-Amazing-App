@@ -17,6 +17,7 @@ https://drive.google.com/file/d/16oPSoIacr9Yl1Imyl0MVnk0O8W78XVPi/view?usp=shari
 https://drive.google.com/file/d/1ZtFWG3nsXx6G3i-L7LnSauDKE_wEyVgB/view?usp=sharing
 
 ## NewTech - Demo 4
+https://drive.google.com/file/d/1smumKuqPM112FF_RuszfI394W213SY0-/view?usp=sharing
 
 ## Project Management Tool
 https://trello.com/b/Jzv91cpj/cos301-capstone
