@@ -4,8 +4,6 @@ import renderer from "react-test-renderer";
 import Enzyme, { mount, shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import NavBar from "../navBar";
-import Footer from "../Footer";
-import SignIn from "../../Login/SignIn";
 
 Enzyme.configure({ adapter: new Adapter() });
 
