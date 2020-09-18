@@ -49,9 +49,6 @@ class App extends React.Component {
 
     //this.token = Cookies.get("token");
     if (this.state.success == "" && Cookies.get("outval") == "in") {
-      console.log(
-        "success " + this.state.success + " valid " + this.state.validTok
-      );
       return (
         <div
           style={myStyle}

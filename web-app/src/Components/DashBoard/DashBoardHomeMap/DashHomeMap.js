@@ -36,7 +36,7 @@ class DashHomeMap extends React.Component {
       })
     );
 
-    let title = document.getElementById("location-title");
+    /*let title = document.getElementById("location-title");
     let description = document.getElementById("location-description");
 
     let locations = [
@@ -78,19 +78,14 @@ class DashHomeMap extends React.Component {
 
     map.on("load", () => {
       playback(0);
-    });
+    });*/
   }
 
   render() {
     return (
       <div>
         <div ref={this.mapContainer} className="mapContainer" id="mapp"></div>
-        <div class="map-overlay-container">
-          <div class="map-overlay">
-            <h4 id="location-title"></h4>
-            <p id="location-description"></p>
-          </div>
-        </div>
+        <div class="map-overlay-container"></div>
       </div>
     );
   }

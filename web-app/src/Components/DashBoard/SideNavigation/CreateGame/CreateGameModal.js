@@ -1,6 +1,8 @@
 import React from "react";
 import { Button, Modal } from "semantic-ui-react";
 import MapModal from "./MapModal";
+import Geocode from "react-geocode";
+import mapboxsdk from "@mapbox/mapbox-sdk";
 import mapboxgl from "mapbox-gl";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import GameName from "./GameName";
@@ -18,18 +20,30 @@ const gameObject1 = {
   question: "",
   answers: [],
   location: "",
+  coords: {
+    lat: 0,
+    long: 0,
+  },
 };
 
 const gameObject2 = {
   question: "",
   answers: [],
   location: "",
+  coords: {
+    lat: 0,
+    long: 0,
+  },
 };
 
 const gameObject3 = {
   question: "",
   answers: [],
   location: "",
+  coords: {
+    lat: 0,
+    long: 0,
+  },
 };
 
 const game = {
@@ -67,19 +81,21 @@ class CreateGameModal extends React.Component {
       submit: "Submit Game",
     };
 
-    this.token = Cookies.get("token");
-    const instance = axios
-      .get("http://localhost:8000/api/auth/me", {
-        headers: { Authorization: "Bearer " + this.token },
-      })
-      .then((res) => {
-        if (res.status == 200) {
-          game.user_id = res.data.data._id;
-        }
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
+    // Get latitude & longitude from address.
+  }
+
+  componentDidMount() {
+    /*console.log("Tapiwanashe");
+    Geocode.fromAddress("Eiffel Tower").then(
+      (response) => {
+        console.log("Tapiwanashe");
+        const { lat, lng } = response.results[0].geometry.location;
+        console.log("geocoder results: " + lat, lng);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );*/
   }
 
   addToGameProp1 = (event) => {

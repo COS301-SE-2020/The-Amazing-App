@@ -7,7 +7,7 @@ import Cookies from "js-cookie";
 import { db } from "../../Config/fbConfig";
 
 let email = Cookies.get("email");
-if (email){
+if (email) {
   const doc_query = db.collection("Users").where("Email", "==", email);
   doc_query.get().then(function (querySnapshot) {
     querySnapshot.forEach((doc) => {
@@ -15,23 +15,11 @@ if (email){
       //setUsername(username);
       //let username = doc.data().Username;
       Cookies.set("username", doc.data().Username, {
-        expires: 2,
+        expires: 1,
       });
     });
   });
 }
-/*const instance = axios
-  .get("http://localhost:8000/api/auth/me", {
-    headers: { Authorization: "Bearer " + Cookies.get("token") },
-  })
-  .then((res) => {
-    if (res.status == 200) {
-      Cookies.set("username", res.data.data.username, { expires: 2 });
-    }
-  })
-  .catch((error) => {
-    console.log(error.message);
-  });*/
 
 const trigger = (
   <div>
@@ -41,9 +29,7 @@ const trigger = (
       alt="userImage"
       style={{ height: 22, width: 22 }}
     />
-    <span style={{ fontSize: 14, color: "white" }}>
-      {Cookies.get("username")}
-    </span>
+    <span style={{ fontSize: 14, color: "white" }}>{Cookies.get("email")}</span>
   </div>
 );
 

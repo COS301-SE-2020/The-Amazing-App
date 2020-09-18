@@ -35,7 +35,7 @@ class GameMap extends React.Component {
     map.addControl(geocoder);
 
     geocoder.on("result", (e) => {
-      //console.log(e.result.place_name);
+      //console.log(e.result.ce);
       this.setState({ add: e.result.place_name });
       this.props.updateSomething(this.state.add);
     });
