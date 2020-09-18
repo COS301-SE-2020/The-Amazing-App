@@ -7,14 +7,13 @@ import { StatusBar } from 'expo-status-bar';
 import {GameContext} from '../Context/GameContext';
 import {UserContext} from '../Context/UserContext';
 import useInstructions from '../Api/InstructionsAPI';
-import gameDetails from '../Hooks/gemeDetails';
 import gemeDetails from '../Hooks/gemeDetails';
 
 const InstructionScreen = ({navigation})=>{
     const gameContext = useContext(GameContext);
     const userContext = useContext(UserContext);
     const [getDesc,getLocation] = useInstructions();
-    const [setGameState] = gemeDetails();
+
     useEffect(() => {
         getDesc();
         getLocation();
@@ -26,9 +25,9 @@ const InstructionScreen = ({navigation})=>{
            <StatusBar style='#2A9D8F'/>
            <Header
                 leftComponent={
-                <TouchableOpacity onPress={()=>navigation.openDrawer()}>
-                    <Feather name="menu" size={30} color='#fff'/>
-                </TouchableOpacity>}
+                    <TouchableOpacity onPress={() => navigation.goBack()}>
+                    <MaterialIcons name="arrow-back" size={30} color="#fff" />
+                  </TouchableOpacity>}
                 centerComponent={{ text: 'Instructions', style: { color: '#fff',fontSize:22, fontWeight:'bold' } }}
                 rightComponent={
                     <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>

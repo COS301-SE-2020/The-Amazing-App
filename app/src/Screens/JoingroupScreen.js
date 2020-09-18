@@ -1,8 +1,7 @@
 import React ,{ useState,useContext } from 'react';
 import {View, StyleSheet, TouchableOpacity, ImageBackground , Image} from 'react-native'
 import { Input,Text, Button, Header,Icon} from 'react-native-elements';
-import FooterComponent from '../Componets/FooterComponent';
-import { FontAwesome,MaterialIcons, FontAwesome5,SimpleLineIcons,Feather } from '@expo/vector-icons'; 
+import {SimpleLineIcons,Feather } from '@expo/vector-icons'; 
 import { StatusBar } from 'expo-status-bar';
 import JoinGroupAPI from '../Api/JoinGroupAPI'
 import {UserContext} from '../Context/UserContext';
@@ -20,7 +19,7 @@ const JoingroupScreen = ({navigation})=>{
                 <TouchableOpacity onPress={()=>navigation.openDrawer()}>
                     <Feather name="menu" size={30} color='#fff'/>
                 </TouchableOpacity>}
-                centerComponent={{ text: 'Dashboard', style: { color: '#fff',fontSize:22, fontWeight:'bold' } }}
+                centerComponent={{ text: 'Join Group', style: { color: '#fff',fontSize:22, fontWeight:'bold' } }}
                 rightComponent={
                     <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
                         <Image source={userContext.image}  style={style.imageStyle}/>
@@ -45,7 +44,7 @@ const JoingroupScreen = ({navigation})=>{
                 />
                 <Button
                     buttonStyle={style.buttonStyle}
-                    title="Submit"
+                    title="Join"
                     onPress={async ()=>{
                         await JoinGroup();
                         navigation.navigate('Dashboard')
@@ -107,7 +106,7 @@ const style = StyleSheet.create({
     overLayer:{
         width:'100%',
         height:'100%',
-        backgroundColor:'rgba(42, 157, 143, 0.01)',
+        backgroundColor:'rgba(42, 157, 143, 0.4)'
     },
     blade:{
         backgroundColor:'white',

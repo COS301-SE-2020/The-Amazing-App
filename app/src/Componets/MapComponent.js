@@ -7,17 +7,22 @@ import {UserContext} from '../Context/UserContext'
 import {GameContext} from '../Context/GameContext';
 import * as Speech from 'expo-speech'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-
+import { getDistance, getPreciseDistance } from 'geolib';
 
 const MapComponent = ({ data}) => {
+  const [count, setCounter] = useState(0)
   const [startWatching] = useLocation()
-  const [destination , setDestination] = useState(data[0])
+  const gameContext = useContext(GameContext);
+  const [destination , setDestination] = useState(gameContext.gameCoord[count])
   const MapStyle=[{"elementType": "geometry", "stylers": [{"color": "#242f3e"}]},{"elementType": "labels.text.fill","stylers": [{"color": "#746855"}]},{"elementType": "labels.text.stroke","stylers": [{"color": "#242f3e"}]},{"featureType": "administrative.locality","elementType": "labels.text.fill","stylers": [{"color": "#d59563"}]},{"featureType": "poi","elementType": "labels.text.fill","stylers": [{"color": "#d59563"}]},{"featureType": "poi.park","elementType": "geometry","stylers": [{"color": "#263c3f"}]},{"featureType": "poi.park","elementType": "labels.text.fill","stylers": [{"color": "#6b9a76"}]},{"featureType": "road","elementType": "geometry","stylers": [{"color": "#38414e"}]},{"featureType": "road","elementType": "geometry.stroke","stylers": [{"color": "#212a37"}]},{"featureType": "road","elementType": "labels.text.fill","stylers": [{"color": "#9ca5b3"}]},{"featureType": "road.highway","elementType": "geometry","stylers": [{"color": "#746855"}]},{"featureType": "road.highway","elementType": "geometry.stroke","stylers": [{"color": "#1f2835"}]},{"featureType": "road.highway","elementType": "labels.text.fill","stylers": [{"color": "#f3d19c"}]},{"featureType": "transit","elementType": "geometry","stylers": [{"color": "#2f3948"}]},{"featureType": "transit.station","elementType": "labels.text.fill","stylers": [{"color": "#d59563"}]},{"featureType": "water","elementType": "geometry","stylers": [{"color": "#17263c"}]},{"featureType": "water","elementType": "labels.text.fill","stylers": [{"color": "#515c6d"}]},{"featureType": "water","elementType": "labels.text.stroke","stylers": [{"color": "#17263c"}]}];
   const userContext = useContext(UserContext);
-  const gameContext = useContext(GameContext);
-
+  const dest = ()=>{
+    let distance = getDistance(gameContext.gameCoord[count],userContext.userLocation.latitude);
+    console.log(distance)
+  }
   useEffect(() => {
-    //startWatching();
+    dest();
+    startWatching();
   },[]);
   const { mapStyle } = style
   const pinColor = '#5c0cc4'
@@ -41,13 +46,11 @@ const MapComponent = ({ data}) => {
       //onUserLocationChange={coord=>userContext.setUserLocation(coord)}
       customMapStyle={MapStyle}
     >
-      {data.map((data) => {
+      {gameContext.gameCoord.map((data) => {
         
         return (
             <Marker
             coordinate={{ latitude: data.latitude, longitude: data.longitude }}
-            key={data.latitude}
-            
             pinColor={pinColor}
           >
             <Callout>

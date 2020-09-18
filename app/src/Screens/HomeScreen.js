@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
+import SpinnerComponent from '../Componets/SpinnerComponent'
 import {
   View,
   Text,
@@ -18,20 +19,26 @@ import { UserContext } from '../Context/UserContext'
 import { GameContext } from '../Context/GameContext'
 import image from '../../assets/avatar1.png'
 import {registerGame} from '../Api/GameAPI'
-import {Paragraph} from 'react-native-paper'
+import Spinner from 'react-native-loading-spinner-overlay';
+
 
 const HomeScreen = ({ navigation }) => {
   const [term, setTerm ]= useState('')
   const [gameId, setgameId ]= useState('')
   const [groupId, setgroupId ] = useState('')
-  const [modalOpen, setModelOpen] = useState(false)
   const userContext = useContext(UserContext);
   const gameContext = useContext(GameContext)
-  const [results, getGroups, games, getGames] = useResults()
+  const [results, getGroups, games, getGames,homeGetGroups] = useResults()
 
-  useEffect(async () => {
-    await getGames()
-    await getGroups()
+
+  const startLoading = () => {
+    userContext.setLoading(true);
+    userContext.setModelLoder(true)
+    
+  };
+
+  useEffect(() => {
+    getGames()
   }, [])
 
   gameContext.setGroups(results);
@@ -71,7 +78,7 @@ const HomeScreen = ({ navigation }) => {
                     onPress={() => {
                       setgroupId(item.id)
                       addGameToGroup()
-                      setModelOpen(false)
+                      userContext.setModelOpen(false)
                     }}
                   >
                     <View style={style.itemStyle2}>
@@ -126,9 +133,25 @@ const HomeScreen = ({ navigation }) => {
       </View>
     )
   }
-
+  /*=======================================VIEW===========================================================*/
   return (
     <>
+        {userContext.loading?
+          (
+            <Modal visible={userContext.modalLoder} animationType="fade" transparent={true}>
+              <View style={style.modalContainer}>
+          
+                  <Spinner
+                      visible={userContext.loading}
+                      textContent={'Loading....'}
+                      textStyle={{color: '#FFF',fontSize:24,fontWeight:'bold'}}
+                      overlayColor='rgba(42, 157, 143, 0.3)'
+                      size="large"
+                  />
+              </View>
+           </Modal>
+          ):null
+        }
       <StatusBar style="#2A9D8F" />
       <Header
         leftComponent={
@@ -157,6 +180,7 @@ const HomeScreen = ({ navigation }) => {
       <Divider style={{ backgroundColor: '#2A9D8F', height: 1 }} />
 
       <View style={style.containerStyle}>
+   
         <Text style={{ fontSize: 22, color: '#2A9D8F' }}>Hello,</Text>
         <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
           <Text style={{ fontSize: 22, fontWeight: 'bold' }}>
@@ -172,10 +196,10 @@ const HomeScreen = ({ navigation }) => {
         onTermChange={setTerm}
         onTermSubmit={() => searchApi(term)}
       />
-      <Modal visible={modalOpen} animationType="fade" transparent={true}>
+      <Modal visible={userContext.modalOpen} animationType="fade" transparent={true}>
         <View style={style.modalContainer}>
           <View style={style.modalStyle}>
-            <TouchableOpacity onPress={() => setModelOpen(false)}>
+            <TouchableOpacity onPress={() => userContext.setModelOpen(false)}>
               <AntDesign
                 name="closecircleo"
                 size={30}
@@ -197,7 +221,9 @@ const HomeScreen = ({ navigation }) => {
               <TouchableOpacity
                 onPress={() => {
                   setgameId(item.id)
-                  setModelOpen(true)
+                  startLoading()
+                  homeGetGroups()
+                  
                 }}
               >
                 <View style={style.itemStyle}>

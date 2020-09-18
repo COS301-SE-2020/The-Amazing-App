@@ -13,7 +13,6 @@ const DashboardScreen = ({navigation})=>{
     const userContext = useContext(UserContext);
     const gameContext = useContext(GameContext);
     const [results,getGroups] = useResults();
-    const [setGameState] = gameDetails();
     useEffect(() => {
         getGroups();
       },[]);

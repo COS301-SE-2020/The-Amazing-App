@@ -1,14 +1,19 @@
-import React ,{ useContext} from 'react';
+import React ,{ useState,useContext,useEffect} from 'react';
 import {View, Text, StyleSheet,Image, TouchableOpacity,FlatList} from 'react-native'
 import {Header, Divider} from 'react-native-elements';
 import { Feather } from '@expo/vector-icons'; 
 import { StatusBar } from 'expo-status-bar';
 import {MaterialIcons, FontAwesome, AntDesign} from '@expo/vector-icons'
 import {UserContext} from '../Context/UserContext';
+import useResults from '../Hooks/useResults';
 
 const AccountScreen = ({navigation})=>{
+    const {imageStyle,imageStyle2, containerStyle, textStyle, statContainer, statAmountStyle, statStyle, statTitleStyle} = style;
     const userContext = useContext(UserContext);
-    
+   const [results,getGroups] = useResults();
+    useEffect(() => {
+        getGroups();
+      },[results]);
     return( 
         <>
             <StatusBar style='#2A9D8F'/>
@@ -20,43 +25,43 @@ const AccountScreen = ({navigation})=>{
                 centerComponent={{ text: 'Profile', style: { color: '#fff',fontSize:22, fontWeight:'bold' } }}
                 rightComponent={
                     <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
-                         <Image source={userContext.image}  style={style.imageStyle}/>
+                        <Image source={userContext.image}  style={style.imageStyle}/>
                     </TouchableOpacity>
                 }
                 containerStyle={{backgroundColor:'#2A9D8F'}}
             />
-             <View style={style.containerStyle}>
-                <Image source={userContext.image}  style={style.imageStyle2}/>
+             <View style={containerStyle}>
+                 <Image source={userContext.image}  style={imageStyle2}/>
             </View>
 
             <Divider style={{ backgroundColor: '#2A9D8F',height:1 , padingBottom:20}} />
             <View style={{paddingBottom:15}}>
                 
                 
-                <Text style={style.textStyle}><AntDesign name="user" size={24} color='#2A9D8F' /> Username : {userContext.username}</Text>
-                <Text style={style.textStyle}><AntDesign name="mail" size={24} color='#2A9D8F' />Email : {userContext.email}</Text>
+                <Text style={textStyle}><AntDesign name="user" size={24} color='#2A9D8F' /> Username : {userContext.username}</Text>
+                <Text style={textStyle}><AntDesign name="mail" size={24} color='#2A9D8F' />Email : {userContext.email} </Text>
             </View>
-            <View style={style.statContainer}>
-                <View style={style.statStyle}>
-                    <Text style={style.statAmountStyle}>{userContext.points}</Text>
-                    <Text style={style.statTitleStyle}>Points</Text>
-                    <AntDesign name="star" size={24} color='white' />
+            <View style={statContainer}>
+                <View style={statStyle}>
+                    <Text style={statAmountStyle}>{userContext.points}</Text>
+                    <Text style={statTitleStyle}>Points</Text>
+                    <AntDesign name="play" size={24} color='white' />
                 </View>
-                <View style={style.statStyle}>
-                    <Text style={style.statAmountStyle}>{userContext.numGames}</Text>
-                    <Text style={style.statTitleStyle}>  Games Completed</Text>
+                <View style={statStyle}>
+                    <Text style={statAmountStyle}>{userContext.numGames}</Text>
+                    <Text style={statTitleStyle}>  Games Completed</Text>
                     <AntDesign name="Trophy" size={24} color='white' />
                 </View>
-                <View style={style.statStyle}>
-                    <Text style={style.statAmountStyle}>{userContext.numGroups}</Text>
-                    <Text style={style.statTitleStyle}>Groups</Text>
+                <View style={statStyle}>
+                    <Text style={statAmountStyle}>{results.length}</Text>
+                    <Text style={statTitleStyle}>Groups</Text>
                     <AntDesign name="team" size={24} color='white' />
                 </View>
             </View>
         </>
     )
 }
-style = StyleSheet.create({
+const style = StyleSheet.create({
     imageStyle:{
         width:40,
         height:40,
@@ -110,4 +115,3 @@ style = StyleSheet.create({
 
 })
 export default AccountScreen;
-

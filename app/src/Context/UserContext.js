@@ -10,9 +10,21 @@ const UserProvider = (props) => {
   const [points, setPoints] = useState(0);
   const [numGames, setNumGames] = useState(0);
   const [numGroups, setNumGroups] = useState(0);
+  const [modalLoder, setModelLoder] = useState(false)
+  const [loading, setLoading] = useState(false);
+  const [modalOpen, setModelOpen] = useState(false)
   return (
     <UserContext.Provider
-        value={{email,setEmail,image,setImage, username, setUsername,userLocation,setUserLocation, points, setPoints,numGames,setNumGames, numGroups, setNumGroups}}
+        value={{email,setEmail,image,setImage, username, setUsername,userLocation,
+          setUserLocation, points, setPoints,numGames,
+          setNumGames, numGroups, setNumGroups,
+          modalOpen,
+          setModelOpen,
+          modalLoder,
+          setModelLoder,
+          loading,
+          setLoading
+        }}
     >
         {props.children}
     </UserContext.Provider>

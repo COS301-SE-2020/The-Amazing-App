@@ -1,32 +1,25 @@
 import React ,{ useState, useContext} from 'react';
 import {View, StyleSheet, TouchableOpacity, ImageBackground , Image} from 'react-native'
 import { Input,Text, Button, Header,Icon} from 'react-native-elements';
-import FooterComponent from '../Componets/FooterComponent';
 import { FontAwesome,MaterialIcons, FontAwesome5,SimpleLineIcons,Feather} from '@expo/vector-icons'; 
 import {createGroup} from '../Api/GameAPI';
 import {UserContext} from '../Context/UserContext';
 import {AuthContext} from '../Context/AuthContext';
 import { StatusBar } from 'expo-status-bar';
-
+import useResults from '../Hooks/useLocation'
 
 const CreatgroupScreen = ({navigation})=>{
-
+    const [results,getGroups] = useResults();
     const userContext = useContext(UserContext);
     const authContext = useContext(AuthContext);
     /**
      * Group details for a game being created 
      */
     const [groupName, setGroupname] =useState('')
-    const [gameName, setGamename] =useState('')
-    const [groupDescription, setGroupdescription] =useState('')
-    const [gameLocation, setGameLocation] =useState('')
 
     const creater=()=>{
       const  data={
             'groupName' : groupName,
-            'groupDescription' : groupDescription,
-            'gameName': gameName,
-            'gameLocation':gameLocation,
             'userId':authContext.userId,
             'gameId':'',
             'game':'',
@@ -68,31 +61,10 @@ const CreatgroupScreen = ({navigation})=>{
                  onChangeText={setGroupname} value={groupName}
                 />
                 
-                 <Input containerStyle={style.inputStyle} placeholder='Group Description'
-                 placeholderTextColor='white'
-                 leftIcon={
-                 <MaterialIcons name="description" size={24} color="white" />
-                }
-                     onChangeText={setGroupdescription} value={groupDescription}
-                />
-                <Input containerStyle={style.inputStyle} 
-                placeholderTextColor='white'
-                placeholder='Game Name'leftIcon={
-                <FontAwesome5 name="user-circle" size={24} color="white" />
-                }
-                onChangeText={setGamename} value={gameName}
-                />
-                <Input containerStyle={style.inputStyle}
-                placeholderTextColor='white'
-                placeholder='Game Location'leftIcon={
-                 <SimpleLineIcons name="location-pin" size={24} color="white" />
-                }
-                onChangeText={setGameLocation} value={gameLocation}
-                />
                 <Button
                     buttonStyle={style.buttonStyle}
-                    title="Submit"
-                    onPress={()=>{
+                    title="Create"
+                    onPress={async()=>{
                         creater()
                         navigation.navigate('Dashboard')
                     }
@@ -120,13 +92,12 @@ const style = StyleSheet.create({
     titleContainer:{
         backgroundColor:'rgba(42, 157, 143, 0.7)',
         alignItems:'center',
-        marginTop:30,
         paddingBottom:15,
         paddingTop:15,
         marginLeft:35,
         marginRight:35,
         borderRadius:5,
-        marginTop:100
+        marginTop:200
     },
     detailContainer:{
         backgroundColor:'rgba(42, 157, 143, 0.7)',
@@ -153,7 +124,7 @@ const style = StyleSheet.create({
     overLayer:{
         width:'100%',
         height:'100%',
-        backgroundColor:'rgba(42, 157, 143, 0.01)',
+        backgroundColor:'rgba(42, 157, 143, 0.4)',
     },
     blade:{
         backgroundColor:'white',
