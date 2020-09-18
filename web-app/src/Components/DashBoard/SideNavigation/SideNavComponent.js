@@ -24,7 +24,6 @@ class SideNavComponent extends React.Component {
             <NotificationsModal />
             <br />
             <CreateGameModal />
-            <br />
             <MyGamesModal />
           </Col>
         </Col>
