@@ -1,85 +1,75 @@
-import React ,{useState} from 'react';
-import {Alert, LogBox} from 'react-native';
+import React ,{useState, useContext} from 'react';
 import firebase from '../Config/Config';
 import 'firebase/storage';
-import sc from '../../assets/t1.jpg';
-import {YellowBox} from 'react-native';
-
-var Email =''; 
+import {Alert, YellowBox} from 'react-native';
+import {UserContext} from '../Context/UserContext';
 YellowBox.ignoredYellowBox = ['Warning: ReactNative.createElement'];
 
-export const User = (email) =>{
-    const [isUser , setUser] = useState('');
-    Email = email;
+export default () => {
+    const userContext = useContext(UserContext);
 
-    firebase.firestore().collection('Users').where('Email', '==', email).limit(1).get().then((query) => {  
-        const thing = query.docs[0];
-        setUser(thing.data().Username);
-    }); 
-    return isUser;
+const updateUsername =async (username) => {
 
+    try {
+        const query = await firebase.firestore().collection('Users').where('Email', '==', userContext.email)
+        .limit(1).get();
+        const user = query.docs[0];
+        user.ref.update({Username:username});
+        Alert.alert('Username updated!')
+        //On Success
+    } catch (error) {
+        //Print this on fail
+        console.log(error);
+    }  
 }
 
-export const getEmail = () =>{
-
-    return Email;
-
+const updatePassword= async(email,newPassword, oldPassword) => {
+   try {
+        await firebase.auth().signInWithEmailAndPassword(email,oldPassword)
+        const user = firebase.auth().currentUser;
+        user.updatePassword(newPassword);
+        Alert.alert('Password updated!');
+        //on success
+   } catch (error) {
+       //on fail
+       Alert.alert('Password not updated!');
+   }
 }
 
-export const updateUsername = (username) => {
-    firebase.firestore().collection('Users').where('Email', '==', Email).limit(1).get().then((query) => {  
-        const thing = query.docs[0];
-        thing.ref.update({Username:username});
-        Alert.alert('Username Updated!');
-    }); 
-
-}
-
-export const updatePassword= (newPassword, oldPassword) => {
-   
+const updatePicture = async (image) => {
     
-    firebase.auth().signInWithEmailAndPassword(Email,oldPassword)
-    .then((res) => {
-        var user = firebase.auth().currentUser;
-        user.updatePassword(newPassword).then(function() {
-            Alert.alert('Password Updated!')
-        })
-    })
+    try {
+        const response = await fetch(image);
+        const blob = await response.blob();
+        firebase.storage().ref(userContext.email).put(blob);
+        const downloadURL = await firebase.storage().ref(userContext.email).getDownloadURL();
+        firebase.firestore().collection('Users').where('Email', '==', userContext.email).limit(1).get().then((query) => {  
+            const thing = query.docs[0];
+            thing.ref.update({Picture:downloadURL});
+            const result = {uri: downloadURL};
+            userContext.setImage(result);
+            Alert.alert('Profile picture updated!');
+        }); 
 
-}
-
-export const updatePicture = async (image) => {
-  
-    const response = await fetch(image);
-    const blob = await response.blob();
-    var ref = firebase.storage().ref(Email);
-    ref.put(blob);
-    const downloadURL = await firebase.storage().ref(Email).getDownloadURL();
-    firebase.firestore().collection('Users').where('Email', '==', Email).limit(1).get().then((query) => {  
-        const thing = query.docs[0];
-        thing.ref.update({Picture:downloadURL});
-    }); 
-    Alert.alert('Profile Picture Updated!')
-}
-
-export const getPicture =() => {
-    const [picture , setPicture] = useState('');
-    firebase.firestore().collection('Users').where('Email', '==', Email).limit(1).get().then((query) => {  
-        const thing = query.docs[0];
-        setPicture(thing.data().Picture);
-    }); 
-
-    if (picture == null)
-    {
-        return sc;
+        //on success
+    } catch (error) {
+        //on fail
+        console.log(error)
     }
-    const result = {uri: picture}
-    return result;
 }
 
-export const forgotPassword = (email) => {
-    firebase.auth().sendPasswordResetEmail(email)
-      .then(function (user) {
-        Alert.alert('Please check your email...')
-      })
+
+const forgotPassword = async () => {
+    try {
+        await firebase.auth().sendPasswordResetEmail(userContext.email);
+        //on success
+        Alert.alert('Check your email!');
+    } catch (error) {
+        //if failed
+        console.log(error);
+    }
   }
+
+  
+  return [updateUsername,updatePassword, updatePicture,forgotPassword]
+}

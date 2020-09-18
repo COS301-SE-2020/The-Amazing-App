@@ -1,17 +1,19 @@
-import React ,{  useState} from 'react';
+import React ,{  useState, useContext} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import currentlocation from '../../assets/currentlocation.png'
 import ImageComponent from '../Componets/ImageComponent';
 import { EvilIcons,MaterialCommunityIcons } from '@expo/vector-icons';
 import RegisterApi from '../Api/RegisterAPI';
+import {AuthContext} from '../Context/AuthContext';
+import {UserContext} from '../Context/UserContext';
 
 const SignupScreen = ({navigation})=>{
     const {containerStyle, inputStyle, buttonStyle} = style;
-    const [Username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [email, setEmail] = useState('');
-    const [isRegistered, Register] = RegisterApi();
+    const [Register] = RegisterApi();
+    const authContext = useContext(AuthContext);
+    const userContext = useContext(UserContext);
 
     return(
         <View style={containerStyle} >
@@ -19,13 +21,13 @@ const SignupScreen = ({navigation})=>{
                 <View > 
                     <Input  autoCorrect={false}autoCapitalize='none'
                      containerStyle={inputStyle} placeholder="Username"
-                     onChangeText={setUsername} value={Username}
+                     onChangeText={userContext.setUsername} value={userContext.username}
                      leftIcon={<EvilIcons name="user" size={24} color="#2A9D8F" />}
                      />
 
                     <Input autoCorrect={false} autoCapitalize='none'
                      containerStyle={inputStyle} placeholder="Email"
-                     onChangeText={setEmail} value={email}
+                     onChangeText={userContext.setEmail} value={userContext.email}
                      leftIcon={<MaterialCommunityIcons name="email" size={20} color="#2A9D8F" />}
                      />
 
@@ -35,10 +37,8 @@ const SignupScreen = ({navigation})=>{
                      leftIcon={<EvilIcons name="lock" size={32} color="#2A9D8F" />}
                      />
                      
-                     <Button  buttonStyle={buttonStyle} title='Sign Up' onPress={()=>{
-                                Register(email,password,Username)
-                     }}/>
-                     {isRegistered?navigation.navigate('Home',{email:email}):null}
+                     <Button  buttonStyle={buttonStyle} title='Sign Up' onPress={()=>{Register(userContext.email,password,userContext.username)}}/>
+                     {authContext.isRegistered?navigation.navigate('Home'):null}
                     <TouchableOpacity onPress={()=>navigation.navigate('SigninScreen')}>
                         <Text style={{alignSelf:'center'}}>
                             Already have an account ? <Text style={{color:'#2A9D8F'}}> Signin

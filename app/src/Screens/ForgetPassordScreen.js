@@ -1,11 +1,13 @@
-import React ,{ useState} from 'react';
+import React ,{ useContext, useState} from 'react';
 import { StyleSheet,Text, TouchableOpacity, SafeAreaView, View} from 'react-native'
 import {Input, Button} from 'react-native-elements';
-import {forgotPassword} from '../Api/UserAPI'
+import UserAPI from '../Api/UserAPI'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import {UserContext} from '../Context/UserContext';
 
 const ForgetPasswordScreen = ({navigation})=>{
-    const [email, setEmail] = useState('');
+    const [forgotPassword] = UserAPI();
+    const userContext = useContext(UserContext);
     return(
         <>
             <SafeAreaView>
@@ -20,10 +22,10 @@ const ForgetPasswordScreen = ({navigation})=>{
                         </Text>
                         <Input  autoCorrect={false} autoCapitalize='none'
                         containerStyle={style.inputStyle} placeholder="Email"
-                        onChangeText={setEmail} value={email}
+                        onChangeText={userContext.setEmail} value={userContext.email}
                         leftIcon={<MaterialCommunityIcons name="email" size={20} color="white" />}
                         />
-                        <Button  buttonStyle={style.buttonStyle} title='Send Request' onPress={()=>{forgotPassword(email)
+                        <Button  buttonStyle={style.buttonStyle} title='Send Request' onPress={()=>{forgotPassword()
                         navigation.navigate('SigninScreen')}
                         } />
                     </View>

@@ -6,6 +6,7 @@ import Home from '../Screens/HomeScreen';
 import Profile from '../Screens/AccountScreen';
 import Settings from '../Screens/SettingsScreen';
 import Logout from '../Screens/LogoutScreen';
+import LeaderBoard from '../Screens/LeaderBoard';
 import Sidebar from '../Componets/SideBarComponent';
 import { Dimensions } from 'react-native';
 
@@ -22,6 +23,13 @@ const MainRouter = createDrawerNavigator({
         navigationOptions:{
             title:'Dashboard',
             drawerIcon:({tintColor})=><MaterialIcons name='dashboard' size={20} color={tintColor} />,
+        }
+    },
+    LeaderBoard:{
+        screen:LeaderBoard,
+        navigationOptions:{
+            title:'Leaderboard',
+            drawerIcon:({tintColor})=><MaterialIcons name='star' size={20} color={tintColor} />,
         }
     },
     Profile:{

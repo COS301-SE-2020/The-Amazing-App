@@ -1,17 +1,26 @@
-import React ,{ useState,useContext } from 'react';
+import React ,{ useContext,useEffect } from 'react';
 import {View, StyleSheet, TouchableOpacity, ImageBackground , Image} from 'react-native'
 import { Input,Text, Button, Header,Icon} from 'react-native-elements';
 import FooterComponent from '../Componets/FooterComponent';
-import { FontAwesome,MaterialIcons, FontAwesome5,SimpleLineIcons,Feather } from '@expo/vector-icons'; 
+import { FontAwesome,MaterialIcons, FontAwesome5,SimpleLineIcons, Feather } from '@expo/vector-icons'; 
 import { StatusBar } from 'expo-status-bar';
-import JoinGroupAPI from '../Api/JoinGroupAPI'
-import {UserContext} from '../Context/UserContext';
 import {GameContext} from '../Context/GameContext';
+import {UserContext} from '../Context/UserContext';
+import useInstructions from '../Api/InstructionsAPI';
+import gameDetails from '../Hooks/gemeDetails';
+import gemeDetails from '../Hooks/gemeDetails';
 
-const JoingroupScreen = ({navigation})=>{
-    const userContext = useContext(UserContext);
+const InstructionScreen = ({navigation})=>{
     const gameContext = useContext(GameContext);
-    const [JoinGroup] = JoinGroupAPI();
+    const userContext = useContext(UserContext);
+    const [getDesc,getLocation] = useInstructions();
+    const [setGameState] = gemeDetails();
+    useEffect(() => {
+        getDesc();
+        getLocation();
+        
+      },[]);
+
     return(
        <>
            <StatusBar style='#2A9D8F'/>
@@ -20,7 +29,7 @@ const JoingroupScreen = ({navigation})=>{
                 <TouchableOpacity onPress={()=>navigation.openDrawer()}>
                     <Feather name="menu" size={30} color='#fff'/>
                 </TouchableOpacity>}
-                centerComponent={{ text: 'Dashboard', style: { color: '#fff',fontSize:22, fontWeight:'bold' } }}
+                centerComponent={{ text: 'Instructions', style: { color: '#fff',fontSize:22, fontWeight:'bold' } }}
                 rightComponent={
                     <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
                         <Image source={userContext.image}  style={style.imageStyle}/>
@@ -30,29 +39,26 @@ const JoingroupScreen = ({navigation})=>{
             />
             <View style={style.overLayer}>
            <View style={style.titleContainer}>
-                <Text style={style.titleStyle}>Group Details</Text>
+                <Text style={style.titleStyle}>{gameContext.gameDesc}</Text>
             </View>
             <View style={style.blade} >
 
             </View>
             <View style={style.detailContainer}>
-            <Input containerStyle={style.inputStyle}
-                placeholderTextColor='white'
-                placeholder='Enter Group Name'leftIcon={
-                 <SimpleLineIcons name="globe-alt" size={24} color="white" />
-                }
-                onChangeText={gameContext.setGroupName} value={gameContext.groupName}
-                />
+            <Text style={style.titleStyle2}>The first location to visit:</Text>
+            <Text style={style.titleStyle}>{gameContext.gameLocation}</Text>
+            <Text style={style.titleStyle2}>1. Follow the route to reach the marker.</Text>
+            <Text style={style.titleStyle2}>2. Answer the question that pops up when you reach the destination.</Text>
                 <Button
                     buttonStyle={style.buttonStyle}
-                    title="Submit"
-                    onPress={async ()=>{
-                        await JoinGroup();
-                        navigation.navigate('Dashboard')
+                    title="Let's Go!"
+                    onPress={()=>{
+                        navigation.navigate('Simulation')
                     }
                     }
                 />
             </View>
+            <FooterComponent/>
             </View>
         </>
     )
@@ -67,26 +73,28 @@ const style = StyleSheet.create({
         borderColor:'#fff',
     },
     titleStyle:{
-        fontSize:18,
-        fontWeight:'bold',
+        fontSize:14,
         color:'white',
+    },
+    titleStyle2:{
+        fontSize:14,
+        color:'black',
+        padding:15,
     },
     titleContainer:{
         backgroundColor:'rgba(42, 157, 143, 0.7)',
         alignItems:'center',
         marginTop:30,
-        paddingBottom:15,
+        padding:15,
         paddingTop:15,
         marginLeft:35,
         marginRight:35,
-        borderRadius:5,
-        marginTop:200
+        borderRadius:5
     },
     detailContainer:{
         backgroundColor:'rgba(42, 157, 143, 0.7)',
         alignItems:'center',
-        paddingBottom:15,
-        paddingTop:15,
+        padding:15,
         marginLeft:35,
         marginRight:35,
         borderRadius:5
@@ -108,6 +116,7 @@ const style = StyleSheet.create({
         width:'100%',
         height:'100%',
         backgroundColor:'rgba(42, 157, 143, 0.01)',
+        marginTop:100
     },
     blade:{
         backgroundColor:'white',
@@ -121,4 +130,4 @@ const style = StyleSheet.create({
 })
 
 
-export default JoingroupScreen;
+export default InstructionScreen;

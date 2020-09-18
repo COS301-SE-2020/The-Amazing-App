@@ -1,9 +1,29 @@
-import React from 'react';
+import React, { useContext, useEffect} from 'react'
 import { StyleSheet,View, TouchableOpacity, SafeAreaView, ImageBackground, Text} from 'react-native'
 import sc from '../../assets/back3.jpg';
-
+import { UserContext } from '../Context/UserContext'
+import * as Location from 'expo-location'
 const LandingScreen = ({navigation})=>{
-    
+
+    const userContext = useContext(UserContext);
+    useEffect(() => {
+        ;(async () => {
+          try {
+            let { status } = await Location.requestPermissionsAsync()
+            if (status !== 'granted') {
+              setErrorMsg('Permission to access location was denied')
+            }
+            let location = await Location.getCurrentPositionAsync({})
+            const loc = {'latitude':location.coords.latitude,'longitude':location.coords.longitude}
+            userContext.setUserLocation(loc)
+          } catch (error) {
+            let status = Location.getProviderStatusAsync();
+            if(!(await status).locationServicesEnabled){
+              alert('')
+            }
+          }
+        })()
+      }, [])
     return(
         <>
             <SafeAreaView>

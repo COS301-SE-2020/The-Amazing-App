@@ -1,17 +1,20 @@
-import React ,{ useState } from 'react';
+import React ,{ useState, useContext } from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import { Input,Button } from 'react-native-elements';
-import currentlocation from '../../assets/currentlocation.png'
+import currentlocation from '../../assets/currentlocation.png';
 import ImageComponent from '../Componets/ImageComponent';
 import { StatusBar } from 'expo-status-bar';
 import { EvilIcons,MaterialCommunityIcons } from '@expo/vector-icons';
-import LoginApi from '../Api/LoginAPI';
+import {AuthContext} from '../Context/AuthContext';
+import {UserContext} from '../Context/UserContext';
+import useLogin from '../Api/LoginAPI';
 
 const SigninScreen = ({navigation})=>{
     const {containerStyle, inputStyle, buttonStyle} = style;
-    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [isLoggedIn, Login] = LoginApi();
+    const [Login] = useLogin();
+    const authContext = useContext(AuthContext);
+    const userContext = useContext(UserContext);
 
     <StatusBar style='#2A9D8F'/>
     return(
@@ -20,7 +23,7 @@ const SigninScreen = ({navigation})=>{
             <View>
                     <Input  autoCorrect={false} autoCapitalize='none'
                      containerStyle={inputStyle} placeholder="Email"
-                      onChangeText={setEmail} value={email}
+                      onChangeText={userContext.setEmail} value={userContext.email}
                       leftIcon={<MaterialCommunityIcons name="email" size={20} color="#2A9D8F" />}
                       />
 
@@ -32,21 +35,19 @@ const SigninScreen = ({navigation})=>{
 
                 <TouchableOpacity onPress={()=>navigation.navigate('ForgetPasswordScreen')}>
                     <Text style={{alignSelf:'center',marginBottom:10,color:'#2A9D8F'}}>
-                        Forgot  Password
+                        Forgot  Password 
                     </Text>
                 </TouchableOpacity>
 
-                <Button  buttonStyle={buttonStyle} title='Sign In' onPress={()=>Login(email,password)} />
-                {isLoggedIn?navigation.navigate('Home',{email:email}):null}
+                <Button  buttonStyle={buttonStyle} title='Sign In' onPress={()=>Login(userContext.email,password)} />
+                {authContext.isLoggedin?navigation.navigate('Home'):null}
                 <TouchableOpacity onPress={()=>navigation.navigate('SignupScreen')}>
                     <Text style={{alignSelf:'center'}}>
                         Dont have an account ? <Text style={{color:'#2A9D8F'}}> Signup
                     </Text></Text>
                 </TouchableOpacity>
             </View>
-         
- 
-       
+    
         </View> 
     )
 };
