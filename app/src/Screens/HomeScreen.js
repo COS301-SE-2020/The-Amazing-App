@@ -16,12 +16,11 @@ import { Feather, AntDesign } from '@expo/vector-icons'
 import { StatusBar } from 'expo-status-bar'
 import avatar from '../../assets/avatar3.png'
 import { UserContext } from '../Context/UserContext'
-import { GameContext } from '../Context/GameContext'
 import image from '../../assets/avatar1.png'
 import {registerGame} from '../Api/GameAPI'
 import Spinner from 'react-native-loading-spinner-overlay';
-
-
+import {GameContext} from '../Context/GameContext'
+ 
 const HomeScreen = ({ navigation }) => {
   const [term, setTerm ]= useState('')
   const [gameId, setgameId ]= useState('')
@@ -41,8 +40,6 @@ const HomeScreen = ({ navigation }) => {
     getGames()
   }, [])
 
-  gameContext.setGroups(results);
-
   const addGameToGroup=()=>{
    const data = {
       'gameId':gameId,
@@ -52,7 +49,7 @@ const HomeScreen = ({ navigation }) => {
   }
 
   const choice = () => {
-    if (gameContext.groups.length > 0) {
+    if (results.length > 0) {
       return (
         <View style={{ height: 340 }}>
           <View style={{ marginBottom: 10, marginTop: 10 }}>
@@ -70,7 +67,7 @@ const HomeScreen = ({ navigation }) => {
           <ScrollView>
             <FlatList
               showsHorizontalScrollIndicator={false}
-              data={gameContext.groups}
+              data={results}
               keyExtractor={(results) => results.id}
               renderItem={({ item }) => {
                 return (
