@@ -8,7 +8,6 @@ The Amazing App is a location-based mobile application game. A web application i
 https://the-amazing-app-website.herokuapp.com/
 
 ## Mobile Application Access
-https://www.overleaf.com/read/ncwmjygvqyfg
 
 ## NewTech - Demo 1
 https://drive.google.com/file/d/1UyQt6fZRNSJOJyFtMWCg19jUgQsAu5F5/view?usp=sharing
