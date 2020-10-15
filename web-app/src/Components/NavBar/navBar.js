@@ -34,18 +34,19 @@ class NavBar extends React.Component {
     };
 
     return (
-      <Navbar sticky="top" style={{ backgroundColor: "#2A9D8F" }}>
-        <Navbar.Brand style={{ marginLeft: 75, color: "white", fontSize: 15 }}>
+      <Navbar style={{ backgroundColor: "#2A9D8F" }}>
+        <Navbar.Brand style={{ color: "white", fontSize: 15, marginLeft: "5%" }}>
           <img
             src={logo}
-            className="ui small circular image"
+            className="d-inline-block align-top"
             alt="userImage"
-            style={{ height: 50, width: 50 }}
+            width="30"
+            height="30"
           />
         </Navbar.Brand>
         <Nav className="mr-auto"></Nav>
         <Nav
-          style={{ marginRight: 100, color: "white", fontWeight: "normal" }}
+          style={{ color: "white", fontWeight: "normal", marginRight: "2%", }}
           className="lead"
           pull
           Right
@@ -61,7 +62,6 @@ class NavBar extends React.Component {
               style={{
                 backgroundColor: "Transparent",
                 color: "white",
-                border: "2px solid white",
               }}
             >
               Dashboard
@@ -77,7 +77,7 @@ class NavBar extends React.Component {
               <i className="sign-out"></i>
             </Button>
           </Nav.Link>
-          <Nav.Link href="#">
+          {/*<Nav.Link href="#">
             <Button
               size="medium"
               style={{
@@ -86,7 +86,7 @@ class NavBar extends React.Component {
             >
               <UserOptions />
             </Button>
-          </Nav.Link>
+            </Nav.Link>*/}
         </Nav>
       </Navbar>
     );

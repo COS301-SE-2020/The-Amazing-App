@@ -6,6 +6,7 @@ import Forgot from "./Login/Forgot";
 import Reset from "./Login/Reset";
 import { Switch, Route } from "react-router-dom";
 import DashBoard from "./DashBoard/DashBoard";
+import GamePage from "./DashBoard/SideNavigation/CreateGame/GamePage";
 
 class App extends React.Component {
   render() {
@@ -18,6 +19,7 @@ class App extends React.Component {
           <Route exact path="/signup" component={SignUp} />
           <Route exact path="/reset" component={Reset} />
           <Route exact path="/forgot" component={Forgot} />
+          <Route exact path="/gamepage" component={GamePage} />
         </Switch>
       </div>
     );

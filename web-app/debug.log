@@ -5,3 +5,6 @@
 [0626/232648.244:ERROR:exception_snapshot_win.cc(98)] thread ID 7424 not found in process
 [0626/232648.244:ERROR:exception_snapshot_win.cc(98)] thread ID 7428 not found in process
 [0704/095409.566:ERROR:file_io.cc(134)] WriteFile: The pipe is being closed. (0xE8)
+[1012/104532.860:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1014/084104.673:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1015/072049.201:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)

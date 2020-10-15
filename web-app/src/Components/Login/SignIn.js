@@ -26,6 +26,7 @@ const Login = ({ signup, signin, resetPassword, authMsg, history }) => {
 
   function login() {
     // signin
+    //history.push("/dashboard");
     setLoading(true);
     signin(credentials.email, credentials.password, () =>
       history.push("/dashboard")

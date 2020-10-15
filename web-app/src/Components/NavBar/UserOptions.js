@@ -27,9 +27,9 @@ const trigger = (
       src={image2}
       className="ui avatar image"
       alt="userImage"
-      style={{ height: 22, width: 22 }}
+      style={{ height: 80, width: 80, marginTop: "3%", marginLeft: "35%"}}
     />
-    <span style={{ fontSize: 14, color: "white" }}>{Cookies.get("email")}</span>
+   
   </div>
 );
 

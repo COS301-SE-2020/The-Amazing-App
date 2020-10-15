@@ -47,7 +47,7 @@ class App extends React.Component {
       marginLeft: "-200px",
     };
 
-    //this.token = Cookies.get("token");
+    this.token = Cookies.get("token");
     if (this.state.success == "" && Cookies.get("outval") == "in") {
       return (
         <div
@@ -76,3 +76,11 @@ class App extends React.Component {
 }
 
 export default App;
+
+/*return (
+      <div>
+        <Navbar />
+        <SideNavComponent />
+        <Footer />
+      </div>
+    );*/

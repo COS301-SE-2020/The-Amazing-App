@@ -11,6 +11,7 @@ class MyGames extends React.Component {
 
   deleteDoc(name) {
     //event.preventDefault();
+    alert("Do you want to delete this game ?")
     const doc_query = db.collection("projects").where("name", "==", name);
     doc_query.get().then(function (querySnapshot) {
       querySnapshot.forEach((doc) => {
